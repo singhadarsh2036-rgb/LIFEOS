@@ -1,0 +1,322 @@
+
+/* =========================================================
+   LIFEOS GLOBAL THEME
+   Applies the Dashboard Light/Dark preference to every page.
+   Dashboard already stores the preference in:
+   localStorage.lifeosTheme = "light" | "dark"
+   ========================================================= */
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html[data-lifeos-theme="dark"] body {
+  background: #120d1d !important;
+  color: #f5efff !important;
+}
+
+/* =========================================================
+   DARK — TRAVEL
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .trips-page {
+  background:
+    radial-gradient(circle at 15% 5%, rgba(180, 85, 190, .16), transparent 30%),
+    radial-gradient(circle at 90% 18%, rgba(95, 70, 220, .18), transparent 32%),
+    linear-gradient(135deg, #120d1d 0%, #1b1228 48%, #160f25 100%) !important;
+  color: #f7f1ff !important;
+}
+
+html[data-lifeos-theme="dark"] .trips-page .trip-planner-card,
+html[data-lifeos-theme="dark"] .trips-page .flight-search-card,
+html[data-lifeos-theme="dark"] .trips-page .flight-results-card,
+html[data-lifeos-theme="dark"] .trips-page .hotel-page > section,
+html[data-lifeos-theme="dark"] .trips-page .trip-summary-card {
+  background: rgba(35, 24, 52, .78) !important;
+  border-color: rgba(236, 180, 255, .13) !important;
+  box-shadow: 0 24px 65px rgba(0,0,0,.28) !important;
+  color: #f7f1ff !important;
+}
+
+html[data-lifeos-theme="dark"] .trips-page h1,
+html[data-lifeos-theme="dark"] .trips-page h2,
+html[data-lifeos-theme="dark"] .trips-page h3,
+html[data-lifeos-theme="dark"] .trips-page strong {
+  color: #fff8ff !important;
+}
+
+html[data-lifeos-theme="dark"] .trips-page p,
+html[data-lifeos-theme="dark"] .trips-page label,
+html[data-lifeos-theme="dark"] .trips-page small,
+html[data-lifeos-theme="dark"] .trips-page .planner-step {
+  color: #b7a9c7 !important;
+}
+
+html[data-lifeos-theme="dark"] .trips-page input,
+html[data-lifeos-theme="dark"] .trips-page select,
+html[data-lifeos-theme="dark"] .trips-page textarea {
+  background: rgba(17, 11, 28, .72) !important;
+  color: #fff !important;
+  border-color: rgba(236, 180, 255, .16) !important;
+}
+
+html[data-lifeos-theme="dark"] .trips-page input::placeholder {
+  color: #8e809d !important;
+}
+
+html[data-lifeos-theme="dark"] .trips-page .flight-card,
+html[data-lifeos-theme="dark"] .trips-page .airport-suggestions,
+html[data-lifeos-theme="dark"] .trips-page .trip-type,
+html[data-lifeos-theme="dark"] .trips-page .flight-summary,
+html[data-lifeos-theme="dark"] .trips-page .hotel-card {
+  background: rgba(25, 17, 39, .82) !important;
+  border-color: rgba(236, 180, 255, .12) !important;
+  color: #f8f1ff !important;
+}
+
+html[data-lifeos-theme="dark"] .trips-page .flight-card:hover,
+html[data-lifeos-theme="dark"] .trips-page .hotel-card:hover {
+  background: rgba(46, 29, 61, .9) !important;
+}
+
+html[data-lifeos-theme="dark"] .trips-page .flight-card.selected {
+  border-color: rgba(126, 231, 160, .48) !important;
+  box-shadow: 0 0 0 1px rgba(126,231,160,.12), 0 20px 50px rgba(0,0,0,.28) !important;
+}
+
+html[data-lifeos-theme="dark"] .trips-page .airport-suggestion,
+html[data-lifeos-theme="dark"] .trips-page .airport-option {
+  color: #eee4f5 !important;
+}
+
+html[data-lifeos-theme="dark"] .trips-page .airport-suggestion:hover,
+html[data-lifeos-theme="dark"] .trips-page .airport-option:hover {
+  background: rgba(139,92,246,.16) !important;
+}
+
+/* =========================================================
+   LIGHT — TRAVEL
+   ========================================================= */
+
+html[data-lifeos-theme="light"] .trips-page {
+  background:
+    radial-gradient(circle at 82% 0%, rgba(124,58,237,.12), transparent 28%),
+    radial-gradient(circle at 15% 80%, rgba(236,72,153,.08), transparent 25%),
+    linear-gradient(135deg, #f7f4ff 0%, #fbf8ff 52%, #fff8f3 100%) !important;
+  color: #2d2342 !important;
+}
+
+html[data-lifeos-theme="light"] .trips-page .trip-planner-card,
+html[data-lifeos-theme="light"] .trips-page .flight-search-card,
+html[data-lifeos-theme="light"] .trips-page .flight-results-card,
+html[data-lifeos-theme="light"] .trips-page .hotel-page > section,
+html[data-lifeos-theme="light"] .trips-page .trip-summary-card {
+  background: rgba(255,255,255,.78) !important;
+  border-color: rgba(112,85,245,.10) !important;
+  color: #2d2342 !important;
+  box-shadow: 0 22px 60px rgba(72,50,120,.09) !important;
+}
+
+html[data-lifeos-theme="light"] .trips-page h1,
+html[data-lifeos-theme="light"] .trips-page h2,
+html[data-lifeos-theme="light"] .trips-page h3,
+html[data-lifeos-theme="light"] .trips-page strong {
+  color: #302442 !important;
+}
+
+html[data-lifeos-theme="light"] .trips-page p,
+html[data-lifeos-theme="light"] .trips-page label,
+html[data-lifeos-theme="light"] .trips-page small,
+html[data-lifeos-theme="light"] .trips-page .planner-step {
+  color: #7c718c !important;
+}
+
+html[data-lifeos-theme="light"] .trips-page input,
+html[data-lifeos-theme="light"] .trips-page select,
+html[data-lifeos-theme="light"] .trips-page textarea {
+  background: rgba(255,255,255,.82) !important;
+  color: #332943 !important;
+  border-color: rgba(112,85,245,.13) !important;
+}
+
+html[data-lifeos-theme="light"] .trips-page input::placeholder {
+  color: #a29aaa !important;
+}
+
+html[data-lifeos-theme="light"] .trips-page .flight-card,
+html[data-lifeos-theme="light"] .trips-page .airport-suggestions,
+html[data-lifeos-theme="light"] .trips-page .trip-type,
+html[data-lifeos-theme="light"] .trips-page .flight-summary,
+html[data-lifeos-theme="light"] .trips-page .hotel-card {
+  background: rgba(255,255,255,.82) !important;
+  border-color: rgba(112,85,245,.10) !important;
+  color: #302442 !important;
+}
+
+/* =========================================================
+   DARK — REMINDERS
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .reminders-page {
+  background:
+    radial-gradient(circle at 82% 4%, rgba(139,92,246,.17), transparent 28%),
+    radial-gradient(circle at 15% 85%, rgba(219,39,119,.10), transparent 25%),
+    linear-gradient(135deg,#120d1d 0%,#1b1228 52%,#150e22 100%) !important;
+  color: #f8f1ff !important;
+}
+
+html[data-lifeos-theme="dark"] .reminders-page .reminders-card,
+html[data-lifeos-theme="dark"] .reminders-page .reminder-row,
+html[data-lifeos-theme="dark"] .reminders-page .reminders-empty,
+html[data-lifeos-theme="dark"] .reminders-page .reminder-modal,
+html[data-lifeos-theme="dark"] .reminders-page .modal-content {
+  background: rgba(35,24,52,.80) !important;
+  border-color: rgba(236,180,255,.13) !important;
+  color: #f8f1ff !important;
+  box-shadow: 0 24px 65px rgba(0,0,0,.28) !important;
+}
+
+html[data-lifeos-theme="dark"] .reminders-page h1,
+html[data-lifeos-theme="dark"] .reminders-page h2,
+html[data-lifeos-theme="dark"] .reminders-page h3,
+html[data-lifeos-theme="dark"] .reminders-page strong {
+  color: #fff8ff !important;
+}
+
+html[data-lifeos-theme="dark"] .reminders-page p,
+html[data-lifeos-theme="dark"] .reminders-page span,
+html[data-lifeos-theme="dark"] .reminders-page label,
+html[data-lifeos-theme="dark"] .reminders-page small {
+  color: #b7a9c7 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminders-page input,
+html[data-lifeos-theme="dark"] .reminders-page select,
+html[data-lifeos-theme="dark"] .reminders-page textarea {
+  background: rgba(17,11,28,.75) !important;
+  color: #fff !important;
+  border-color: rgba(236,180,255,.16) !important;
+}
+
+html[data-lifeos-theme="dark"] .reminders-page .reminder-status {
+  color: #d9b8ff !important;
+  background: rgba(139,92,246,.14) !important;
+}
+
+/* =========================================================
+   LIGHT — REMINDERS
+   ========================================================= */
+
+html[data-lifeos-theme="light"] .reminders-page {
+  background:
+    radial-gradient(circle at 82% 0%, rgba(236,72,153,.12), transparent 28%),
+    radial-gradient(circle at 12% 82%, rgba(124,58,237,.09), transparent 25%),
+    linear-gradient(135deg,#f7f4ff 0%,#fff8fc 52%,#fff9f3 100%) !important;
+  color: #302442 !important;
+}
+
+html[data-lifeos-theme="light"] .reminders-page .reminders-card,
+html[data-lifeos-theme="light"] .reminders-page .reminder-row,
+html[data-lifeos-theme="light"] .reminders-page .reminders-empty,
+html[data-lifeos-theme="light"] .reminders-page .reminder-modal,
+html[data-lifeos-theme="light"] .reminders-page .modal-content {
+  background: rgba(255,255,255,.82) !important;
+  border-color: rgba(112,85,245,.10) !important;
+  color: #302442 !important;
+  box-shadow: 0 22px 60px rgba(72,50,120,.09) !important;
+}
+
+html[data-lifeos-theme="light"] .reminders-page h1,
+html[data-lifeos-theme="light"] .reminders-page h2,
+html[data-lifeos-theme="light"] .reminders-page h3,
+html[data-lifeos-theme="light"] .reminders-page strong {
+  color: #302442 !important;
+}
+
+html[data-lifeos-theme="light"] .reminders-page p,
+html[data-lifeos-theme="light"] .reminders-page span,
+html[data-lifeos-theme="light"] .reminders-page label,
+html[data-lifeos-theme="light"] .reminders-page small {
+  color: #7c718c !important;
+}
+
+/* =========================================================
+   TASKS / TASK-LIKE PAGES
+   The project has used several task layouts over development,
+   so these selectors intentionally cover the shared task UI.
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .tasks-page,
+html[data-lifeos-theme="dark"] .task-page,
+html[data-lifeos-theme="dark"] .tasks-container,
+html[data-lifeos-theme="dark"] .tasks-main {
+  background:
+    radial-gradient(circle at 82% 5%, rgba(139,92,246,.16), transparent 28%),
+    radial-gradient(circle at 12% 88%, rgba(219,39,119,.09), transparent 25%),
+    linear-gradient(135deg,#120d1d 0%,#1b1228 52%,#150e22 100%) !important;
+  color: #f8f1ff !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-page *,
+html[data-lifeos-theme="dark"] .task-page *,
+html[data-lifeos-theme="dark"] .tasks-container *,
+html[data-lifeos-theme="dark"] .tasks-main * {
+  border-color: rgba(236,180,255,.12) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-page .glass-card,
+html[data-lifeos-theme="dark"] .task-page .glass-card,
+html[data-lifeos-theme="dark"] .tasks-page .task-card,
+html[data-lifeos-theme="dark"] .task-page .task-card,
+html[data-lifeos-theme="dark"] .tasks-page .tasks-section {
+  background: rgba(35,24,52,.80) !important;
+  color: #f8f1ff !important;
+  box-shadow: 0 24px 65px rgba(0,0,0,.26) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-page h1,
+html[data-lifeos-theme="dark"] .tasks-page h2,
+html[data-lifeos-theme="dark"] .tasks-page h3,
+html[data-lifeos-theme="dark"] .tasks-page strong,
+html[data-lifeos-theme="dark"] .task-page h1,
+html[data-lifeos-theme="dark"] .task-page h2,
+html[data-lifeos-theme="dark"] .task-page h3,
+html[data-lifeos-theme="dark"] .task-page strong {
+  color: #fff8ff !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-page p,
+html[data-lifeos-theme="dark"] .tasks-page small,
+html[data-lifeos-theme="dark"] .task-page p,
+html[data-lifeos-theme="dark"] .task-page small {
+  color: #b7a9c7 !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-page .task-row,
+html[data-lifeos-theme="dark"] .task-page .task-row {
+  background: rgba(25,17,39,.82) !important;
+  color: #f8f1ff !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-page input,
+html[data-lifeos-theme="dark"] .tasks-page textarea,
+html[data-lifeos-theme="dark"] .task-page input,
+html[data-lifeos-theme="dark"] .task-page textarea {
+  background: rgba(17,11,28,.75) !important;
+  color: #fff !important;
+}
+
+/* =========================================================
+   GLOBAL TRANSITION
+   ========================================================= */
+
+html[data-lifeos-theme] .trips-page,
+html[data-lifeos-theme] .reminders-page,
+html[data-lifeos-theme] .tasks-page,
+html[data-lifeos-theme] .task-page {
+  transition:
+    background .25s ease,
+    color .25s ease;
+}

@@ -1,0 +1,665 @@
+/* =========================================================
+   LIFEOS LOGIN — COMPLETE VISUAL SYSTEM
+   This stylesheet intentionally uses unique classes so the
+   old App.css login theme cannot interfere with this design.
+   ========================================================= */
+
+.lifeos-login {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  color: #fff;
+  background: #10182d;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.lifeos-login-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(6, 13, 32, 0.68) 0%,
+      rgba(7, 15, 34, 0.28) 43%,
+      rgba(8, 14, 32, 0.30) 65%,
+      rgba(5, 10, 24, 0.55) 100%
+    ),
+    url('/lifeos-bg.png');
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.015);
+}
+
+.lifeos-login-noise {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  opacity: 0.14;
+  background:
+    radial-gradient(circle at 18% 35%, rgba(160, 128, 255, 0.42), transparent 24%),
+    radial-gradient(circle at 78% 42%, rgba(86, 177, 255, 0.18), transparent 26%);
+}
+
+.lifeos-login-brand {
+  position: absolute;
+  top: 34px;
+  left: 48px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.lifeos-login-logo {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border-radius: 15px;
+  background: linear-gradient(145deg, #9b75ff, #63baff);
+  box-shadow:
+    0 12px 35px rgba(97, 93, 255, 0.38),
+    inset 0 1px rgba(255, 255, 255, 0.45);
+}
+
+.lifeos-login-logo span {
+  width: 4px;
+  height: 22px;
+  border-radius: 99px;
+  background: #fff;
+}
+
+.lifeos-login-logo span:nth-child(2) {
+  height: 27px;
+}
+
+.lifeos-login-brand-name {
+  font-size: 22px;
+  font-weight: 850;
+  letter-spacing: 0.17em;
+}
+
+.lifeos-login-brand-tagline {
+  margin-top: 2px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: rgba(236, 238, 255, 0.62);
+}
+
+.lifeos-login-main {
+  min-height: 100vh;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 105px 6.2% 45px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(460px, 560px);
+  align-items: center;
+  gap: 7vw;
+}
+
+.lifeos-login-hero {
+  max-width: 710px;
+  padding-left: 1%;
+  padding-bottom: 2vh;
+}
+
+.lifeos-login-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 27px;
+  color: #c7b9ff;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.22em;
+}
+
+.lifeos-login-eyebrow span {
+  width: 38px;
+  height: 1px;
+  background: linear-gradient(90deg, #a88cff, #ffac8b);
+}
+
+.lifeos-login-hero h1 {
+  margin: 0;
+  font-size: clamp(58px, 5.3vw, 86px);
+  line-height: 0.95;
+  letter-spacing: -0.055em;
+  font-weight: 850;
+  text-shadow: 0 16px 55px rgba(0, 0, 0, 0.30);
+}
+
+.lifeos-login-hero h1 span {
+  background: linear-gradient(100deg, #a875ff, #5fc6ff 48%, #ffb28e);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.lifeos-login-copy {
+  margin: 28px 0 0;
+  color: rgba(243, 244, 255, 0.80);
+  font-size: 18px;
+  line-height: 1.65;
+  letter-spacing: -0.01em;
+}
+
+.lifeos-login-features {
+  margin-top: 39px;
+  display: grid;
+  gap: 13px;
+  max-width: 500px;
+}
+
+.lifeos-login-feature {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 8px 13px 8px 0;
+  border-radius: 17px;
+}
+
+.lifeos-login-feature-icon {
+  width: 51px;
+  height: 51px;
+  flex: 0 0 51px;
+  display: grid;
+  place-items: center;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.16),
+    inset 0 1px rgba(255, 255, 255, 0.13);
+}
+
+.lifeos-login-feature-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.lifeos-login-feature-icon.purple {
+  color: #c0aaff;
+  background: linear-gradient(145deg, rgba(150, 111, 255, 0.36), rgba(90, 81, 205, 0.16));
+}
+
+.lifeos-login-feature-icon.blue {
+  color: #73d0ff;
+  background: linear-gradient(145deg, rgba(68, 173, 255, 0.32), rgba(53, 115, 190, 0.15));
+}
+
+.lifeos-login-feature-icon.peach {
+  color: #ffc19d;
+  background: linear-gradient(145deg, rgba(255, 150, 112, 0.30), rgba(154, 81, 157, 0.16));
+}
+
+.lifeos-login-feature strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 780;
+}
+
+.lifeos-login-feature small {
+  display: block;
+  margin-top: 4px;
+  color: rgba(236, 237, 250, 0.63);
+  font-size: 13px;
+}
+
+.lifeos-login-quote {
+  margin-top: 31px;
+  display: flex;
+  gap: 13px;
+  align-items: stretch;
+}
+
+.lifeos-login-quote > span {
+  width: 2px;
+  border-radius: 5px;
+  background: linear-gradient(#a87cff, #6dbaff);
+  box-shadow: 0 0 18px rgba(144, 110, 255, 0.42);
+}
+
+.lifeos-login-quote p {
+  margin: 0;
+  color: rgba(240, 241, 252, 0.64);
+  font-size: 11px;
+  line-height: 1.75;
+  font-weight: 700;
+  letter-spacing: 0.17em;
+}
+
+.lifeos-login-panel {
+  display: flex;
+  justify-content: center;
+}
+
+.lifeos-login-card {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  box-sizing: border-box;
+  padding: 48px 48px 35px;
+  overflow: hidden;
+  border-radius: 29px;
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(38, 48, 83, 0.62),
+      rgba(19, 27, 55, 0.58)
+    );
+  backdrop-filter: blur(25px) saturate(125%);
+  -webkit-backdrop-filter: blur(25px) saturate(125%);
+  box-shadow:
+    0 35px 90px rgba(0, 0, 0, 0.38),
+    0 0 80px rgba(87, 99, 255, 0.11),
+    inset 0 1px rgba(255, 255, 255, 0.20);
+}
+
+.lifeos-login-card-glow {
+  position: absolute;
+  width: 280px;
+  height: 280px;
+  right: -150px;
+  top: -150px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(135, 105, 255, 0.28), transparent 68%);
+  pointer-events: none;
+}
+
+.lifeos-login-card-topline {
+  position: absolute;
+  left: 16%;
+  right: 16%;
+  top: 0;
+  height: 2px;
+  display: flex;
+}
+
+.lifeos-login-card-topline span {
+  flex: 1;
+  background: linear-gradient(90deg, transparent, rgba(161, 122, 255, 0.7));
+}
+
+.lifeos-login-card-topline span:nth-child(2) {
+  background: linear-gradient(90deg, rgba(91, 199, 255, 0.75), rgba(255, 169, 133, 0.72));
+}
+
+.lifeos-login-card h2 {
+  position: relative;
+  margin: 0;
+  font-size: 34px;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+}
+
+.lifeos-login-card h2 span {
+  display: inline-block;
+  margin-left: 4px;
+}
+
+.lifeos-login-subtitle {
+  margin: 13px 0 28px;
+  color: rgba(233, 236, 250, 0.62);
+  font-size: 15px;
+}
+
+.lifeos-login-methods {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  padding: 4px;
+  margin-bottom: 24px;
+  border-radius: 16px;
+  background: rgba(5, 10, 27, 0.34);
+  border: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.lifeos-login-methods button {
+  height: 45px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: rgba(232, 235, 251, 0.50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: 180ms ease;
+}
+
+.lifeos-login-methods button svg {
+  width: 17px;
+  height: 17px;
+}
+
+.lifeos-login-methods button:hover {
+  color: #fff;
+}
+
+.lifeos-login-methods button.active {
+  color: #fff;
+  background: linear-gradient(105deg, rgba(135, 91, 255, 0.50), rgba(80, 164, 255, 0.30));
+  border-color: rgba(194, 174, 255, 0.22);
+  box-shadow: 0 8px 24px rgba(71, 76, 190, 0.18), inset 0 1px rgba(255,255,255,.14);
+}
+
+.lifeos-login-field {
+  margin-bottom: 18px;
+}
+
+.lifeos-login-field label {
+  display: block;
+  margin: 0 0 8px 2px;
+  color: rgba(246, 247, 255, 0.80);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.lifeos-login-input,
+.lifeos-login-phone {
+  width: 100%;
+  min-height: 58px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(5, 9, 26, 0.34);
+  box-shadow: inset 0 1px rgba(255,255,255,.035);
+  transition: 180ms ease;
+}
+
+.lifeos-login-input:focus-within,
+.lifeos-login-phone:focus-within {
+  border-color: rgba(146, 126, 255, 0.75);
+  background: rgba(7, 11, 30, 0.46);
+  box-shadow:
+    0 0 0 3px rgba(131, 102, 255, 0.10),
+    0 10px 30px rgba(61, 71, 178, 0.10);
+}
+
+.lifeos-login-input > svg {
+  width: 19px;
+  height: 19px;
+  margin-left: 17px;
+  flex: 0 0 auto;
+  color: #ad98ff;
+}
+
+.lifeos-login-input input {
+  min-width: 0;
+  flex: 1;
+  height: 56px;
+  padding: 0 14px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+}
+
+.lifeos-login-input input::placeholder,
+.lifeos-login-phone .PhoneInputInput::placeholder {
+  color: rgba(216, 220, 239, 0.34);
+}
+
+.lifeos-login-eye {
+  width: 45px;
+  height: 45px;
+  margin-right: 4px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  background: transparent;
+  color: rgba(196, 183, 255, 0.58);
+  cursor: pointer;
+}
+
+.lifeos-login-eye svg {
+  width: 19px;
+  height: 19px;
+}
+
+.lifeos-login-phone {
+  padding: 0 12px;
+}
+
+.lifeos-login-phone .PhoneInput {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.lifeos-login-phone .PhoneInputCountry {
+  margin-left: 2px;
+}
+
+.lifeos-login-phone .PhoneInputCountrySelect {
+  color: #fff;
+  background: transparent;
+}
+
+.lifeos-login-phone .PhoneInputCountryIcon {
+  box-shadow: none;
+}
+
+.lifeos-login-phone .PhoneInputInput {
+  min-width: 0;
+  flex: 1;
+  height: 54px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+}
+
+.lifeos-login-forgot {
+  display: block;
+  margin: -3px 2px 21px auto;
+  border: 0;
+  background: transparent;
+  color: #c0aaff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lifeos-login-submit {
+  width: 100%;
+  height: 58px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 16px;
+  background: linear-gradient(105deg, #7957ff 0%, #5e9dff 48%, #ff9c78 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow:
+    0 14px 35px rgba(88, 79, 229, 0.30),
+    0 8px 24px rgba(255, 139, 108, 0.10),
+    inset 0 1px rgba(255,255,255,.30);
+  transition: 180ms ease;
+}
+
+.lifeos-login-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  box-shadow:
+    0 18px 42px rgba(88, 79, 229, 0.37),
+    0 10px 28px rgba(255, 139, 108, 0.14),
+    inset 0 1px rgba(255,255,255,.34);
+}
+
+.lifeos-login-submit:disabled {
+  opacity: .7;
+  cursor: wait;
+}
+
+.lifeos-login-divider {
+  margin: 27px 0 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(230, 232, 245, 0.34);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+.lifeos-login-divider span {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.13));
+}
+
+.lifeos-login-divider span:last-child {
+  background: linear-gradient(90deg, rgba(255,255,255,.13), transparent);
+}
+
+.lifeos-login-register {
+  margin: 0;
+  text-align: center;
+  color: rgba(231, 233, 247, 0.58);
+  font-size: 13px;
+}
+
+.lifeos-login-register button {
+  margin-left: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #c0a6ff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.lifeos-login-footer {
+  margin-top: 30px;
+  text-align: center;
+  color: rgba(226, 228, 242, 0.28);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .24em;
+}
+
+.lifeos-login-corner {
+  position: absolute;
+  right: 42px;
+  top: 27px;
+  z-index: 3;
+  display: grid;
+  gap: 2px;
+  color: rgba(244, 237, 255, 0.52);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: .16em;
+  text-align: right;
+}
+
+.lifeos-login-corner::before {
+  content: "";
+  position: absolute;
+  width: 29px;
+  height: 1px;
+  right: -39px;
+  top: 8px;
+  background: linear-gradient(90deg, rgba(255,255,255,.45), transparent);
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVE
+--------------------------------------------------------- */
+
+@media (max-width: 1050px) {
+  .lifeos-login-main {
+    grid-template-columns: 1fr;
+    padding: 110px 7% 45px;
+  }
+
+  .lifeos-login-hero {
+    max-width: 650px;
+  }
+
+  .lifeos-login-panel {
+    justify-content: flex-start;
+  }
+
+  .lifeos-login-card {
+    max-width: 560px;
+  }
+
+  .lifeos-login-corner {
+    display: none;
+  }
+}
+
+@media (max-width: 650px) {
+  .lifeos-login-brand {
+    top: 22px;
+    left: 22px;
+  }
+
+  .lifeos-login-logo {
+    width: 41px;
+    height: 41px;
+    border-radius: 13px;
+  }
+
+  .lifeos-login-brand-name {
+    font-size: 18px;
+  }
+
+  .lifeos-login-brand-tagline {
+    display: none;
+  }
+
+  .lifeos-login-main {
+    padding: 90px 18px 28px;
+    gap: 38px;
+  }
+
+  .lifeos-login-hero h1 {
+    font-size: clamp(48px, 14vw, 70px);
+  }
+
+  .lifeos-login-copy {
+    font-size: 16px;
+  }
+
+  .lifeos-login-features {
+    margin-top: 27px;
+  }
+
+  .lifeos-login-card {
+    padding: 34px 22px 27px;
+    border-radius: 23px;
+  }
+
+  .lifeos-login-card h2 {
+    font-size: 29px;
+  }
+}

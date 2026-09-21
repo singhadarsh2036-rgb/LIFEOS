@@ -1,0 +1,2473 @@
+
+@import './LIFEOS_Global_Theme.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+body {
+  background: #050611;
+  font-family: 'Inter', sans-serif;
+}
+
+/* =========================================================
+   MAIN LOGIN PAGE
+========================================================= */
+
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+
+  position: relative;
+  overflow: hidden;
+
+  display: grid;
+  grid-template-columns: 58% 42%;
+
+  background: #060711;
+
+  color: #f7f8ff;
+}
+
+/* =========================================================
+   BACKGROUND ATMOSPHERE
+========================================================= */
+
+.login-mountains {
+  position: absolute;
+  inset: 0 auto 0 0;
+
+  width: 64%;
+  height: 100%;
+
+  z-index: 0;
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at 45% 35%,
+      rgba(118, 94, 230, 0.28) 0%,
+      rgba(118, 94, 230, 0.12) 28%,
+      transparent 65%
+    ),
+
+    radial-gradient(
+      ellipse at 35% 72%,
+      rgba(180, 100, 155, 0.16) 0%,
+      transparent 48%
+    ),
+
+    radial-gradient(
+      ellipse at 70% 20%,
+      rgba(74, 92, 210, 0.12) 0%,
+      transparent 42%
+    ),
+
+    linear-gradient(
+      180deg,
+      #08091a 0%,
+      #0b0d20 38%,
+      #12132b 68%,
+      #070813 100%
+    );
+}
+
+/* =========================================================
+   SUBTLE LIGHT BEHIND HERO
+========================================================= */
+
+.login-mountains::before {
+  content: '';
+
+  position: absolute;
+
+  width: 650px;
+  height: 650px;
+
+  left: 5%;
+  top: 18%;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(123, 101, 255, 0.12) 0%,
+      rgba(123, 101, 255, 0.05) 35%,
+      transparent 70%
+    );
+
+  filter: blur(30px);
+}
+
+/* =========================================================
+   VERY SUBTLE HORIZON GLOW
+========================================================= */
+
+.login-mountains::after {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 35%;
+
+  background:
+    linear-gradient(
+      180deg,
+      transparent,
+      rgba(95, 79, 180, 0.08)
+    );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   PAGE OVERLAY
+========================================================= */
+
+.login-page::after {
+  content: '';
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 1;
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent 0%,
+      transparent 48%,
+      rgba(6, 7, 17, 0.08) 58%,
+      rgba(6, 7, 17, 0.48) 74%,
+      rgba(6, 7, 17, 0.88) 94%,
+      #060711 100%
+    );
+}
+
+/* =========================================================
+   LEFT SIDE
+========================================================= */
+
+.login-left {
+  min-height: 100vh;
+
+  position: relative;
+  z-index: 3;
+
+  padding: 52px 60px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.login-brand {
+  position: relative;
+  z-index: 10;
+
+  width: fit-content;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+
+  color: #ffffff;
+
+  font-size: 21px;
+  font-weight: 800;
+
+  letter-spacing: 0.30em;
+
+  text-shadow:
+    0 5px 25px rgba(0, 0, 0, 0.55);
+}
+
+/* LIFEOS logo */
+
+.login-brand-mark {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #a48cff 0%,
+      #806eff 48%,
+      #6689ff 100%
+    );
+
+  box-shadow:
+    0 12px 35px rgba(105, 83, 255, 0.40),
+    inset 0 1px 0 rgba(255, 255, 255, 0.42);
+}
+
+.login-brand-mark::before {
+  content: '';
+
+  width: 4px;
+  height: 19px;
+
+  border-radius: 5px;
+
+  background: #ffffff;
+
+  box-shadow:
+    8px 0 0 #ffffff,
+    16px 0 0 #ffffff;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.login-hero {
+  max-width: 680px;
+
+  margin-top: auto;
+  margin-bottom: auto;
+
+  padding-top: 50px;
+}
+
+/* =========================================================
+   KICKER
+========================================================= */
+
+.login-kicker {
+  margin: 0 0 25px;
+
+  color: #aaa1ff;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  letter-spacing: 0.25em;
+
+  text-transform: uppercase;
+
+  text-shadow:
+    0 0 25px rgba(135, 113, 255, 0.28);
+}
+
+/* =========================================================
+   MAIN HEADING
+========================================================= */
+
+.login-hero h1 {
+  margin: 0;
+
+  color: #f8f8ff;
+
+  font-size: clamp(54px, 5vw, 82px);
+
+  line-height: 0.98;
+
+  font-weight: 800;
+
+  letter-spacing: -0.065em;
+
+  text-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.38);
+}
+
+/* =========================================================
+   GRADIENT WORD
+========================================================= */
+
+.login-gradient-text {
+  background:
+    linear-gradient(
+      110deg,
+      #8175ff 0%,
+      #a474ff 45%,
+      #658fff 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+
+  filter:
+    drop-shadow(
+      0 8px 25px rgba(119, 95, 255, 0.18)
+    );
+}
+
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
+
+.login-hero-copy {
+  margin: 28px 0 40px;
+
+  color: rgba(236, 238, 255, 0.70);
+
+  font-size: 18px;
+
+  line-height: 1.65;
+}
+
+/* =========================================================
+   FEATURES
+========================================================= */
+
+.login-features {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+.login-feature {
+  display: flex;
+
+  align-items: center;
+
+  gap: 17px;
+}
+
+/* =========================================================
+   FEATURE ICON
+========================================================= */
+
+.login-feature-icon {
+  width: 54px;
+  height: 54px;
+
+  flex-shrink: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.13);
+
+  border-radius: 16px;
+
+  background:
+    rgba(13, 15, 32, 0.42);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.login-feature-icon svg {
+  width: 27px;
+  height: 27px;
+
+  color: #f1f2ff;
+}
+
+/* =========================================================
+   FEATURE TEXT
+========================================================= */
+
+.login-feature strong {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #ffffff;
+
+  font-size: 15px;
+
+  font-weight: 700;
+}
+
+.login-feature span {
+  display: block;
+
+  color: rgba(215, 218, 239, 0.62);
+
+  font-size: 13px;
+}
+
+/* =========================================================
+   QUOTE
+========================================================= */
+
+.login-quote {
+  margin: 42px 0 0;
+
+  padding-left: 17px;
+
+  border-left: 2px solid #8978ff;
+
+  color: rgba(239, 240, 255, 0.72);
+
+  font-size: 12px;
+
+  line-height: 1.8;
+
+  letter-spacing: 0.20em;
+
+  text-transform: uppercase;
+}
+
+/* =========================================================
+   RIGHT SIDE
+========================================================= */
+
+.login-right {
+  min-height: 100vh;
+
+  position: relative;
+  z-index: 5;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 45px 55px 45px 20px;
+}
+
+/* =========================================================
+   LOGIN CARD
+========================================================= */
+
+.login-card {
+  width: min(550px, 100%);
+
+  position: relative;
+
+  padding: 48px 46px 38px;
+
+  border-radius: 30px;
+
+  border: 1px solid rgba(255, 255, 255, 0.13);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(25, 28, 52, 0.84),
+      rgba(8, 10, 24, 0.88)
+    );
+
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.58),
+    0 0 80px rgba(100, 78, 255, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.13);
+
+  overflow: hidden;
+}
+
+/* Card glow */
+
+.login-card::before {
+  content: '';
+
+  position: absolute;
+
+  width: 330px;
+  height: 220px;
+
+  top: -140px;
+  right: -80px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(125, 101, 255, 0.20);
+
+  filter: blur(75px);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CARD TITLE
+========================================================= */
+
+.login-card h2 {
+  position: relative;
+  z-index: 2;
+
+  margin: 0;
+
+  color: #f8f8ff;
+
+  font-size: clamp(34px, 3vw, 46px);
+
+  line-height: 1.05;
+
+  font-weight: 800;
+
+  letter-spacing: -0.055em;
+}
+
+/* =========================================================
+   CARD SUBTITLE
+========================================================= */
+
+.login-card-subtitle {
+  position: relative;
+  z-index: 2;
+
+  margin: 14px 0 38px;
+
+  color: rgba(204, 207, 226, 0.64);
+
+  font-size: 15px;
+
+  line-height: 1.6;
+}
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.login-form {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.login-field {
+  margin-bottom: 22px;
+}
+
+.login-field label {
+  display: block;
+
+  margin: 0 0 9px 3px;
+
+  color: #dedfec;
+
+  font-size: 13px;
+
+  font-weight: 600;
+}
+
+/* =========================================================
+   INPUT WRAPPER
+========================================================= */
+
+.login-input-wrap {
+  position: relative;
+
+  width: 100%;
+}
+
+/* icons */
+
+.login-input-wrap > svg {
+  position: absolute;
+
+  left: 18px;
+  top: 50%;
+
+  width: 20px;
+  height: 20px;
+
+  transform: translateY(-50%);
+
+  color: #7d829b;
+
+  pointer-events: none;
+
+  transition: color 0.2s ease;
+}
+
+/* =========================================================
+   INPUT
+========================================================= */
+
+.login-input {
+  width: 100%;
+  height: 60px;
+
+  padding: 0 52px;
+
+  border: 1px solid rgba(255, 255, 255, 0.10);
+
+  border-radius: 16px;
+
+  outline: none;
+
+  background:
+    rgba(255, 255, 255, 0.045);
+
+  color: #f7f8ff;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  transition:
+    border-color 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.login-input::placeholder {
+  color: #696e84;
+}
+
+.login-input:hover {
+  background:
+    rgba(255, 255, 255, 0.06);
+}
+
+.login-input:focus {
+  border-color:
+    rgba(139, 121, 255, 0.75);
+
+  background:
+    rgba(255, 255, 255, 0.065);
+
+  box-shadow:
+    0 0 0 4px rgba(112, 94, 255, 0.10),
+    0 10px 35px rgba(70, 55, 180, 0.08);
+}
+
+.login-input-wrap:focus-within > svg {
+  color: #a99eff;
+}
+
+/* =========================================================
+   PASSWORD TOGGLE
+========================================================= */
+
+.login-password-toggle {
+  position: absolute;
+
+  right: 15px;
+  top: 50%;
+
+  width: 32px;
+  height: 32px;
+
+  transform: translateY(-50%);
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #777c94;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.login-password-toggle:hover {
+  color: #b1a7ff;
+
+  transform:
+    translateY(-50%)
+    scale(1.08);
+}
+
+.login-password-toggle svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* =========================================================
+   FORGOT PASSWORD
+========================================================= */
+
+.login-forgot {
+  align-self: flex-end;
+
+  margin: -5px 2px 25px;
+
+  padding: 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #9d91ff;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  font-weight: 600;
+
+  transition: color 0.2s ease;
+}
+
+.login-forgot:hover {
+  color: #c4bdff;
+}
+
+/* =========================================================
+   LOGIN BUTTON
+========================================================= */
+
+.login-submit {
+  width: 100%;
+  height: 60px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+
+  border-radius: 16px;
+
+  cursor: pointer;
+
+  color: #ffffff;
+
+  background:
+    linear-gradient(
+      110deg,
+      #8968ff 0%,
+      #776cff 45%,
+      #5f88ff 100%
+    );
+
+  box-shadow:
+    0 18px 40px rgba(103, 80, 255, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.30);
+
+  font-family: inherit;
+
+  font-size: 15px;
+
+  font-weight: 700;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.login-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  filter: brightness(1.08);
+
+  box-shadow:
+    0 24px 50px rgba(103, 80, 255, 0.38),
+    inset 0 1px 0 rgba(255, 255, 255, 0.30);
+}
+
+.login-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.login-submit:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.65;
+}
+
+/* =========================================================
+   DIVIDER
+========================================================= */
+
+.login-divider {
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin: 29px 0 25px;
+
+  color: #676b80;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.18em;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: '';
+
+  height: 1px;
+
+  flex: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.10)
+    );
+}
+
+.login-divider::after {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.10),
+      transparent
+    );
+}
+
+/* =========================================================
+   REGISTER
+========================================================= */
+
+.login-register {
+  margin: 0;
+
+  text-align: center;
+
+  color: #85899e;
+
+  font-size: 13px;
+}
+
+.login-register button {
+  padding: 0;
+
+  margin-left: 4px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #a99cff;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  font-size: inherit;
+
+  font-weight: 700;
+
+  transition: color 0.2s ease;
+}
+
+.login-register button:hover {
+  color: #c9c2ff;
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.login-footer {
+  margin-top: 28px;
+
+  text-align: center;
+
+  color: rgba(125, 129, 151, 0.50);
+
+  font-size: 9px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.20em;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+  .login-page {
+    grid-template-columns: 54% 46%;
+  }
+
+  .login-mountains {
+    width: 60%;
+  }
+
+  .login-left {
+    padding: 40px;
+  }
+
+  .login-right {
+    padding: 30px;
+  }
+
+  .login-card {
+    padding: 40px 34px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+  .login-page {
+    display: block;
+
+    min-height: 100vh;
+
+    overflow-y: auto;
+  }
+
+  .login-mountains {
+    position: fixed;
+
+    width: 100%;
+    height: 100%;
+
+    background:
+      radial-gradient(
+        ellipse at 50% 35%,
+        rgba(118, 94, 230, 0.24),
+        transparent 48%
+      ),
+
+      linear-gradient(
+        180deg,
+        #08091a 0%,
+        #10112b 50%,
+        #060711 100%
+      );
+  }
+
+  .login-page::after {
+    background:
+      linear-gradient(
+        180deg,
+        transparent 0%,
+        rgba(6, 7, 17, 0.15) 35%,
+        rgba(6, 7, 17, 0.75) 75%,
+        #060711 100%
+      );
+  }
+
+  .login-left {
+    min-height: auto;
+
+    padding:
+      28px 24px 10px;
+  }
+
+  .login-hero {
+    padding-top: 70px;
+  }
+
+  .login-hero h1 {
+    font-size: 52px;
+  }
+
+  .login-right {
+    min-height: auto;
+
+    padding:
+      25px 20px 45px;
+  }
+
+  .login-card {
+    max-width: 560px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 520px) {
+
+  .login-left {
+    padding:
+      22px 18px 10px;
+  }
+
+  .login-brand {
+    gap: 10px;
+
+    font-size: 16px;
+
+    letter-spacing: 0.25em;
+  }
+
+  .login-brand-mark {
+    width: 36px;
+    height: 36px;
+
+    border-radius: 11px;
+  }
+
+  .login-hero {
+    padding-top: 60px;
+  }
+
+  .login-hero h1 {
+    font-size: 44px;
+  }
+
+  .login-hero-copy {
+    font-size: 15px;
+  }
+
+  .login-feature-icon {
+    width: 48px;
+    height: 48px;
+  }
+
+  .login-card {
+    padding:
+      30px 21px 27px;
+
+    border-radius: 23px;
+  }
+
+  .login-card h2 {
+    font-size: 31px;
+  }
+
+  .login-card-subtitle {
+    font-size: 13px;
+
+    margin-bottom: 29px;
+  }
+
+  .login-input,
+  .login-submit {
+    height: 56px;
+  }
+}
+/* =========================================================
+   CINEMATIC MOUNTAINS + LIGHTNING
+========================================================= */
+
+/* Keep hero content above the artwork */
+.login-brand,
+.login-hero {
+  position: relative;
+  z-index: 3;
+}
+
+
+/* =========================================================
+   MOUNTAIN RANGE
+========================================================= */
+
+.login-left::before {
+  content: '';
+
+  position: absolute;
+
+  z-index: 0;
+
+  left: -8%;
+  bottom: -2%;
+
+  width: 118%;
+  height: 48%;
+
+  pointer-events: none;
+
+  /* Mountain + subtle snow */
+  background:
+
+    /* snow ridge */
+    linear-gradient(
+      132deg,
+      transparent 0%,
+      transparent 30%,
+      rgba(193, 199, 229, 0.20) 31%,
+      rgba(109, 119, 168, 0.16) 33%,
+      transparent 35%,
+      transparent 100%
+    ),
+
+    linear-gradient(
+      146deg,
+      #252b4d 0%,
+      #151a36 35%,
+      #0a0d20 70%,
+      #050611 100%
+    );
+
+  clip-path: polygon(
+    0% 100%,
+
+    0% 72%,
+    8% 61%,
+    15% 76%,
+
+    23% 52%,
+    31% 72%,
+
+    40% 35%,
+    48% 70%,
+
+    57% 48%,
+    65% 73%,
+
+    74% 40%,
+    82% 68%,
+
+    91% 53%,
+    100% 69%,
+
+    100% 100%
+  );
+
+  opacity: 0.92;
+
+  filter:
+    drop-shadow(
+      0 -15px 35px rgba(70, 76, 145, 0.12)
+    );
+}
+
+
+/* =========================================================
+   SECOND DARK FOREGROUND MOUNTAIN
+========================================================= */
+
+.login-left::after {
+  content: '';
+
+  position: absolute;
+
+  z-index: 1;
+
+  left: -12%;
+  bottom: -8%;
+
+  width: 125%;
+  height: 34%;
+
+  pointer-events: none;
+
+  background:
+    linear-gradient(
+      145deg,
+      #11162e 0%,
+      #080b1b 55%,
+      #03040b 100%
+    );
+
+  clip-path: polygon(
+    0% 100%,
+
+    0% 74%,
+    12% 61%,
+    21% 82%,
+
+    32% 48%,
+    42% 77%,
+
+    54% 57%,
+    65% 80%,
+
+    77% 51%,
+    87% 76%,
+
+    100% 61%,
+
+    100% 100%
+  );
+
+  opacity: 0.95;
+}
+
+
+/* =========================================================
+   LIGHTNING
+========================================================= */
+
+.login-mountains {
+  overflow: hidden;
+}
+
+/*
+   We use a box-shadow based atmospheric flash.
+   It stays subtle instead of looking like a cartoon bolt.
+*/
+
+.login-mountains::before {
+  content: '';
+
+  position: absolute;
+
+  z-index: 1;
+
+  top: 15%;
+  left: 54%;
+
+  width: 3px;
+  height: 155px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0) 0%,
+      rgba(210,220,255,0.85) 30%,
+      #ffffff 48%,
+      rgba(160,180,255,0.35) 70%,
+      rgba(255,255,255,0) 100%
+    );
+
+  clip-path: polygon(
+    45% 0%,
+    100% 0%,
+    57% 37%,
+    100% 37%,
+    25% 100%,
+    43% 52%,
+    0% 52%
+  );
+
+  transform:
+    rotate(7deg)
+    scaleX(2.5);
+
+  filter:
+    drop-shadow(
+      0 0 8px rgba(185, 196, 255, 0.85)
+    )
+    drop-shadow(
+      0 0 25px rgba(125, 130, 255, 0.55)
+    );
+
+  opacity: 0.75;
+
+  animation:
+    lifeosLightning 7s infinite;
+}
+
+
+/* =========================================================
+   LIGHTNING ATMOSPHERIC GLOW
+========================================================= */
+
+.login-mountains::after {
+  content: '';
+
+  position: absolute;
+
+  z-index: 0;
+
+  top: 8%;
+  left: 42%;
+
+  width: 260px;
+  height: 260px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      circle,
+      rgba(119, 127, 255, 0.13) 0%,
+      rgba(119, 127, 255, 0.05) 35%,
+      transparent 70%
+    );
+
+  filter: blur(25px);
+
+  animation:
+    lifeosLightningGlow 7s infinite;
+}
+
+
+/* =========================================================
+   LIGHTNING ANIMATION
+========================================================= */
+
+@keyframes lifeosLightning {
+
+  0%,
+  47%,
+  52%,
+  100% {
+    opacity: 0;
+  }
+
+  48% {
+    opacity: 0.25;
+  }
+
+  49% {
+    opacity: 0.95;
+  }
+
+  50% {
+    opacity: 0.15;
+  }
+
+  51% {
+    opacity: 0.75;
+  }
+}
+
+
+@keyframes lifeosLightningGlow {
+
+  0%,
+  47%,
+  52%,
+  100% {
+    opacity: 0.15;
+  }
+
+  49% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 0.20;
+  }
+
+  51% {
+    opacity: 0.45;
+  }
+}
+
+
+/* =========================================================
+   EXTRA ATMOSPHERIC HAZE
+========================================================= */
+
+.login-page::before {
+  content: '';
+
+  position: absolute;
+
+  z-index: 2;
+
+  left: 0;
+  bottom: 18%;
+
+  width: 63%;
+  height: 100px;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(174, 132, 170, 0.10) 0%,
+      rgba(120, 100, 180, 0.05) 35%,
+      transparent 72%
+    );
+
+  filter: blur(25px);
+
+  opacity: 0.9;
+}
+
+/* ================================
+   LOGIN METHOD SELECTOR
+================================ */
+
+.login-method-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+  width: 100%;
+  padding: 4px;
+  margin-bottom: 22px;
+
+  background: rgba(255, 255, 255, 0.055);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 14px;
+
+  box-sizing: border-box;
+}
+
+.login-method {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  height: 42px;
+  padding: 0 14px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: transparent;
+  color: rgba(255, 255, 255, 0.52);
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.login-method svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+
+.login-method:hover {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.login-method.active {
+  color: #ffffff;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.13),
+    rgba(255, 255, 255, 0.07)
+  );
+
+  box-shadow:
+    0 4px 14px rgba(0, 0, 0, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.login-method:active {
+  transform: scale(0.98);
+}
+/* =========================================================
+   LIFEOS — PREMIUM JOYFUL LOGIN THEME
+   ========================================================= */
+
+.login-page {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 78% 18%,
+      rgba(129, 92, 246, 0.24),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 15% 82%,
+      rgba(47, 160, 255, 0.16),
+      transparent 28%
+    ),
+    linear-gradient(
+      135deg,
+      #08091a 0%,
+      #10112b 45%,
+      #111936 100%
+    );
+}
+
+/* Ambient light */
+.login-page::before {
+  content: '';
+  position: absolute;
+  width: 520px;
+  height: 520px;
+
+  top: -230px;
+  right: -120px;
+
+  background: radial-gradient(
+    circle,
+    rgba(157, 110, 255, 0.20),
+    transparent 68%
+  );
+
+  filter: blur(20px);
+  pointer-events: none;
+}
+
+/* Bottom warm glow */
+.login-page::after {
+  content: '';
+  position: absolute;
+  width: 480px;
+  height: 480px;
+
+  bottom: -300px;
+  left: 20%;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 143, 102, 0.12),
+    transparent 68%
+  );
+
+  filter: blur(25px);
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   BRAND
+   ========================================================= */
+
+.login-brand {
+  letter-spacing: 0.18em;
+  font-weight: 800;
+
+  color: #ffffff;
+
+  text-shadow:
+    0 0 24px rgba(147, 112, 255, 0.28);
+}
+
+.login-brand-mark {
+  background:
+    linear-gradient(
+      135deg,
+      #8b6cff,
+      #5ab8ff
+    ) !important;
+
+  box-shadow:
+    0 8px 30px rgba(109, 92, 255, 0.35),
+    inset 0 1px 1px rgba(255,255,255,0.35);
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.login-kicker {
+  color: #9da5ff !important;
+
+  letter-spacing: 0.18em;
+
+  text-shadow:
+    0 0 20px rgba(125, 110, 255, 0.25);
+}
+
+.login-hero h1 {
+  color: #ffffff;
+
+  text-shadow:
+    0 12px 50px rgba(0, 0, 0, 0.35);
+}
+
+.login-gradient-text {
+  background:
+    linear-gradient(
+      100deg,
+      #9b7cff 0%,
+      #5ec8ff 48%,
+      #ffad91 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  filter:
+    drop-shadow(0 0 18px rgba(126, 105, 255, 0.22));
+}
+
+.login-hero-copy {
+  color: rgba(235, 237, 255, 0.68) !important;
+}
+
+
+/* =========================================================
+   FEATURES
+   ========================================================= */
+
+.login-feature {
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+.login-feature:hover {
+  transform: translateX(5px);
+
+  background: rgba(255, 255, 255, 0.035);
+  border-radius: 14px;
+}
+
+.login-feature-icon {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(137, 108, 255, 0.22),
+      rgba(73, 180, 255, 0.10)
+    ) !important;
+
+  border: 1px solid rgba(160, 140, 255, 0.20) !important;
+
+  box-shadow:
+    0 8px 24px rgba(92, 76, 200, 0.16),
+    inset 0 1px rgba(255,255,255,0.08);
+}
+
+.login-feature-icon svg {
+  color: #a998ff !important;
+}
+
+.login-feature strong {
+  color: #f7f7ff !important;
+}
+
+.login-feature span {
+  color: rgba(220, 224, 255, 0.55) !important;
+}
+
+
+/* =========================================================
+   QUOTE
+   ========================================================= */
+
+.login-quote {
+  color: rgba(255, 255, 255, 0.48) !important;
+
+  border-left-color: rgba(148, 119, 255, 0.55) !important;
+}
+
+
+/* =========================================================
+   LOGIN CARD
+   ========================================================= */
+
+.login-card {
+  position: relative;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(31, 33, 66, 0.78),
+      rgba(17, 19, 42, 0.72)
+    ) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.095) !important;
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.40),
+    0 0 70px rgba(108, 86, 255, 0.08),
+    inset 0 1px rgba(255,255,255,0.08) !important;
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+
+  border-radius: 26px !important;
+}
+
+.login-card::before {
+  content: '';
+
+  position: absolute;
+  top: 0;
+  left: 12%;
+  right: 12%;
+
+  height: 1px;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(169, 146, 255, 0.65),
+      rgba(101, 198, 255, 0.45),
+      transparent
+    );
+
+  opacity: 0.7;
+}
+
+
+/* =========================================================
+   CARD TEXT
+   ========================================================= */
+
+.login-card h2 {
+  color: #ffffff !important;
+
+  text-shadow:
+    0 4px 20px rgba(0,0,0,0.22);
+}
+
+.login-card-subtitle {
+  color: rgba(224, 228, 255, 0.58) !important;
+}
+
+
+/* =========================================================
+   EMAIL / PHONE SELECTOR
+   ========================================================= */
+
+.login-method-selector {
+  background:
+    rgba(7, 9, 25, 0.42) !important;
+
+  border:
+    1px solid rgba(255,255,255,0.075) !important;
+
+  border-radius: 15px !important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,0.035);
+}
+
+.login-method {
+  color: rgba(224, 227, 255, 0.48) !important;
+}
+
+.login-method:hover {
+  color: rgba(255,255,255,0.85) !important;
+}
+
+.login-method.active {
+  color: #ffffff !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(139, 109, 255, 0.28),
+      rgba(77, 178, 255, 0.15)
+    ) !important;
+
+  border:
+    1px solid rgba(158, 135, 255, 0.18);
+
+  box-shadow:
+    0 6px 22px rgba(101, 78, 220, 0.18),
+    inset 0 1px rgba(255,255,255,0.10);
+}
+
+.login-method.active svg {
+  color: #aa9aff;
+}
+
+
+/* =========================================================
+   INPUTS
+   ========================================================= */
+
+.login-field label {
+  color: rgba(236, 238, 255, 0.72) !important;
+}
+
+.login-input-wrap,
+.login-phone-input-wrap {
+  background:
+    rgba(7, 9, 25, 0.42) !important;
+
+  border:
+    1px solid rgba(255,255,255,0.075) !important;
+
+  box-shadow:
+    inset 0 1px rgba(255,255,255,0.025);
+}
+
+.login-input-wrap:focus-within,
+.login-phone-input-wrap:focus-within {
+  border-color: rgba(139, 117, 255, 0.60) !important;
+
+  box-shadow:
+    0 0 0 3px rgba(120, 96, 255, 0.10),
+    0 8px 25px rgba(82, 65, 190, 0.10);
+}
+
+.login-input {
+  color: #ffffff !important;
+}
+
+.login-input::placeholder {
+  color: rgba(213, 216, 240, 0.34) !important;
+}
+
+.login-input-wrap > svg {
+  color: rgba(151, 139, 255, 0.72) !important;
+}
+
+
+/* =========================================================
+   PHONE INPUT
+   ========================================================= */
+
+.login-phone-input-wrap .PhoneInput {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+}
+
+.login-phone-input-wrap .PhoneInputCountry {
+  margin-left: 4px;
+}
+
+.login-phone-input-wrap .PhoneInputCountrySelect {
+  color: #ffffff;
+  background: transparent;
+}
+
+.login-phone-input-wrap .PhoneInputCountryIcon {
+  box-shadow: none;
+}
+
+.login-phone-input-wrap .PhoneInputInput {
+  min-width: 0;
+  flex: 1;
+
+  height: 48px;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.login-phone-input-wrap .PhoneInputInput::placeholder {
+  color: rgba(213, 216, 240, 0.34);
+}
+
+
+/* =========================================================
+   LOGIN BUTTON
+   ========================================================= */
+
+.login-submit {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      110deg,
+      #765cff,
+      #5d9cff 52%,
+      #8a6cff
+    ) !important;
+
+  border: none !important;
+
+  box-shadow:
+    0 12px 30px rgba(92, 75, 230, 0.30),
+    inset 0 1px rgba(255,255,255,0.24);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.login-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+
+  filter: brightness(1.08);
+
+  box-shadow:
+    0 16px 38px rgba(92, 75, 230, 0.40),
+    inset 0 1px rgba(255,255,255,0.28);
+}
+
+.login-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+
+/* =========================================================
+   FORGOT PASSWORD
+   ========================================================= */
+
+.login-forgot {
+  color: #9e8cff !important;
+
+  transition: color 0.2s ease;
+}
+
+.login-forgot:hover {
+  color: #c0b6ff !important;
+}
+
+
+/* =========================================================
+   DIVIDER / REGISTER
+   ========================================================= */
+
+.login-divider {
+  color: rgba(215, 218, 240, 0.35) !important;
+}
+
+.login-register {
+  color: rgba(220, 223, 245, 0.54) !important;
+}
+
+.login-register button {
+  color: #a99aff !important;
+}
+
+.login-register button:hover {
+  color: #c5bcff !important;
+}
+
+
+/* =========================================================
+   PASSWORD EYE
+   ========================================================= */
+
+.login-password-toggle {
+  color: rgba(196, 190, 255, 0.55) !important;
+}
+
+.login-password-toggle:hover {
+  color: #b8aaff !important;
+}
+
+
+/* =========================================================
+   SUBTLE MOUNTAIN ATMOSPHERE
+   ========================================================= */
+
+.login-mountains {
+  opacity: 0.72;
+  filter:
+    saturate(1.12)
+    contrast(1.03);
+}
+
+/* =========================================================
+   LIFEOS — LOGIN VISUAL OVERHAUL
+   Paste at the VERY END of App.css
+   ========================================================= */
+
+.login-page {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  background:
+    radial-gradient(circle at 18% 22%, rgba(116, 86, 255, 0.30), transparent 30%),
+    radial-gradient(circle at 54% 48%, rgba(68, 156, 255, 0.16), transparent 27%),
+    radial-gradient(circle at 84% 80%, rgba(255, 143, 112, 0.16), transparent 28%),
+    linear-gradient(125deg, #070817 0%, #10112b 42%, #171638 72%, #0a1026 100%) !important;
+}
+
+/* Ambient blobs */
+.login-page::before {
+  content: "";
+  position: absolute;
+  width: 620px;
+  height: 620px;
+  left: -250px;
+  top: -260px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(133, 100, 255, 0.30) 0%,
+    rgba(133, 100, 255, 0.08) 38%,
+    transparent 70%
+  );
+  filter: blur(18px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.login-page::after {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  right: -250px;
+  bottom: -300px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 139, 105, 0.18) 0%,
+    rgba(93, 150, 255, 0.08) 40%,
+    transparent 70%
+  );
+  filter: blur(24px);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Mountains become atmospheric instead of flat */
+.login-mountains {
+  opacity: 0.88 !important;
+  filter: saturate(1.25) contrast(1.05) brightness(1.08);
+}
+
+/* ---------------------------------------------------------
+   BRAND
+--------------------------------------------------------- */
+
+.login-brand {
+  color: #ffffff !important;
+  text-shadow: 0 4px 28px rgba(117, 91, 255, 0.28);
+}
+
+.login-brand-mark {
+  background:
+    linear-gradient(145deg, #9b7cff 0%, #6d9dff 52%, #63c9ff 100%) !important;
+  box-shadow:
+    0 10px 34px rgba(106, 88, 255, 0.38),
+    inset 0 1px 1px rgba(255, 255, 255, 0.38);
+}
+
+/* ---------------------------------------------------------
+   HERO
+--------------------------------------------------------- */
+
+.login-kicker {
+  color: #b2a5ff !important;
+  text-shadow: 0 0 22px rgba(145, 116, 255, 0.25);
+}
+
+.login-hero h1 {
+  color: #ffffff !important;
+  letter-spacing: -0.045em;
+  text-shadow: 0 18px 55px rgba(0, 0, 0, 0.34);
+}
+
+.login-gradient-text {
+  background:
+    linear-gradient(
+      105deg,
+      #a17dff 0%,
+      #6ea7ff 38%,
+      #72d2ff 63%,
+      #ffb08f 100%
+    ) !important;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 8px 26px rgba(112, 106, 255, 0.18));
+}
+
+.login-hero-copy {
+  color: rgba(239, 241, 255, 0.70) !important;
+}
+
+/* ---------------------------------------------------------
+   FEATURE ROWS
+--------------------------------------------------------- */
+
+.login-feature {
+  position: relative;
+  border-radius: 16px;
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease;
+}
+
+.login-feature:hover {
+  transform: translateX(6px);
+  background: linear-gradient(
+    90deg,
+    rgba(131, 103, 255, 0.10),
+    rgba(83, 176, 255, 0.04),
+    transparent
+  );
+}
+
+.login-feature-icon {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(153, 121, 255, 0.22),
+      rgba(80, 176, 255, 0.12)
+    ) !important;
+  border: 1px solid rgba(177, 157, 255, 0.20) !important;
+  box-shadow:
+    0 10px 28px rgba(84, 66, 190, 0.15),
+    inset 0 1px rgba(255, 255, 255, 0.10);
+}
+
+.login-feature-icon svg {
+  color: #b6a5ff !important;
+}
+
+.login-feature strong {
+  color: #f9f9ff !important;
+}
+
+.login-feature span {
+  color: rgba(220, 224, 247, 0.55) !important;
+}
+
+/* Give the three feature icons different tiny accents */
+.login-feature:nth-child(2) .login-feature-icon {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(77, 163, 255, 0.22),
+      rgba(87, 218, 255, 0.09)
+    ) !important;
+}
+
+.login-feature:nth-child(2) .login-feature-icon svg {
+  color: #75c4ff !important;
+}
+
+.login-feature:nth-child(3) .login-feature-icon {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 151, 116, 0.18),
+      rgba(173, 111, 255, 0.12)
+    ) !important;
+}
+
+.login-feature:nth-child(3) .login-feature-icon svg {
+  color: #ffad91 !important;
+}
+
+.login-quote {
+  color: rgba(236, 237, 252, 0.48) !important;
+  border-left-color: rgba(153, 126, 255, 0.62) !important;
+}
+
+/* ---------------------------------------------------------
+   LOGIN CARD — LIGHTER PREMIUM GLASS
+--------------------------------------------------------- */
+
+.login-card {
+  position: relative;
+  overflow: hidden;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(39, 40, 79, 0.78) 0%,
+      rgba(25, 27, 58, 0.74) 48%,
+      rgba(24, 27, 57, 0.70) 100%
+    ) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.115) !important;
+
+  box-shadow:
+    0 34px 90px rgba(0, 0, 0, 0.44),
+    0 0 90px rgba(108, 88, 255, 0.10),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10) !important;
+
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+}
+
+.login-card::before {
+  content: "";
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(175, 151, 255, 0.85),
+    rgba(103, 199, 255, 0.65),
+    rgba(255, 175, 139, 0.50),
+    transparent
+  );
+}
+
+.login-card::after {
+  content: "";
+  position: absolute;
+  width: 330px;
+  height: 330px;
+  top: -220px;
+  right: -130px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(132, 105, 255, 0.16),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ---------------------------------------------------------
+   CARD TYPOGRAPHY
+--------------------------------------------------------- */
+
+.login-card h2 {
+  color: #ffffff !important;
+  text-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
+}
+
+.login-card-subtitle {
+  color: rgba(226, 229, 249, 0.60) !important;
+}
+
+/* ---------------------------------------------------------
+   EMAIL / PHONE SWITCH
+--------------------------------------------------------- */
+
+.login-method-selector {
+  padding: 4px !important;
+  background: rgba(7, 9, 25, 0.38) !important;
+  border: 1px solid rgba(255, 255, 255, 0.075) !important;
+  border-radius: 16px !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.035),
+    0 8px 28px rgba(0, 0, 0, 0.12);
+}
+
+.login-method {
+  color: rgba(222, 224, 246, 0.48) !important;
+  border-radius: 12px !important;
+}
+
+.login-method:hover {
+  color: rgba(255, 255, 255, 0.90) !important;
+}
+
+.login-method.active {
+  color: #ffffff !important;
+  background:
+    linear-gradient(
+      110deg,
+      rgba(126, 94, 255, 0.40),
+      rgba(83, 154, 255, 0.22)
+    ) !important;
+  border: 1px solid rgba(170, 150, 255, 0.22) !important;
+  box-shadow:
+    0 7px 22px rgba(86, 67, 190, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.login-method.active svg {
+  color: #c0b0ff !important;
+}
+
+/* ---------------------------------------------------------
+   INPUTS
+--------------------------------------------------------- */
+
+.login-field label {
+  color: rgba(239, 240, 255, 0.76) !important;
+}
+
+.login-input-wrap,
+.login-phone-input-wrap {
+  background:
+    rgba(8, 10, 28, 0.38) !important;
+  border: 1px solid rgba(255, 255, 255, 0.085) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.login-input-wrap:hover,
+.login-phone-input-wrap:hover {
+  background: rgba(12, 14, 36, 0.46) !important;
+  border-color: rgba(255, 255, 255, 0.13) !important;
+}
+
+.login-input-wrap:focus-within,
+.login-phone-input-wrap:focus-within {
+  background: rgba(11, 13, 34, 0.54) !important;
+  border-color: rgba(143, 119, 255, 0.66) !important;
+  box-shadow:
+    0 0 0 3px rgba(122, 98, 255, 0.11),
+    0 12px 30px rgba(82, 65, 190, 0.10);
+}
+
+.login-input {
+  color: #ffffff !important;
+}
+
+.login-input::placeholder {
+  color: rgba(211, 215, 239, 0.34) !important;
+}
+
+.login-input-wrap > svg {
+  color: #9f8cff !important;
+}
+
+/* Phone input */
+.login-phone-input-wrap .PhoneInput {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  gap: 8px;
+}
+
+.login-phone-input-wrap .PhoneInputCountry {
+  margin-left: 4px;
+}
+
+.login-phone-input-wrap .PhoneInputCountrySelect {
+  color: #ffffff;
+  background: transparent;
+}
+
+.login-phone-input-wrap .PhoneInputCountryIcon {
+  box-shadow: none;
+}
+
+.login-phone-input-wrap .PhoneInputInput {
+  min-width: 0;
+  flex: 1;
+  height: 48px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+.login-phone-input-wrap .PhoneInputInput::placeholder {
+  color: rgba(211, 215, 239, 0.34);
+}
+
+/* ---------------------------------------------------------
+   BUTTON — MORE COLOR / DEPTH
+--------------------------------------------------------- */
+
+.login-submit {
+  background:
+    linear-gradient(
+      105deg,
+      #7657ff 0%,
+      #687cff 38%,
+      #5bb8ff 72%,
+      #8d70ff 100%
+    ) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+
+  box-shadow:
+    0 14px 34px rgba(92, 72, 235, 0.34),
+    0 4px 14px rgba(76, 158, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+
+  transition:
+    transform 180ms ease,
+    filter 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.login-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.07);
+  box-shadow:
+    0 18px 42px rgba(92, 72, 235, 0.42),
+    0 6px 18px rgba(76, 158, 255, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.28) !important;
+}
+
+.login-submit:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* ---------------------------------------------------------
+   SMALL DETAILS
+--------------------------------------------------------- */
+
+.login-forgot {
+  color: #aa9aff !important;
+}
+
+.login-forgot:hover {
+  color: #c9c0ff !important;
+}
+
+.login-divider {
+  color: rgba(218, 220, 241, 0.34) !important;
+}
+
+.login-register {
+  color: rgba(221, 224, 245, 0.56) !important;
+}
+
+.login-register button {
+  color: #b09fff !important;
+}
+
+.login-register button:hover {
+  color: #d0c8ff !important;
+}
+
+.login-password-toggle {
+  color: rgba(190, 181, 255, 0.56) !important;
+}
+
+.login-password-toggle:hover {
+  color: #c1b5ff !important;
+}
+
+.login-footer {
+  color: rgba(209, 211, 233, 0.28) !important;
+}
+.login-gradient-text {
+  display: inline !important;
+  background: linear-gradient(
+    105deg,
+    #a17dff 0%,
+    #6ea7ff 38%,
+    #72d2ff 63%,
+    #ffb08f 100%
+  ) !important;
+
+  background-size: 100% 100% !important;
+  background-repeat: no-repeat !important;
+
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+
+  color: transparent !important;
+
+  filter: drop-shadow(
+    0 8px 26px rgba(112, 106, 255, 0.18)
+  ) !important;
+}

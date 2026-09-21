@@ -1,0 +1,271 @@
+/* =================================
+   LIFEOS TASK MODAL
+================================= */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(3, 4, 10, 0.72);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  animation: lifeosOverlayIn 0.2s ease;
+}
+
+.task-modal {
+  width: min(500px, calc(100vw - 40px));
+
+  padding: 30px;
+
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  border-radius: 24px;
+
+  background:
+    radial-gradient(
+      circle at 85% 0%,
+      rgba(124, 92, 255, 0.16),
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      #1b1c27,
+      #0d0e14
+    );
+
+  box-shadow:
+    0 40px 100px rgba(0, 0, 0, 0.65),
+    0 0 70px rgba(110, 80, 255, 0.12);
+
+  color: #f5f5fb;
+
+  animation: lifeosModalIn 0.3s cubic-bezier(.2, .8, .2, 1);
+}
+
+
+/* HEADER */
+
+.modal-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  margin-bottom: 25px;
+}
+
+.modal-header h2 {
+  margin: 7px 0 0;
+
+  color: #f5f5fb;
+
+  font-size: 25px;
+  font-weight: 750;
+  letter-spacing: -0.7px;
+}
+
+
+/* CLOSE */
+
+.modal-close {
+  width: 36px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  padding: 0;
+
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.045);
+
+  color: #999dae;
+
+  font-size: 23px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease,
+    background 0.2s ease;
+}
+
+.modal-close:hover {
+  color: white;
+
+  background: rgba(255, 255, 255, 0.09);
+
+  transform: rotate(90deg);
+}
+
+
+/* INPUT */
+
+.task-input {
+  width: 100%;
+
+  height: 52px;
+
+  padding: 0 16px;
+
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 13px;
+
+  outline: none;
+
+  background: rgba(255, 255, 255, 0.045);
+
+  color: #f5f5fb;
+
+  font-family: inherit;
+  font-size: 14px;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.task-input::placeholder {
+  color: #686d80;
+}
+
+.task-input:focus {
+  border-color: rgba(126, 96, 255, 0.7);
+
+  background: rgba(255, 255, 255, 0.065);
+
+  box-shadow:
+    0 0 0 4px rgba(126, 96, 255, 0.09),
+    0 0 30px rgba(126, 96, 255, 0.08);
+}
+
+
+/* ACTIONS */
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  margin-top: 20px;
+}
+
+.modal-cancel,
+.modal-save {
+  height: 43px;
+
+  padding: 0 17px;
+
+  border-radius: 11px;
+
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    filter 0.18s ease,
+    background 0.18s ease;
+}
+
+.modal-cancel {
+  border: 1px solid rgba(255, 255, 255, 0.08);
+
+  background: rgba(255, 255, 255, 0.045);
+
+  color: #aaaebe;
+}
+
+.modal-save {
+  border: 0;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8063ff,
+      #587dff
+    );
+
+  color: white;
+
+  box-shadow:
+    0 10px 28px rgba(105, 82, 255, 0.28);
+}
+
+.modal-cancel:hover,
+.modal-save:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+.modal-cancel:active,
+.modal-save:active {
+  transform: scale(0.97);
+}
+
+.modal-save:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+
+/* ANIMATIONS */
+
+@keyframes lifeosOverlayIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lifeosModalIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .task-modal {
+    padding: 23px;
+    border-radius: 20px;
+  }
+
+  .modal-header h2 {
+    font-size: 21px;
+  }
+
+  .modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .modal-cancel,
+  .modal-save {
+    width: 100%;
+  }
+}

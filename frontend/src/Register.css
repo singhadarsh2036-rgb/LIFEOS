@@ -1,0 +1,562 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+.lifeos-register {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow: hidden auto;
+  isolation: isolate;
+  color: #fff;
+  background: #10182d;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.lifeos-register-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -3;
+  background-image:
+    linear-gradient(
+      90deg,
+      rgba(6, 13, 32, 0.70),
+      rgba(7, 15, 34, 0.32) 45%,
+      rgba(8, 14, 32, 0.40)
+    ),
+    url('/lifeos-bg.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.lifeos-register::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 38%, rgba(145, 103, 255, .22), transparent 28%),
+    radial-gradient(circle at 82% 35%, rgba(73, 177, 255, .14), transparent 25%),
+    radial-gradient(circle at 80% 90%, rgba(255, 145, 108, .12), transparent 26%);
+}
+
+.lifeos-register-brand {
+  position: absolute;
+  top: 32px;
+  left: 48px;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.lifeos-register-logo {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border-radius: 15px;
+  background: linear-gradient(145deg, #9b75ff, #63baff);
+  box-shadow:
+    0 12px 35px rgba(97, 93, 255, .38),
+    inset 0 1px rgba(255,255,255,.45);
+}
+
+.lifeos-register-logo span {
+  width: 4px;
+  height: 22px;
+  border-radius: 99px;
+  background: #fff;
+}
+
+.lifeos-register-logo span:nth-child(2) { height: 27px; }
+
+.lifeos-register-brand-name {
+  font-size: 22px;
+  font-weight: 850;
+  letter-spacing: .17em;
+}
+
+.lifeos-register-brand-tagline {
+  margin-top: 2px;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: .18em;
+  color: rgba(236,238,255,.62);
+}
+
+.lifeos-register-main {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 105px 6.2% 45px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(480px, 560px);
+  align-items: center;
+  gap: 7vw;
+}
+
+.lifeos-register-hero { max-width: 680px; }
+
+.lifeos-register-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  margin-bottom: 27px;
+  color: #c7b9ff;
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: .22em;
+}
+
+.lifeos-register-eyebrow span {
+  width: 38px;
+  height: 1px;
+  background: linear-gradient(90deg, #a88cff, #ffac8b);
+}
+
+.lifeos-register-hero h1 {
+  margin: 0;
+  font-size: clamp(58px, 5.2vw, 84px);
+  line-height: .95;
+  letter-spacing: -.055em;
+  font-weight: 850;
+  text-shadow: 0 16px 55px rgba(0,0,0,.30);
+}
+
+.lifeos-register-hero h1 span {
+  background: linear-gradient(100deg, #a875ff, #5fc6ff 48%, #ffb28e);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+.lifeos-register-hero > p {
+  margin: 28px 0 0;
+  color: rgba(243,244,255,.78);
+  font-size: 18px;
+  line-height: 1.65;
+}
+
+.lifeos-register-steps {
+  margin-top: 40px;
+  display: grid;
+  gap: 13px;
+  max-width: 470px;
+}
+
+.lifeos-register-step {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: rgba(234,236,249,.58);
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.lifeos-register-step div {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  border: 1px solid rgba(255,255,255,.11);
+  background: rgba(7,11,28,.28);
+  color: rgba(225,228,247,.45);
+  font-size: 11px;
+  letter-spacing: .08em;
+}
+
+.lifeos-register-step.active { color: #fff; }
+
+.lifeos-register-step.active div {
+  color: #fff;
+  border-color: rgba(174,145,255,.30);
+  background: linear-gradient(145deg, rgba(145,102,255,.30), rgba(75,158,255,.14));
+  box-shadow: 0 9px 25px rgba(76,68,185,.18);
+}
+
+.lifeos-register-panel {
+  display: flex;
+  justify-content: center;
+}
+
+.lifeos-register-card {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  box-sizing: border-box;
+  padding: 43px 46px 31px;
+  border-radius: 29px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.20);
+  background: linear-gradient(145deg, rgba(38,48,83,.66), rgba(19,27,55,.61));
+  backdrop-filter: blur(25px) saturate(125%);
+  -webkit-backdrop-filter: blur(25px) saturate(125%);
+  box-shadow:
+    0 35px 90px rgba(0,0,0,.38),
+    0 0 80px rgba(87,99,255,.11),
+    inset 0 1px rgba(255,255,255,.20);
+}
+
+.lifeos-register-card-glow {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  right: -160px;
+  top: -170px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(135,105,255,.26), transparent 68%);
+  pointer-events: none;
+}
+
+.lifeos-register-card h2 {
+  position: relative;
+  margin: 0;
+  font-size: 33px;
+  line-height: 1.05;
+  letter-spacing: -.035em;
+}
+
+.lifeos-register-subtitle {
+  margin: 12px 0 24px;
+  color: rgba(233,236,250,.62);
+  font-size: 14px;
+}
+
+.lifeos-register-methods {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5px;
+  padding: 4px;
+  margin-bottom: 20px;
+  border-radius: 16px;
+  background: rgba(5,10,27,.34);
+  border: 1px solid rgba(255,255,255,.11);
+}
+
+.lifeos-register-methods button {
+  height: 45px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  background: transparent;
+  color: rgba(232,235,251,.50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.lifeos-register-methods button svg {
+  width: 17px;
+  height: 17px;
+}
+
+.lifeos-register-methods button:hover { color: #fff; }
+
+.lifeos-register-methods button.active {
+  color: #fff;
+  background: linear-gradient(105deg, rgba(135,91,255,.50), rgba(80,164,255,.30));
+  border-color: rgba(194,174,255,.22);
+  box-shadow: 0 8px 24px rgba(71,76,190,.18), inset 0 1px rgba(255,255,255,.14);
+}
+
+.lifeos-register-field { margin-bottom: 17px; }
+
+.lifeos-register-field label {
+  display: block;
+  margin: 0 0 8px 2px;
+  color: rgba(246,247,255,.80);
+  font-size: 13px;
+  font-weight: 750;
+}
+
+.lifeos-register-input,
+.lifeos-register-phone {
+  width: 100%;
+  min-height: 56px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: rgba(5,9,26,.34);
+  box-shadow: inset 0 1px rgba(255,255,255,.035);
+  transition: 180ms ease;
+}
+
+.lifeos-register-input:focus-within,
+.lifeos-register-phone:focus-within {
+  border-color: rgba(146,126,255,.75);
+  background: rgba(7,11,30,.46);
+  box-shadow: 0 0 0 3px rgba(131,102,255,.10), 0 10px 30px rgba(61,71,178,.10);
+}
+
+.lifeos-register-input > svg {
+  width: 19px;
+  height: 19px;
+  margin-left: 16px;
+  flex: 0 0 auto;
+  color: #ad98ff;
+}
+
+.lifeos-register-input input {
+  min-width: 0;
+  flex: 1;
+  height: 54px;
+  padding: 0 15px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+}
+
+.lifeos-register-input input::placeholder,
+.lifeos-register-phone .PhoneInputInput::placeholder {
+  color: rgba(216,220,239,.34);
+}
+
+.lifeos-register-input.otp { justify-content: center; }
+
+.lifeos-register-input.otp input {
+  text-align: center;
+  padding: 0 15px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: .28em;
+}
+
+.lifeos-register-phone { padding: 0 12px; }
+
+.lifeos-register-phone .PhoneInput {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.lifeos-register-phone .PhoneInputCountry { margin-left: 2px; }
+
+.lifeos-register-phone .PhoneInputCountrySelect {
+  color: #fff;
+  background: transparent;
+}
+
+.lifeos-register-phone .PhoneInputCountryIcon { box-shadow: none; }
+
+.lifeos-register-phone .PhoneInputInput {
+  min-width: 0;
+  flex: 1;
+  height: 54px;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: 14px;
+}
+
+.lifeos-register-error {
+  margin-bottom: 6px;
+  color: #ff8f98;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.lifeos-register-submit {
+  width: 100%;
+  height: 57px;
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 16px;
+  background: linear-gradient(105deg, #7957ff 0%, #5e9dff 48%, #ff9c78 100%);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow:
+    0 14px 35px rgba(88,79,229,.30),
+    0 8px 24px rgba(255,139,108,.10),
+    inset 0 1px rgba(255,255,255,.30);
+  transition: 180ms ease;
+}
+
+.lifeos-register-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  box-shadow:
+    0 18px 42px rgba(88,79,229,.37),
+    0 10px 28px rgba(255,139,108,.14),
+    inset 0 1px rgba(255,255,255,.34);
+}
+
+.lifeos-register-submit:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+.lifeos-register-verify-badge,
+.lifeos-register-verified {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 14px;
+  margin-bottom: 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(114,205,255,.16);
+  background: linear-gradient(105deg, rgba(86,168,255,.12), rgba(150,102,255,.10));
+}
+
+.lifeos-register-verify-badge svg,
+.lifeos-register-verified svg {
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  color: #79d2ff;
+}
+
+.lifeos-register-verify-badge strong {
+  display: block;
+  font-size: 13px;
+}
+
+.lifeos-register-verify-badge span {
+  display: block;
+  margin-top: 3px;
+  color: rgba(228,231,246,.53);
+  font-size: 11px;
+}
+
+.lifeos-register-verified {
+  color: #bff0ff;
+  font-size: 13px;
+  font-weight: 750;
+  border-color: rgba(112,219,179,.17);
+  background: rgba(65,177,135,.08);
+}
+
+.lifeos-register-verified svg { color: #76e2b5; }
+
+.lifeos-register-countdown {
+  margin: -4px 0 14px;
+  text-align: center;
+  color: rgba(226,229,245,.53);
+  font-size: 12px;
+}
+
+.lifeos-register-countdown strong { color: #c4b1ff; }
+
+.lifeos-register-resend {
+  display: block;
+  margin: 11px auto 0;
+  border: 0;
+  background: transparent;
+  color: #c0a6ff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+.lifeos-register-divider {
+  margin: 23px 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  color: rgba(230,232,245,.34);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .16em;
+}
+
+.lifeos-register-divider span {
+  height: 1px;
+  flex: 1;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.13));
+}
+
+.lifeos-register-divider span:last-child {
+  background: linear-gradient(90deg, rgba(255,255,255,.13), transparent);
+}
+
+.lifeos-register-login {
+  margin: 0;
+  text-align: center;
+  color: rgba(231,233,247,.58);
+  font-size: 13px;
+}
+
+.lifeos-register-login button {
+  margin-left: 6px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #c0a6ff;
+  font: inherit;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.lifeos-register-footer {
+  margin-top: 27px;
+  text-align: center;
+  color: rgba(226,228,242,.28);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: .24em;
+}
+
+@media (max-width: 1050px) {
+  .lifeos-register-main {
+    grid-template-columns: 1fr;
+    padding: 105px 7% 45px;
+  }
+
+  .lifeos-register-hero { max-width: 650px; }
+
+  .lifeos-register-panel { justify-content: flex-start; }
+}
+
+@media (max-width: 650px) {
+  .lifeos-register-brand {
+    top: 20px;
+    left: 20px;
+  }
+
+  .lifeos-register-logo {
+    width: 41px;
+    height: 41px;
+    border-radius: 13px;
+  }
+
+  .lifeos-register-brand-name { font-size: 18px; }
+
+  .lifeos-register-brand-tagline { display: none; }
+
+  .lifeos-register-main {
+    padding: 86px 18px 28px;
+    gap: 35px;
+  }
+
+  .lifeos-register-hero h1 {
+    font-size: clamp(48px, 14vw, 70px);
+  }
+
+  .lifeos-register-card {
+    padding: 34px 22px 27px;
+    border-radius: 23px;
+  }
+
+  .lifeos-register-card h2 { font-size: 29px; }
+}
