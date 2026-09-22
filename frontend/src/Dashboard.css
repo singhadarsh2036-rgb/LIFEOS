@@ -2607,4 +2607,228 @@ html[data-lifeos-theme="dark"] .lifeos-toast {
     display: none;
   }
 }
+/* =========================================================
+   LIFEOS MOBILE DASHBOARD — FINAL NAVIGATION FIX
+   ========================================================= */
+
+@media (max-width: 720px) {
+
+  .dashboard-page {
+    display: block;
+    min-height: 100vh;
+  }
+
+  /* ---------- SIDEBAR ---------- */
+
+  .sidebar {
+    width: 100%;
+    min-height: auto;
+    position: relative;
+    padding: 14px 14px 10px;
+    box-sizing: border-box;
+  }
+
+  .brand {
+    padding-bottom: 12px;
+  }
+
+  /* Main navigation */
+  .sidebar-nav {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    width: 100%;
+  }
+
+  .nav-item {
+    min-width: 0;
+    height: 48px;
+    justify-content: center;
+    padding: 0;
+    border-radius: 13px;
+  }
+
+  .nav-item > span:not(.nav-icon):not(.nav-active-dot) {
+    display: none;
+  }
+
+  .nav-icon {
+    font-size: 20px;
+  }
+
+  .nav-active-dot {
+    display: none;
+  }
+
+  /* ---------- PROFILE / SETTINGS / LOGOUT ---------- */
+
+  .sidebar-bottom {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 9px;
+  }
+
+  .sidebar-bottom .nav-item {
+    flex: 1;
+    height: 42px;
+  }
+
+  .sidebar-bottom .nav-item > span:not(.nav-icon) {
+    display: inline !important;
+    font-size: 11px;
+  }
+
+  .sidebar-profile {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-top: 9px;
+    padding: 9px 11px;
+    box-sizing: border-box;
+    border-radius: 14px;
+  }
+
+  .sidebar-profile > * {
+    display: flex;
+  }
+
+  /* ---------- MAIN ---------- */
+
+  .dashboard-main {
+    width: 100%;
+    margin-left: 0;
+    padding: 12px;
+    box-sizing: border-box;
+  }
+
+  /* ---------- TOPBAR ---------- */
+
+  .topbar {
+    height: auto;
+    min-height: 52px;
+    margin-bottom: 12px;
+    gap: 8px;
+  }
+
+  .search-box {
+    width: 100%;
+    min-width: 0;
+  }
+
+  /* Bring theme/profile controls back */
+  .top-actions {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .theme-toggle {
+    min-width: 42px;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .theme-toggle-text {
+    display: none;
+  }
+
+  .top-profile {
+    display: flex;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ---------- HERO ---------- */
+
+  .hero-panel {
+    min-height: 230px;
+  }
+
+  .hero-art {
+    inset: 45% 0 0;
+  }
+
+  .hero-copy h1 {
+    font-size: 34px;
+  }
+
+  /* ---------- METRICS ---------- */
+
+  .metric-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .sidebar {
+    padding: 11px 10px 9px;
+  }
+
+  .brand {
+    padding-bottom: 9px;
+  }
+
+  .sidebar-nav {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+  }
+
+  .nav-item {
+    height: 44px;
+    border-radius: 11px;
+  }
+
+  .nav-icon {
+    font-size: 18px;
+  }
+
+  .sidebar-bottom {
+    gap: 5px;
+  }
+
+  .sidebar-bottom .nav-item {
+    height: 39px;
+  }
+
+  .sidebar-bottom .nav-item > span:not(.nav-icon) {
+    font-size: 10px;
+  }
+
+  .sidebar-profile {
+    min-height: 46px;
+  }
+
+  .dashboard-main {
+    padding: 10px;
+  }
+
+  .metric-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-panel {
+    padding: 22px;
+  }
+
+  .hero-quote {
+    display: none;
+  }
+
+  .bottom-banner button {
+    display: none;
+  }
+
+}
 
