@@ -663,4 +663,59 @@
     font-size: 29px;
   }
 }
+/* =========================================================
+   MOBILE LOGIN — COMPACT LAYOUT
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .lifeos-login-main {
+    padding: 82px 18px 24px !important;
+    gap: 16px !important;
+    align-items: start !important;
+  }
+
+  .lifeos-login-hero {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .lifeos-login-eyebrow {
+    margin-bottom: 16px !important;
+    font-size: 10px !important;
+  }
+
+  .lifeos-login-hero h1 {
+    font-size: clamp(44px, 12vw, 58px) !important;
+    line-height: 0.94 !important;
+  }
+
+  .lifeos-login-copy {
+    margin-top: 16px !important;
+    font-size: 15px !important;
+    line-height: 1.45 !important;
+  }
+
+  /* Hide extra promotional content on phone */
+  .lifeos-login-features,
+  .lifeos-login-quote {
+    display: none !important;
+  }
+
+  .lifeos-login-panel {
+    width: 100% !important;
+    justify-content: stretch !important;
+  }
+
+  .lifeos-login-card {
+    width: 100% !important;
+    max-width: none !important;
+    padding: 27px 20px 23px !important;
+    border-radius: 22px !important;
+  }
+
+  .lifeos-login-card h2 {
+    font-size: 27px !important;
+  }
+}
 
