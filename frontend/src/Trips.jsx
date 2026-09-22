@@ -81,7 +81,7 @@ function Trips() {
       }
 
       const response = await fetch(
-        `http://localhost:8081/trips/airports?query=${encodeURIComponent(
+        `https://lifeos-v22r.onrender.com/trips/airports?query=${encodeURIComponent(
           trimmedQuery
         )}`,
         {
@@ -344,7 +344,7 @@ function Trips() {
 
     try {
       const response = await fetch(
-        'http://localhost:8081/trips/flights/search',
+        'https://lifeos-v22r.onrender.com/trips/flights/search',
         {
           method: 'POST',
           headers: {
@@ -407,7 +407,7 @@ function Trips() {
 
     try {
       const response = await fetch(
-        'http://localhost:8081/trips/flights/booking-links',
+        'https://lifeos-v22r.onrender.com/trips/flights/booking-links',
         {
           method: 'POST',
           headers: {
