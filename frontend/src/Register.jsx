@@ -62,7 +62,7 @@ function Reminders() {
         await navigator.serviceWorker.ready
 
       const publicKeyResponse = await fetch(
-        'http://127.0.0.1:8081/push/public-key'
+        'https://lifeos-v22r.onrender.com/push/public-key'
       )
 
       if (!publicKeyResponse.ok) {
@@ -114,7 +114,7 @@ function Reminders() {
         subscription.toJSON()
 
       const response = await fetch(
-        'http://127.0.0.1:8081/push/subscribe',
+        'https://lifeos-v22r.onrender.com/push/subscribe',
         {
           method: 'POST',
           headers: {
@@ -152,7 +152,7 @@ function Reminders() {
   const loadReminders = async () => {
     try {
       const response = await fetch(
-        'http://127.0.0.1:8081/reminders',
+        'https://lifeos-v22r.onrender.com/reminders',
         {
           headers: {
             Authorization: `Bearer ${getToken()}`,
@@ -260,7 +260,7 @@ function Reminders() {
         `${date}T${formattedHour}:${timeParts[1]}:00`
 
       const response = await fetch(
-        'http://127.0.0.1:8081/reminders',
+        'https://lifeos-v22r.onrender.com/reminders',
         {
           method: 'POST',
 
@@ -329,7 +329,7 @@ function Reminders() {
   const deleteReminder = async (id) => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8081/reminders/${id}`,
+        `https://lifeos-v22r.onrender.com/reminders/${id}`,
         {
           method: 'DELETE',
 

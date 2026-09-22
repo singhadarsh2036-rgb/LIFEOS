@@ -375,7 +375,7 @@ function Dashboard() {
       setUserLoginIdentifier(loginIdentifier)
 
       const response = await fetch(
-        'http://127.0.0.1:8081/users'
+        'https://lifeos-v22r.onrender.com/users'
       )
 
       if (!response.ok) {
@@ -438,7 +438,7 @@ function Dashboard() {
       }
 
       const response = await fetch(
-        'http://127.0.0.1:8081/dashboard',
+        'https://lifeos-v22r.onrender.com/dashboard',
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -474,7 +474,7 @@ function Dashboard() {
       }
 
       const response = await fetch(
-        'http://127.0.0.1:8081/tasks',
+        'https://lifeos-v22r.onrender.com/tasks',
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -510,7 +510,7 @@ function Dashboard() {
       }
 
       const response = await fetch(
-        'http://127.0.0.1:8081/reminders',
+        'https://lifeos-v22r.onrender.com/reminders',
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -574,7 +574,7 @@ function Dashboard() {
       const token = getToken()
 
       const response = await fetch(
-        'http://127.0.0.1:8081/tasks',
+        'https://lifeos-v22r.onrender.com/tasks',
         {
           method: 'POST',
           headers: {
@@ -639,7 +639,7 @@ function Dashboard() {
       const token = getToken()
 
       const response = await fetch(
-        `http://127.0.0.1:8081/tasks/${task.id}`,
+        `https://lifeos-v22r.onrender.com/tasks/${task.id}`,
         {
           method: 'PUT',
           headers: {

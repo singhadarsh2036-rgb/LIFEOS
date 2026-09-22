@@ -23,7 +23,7 @@ function Tasks() {
       const token = getToken()
 
       const response = await fetch(
-        'http://127.0.0.1:8081/tasks',
+        'https://lifeos-v22r.onrender.com/tasks',
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -64,7 +64,7 @@ function Tasks() {
       setSaving(true)
 
       const response = await fetch(
-        'http://127.0.0.1:8081/tasks',
+        'https://lifeos-v22r.onrender.com/tasks',
         {
           method: 'POST',
           headers: {
@@ -110,7 +110,7 @@ function Tasks() {
 
     try {
       const response = await fetch(
-        `http://127.0.0.1:8081/tasks/${task.id}`,
+        `https://lifeos-v22r.onrender.com/tasks/${task.id}`,
         {
           method: 'PUT',
           headers: {
@@ -155,7 +155,7 @@ function Tasks() {
   const deleteTask = async (id) => {
     try {
       const response = await fetch(
-        `http://127.0.0.1:8081/tasks/${id}`,
+        `https://lifeos-v22r.onrender.com/tasks/${id}`,
         {
           method: 'DELETE',
           headers: {
@@ -373,3 +373,4 @@ function Tasks() {
 }
 
 export default Tasks
+
