@@ -664,58 +664,192 @@
   }
 }
 /* =========================================================
-   MOBILE LOGIN — COMPACT LAYOUT
+   LIFEOS — PREMIUM MOBILE LOGIN
 ========================================================= */
 
 @media (max-width: 650px) {
 
+  /* ---------- PAGE ---------- */
+
   .lifeos-login-main {
-    padding: 82px 18px 24px !important;
-    gap: 16px !important;
+    min-height: auto !important;
+    height: auto !important;
+    padding: 76px 14px 22px !important;
+    gap: 14px !important;
     align-items: start !important;
   }
 
+  /* ---------- HERO ---------- */
+
   .lifeos-login-hero {
-    padding: 0 !important;
+    padding: 0 4px !important;
     max-width: 100% !important;
   }
 
   .lifeos-login-eyebrow {
-    margin-bottom: 16px !important;
-    font-size: 10px !important;
+    margin-bottom: 11px !important;
+    gap: 9px !important;
+    font-size: 8px !important;
+    letter-spacing: .17em !important;
+  }
+
+  .lifeos-login-eyebrow span {
+    width: 28px !important;
   }
 
   .lifeos-login-hero h1 {
-    font-size: clamp(44px, 12vw, 58px) !important;
-    line-height: 0.94 !important;
+    margin: 0 !important;
+    font-size: clamp(40px, 11.5vw, 54px) !important;
+    line-height: .91 !important;
+    letter-spacing: -.06em !important;
   }
 
   .lifeos-login-copy {
-    margin-top: 16px !important;
-    font-size: 15px !important;
-    line-height: 1.45 !important;
+    margin: 13px 0 0 !important;
+    font-size: 14px !important;
+    line-height: 1.4 !important;
   }
 
-  /* Hide extra promotional content on phone */
+  /* Don't waste vertical space on phone */
   .lifeos-login-features,
   .lifeos-login-quote {
     display: none !important;
   }
 
+  /* ---------- LOGIN PANEL ---------- */
+
   .lifeos-login-panel {
     width: 100% !important;
-    justify-content: stretch !important;
+    display: block !important;
   }
+
+  /* ---------- CARD ---------- */
 
   .lifeos-login-card {
     width: 100% !important;
     max-width: none !important;
-    padding: 27px 20px 23px !important;
-    border-radius: 22px !important;
+    box-sizing: border-box !important;
+
+    padding: 22px 17px 18px !important;
+
+    border-radius: 24px !important;
+
+    box-shadow:
+      0 22px 60px rgba(0, 0, 0, .38),
+      inset 0 1px rgba(255,255,255,.16) !important;
   }
 
   .lifeos-login-card h2 {
-    font-size: 27px !important;
+    margin: 0 !important;
+    font-size: 25px !important;
+    line-height: 1.1 !important;
+    letter-spacing: -.035em !important;
+  }
+
+  /* ---------- CARD SUBTITLE ---------- */
+
+  .lifeos-login-card > p:first-of-type {
+    margin: 7px 0 17px !important;
+    font-size: 13px !important;
+    line-height: 1.35 !important;
+  }
+
+  /* ---------- METHOD SWITCH ---------- */
+
+  .lifeos-login-methods {
+    margin-bottom: 16px !important;
+  }
+
+  /* ---------- FORM FIELDS ---------- */
+
+  .lifeos-login-field {
+    margin-bottom: 13px !important;
+  }
+
+  .lifeos-login-field label {
+    margin-bottom: 6px !important;
+    font-size: 12px !important;
+  }
+
+  .lifeos-login-input,
+  .lifeos-login-phone {
+    min-height: 52px !important;
+    height: 52px !important;
+    border-radius: 15px !important;
+  }
+
+  .lifeos-login-input input {
+    height: 50px !important;
+    font-size: 14px !important;
+  }
+
+  .lifeos-login-input svg {
+    width: 17px !important;
+    height: 17px !important;
+  }
+
+  /* ---------- AUTOFILL ---------- */
+
+  .lifeos-login-input input:-webkit-autofill,
+  .lifeos-login-input input:-webkit-autofill:hover,
+  .lifeos-login-input input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #f5f3ff !important;
+    -webkit-box-shadow: 0 0 0 1000px rgba(255,255,255,.035) inset !important;
+    transition: background-color 9999s ease-in-out 0s !important;
+  }
+
+  /* ---------- PASSWORD EYE ---------- */
+
+  .lifeos-login-eye {
+    width: 42px !important;
+    min-width: 42px !important;
+  }
+
+  /* ---------- FORGOT PASSWORD ---------- */
+
+  .lifeos-login-forgot {
+    margin-top: -2px !important;
+    margin-bottom: 14px !important;
+    font-size: 11px !important;
+  }
+
+  /* ---------- LOGIN BUTTON ---------- */
+
+  .lifeos-login-submit {
+    min-height: 54px !important;
+    height: 54px !important;
+    border-radius: 16px !important;
+
+    font-size: 15px !important;
+    font-weight: 800 !important;
+
+    box-shadow:
+      0 12px 28px rgba(104, 92, 255, .28),
+      inset 0 1px rgba(255,255,255,.28) !important;
+  }
+
+  /* ---------- DIVIDER ---------- */
+
+  .lifeos-login-divider {
+    margin: 16px 0 13px !important;
+    font-size: 9px !important;
+  }
+
+  /* ---------- REGISTER ---------- */
+
+  .lifeos-login-register {
+    font-size: 12px !important;
+  }
+
+  .lifeos-login-register button {
+    font-size: 12px !important;
+  }
+
+  /* ---------- FOOTER ---------- */
+
+  .lifeos-login-footer {
+    margin-top: 18px !important;
+    font-size: 7px !important;
+    letter-spacing: .19em !important;
   }
 }
-
