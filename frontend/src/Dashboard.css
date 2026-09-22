@@ -3043,3 +3043,354 @@ html[data-lifeos-theme="dark"] .lifeos-toast {
   }
 
 }
+/* =========================================================
+   PREMIUM MOBILE POLISH
+   ========================================================= */
+
+@media (max-width: 720px) {
+
+  /* ---------- LEFT NAV ---------- */
+
+  .sidebar {
+    width: 88px !important;
+  }
+
+  .dashboard-main {
+    width: calc(100% - 88px) !important;
+    margin-left: 88px !important;
+  }
+
+  .sidebar-nav {
+    gap: 6px !important;
+  }
+
+  .nav-item {
+    width: 64px !important;
+    min-width: 64px !important;
+    height: 52px !important;
+    flex-basis: 52px !important;
+
+    flex-direction: column !important;
+    gap: 3px !important;
+
+    justify-content: center !important;
+  }
+
+  .nav-icon {
+    font-size: 17px !important;
+    line-height: 1 !important;
+  }
+
+  /* Show the navigation name under the icon */
+  .nav-item > span:not(.nav-icon):not(.nav-active-dot) {
+    display: block !important;
+
+    font-size: 7px !important;
+    line-height: 1 !important;
+
+    font-weight: 700 !important;
+    letter-spacing: .04em !important;
+
+    text-align: center;
+
+    color: rgba(255,255,255,.68) !important;
+
+    white-space: nowrap;
+  }
+
+  .nav-item.active > span:not(.nav-icon):not(.nav-active-dot) {
+    color: #fff !important;
+  }
+
+
+  /* ---------- HERO ---------- */
+
+  .hero-panel {
+    min-height: 235px !important;
+  }
+
+  /*
+     The quote is decorative on desktop but overlaps
+     the heading on small screens.
+  */
+  .hero-quote {
+    display: none !important;
+  }
+
+  .hero-copy {
+    position: relative !important;
+    z-index: 5 !important;
+  }
+
+  .hero-copy h1 {
+    max-width: 100% !important;
+    font-size: 30px !important;
+    line-height: 1.04 !important;
+  }
+
+  .hero-copy p {
+    max-width: 90% !important;
+  }
+
+
+  /* ---------- TOP RIGHT CONTROLS ---------- */
+
+  .top-actions {
+    gap: 5px !important;
+  }
+
+  .top-icon,
+  .theme-toggle,
+  .top-profile {
+    width: 38px !important;
+    min-width: 38px !important;
+    height: 38px !important;
+  }
+
+  .consistency {
+    display: none !important;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .sidebar {
+    width: 82px !important;
+    padding-left: 7px !important;
+    padding-right: 7px !important;
+  }
+
+  .dashboard-main {
+    width: calc(100% - 82px) !important;
+    margin-left: 82px !important;
+  }
+
+  .nav-item {
+    width: 60px !important;
+    min-width: 60px !important;
+    height: 50px !important;
+    flex-basis: 50px !important;
+  }
+
+  .nav-item > span:not(.nav-icon):not(.nav-active-dot) {
+    font-size: 6.8px !important;
+  }
+
+  .nav-icon {
+    font-size: 16px !important;
+  }
+
+  .hero-panel {
+    min-height: 225px !important;
+  }
+
+  .hero-copy h1 {
+    font-size: 28px !important;
+  }
+
+  .hero-copy p {
+    font-size: 12px !important;
+  }
+}
+/* =========================================================
+   FINAL MOBILE HERO + NAV POLISH
+   ========================================================= */
+
+@media (max-width: 720px) {
+
+  /* ---------- LEFT RAIL ---------- */
+
+  .sidebar {
+    width: 84px !important;
+    padding: 14px 8px !important;
+  }
+
+  .dashboard-main {
+    width: calc(100% - 84px) !important;
+    margin-left: 84px !important;
+    padding: 10px 12px 30px !important;
+  }
+
+  .sidebar-nav {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    gap: 6px !important;
+  }
+
+  .sidebar-nav .nav-item {
+    width: 66px !important;
+    min-width: 66px !important;
+    height: 53px !important;
+    flex: 0 0 53px !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 4px !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 15px !important;
+  }
+
+  .sidebar-nav .nav-item .nav-icon {
+    display: block !important;
+    font-size: 17px !important;
+    line-height: 1 !important;
+  }
+
+  /* EXACT nav label span */
+  .sidebar-nav .nav-item > span:nth-child(2) {
+    display: block !important;
+    font-size: 7px !important;
+    line-height: 1 !important;
+    font-weight: 750 !important;
+    color: rgba(255,255,255,.72) !important;
+    white-space: nowrap !important;
+  }
+
+  .sidebar-nav .nav-item.active > span:nth-child(2) {
+    color: #fff !important;
+  }
+
+  .sidebar-nav .nav-active-dot {
+    display: none !important;
+  }
+
+  .quick-actions,
+  .sidebar-bottom,
+  .sidebar-profile {
+    display: none !important;
+  }
+
+
+  /* ---------- HERO ---------- */
+
+  .hero-panel {
+    position: relative !important;
+    min-height: 235px !important;
+    overflow: hidden !important;
+  }
+
+  .hero-copy {
+    position: relative !important;
+    z-index: 20 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 22px !important;
+  }
+
+  .hero-copy h1 {
+    position: relative !important;
+    z-index: 25 !important;
+
+    max-width: 100% !important;
+    margin: 8px 0 10px !important;
+
+    font-size: 30px !important;
+    line-height: 1.03 !important;
+    letter-spacing: -.045em !important;
+  }
+
+  .hero-copy p {
+    position: relative !important;
+    z-index: 25 !important;
+
+    max-width: 82% !important;
+    margin: 0 !important;
+
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+
+  /* REMOVE overlapping quote completely on phone */
+  .hero-art .hero-quote {
+    display: none !important;
+  }
+
+  .hero-art {
+    position: absolute !important;
+    z-index: 1 !important;
+    inset: 42% 0 0 !important;
+  }
+
+  .hero-art .hero-sun,
+  .hero-art .hero-mountain {
+    z-index: 1 !important;
+  }
+
+
+  /* ---------- TOP RIGHT ---------- */
+
+  .top-actions {
+    display: flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+  }
+
+  .top-icon,
+  .theme-toggle,
+  .top-profile {
+    width: 38px !important;
+    min-width: 38px !important;
+    height: 38px !important;
+  }
+
+  .theme-toggle-text {
+    display: none !important;
+  }
+
+  .consistency {
+    display: none !important;
+  }
+}
+
+
+@media (max-width: 480px) {
+
+  .sidebar {
+    width: 80px !important;
+  }
+
+  .dashboard-main {
+    width: calc(100% - 80px) !important;
+    margin-left: 80px !important;
+    padding: 9px 10px 28px !important;
+  }
+
+  .sidebar-nav .nav-item {
+    width: 62px !important;
+    min-width: 62px !important;
+    height: 51px !important;
+    flex-basis: 51px !important;
+  }
+
+  .sidebar-nav .nav-item > span:nth-child(2) {
+    font-size: 6.5px !important;
+  }
+
+  .hero-panel {
+    min-height: 225px !important;
+  }
+
+  .hero-copy {
+    padding: 19px !important;
+  }
+
+  .hero-copy h1 {
+    font-size: 28px !important;
+  }
+
+  .hero-copy p {
+    font-size: 12px !important;
+    max-width: 88% !important;
+  }
+}
