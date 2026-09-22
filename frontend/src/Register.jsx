@@ -1,11 +1,14 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import PhoneInput from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
 import './Register.css'
 
 function Register() {
   const navigate = useNavigate()
 
   const [name, setName] = useState('')
+  const [registerMethod, setRegisterMethod] = useState('email')
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
   const [password, setPassword] = useState('')
@@ -32,8 +35,13 @@ function Register() {
       return
     }
 
-    if (!email.trim() && !phone.trim()) {
-      showMessage('Enter your email or phone number')
+    if (registerMethod === 'email' && !email.trim()) {
+      showMessage('Please enter your email')
+      return
+    }
+
+    if (registerMethod === 'phone' && !phone) {
+      showMessage('Please enter your phone number')
       return
     }
 
@@ -62,18 +70,40 @@ function Register() {
         },
         body: JSON.stringify({
           name: name.trim(),
-          email: email.trim(),
-          phone: phone.trim(),
+          email:
+            registerMethod === 'email'
+              ? email.trim()
+              : '',
+          phone:
+            registerMethod === 'phone'
+              ? phone
+              : '',
           password,
         }),
       })
 
       if (!response.ok) {
         const errorText = await response.text()
-        throw new Error(errorText || 'Registration failed')
+
+        let errorMessage = 'Registration failed'
+
+        try {
+          const errorData = JSON.parse(errorText)
+
+          errorMessage =
+            errorData.error ||
+            errorData.message ||
+            errorMessage
+        } catch {
+          if (errorText) {
+            errorMessage = errorText
+          }
+        }
+
+        throw new Error(errorMessage)
       }
 
-      showMessage('Account created successfully')
+      showMessage('Account created successfully 🎉')
 
       setTimeout(() => {
         navigate('/')
@@ -81,7 +111,6 @@ function Register() {
 
     } catch (error) {
       console.error('REGISTER ERROR:', error)
-
       showMessage(
         error.message || 'Could not create your account'
       )
@@ -185,13 +214,15 @@ function Register() {
 
           <form onSubmit={handleRegister}>
 
+            {/* NAME */}
+
             <div className="lifeos-register-field">
 
               <label>Full name</label>
 
               <input
                 type="text"
-                placeholder="Adarsh Singh"
+                placeholder="Your full name"
                 value={name}
                 onChange={(event) =>
                   setName(event.target.value)
@@ -202,39 +233,92 @@ function Register() {
             </div>
 
 
+            {/* REGISTER METHOD */}
+
             <div className="lifeos-register-field">
 
-              <label>Email</label>
+              <label>Register using</label>
 
-              <input
-                type="email"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(event) =>
-                  setEmail(event.target.value)
-                }
-                autoComplete="email"
-              />
+              <div className="register-method-toggle">
+
+                <button
+                  type="button"
+                  className={
+                    registerMethod === 'email'
+                      ? 'active'
+                      : ''
+                  }
+                  onClick={() => {
+                    setRegisterMethod('email')
+                    setPhone('')
+                  }}
+                >
+                  ✉ Email
+                </button>
+
+                <button
+                  type="button"
+                  className={
+                    registerMethod === 'phone'
+                      ? 'active'
+                      : ''
+                  }
+                  onClick={() => {
+                    setRegisterMethod('phone')
+                    setEmail('')
+                  }}
+                >
+                  ☎ Phone
+                </button>
+
+              </div>
 
             </div>
 
 
-            <div className="lifeos-register-field">
+            {/* EMAIL */}
 
-              <label>Phone</label>
+            {registerMethod === 'email' && (
+              <div className="lifeos-register-field">
 
-              <input
-                type="tel"
-                placeholder="+91 98765 43210"
-                value={phone}
-                onChange={(event) =>
-                  setPhone(event.target.value)
-                }
-                autoComplete="tel"
-              />
+                <label>Email address</label>
 
-            </div>
+                <input
+                  type="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(event) =>
+                    setEmail(event.target.value)
+                  }
+                  autoComplete="email"
+                />
 
+              </div>
+            )}
+
+
+            {/* PHONE */}
+
+            {registerMethod === 'phone' && (
+              <div className="lifeos-register-field">
+
+                <label>Phone number</label>
+
+                <PhoneInput
+                  international
+                  defaultCountry="IN"
+                  countryCallingCodeEditable={false}
+                  placeholder="98765 43210"
+                  value={phone}
+                  onChange={setPhone}
+                  className="lifeos-phone-input"
+                />
+
+              </div>
+            )}
+
+
+            {/* PASSWORD */}
 
             <div className="lifeos-register-field">
 
@@ -253,6 +337,8 @@ function Register() {
             </div>
 
 
+            {/* CONFIRM PASSWORD */}
+
             <div className="lifeos-register-field">
 
               <label>Confirm password</label>
@@ -269,6 +355,8 @@ function Register() {
 
             </div>
 
+
+            {/* SUBMIT */}
 
             <button
               className="lifeos-register-submit"
@@ -300,6 +388,8 @@ function Register() {
 
       </main>
 
+
+      {/* TOAST */}
 
       {message && (
         <div className="lifeos-register-toast">

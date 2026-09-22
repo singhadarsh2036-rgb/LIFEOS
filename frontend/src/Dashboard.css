@@ -2608,227 +2608,438 @@ html[data-lifeos-theme="dark"] .lifeos-toast {
   }
 }
 /* =========================================================
-   LIFEOS MOBILE DASHBOARD — FINAL NAVIGATION FIX
+   LIFEOS — PREMIUM MOBILE APP LAYOUT
+   Left navigation rail + top-right controls
    ========================================================= */
 
 @media (max-width: 720px) {
 
+  /* PAGE */
   .dashboard-page {
-    display: block;
+    display: block !important;
     min-height: 100vh;
+    width: 100%;
   }
 
-  /* ---------- SIDEBAR ---------- */
+  /* =======================================================
+     LEFT NAVIGATION RAIL
+     ======================================================= */
 
   .sidebar {
-    width: 100%;
-    min-height: auto;
-    position: relative;
-    padding: 14px 14px 10px;
+    position: fixed !important;
+
+    top: 0 !important;
+    left: 0 !important;
+    bottom: 0 !important;
+
+    width: 76px !important;
+    min-height: 100vh !important;
+    height: 100vh !important;
+
+    padding: 16px 9px !important;
     box-sizing: border-box;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+
+    background:
+      linear-gradient(
+        180deg,
+        rgba(103, 50, 160, 0.98),
+        rgba(126, 56, 157, 0.96)
+      ) !important;
+
+    border-right: 1px solid rgba(255,255,255,.14) !important;
+    border-radius: 0 !important;
+
+    box-shadow:
+      10px 0 35px rgba(66, 25, 100, .14);
+
+    z-index: 999;
   }
+
+
+  /* =======================================================
+     BRAND
+     ======================================================= */
 
   .brand {
-    padding-bottom: 12px;
+    width: 100% !important;
+
+    padding: 0 !important;
+    margin: 0 0 20px !important;
+
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
 
-  /* Main navigation */
-  .sidebar-nav {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 6px;
-    width: 100%;
-  }
+  .brand-mark {
+    width: 45px !important;
+    height: 45px !important;
 
-  .nav-item {
-    min-width: 0;
-    height: 48px;
+    border-radius: 14px !important;
+
+    display: flex !important;
+    align-items: center;
     justify-content: center;
-    padding: 0;
-    border-radius: 13px;
+
+    font-size: 20px !important;
+    font-weight: 800;
+
+    background:
+      linear-gradient(
+        145deg,
+        #a878ff,
+        #70c4ff
+      ) !important;
+
+    box-shadow:
+      0 10px 28px rgba(80,50,160,.30);
   }
 
-  .nav-item > span:not(.nav-icon):not(.nav-active-dot) {
+  .brand > div:last-child {
+    display: none !important;
+  }
+
+
+  /* =======================================================
+     NAV
+     ======================================================= */
+
+  .sidebar-nav {
+    width: 100% !important;
+
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+
+    gap: 7px !important;
+
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+
+    scrollbar-width: none;
+  }
+
+  .sidebar-nav::-webkit-scrollbar {
     display: none;
   }
 
+
+  .nav-item {
+    position: relative;
+
+    width: 50px !important;
+    min-width: 50px !important;
+    height: 48px !important;
+
+    padding: 0 !important;
+    margin: 0 !important;
+
+    flex: 0 0 48px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+
+    border-radius: 15px !important;
+
+    background: transparent !important;
+    border: 1px solid transparent !important;
+
+    color: rgba(255,255,255,.68) !important;
+  }
+
+
+  .nav-item:hover {
+    background: rgba(255,255,255,.08) !important;
+  }
+
+
+  .nav-item.active {
+    background:
+      rgba(255,255,255,.18) !important;
+
+    border-color:
+      rgba(255,255,255,.16) !important;
+
+    color: #fff !important;
+
+    box-shadow:
+      inset 0 1px rgba(255,255,255,.18),
+      0 8px 22px rgba(45,15,75,.16);
+  }
+
+
   .nav-icon {
-    font-size: 20px;
+    font-size: 19px !important;
+    line-height: 1 !important;
+  }
+
+
+  .nav-item > span:not(.nav-icon):not(.nav-active-dot) {
+    display: none !important;
   }
 
   .nav-active-dot {
-    display: none;
+    display: none !important;
   }
 
-  /* ---------- PROFILE / SETTINGS / LOGOUT ---------- */
 
-  .sidebar-bottom {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    margin-top: 9px;
-  }
+  /* =======================================================
+     REMOVE SIDEBAR EXTRAS
+     ======================================================= */
 
-  .sidebar-bottom .nav-item {
-    flex: 1;
-    height: 42px;
-  }
-
-  .sidebar-bottom .nav-item > span:not(.nav-icon) {
-    display: inline !important;
-    font-size: 11px;
-  }
-
+  .quick-actions,
+  .sidebar-bottom,
   .sidebar-profile {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    margin-top: 9px;
-    padding: 9px 11px;
-    box-sizing: border-box;
-    border-radius: 14px;
+    display: none !important;
   }
 
-  .sidebar-profile > * {
-    display: flex;
-  }
 
-  /* ---------- MAIN ---------- */
+  /* =======================================================
+     MAIN
+     ======================================================= */
 
   .dashboard-main {
-    width: 100%;
-    margin-left: 0;
-    padding: 12px;
+    width: calc(100% - 76px) !important;
+
+    margin-left: 76px !important;
+
+    padding: 11px 14px 30px !important;
+
     box-sizing: border-box;
   }
 
-  /* ---------- TOPBAR ---------- */
+
+  /* =======================================================
+     TOP BAR
+     ======================================================= */
 
   .topbar {
-    height: auto;
-    min-height: 52px;
-    margin-bottom: 12px;
-    gap: 8px;
+    width: 100% !important;
+
+    height: auto !important;
+    min-height: 46px !important;
+
+    margin-bottom: 12px !important;
+
+    display: flex !important;
+    align-items: center !important;
+
+    gap: 7px !important;
   }
+
 
   .search-box {
-    width: 100%;
-    min-width: 0;
+    flex: 1 !important;
+
+    width: auto !important;
+    min-width: 0 !important;
+
+    height: 44px !important;
+
+    border-radius: 14px !important;
   }
 
-  /* Bring theme/profile controls back */
+
   .top-actions {
-    display: flex;
-    align-items: center;
-    gap: 7px;
+    display: flex !important;
+
+    align-items: center !important;
+
+    gap: 6px !important;
+
+    flex-shrink: 0 !important;
   }
+
+
+  .lifeos-notification-wrap {
+    display: flex !important;
+  }
+
+
+  .top-icon {
+    width: 40px !important;
+    height: 40px !important;
+
+    border-radius: 12px !important;
+  }
+
 
   .theme-toggle {
-    min-width: 42px;
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    justify-content: center;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+
+    padding: 0 !important;
+
+    border-radius: 12px !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
+
 
   .theme-toggle-text {
-    display: none;
+    display: none !important;
   }
+
 
   .top-profile {
-    display: flex;
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    align-items: center;
-    justify-content: center;
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+
+    padding: 0 !important;
+
+    border-radius: 50% !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
   }
 
-  /* ---------- HERO ---------- */
+
+  .consistency {
+    display: none !important;
+  }
+
+
+  /* =======================================================
+     HERO
+     ======================================================= */
 
   .hero-panel {
-    min-height: 230px;
+    min-height: 245px !important;
+
+    border-radius: 23px !important;
+
+    overflow: hidden;
   }
 
-  .hero-art {
-    inset: 45% 0 0;
+  .hero-copy {
+    padding: 22px !important;
   }
 
   .hero-copy h1 {
-    font-size: 34px;
+    font-size: clamp(30px, 7vw, 38px) !important;
+    line-height: 1.03 !important;
   }
 
-  /* ---------- METRICS ---------- */
+  .hero-copy p {
+    font-size: 13px !important;
+    line-height: 1.5 !important;
+  }
+
+
+  .hero-art {
+    inset: 43% 0 0 !important;
+  }
+
+
+  /* =======================================================
+     METRICS
+     ======================================================= */
 
   .metric-grid {
-    grid-template-columns: repeat(2, 1fr);
+    display: grid !important;
+
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr)) !important;
+
+    gap: 9px !important;
   }
+
+
+  .metric-card {
+    min-width: 0 !important;
+
+    padding: 15px !important;
+
+    border-radius: 19px !important;
+  }
+
 }
 
 
 /* =========================================================
-   SMALL PHONES
+   VERY SMALL PHONES
    ========================================================= */
 
 @media (max-width: 480px) {
 
   .sidebar {
-    padding: 11px 10px 9px;
+    width: 68px !important;
+    padding: 12px 7px !important;
   }
 
-  .brand {
-    padding-bottom: 9px;
+  .brand-mark {
+    width: 42px !important;
+    height: 42px !important;
   }
 
   .sidebar-nav {
-    grid-template-columns: repeat(5, 1fr);
-    gap: 5px;
+    gap: 5px !important;
   }
 
   .nav-item {
-    height: 44px;
-    border-radius: 11px;
+    width: 46px !important;
+    min-width: 46px !important;
+    height: 45px !important;
+    flex-basis: 45px !important;
+    border-radius: 14px !important;
   }
 
   .nav-icon {
-    font-size: 18px;
-  }
-
-  .sidebar-bottom {
-    gap: 5px;
-  }
-
-  .sidebar-bottom .nav-item {
-    height: 39px;
-  }
-
-  .sidebar-bottom .nav-item > span:not(.nav-icon) {
-    font-size: 10px;
-  }
-
-  .sidebar-profile {
-    min-height: 46px;
+    font-size: 18px !important;
   }
 
   .dashboard-main {
-    padding: 10px;
+    width: calc(100% - 68px) !important;
+    margin-left: 68px !important;
+    padding: 9px 10px 28px !important;
   }
 
-  .metric-grid {
-    grid-template-columns: 1fr;
+  .topbar {
+    gap: 5px !important;
+  }
+
+  .search-box {
+    height: 41px !important;
+  }
+
+  .top-icon,
+  .theme-toggle,
+  .top-profile {
+    width: 37px !important;
+    min-width: 37px !important;
+    height: 37px !important;
   }
 
   .hero-panel {
-    padding: 22px;
+    min-height: 230px !important;
+    border-radius: 21px !important;
   }
 
-  .hero-quote {
-    display: none;
+  .hero-copy {
+    padding: 19px !important;
   }
 
-  .bottom-banner button {
-    display: none;
+  .hero-copy h1 {
+    font-size: 30px !important;
+  }
+
+  .metric-grid {
+    gap: 8px !important;
+  }
+
+  .metric-card {
+    padding: 13px !important;
+    border-radius: 17px !important;
   }
 
 }
-
