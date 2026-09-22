@@ -65,18 +65,6 @@ function Reminders() {
         return false
       }
 
-      if (!('PushManager' in window)) {
-        console.log(
-          '❌ Push notifications are not supported'
-        )
-
-        showMessage(
-          'Push notifications are not supported'
-        )
-
-        return false
-      }
-
       if (!('Notification' in window)) {
         console.log(
           '❌ Notification API is not supported'
@@ -132,10 +120,26 @@ function Reminders() {
         )
       }
 
+      if (permission === 'denied') {
+        console.log(
+          '⚠️ Notification permission is denied'
+        )
+
+        showMessage(
+          'Notifications are blocked. Enable them in iPhone Settings/Safari for LIFEOS.'
+        )
+
+        return false
+      }
+
       if (permission !== 'granted') {
         console.log(
           '⚠️ Notification permission:',
           permission
+        )
+
+        showMessage(
+          'Tap Enable Notifications and allow notifications.'
         )
 
         return false
@@ -153,6 +157,20 @@ function Reminders() {
       console.log(
         '✅ Service Worker ready'
       )
+
+      // iPhone/iPad Safari: check PushManager on the
+      // ServiceWorkerRegistration instead of window.
+      if (!registration.pushManager) {
+        console.log(
+          '❌ PushManager is unavailable on this web app'
+        )
+
+        showMessage(
+          'Push notifications are unavailable here. Open LIFEOS from the Home Screen.'
+        )
+
+        return false
+      }
 
       // --------------------------------
       // GET VAPID PUBLIC KEY
@@ -581,8 +599,15 @@ function Reminders() {
         const errorText =
           await response.text()
 
-        throw new Error(
+        console.error(
+          '❌ REMINDER API ERROR:',
+          response.status,
           errorText
+        )
+
+        throw new Error(
+          errorText ||
+          `Request failed with status ${response.status}`
         )
       }
 
@@ -612,8 +637,13 @@ function Reminders() {
         error
       )
 
+      const errorMessage =
+        error?.message?.trim()
+
       showMessage(
-        'Could not create reminder'
+        errorMessage
+          ? `Couldn't create reminder: ${errorMessage}`
+          : 'Could not create reminder'
       )
 
     } finally {
