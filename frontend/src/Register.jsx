@@ -1,755 +1,315 @@
-import { useEffect, useRef, useState } from 'react'
-import './Reminders.css'
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import './Register.css'
 
-function Reminders() {
-  const [reminders, setReminders] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [showModal, setShowModal] = useState(false)
+function Register() {
+  const navigate = useNavigate()
 
-  const [title, setTitle] = useState('')
-  const [date, setDate] = useState('')
-  const [time, setTime] = useState('')
-  const [timePeriod, setTimePeriod] = useState('AM')
-  const [saving, setSaving] = useState(false)
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [phone, setPhone] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
 
+  const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState('')
 
-  const notifiedReminders = useRef(new Set())
-
-  const getToken = () => {
-    return localStorage.getItem('token')
-  }
+  const API = 'https://lifeos-v22r.onrender.com'
 
   const showMessage = (text) => {
     setMessage(text)
 
     setTimeout(() => {
       setMessage('')
-    }, 2200)
+    }, 2500)
   }
 
-  // ==============================
-  // PUSH NOTIFICATION SETUP
-  // ==============================
+  const handleRegister = async (event) => {
+    event.preventDefault()
 
-  const setupPushNotifications = async () => {
-    try {
-      if (!('serviceWorker' in navigator)) {
-        console.log('Service Worker is not supported')
-        return
-      }
-
-      if (!('PushManager' in window)) {
-        console.log('Push notifications are not supported')
-        return
-      }
-
-      const token = getToken()
-
-      if (!token) {
-        console.log('No login token found')
-        return
-      }
-
-      const permission = await Notification.requestPermission()
-
-      if (permission !== 'granted') {
-        console.log('Notification permission not granted')
-        return
-      }
-
-      const registration =
-        await navigator.serviceWorker.ready
-
-      const publicKeyResponse = await fetch(
-        'https://lifeos-v22r.onrender.com/push/public-key'
-      )
-
-      if (!publicKeyResponse.ok) {
-        throw new Error(
-          'Failed to get VAPID public key'
-        )
-      }
-
-      const publicKey =
-        await publicKeyResponse.text()
-
-      const urlBase64ToUint8Array = (
-        base64String
-      ) => {
-        const padding = '='.repeat(
-          (4 - (base64String.length % 4)) % 4
-        )
-
-        const base64 = (
-          base64String + padding
-        )
-          .replace(/-/g, '+')
-          .replace(/_/g, '/')
-
-        const rawData = window.atob(base64)
-
-        return Uint8Array.from(
-          [...rawData].map((char) =>
-            char.charCodeAt(0)
-          )
-        )
-      }
-
-      let subscription =
-        await registration.pushManager.getSubscription()
-
-      if (!subscription) {
-        subscription =
-          await registration.pushManager.subscribe({
-            userVisibleOnly: true,
-            applicationServerKey:
-              urlBase64ToUint8Array(
-                publicKey
-              ),
-          })
-      }
-
-      const subscriptionJson =
-        subscription.toJSON()
-
-      const response = await fetch(
-        'https://lifeos-v22r.onrender.com/push/subscribe',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(
-            subscriptionJson
-          ),
-        }
-      )
-
-      if (!response.ok) {
-        throw new Error(
-          `Subscription failed: ${response.status}`
-        )
-      }
-
-      console.log(
-        '🔔 LIFEOS Push Subscription Saved'
-      )
-
-    } catch (error) {
-      console.error(
-        'Push notification setup failed:',
-        error
-      )
+    if (!name.trim()) {
+      showMessage('Please enter your name')
+      return
     }
-  }
 
-  // ==============================
-  // LOAD REMINDERS
-  // ==============================
+    if (!email.trim() && !phone.trim()) {
+      showMessage('Enter your email or phone number')
+      return
+    }
 
-  const loadReminders = async () => {
+    if (!password) {
+      showMessage('Please enter a password')
+      return
+    }
+
+    if (password.length < 6) {
+      showMessage('Password must be at least 6 characters')
+      return
+    }
+
+    if (password !== confirmPassword) {
+      showMessage('Passwords do not match')
+      return
+    }
+
     try {
-      const response = await fetch(
-        'https://lifeos-v22r.onrender.com/reminders',
-        {
-          headers: {
-            Authorization: `Bearer ${getToken()}`,
-          },
-        }
-      )
+      setLoading(true)
+
+      const response = await fetch(`${API}/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          password,
+        }),
+      })
 
       if (!response.ok) {
-        throw new Error(
-          'Could not load reminders'
-        )
+        const errorText = await response.text()
+        throw new Error(errorText || 'Registration failed')
       }
 
-      const data = await response.json()
+      showMessage('Account created successfully')
 
-      setReminders(
-        Array.isArray(data) ? data : []
-      )
+      setTimeout(() => {
+        navigate('/')
+      }, 1000)
 
     } catch (error) {
-      console.error(
-        'REMINDER ERROR:',
-        error
-      )
+      console.error('REGISTER ERROR:', error)
 
       showMessage(
-        'Could not load reminders'
+        error.message || 'Could not create your account'
       )
-
     } finally {
       setLoading(false)
     }
   }
 
-  // ==============================
-  // INITIAL SETUP
-  // ==============================
-
-  useEffect(() => {
-    loadReminders()
-    setupPushNotifications()
-
-    if ('Notification' in window) {
-      Notification.requestPermission()
-    }
-  }, [])
-
-  // ==============================
-  // CREATE REMINDER
-  // ==============================
-
-  const createReminder = async (event) => {
-    event.preventDefault()
-
-    if (!title.trim()) {
-      showMessage('Enter a reminder')
-      return
-    }
-
-    if (!date || !time) {
-      showMessage(
-        'Select date and time'
-      )
-      return
-    }
-
-    const timeParts = time.split(':')
-
-    if (
-      timeParts.length !== 2 ||
-      parseInt(timeParts[0], 10) < 1 ||
-      parseInt(timeParts[0], 10) > 12 ||
-      parseInt(timeParts[1], 10) < 0 ||
-      parseInt(timeParts[1], 10) > 59
-    ) {
-      showMessage(
-        'Enter a valid time'
-      )
-      return
-    }
-
-    try {
-      setSaving(true)
-
-      // Convert 12-hour time to 24-hour time
-      let hour = parseInt(
-        timeParts[0],
-        10
-      )
-
-      if (timePeriod === 'AM') {
-        if (hour === 12) {
-          hour = 0
-        }
-      } else {
-        if (hour !== 12) {
-          hour += 12
-        }
-      }
-
-      const formattedHour =
-        String(hour).padStart(2, '0')
-
-      const reminderTime =
-        `${date}T${formattedHour}:${timeParts[1]}:00`
-
-      const response = await fetch(
-        'https://lifeos-v22r.onrender.com/reminders',
-        {
-          method: 'POST',
-
-          headers: {
-            'Content-Type':
-              'application/json',
-
-            Authorization:
-              `Bearer ${getToken()}`,
-          },
-
-          body: JSON.stringify({
-            title: title.trim(),
-            reminderTime,
-            completed: false,
-            notificationSent: false,
-          }),
-        }
-      )
-
-      if (!response.ok) {
-        const errorText =
-          await response.text()
-
-        throw new Error(errorText)
-      }
-
-      const createdReminder =
-        await response.json()
-
-      setReminders((current) => [
-        ...current,
-        createdReminder,
-      ])
-
-      setTitle('')
-      setDate('')
-      setTime('')
-      setTimePeriod('AM')
-      setShowModal(false)
-
-      showMessage(
-        'Reminder created'
-      )
-
-    } catch (error) {
-      console.error(
-        'CREATE REMINDER ERROR:',
-        error
-      )
-
-      showMessage(
-        error.message ||
-        'Could not create reminder'
-      )
-
-    } finally {
-      setSaving(false)
-    }
-  }
-
-  // ==============================
-  // DELETE REMINDER
-  // ==============================
-
-  const deleteReminder = async (id) => {
-    try {
-      const response = await fetch(
-        `https://lifeos-v22r.onrender.com/reminders/${id}`,
-        {
-          method: 'DELETE',
-
-          headers: {
-            Authorization:
-              `Bearer ${getToken()}`,
-          },
-        }
-      )
-
-      if (!response.ok) {
-        throw new Error(
-          'Could not delete reminder'
-        )
-      }
-
-      setReminders((current) =>
-        current.filter(
-          (reminder) =>
-            reminder.id !== id
-        )
-      )
-
-      showMessage(
-        'Reminder deleted'
-      )
-
-    } catch (error) {
-      console.error(error)
-
-      showMessage(
-        'Could not delete reminder'
-      )
-    }
-  }
-
-  // ==============================
-  // FORMAT DATE
-  // ==============================
-
-  const formatReminderDate = (
-    value
-  ) => {
-    if (!value) return ''
-
-    const dateObject =
-      new Date(value)
-
-    return dateObject.toLocaleString(
-      'en-IN',
-      {
-        day: 'numeric',
-        month: 'short',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true,
-      }
-    )
-  }
-
   return (
-    <div className="reminders-page">
+    <div className="lifeos-register">
 
-      <header className="reminders-header">
+      <div className="lifeos-register-bg" />
+
+      {/* BRAND */}
+
+      <div className="lifeos-register-brand">
+
+        <div className="lifeos-register-logo">
+          <span />
+          <span />
+          <span />
+        </div>
 
         <div>
+          <div className="lifeos-register-brand-name">
+            LIFEOS
+          </div>
 
-          <div className="reminders-eyebrow">
-            LIFEOS · REMINDERS
+          <div className="lifeos-register-brand-tagline">
+            YOUR LIFE. ORGANIZED.
+          </div>
+        </div>
+
+      </div>
+
+
+      <main className="lifeos-register-main">
+
+        {/* LEFT SIDE */}
+
+        <section className="lifeos-register-hero">
+
+          <div className="lifeos-register-eyebrow">
+            <span />
+            START YOUR JOURNEY
           </div>
 
           <h1>
-            Never miss a moment
-            <span>.</span>
+            Build a life
+            <br />
+            <span>that runs better.</span>
           </h1>
 
           <p>
-            Set a time. LIFEOS will remind you.
+            LIFEOS brings your tasks, reminders, plans and
+            everyday life together in one intelligent space.
           </p>
 
-        </div>
+          <div className="lifeos-register-steps">
 
-        <button
-          className="reminder-add-button"
-          onClick={() =>
-            setShowModal(true)
-          }
-        >
-          <span>+</span>
-          Add reminder
-        </button>
+            <div className="lifeos-register-step">
+              <div>01</div>
+              <span>Organize everything that matters.</span>
+            </div>
 
-      </header>
+            <div className="lifeos-register-step">
+              <div>02</div>
+              <span>Stay ahead with smart reminders.</span>
+            </div>
+
+            <div className="lifeos-register-step">
+              <div>03</div>
+              <span>Make every day a little easier.</span>
+            </div>
+
+          </div>
+
+        </section>
 
 
-      <section className="reminders-card">
+        {/* REGISTER CARD */}
 
-        <div className="reminders-card-header">
+        <section className="lifeos-register-card">
 
-          <div>
+          <div className="lifeos-register-card-header">
 
-            <span className="reminders-label">
-              YOUR REMINDERS
+            <span className="lifeos-register-card-label">
+              CREATE ACCOUNT
             </span>
 
             <h2>
-              Stay ahead of your day
+              Welcome to LIFEOS.
             </h2>
 
-          </div>
-
-          <span className="reminder-count">
-            {reminders.length} reminders
-          </span>
-
-        </div>
-
-
-        {loading ? (
-
-          <div className="reminders-empty">
-            Loading your reminders...
-          </div>
-
-        ) : reminders.length === 0 ? (
-
-          <div className="reminders-empty">
-
-            <div className="reminder-empty-icon">
-              ◷
-            </div>
-
-            <h3>
-              Nothing scheduled.
-            </h3>
-
             <p>
-              Add a reminder and LIFEOS will
-              keep track of it for you.
+              Create your account and start organizing your life.
             </p>
 
+          </div>
+
+
+          <form onSubmit={handleRegister}>
+
+            <div className="lifeos-register-field">
+
+              <label>Full name</label>
+
+              <input
+                type="text"
+                placeholder="Adarsh Singh"
+                value={name}
+                onChange={(event) =>
+                  setName(event.target.value)
+                }
+                autoComplete="name"
+              />
+
+            </div>
+
+
+            <div className="lifeos-register-field">
+
+              <label>Email</label>
+
+              <input
+                type="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(event) =>
+                  setEmail(event.target.value)
+                }
+                autoComplete="email"
+              />
+
+            </div>
+
+
+            <div className="lifeos-register-field">
+
+              <label>Phone</label>
+
+              <input
+                type="tel"
+                placeholder="+91 98765 43210"
+                value={phone}
+                onChange={(event) =>
+                  setPhone(event.target.value)
+                }
+                autoComplete="tel"
+              />
+
+            </div>
+
+
+            <div className="lifeos-register-field">
+
+              <label>Password</label>
+
+              <input
+                type="password"
+                placeholder="Create a password"
+                value={password}
+                onChange={(event) =>
+                  setPassword(event.target.value)
+                }
+                autoComplete="new-password"
+              />
+
+            </div>
+
+
+            <div className="lifeos-register-field">
+
+              <label>Confirm password</label>
+
+              <input
+                type="password"
+                placeholder="Enter password again"
+                value={confirmPassword}
+                onChange={(event) =>
+                  setConfirmPassword(event.target.value)
+                }
+                autoComplete="new-password"
+              />
+
+            </div>
+
+
             <button
-              className="empty-add-button"
-              onClick={() =>
-                setShowModal(true)
-              }
+              className="lifeos-register-submit"
+              type="submit"
+              disabled={loading}
             >
-              + Create your first reminder
+              {loading
+                ? 'Creating account...'
+                : 'Create my account'}
+            </button>
+
+          </form>
+
+
+          <div className="lifeos-register-login">
+
+            Already have an account?
+
+            <button
+              type="button"
+              onClick={() => navigate('/')}
+            >
+              Sign in
             </button>
 
           </div>
 
-        ) : (
+        </section>
 
-          <div className="reminders-list">
-
-            {reminders.map(
-              (reminder) => (
-
-                <div
-                  className="reminder-row"
-                  key={reminder.id}
-                >
-
-                  <div className="reminder-icon">
-                    ◷
-                  </div>
-
-                  <div className="reminder-info">
-
-                    <strong>
-                      {reminder.title}
-                    </strong>
-
-                    <span>
-                      {formatReminderDate(
-                        reminder.reminderTime
-                      )}
-                    </span>
-
-                  </div>
-
-                  <span className="reminder-status">
-                    {reminder.completed
-                      ? 'DONE'
-                      : 'UPCOMING'}
-                  </span>
-
-                  <button
-                    className="reminder-delete"
-                    onClick={() =>
-                      deleteReminder(
-                        reminder.id
-                      )
-                    }
-                  >
-                    ×
-                  </button>
-
-                </div>
-
-              )
-            )}
-
-          </div>
-
-        )}
-
-      </section>
-
-
-      {/* CREATE REMINDER MODAL */}
-
-      {showModal && (
-
-        <div
-          className="reminder-modal-overlay"
-          onClick={() =>
-            setShowModal(false)
-          }
-        >
-
-          <div
-            className="reminder-modal"
-            onClick={(event) =>
-              event.stopPropagation()
-            }
-          >
-
-            <div className="reminder-modal-header">
-
-              <div>
-
-                <span className="reminders-label">
-                  NEW REMINDER
-                </span>
-
-                <h2>
-                  When should we remind you?
-                </h2>
-
-              </div>
-
-              <button
-                className="reminder-close"
-                onClick={() =>
-                  setShowModal(false)
-                }
-              >
-                ×
-              </button>
-
-            </div>
-
-
-            <form
-              onSubmit={createReminder}
-            >
-
-              <label>
-                Reminder
-              </label>
-
-              <input
-                className="reminder-input"
-                type="text"
-                placeholder="e.g. Call Mom"
-                value={title}
-                onChange={(event) =>
-                  setTitle(
-                    event.target.value
-                  )
-                }
-                autoFocus
-                maxLength={100}
-              />
-
-
-              <div className="reminder-fields">
-
-                <div>
-
-                  <label>
-                    Date
-                  </label>
-
-                  <input
-                    className="reminder-input"
-                    type="date"
-                    value={date}
-                    onChange={(event) =>
-                      setDate(
-                        event.target.value
-                      )
-                    }
-                  />
-
-                </div>
-
-
-                <div>
-
-                  <label>
-                    Time
-                  </label>
-
-                  <div className="time-picker">
-
-                    <input
-                      className="reminder-input"
-                      type="text"
-                      placeholder="09:30"
-                      value={time}
-                      onChange={(event) => {
-
-                        let value =
-                          event.target.value
-                            .replace(
-                              /\D/g,
-                              ''
-                            )
-
-                        if (
-                          value.length > 4
-                        ) {
-                          value =
-                            value.slice(
-                              0,
-                              4
-                            )
-                        }
-
-                        if (
-                          value.length > 2
-                        ) {
-                          value =
-                            value.slice(
-                              0,
-                              2
-                            ) +
-                            ':' +
-                            value.slice(2)
-                        }
-
-                        setTime(value)
-                      }}
-                      maxLength={5}
-                    />
-
-                    <select
-                      className="reminder-input time-period"
-                      value={timePeriod}
-                      onChange={(event) =>
-                        setTimePeriod(
-                          event.target.value
-                        )
-                      }
-                    >
-
-                      <option value="AM">
-                        AM
-                      </option>
-
-                      <option value="PM">
-                        PM
-                      </option>
-
-                    </select>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-
-              <div className="reminder-modal-actions">
-
-                <button
-                  type="button"
-                  className="reminder-cancel"
-                  onClick={() =>
-                    setShowModal(false)
-                  }
-                >
-                  Cancel
-                </button>
-
-                <button
-                  type="submit"
-                  className="reminder-save"
-                  disabled={saving}
-                >
-                  {saving
-                    ? 'Saving...'
-                    : 'Set reminder'}
-                </button>
-
-              </div>
-
-            </form>
-
-          </div>
-
-        </div>
-
-      )}
+      </main>
 
 
       {message && (
-
-        <div className="lifeos-toast">
+        <div className="lifeos-register-toast">
           <span>✓</span>
           {message}
         </div>
-
       )}
 
     </div>
   )
 }
 
-export default Reminders
+export default Register
