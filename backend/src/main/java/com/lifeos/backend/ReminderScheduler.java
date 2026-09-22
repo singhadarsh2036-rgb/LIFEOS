@@ -1,9 +1,9 @@
 package com.lifeos.backend.service;
 
-import com.lifeos.backend.model.PushSubscription;
 import com.lifeos.backend.model.Reminder;
-import com.lifeos.backend.repository.PushSubscriptionRepository;
+import com.lifeos.backend.model.PushSubscription;
 import com.lifeos.backend.repository.ReminderRepository;
+import com.lifeos.backend.repository.PushSubscriptionRepository;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +31,7 @@ public class ReminderScheduler {
     @Scheduled(fixedRate = 15000)
     public void checkReminders() {
 
+        // 🇮🇳 Always use Indian Standard Time
         LocalDateTime now =
                 LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
 
@@ -43,14 +44,11 @@ public class ReminderScheduler {
             try {
 
                 List<PushSubscription> subscriptions =
-                        pushSubscriptionRepository.findByUser(
-                                reminder.getUser()
-                        );
+                        pushSubscriptionRepository
+                                .findByUser(reminder.getUser());
 
                 String title = "🔔 LIFEOS Reminder";
-
-                String body =
-                        "⏰ " + reminder.getTitle();
+                String body = "⏰ " + reminder.getTitle();
 
                 for (PushSubscription subscription : subscriptions) {
 
@@ -63,13 +61,11 @@ public class ReminderScheduler {
                     );
                 }
 
-                reminder.setNotificationSent(true);
-                reminder.setCompleted(true);
-
-                reminderRepository.save(reminder);
+                // 🔥 Notification successfully processed → delete reminder
+                reminderRepository.delete(reminder);
 
                 System.out.println(
-                        "✅ Reminder notification sent: "
+                        "✅ Reminder notification sent & reminder deleted: "
                                 + reminder.getTitle()
                 );
 
