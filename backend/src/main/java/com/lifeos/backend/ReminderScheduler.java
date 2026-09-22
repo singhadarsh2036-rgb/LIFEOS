@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 @Service
@@ -30,7 +31,8 @@ public class ReminderScheduler {
     @Scheduled(fixedRate = 15000)
     public void checkReminders() {
 
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime now =
+                LocalDateTime.now(ZoneId.of("Asia/Kolkata"));
 
         List<Reminder> reminders =
                 reminderRepository
