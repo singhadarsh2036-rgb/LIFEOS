@@ -35,7 +35,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         response.setHeader(
                 "Access-Control-Allow-Origin",
-                "http://localhost:5173"
+                "https://lifeos-frontend-h7fb.onrender.com"
         );
 
         response.setHeader(
