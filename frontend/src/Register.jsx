@@ -1,402 +1,605 @@
-import { useState } from 'react'
+import './App.css'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import PhoneInput from 'react-phone-number-input'
+import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
-import './Register.css'
+
+const API = 'https://lifeos-v22r.onrender.com'
 
 function Register() {
   const navigate = useNavigate()
 
   const [name, setName] = useState('')
-  const [registerMethod, setRegisterMethod] = useState('email')
+  const [registrationMethod, setRegistrationMethod] = useState('email')
+
   const [email, setEmail] = useState('')
   const [phone, setPhone] = useState('')
+
   const [password, setPassword] = useState('')
-  const [confirmPassword, setConfirmPassword] = useState('')
+
+  const [emailError, setEmailError] = useState('')
+  const [phoneError, setPhoneError] = useState('')
+
+  const [checkingEmail, setCheckingEmail] = useState(false)
+  const [checkingPhone, setCheckingPhone] = useState(false)
 
   const [loading, setLoading] = useState(false)
-  const [message, setMessage] = useState('')
 
-  const API = 'https://lifeos-v22r.onrender.com'
+  // ================================
+  // CHECK EMAIL
+  // ================================
 
-  const showMessage = (text) => {
-    setMessage(text)
+  useEffect(() => {
+    const value = email.trim()
 
-    setTimeout(() => {
-      setMessage('')
-    }, 2500)
-  }
+    if (!value) {
+      setEmailError('')
+      setCheckingEmail(false)
+      return
+    }
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      setEmailError('')
+      setCheckingEmail(false)
+      return
+    }
+
+    const timer = setTimeout(async () => {
+      setCheckingEmail(true)
+
+      try {
+        const response = await fetch(
+          `${API}/users/check-email?email=${encodeURIComponent(value)}`
+        )
+
+        if (!response.ok) return
+
+        const exists = await response.json()
+
+        if (exists) {
+          setEmailError('Email already registered')
+        } else {
+          setEmailError('')
+        }
+      } catch (error) {
+        console.error('EMAIL CHECK ERROR:', error)
+      } finally {
+        setCheckingEmail(false)
+      }
+    }, 400)
+
+    return () => clearTimeout(timer)
+  }, [email])
+
+  // ================================
+  // CHECK PHONE
+  // ================================
+
+  useEffect(() => {
+    if (!phone) {
+      setPhoneError('')
+      setCheckingPhone(false)
+      return
+    }
+
+    if (!isValidPhoneNumber(phone)) {
+      setPhoneError('')
+      setCheckingPhone(false)
+      return
+    }
+
+    const timer = setTimeout(async () => {
+      setCheckingPhone(true)
+
+      try {
+        const response = await fetch(
+          `${API}/users/check-phone?phone=${encodeURIComponent(phone)}`
+        )
+
+        if (!response.ok) return
+
+        const exists = await response.json()
+
+        if (exists) {
+          setPhoneError('Phone number already registered')
+        } else {
+          setPhoneError('')
+        }
+      } catch (error) {
+        console.error('PHONE CHECK ERROR:', error)
+      } finally {
+        setCheckingPhone(false)
+      }
+    }, 400)
+
+    return () => clearTimeout(timer)
+  }, [phone])
+
+  // ================================
+  // REGISTER
+  // ================================
 
   const handleRegister = async (event) => {
     event.preventDefault()
 
-    if (!name.trim()) {
-      showMessage('Please enter your name')
-      return
-    }
-
-    if (registerMethod === 'email' && !email.trim()) {
-      showMessage('Please enter your email')
-      return
-    }
-
-    if (registerMethod === 'phone' && !phone) {
-      showMessage('Please enter your phone number')
-      return
-    }
-
-    if (!password) {
-      showMessage('Please enter a password')
-      return
-    }
-
     if (password.length < 6) {
-      showMessage('Password must be at least 6 characters')
+      alert('Password must be at least 6 characters.')
       return
     }
 
-    if (password !== confirmPassword) {
-      showMessage('Passwords do not match')
+    if (registrationMethod === 'email' && emailError) {
+      alert(emailError)
       return
     }
 
-    try {
-      setLoading(true)
+    if (registrationMethod === 'phone' && phoneError) {
+      alert(phoneError)
+      return
+    }
 
-      const response = await fetch(`${API}/users`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: name.trim(),
-          email:
-            registerMethod === 'email'
-              ? email.trim()
-              : '',
-          phone:
-            registerMethod === 'phone'
-              ? phone
-              : '',
-          password,
-        }),
-      })
+    if (registrationMethod === 'email' && !email.trim()) {
+      alert('Please enter your email address.')
+      return
+    }
 
-      if (!response.ok) {
-        const errorText = await response.text()
-
-        let errorMessage = 'Registration failed'
-
-        try {
-          const errorData = JSON.parse(errorText)
-
-          errorMessage =
-            errorData.error ||
-            errorData.message ||
-            errorMessage
-        } catch {
-          if (errorText) {
-            errorMessage = errorText
-          }
-        }
-
-        throw new Error(errorMessage)
+    if (registrationMethod === 'phone') {
+      if (!phone) {
+        alert('Please enter your phone number.')
+        return
       }
 
-      showMessage('Account created successfully 🎉')
+      if (!isValidPhoneNumber(phone)) {
+        alert('Please enter a valid phone number.')
+        return
+      }
+    }
 
-      setTimeout(() => {
-        navigate('/')
-      }, 1000)
+    setLoading(true)
 
+    try {
+      // CREATE ACCOUNT
+      const registerResponse = await fetch(`${API}/users`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          email: registrationMethod === 'email' ? email : '',
+          phone: registrationMethod === 'phone' ? phone : '',
+          password
+        })
+      })
+
+      const registerText = await registerResponse.text()
+
+      console.log(
+        'REGISTER RESPONSE:',
+        registerResponse.status,
+        registerText
+      )
+
+      if (!registerResponse.ok) {
+        let data
+
+        try {
+          data = JSON.parse(registerText)
+        } catch {
+          data = registerText
+        }
+
+        alert(
+          typeof data === 'object'
+            ? data?.message || data?.error || 'Registration failed'
+            : data || 'Registration failed'
+        )
+
+        return
+      }
+
+      // AUTO LOGIN
+      const loginResponse = await fetch(`${API}/users/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          login: registrationMethod === 'email' ? email : phone,
+          password
+        })
+      })
+
+      const loginText = await loginResponse.text()
+
+      console.log(
+        'AUTO LOGIN RESPONSE:',
+        loginResponse.status,
+        loginText
+      )
+
+      if (!loginResponse.ok) {
+        alert(
+          'Account created successfully, but automatic login failed. Please login manually.'
+        )
+
+        navigate('/login')
+        return
+      }
+
+      localStorage.setItem('token', loginText)
+
+      alert('Account created successfully! 🎉')
+
+      navigate('/dashboard')
     } catch (error) {
       console.error('REGISTER ERROR:', error)
-      showMessage(
-        error.message || 'Could not create your account'
-      )
+      alert('Registration error: ' + error.message)
     } finally {
       setLoading(false)
     }
   }
 
+  // ================================
+  // SWITCH METHOD
+  // ================================
+
+  const switchMethod = (method) => {
+    setRegistrationMethod(method)
+    setEmailError('')
+    setPhoneError('')
+  }
+
   return (
-    <div className="lifeos-register">
+    <div className="login-page">
 
-      <div className="lifeos-register-bg" />
+      <div className="login-mountains" />
 
-      {/* BRAND */}
+      {/* LEFT SIDE */}
 
-      <div className="lifeos-register-brand">
+      <section className="login-left">
 
-        <div className="lifeos-register-logo">
-          <span />
-          <span />
-          <span />
-        </div>
-
-        <div>
-          <div className="lifeos-register-brand-name">
-            LIFEOS
-          </div>
-
-          <div className="lifeos-register-brand-tagline">
-            YOUR LIFE. ORGANIZED.
-          </div>
-        </div>
-
-      </div>
-
-
-      <main className="lifeos-register-main">
-
-        {/* LEFT SIDE */}
-
-        <section className="lifeos-register-hero">
-
-          <div className="lifeos-register-eyebrow">
+        <div className="login-brand">
+          <div className="login-brand-mark">
             <span />
-            START YOUR JOURNEY
           </div>
 
-          <h1>
-            Build a life
-            <br />
-            <span>that runs better.</span>
-          </h1>
+          LIFEOS
+        </div>
 
-          <p>
-            LIFEOS brings your tasks, reminders, plans and
-            everyday life together in one intelligent space.
+        <div className="login-hero">
+
+          <p className="login-kicker">
+            Your life. One system.
           </p>
 
-          <div className="lifeos-register-steps">
+          <h1>
+            Start Your
+            <br />
 
-            <div className="lifeos-register-step">
-              <div>01</div>
-              <span>Organize everything that matters.</span>
-            </div>
-
-            <div className="lifeos-register-step">
-              <div>02</div>
-              <span>Stay ahead with smart reminders.</span>
-            </div>
-
-            <div className="lifeos-register-step">
-              <div>03</div>
-              <span>Make every day a little easier.</span>
-            </div>
-
-          </div>
-
-        </section>
-
-
-        {/* REGISTER CARD */}
-
-        <section className="lifeos-register-card">
-
-          <div className="lifeos-register-card-header">
-
-            <span className="lifeos-register-card-label">
-              CREATE ACCOUNT
+            <span className="login-gradient-text">
+              Journey.
             </span>
+          </h1>
 
-            <h2>
-              Welcome to LIFEOS.
-            </h2>
+          <p className="login-hero-copy">
+            Create your LIFEOS account.
+            <br />
+            Build your better tomorrow.
+          </p>
 
-            <p>
-              Create your account and start organizing your life.
-            </p>
+        </div>
 
-          </div>
+      </section>
 
+      {/* RIGHT SIDE */}
 
-          <form onSubmit={handleRegister}>
+      <section className="login-right">
+
+        <div className="login-card">
+
+          <h2>
+            Create your account 🚀
+          </h2>
+
+          <p className="login-card-subtitle">
+            Start building your better life
+          </p>
+
+          <form
+            className="login-form"
+            onSubmit={handleRegister}
+          >
+
+            {/* METHOD */}
+
+            <div style={{ marginBottom: '22px' }}>
+
+              <label
+                style={{
+                  display: 'block',
+                  marginBottom: '10px'
+                }}
+              >
+                Register with
+              </label>
+
+              <div
+                style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gap: '10px'
+                }}
+              >
+
+                <button
+                  type="button"
+                  onClick={() => switchMethod('email')}
+                  style={{
+                    padding: '13px 12px',
+                    borderRadius: '12px',
+                    border:
+                      registrationMethod === 'email'
+                        ? '1px solid rgba(145,110,255,0.9)'
+                        : '1px solid rgba(255,255,255,0.12)',
+                    background:
+                      registrationMethod === 'email'
+                        ? 'rgba(113,82,220,0.22)'
+                        : 'rgba(255,255,255,0.04)',
+                    color: '#fff',
+                    fontSize: '14px',
+                    fontWeight: '700',
+                    cursor: 'pointer'
+                  }}
+                >
+                  📧 Email
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => switchMethod('phone')}
+                  style={{
+                    padding: '13px 12px',
+                    borderRadius: '12px',
+                    border:
+                      registrationMethod === 'phone'
+                        ? '1px solid rgba(145,110,255,0.9)'
+                        : '1px solid rgba(255,255,255,0.12)',
+                    background:
+                      registrationMethod === 'phone'
+                        ? 'rgba(113,82,220,0.22)'
+                        : 'rgba(255,255,255,0.04)',
+                    color: '#fff',
+                    fontSize: '14px',
+                    fontWeight: '700',
+                    cursor: 'pointer'
+                  }}
+                >
+                  📱 Phone
+                </button>
+
+              </div>
+
+            </div>
 
             {/* NAME */}
 
-            <div className="lifeos-register-field">
+            <div className="login-field">
 
-              <label>Full name</label>
+              <label htmlFor="register-name">
+                Full name
+              </label>
 
-              <input
-                type="text"
-                placeholder="Your full name"
-                value={name}
-                onChange={(event) =>
-                  setName(event.target.value)
-                }
-                autoComplete="name"
-              />
+              <div className="login-input-wrap">
 
-            </div>
-
-
-            {/* REGISTER METHOD */}
-
-            <div className="lifeos-register-field">
-
-              <label>Register using</label>
-
-              <div className="register-method-toggle">
-
-                <button
-                  type="button"
-                  className={
-                    registerMethod === 'email'
-                      ? 'active'
-                      : ''
-                  }
-                  onClick={() => {
-                    setRegisterMethod('email')
-                    setPhone('')
-                  }}
-                >
-                  ✉ Email
-                </button>
-
-                <button
-                  type="button"
-                  className={
-                    registerMethod === 'phone'
-                      ? 'active'
-                      : ''
-                  }
-                  onClick={() => {
-                    setRegisterMethod('phone')
-                    setEmail('')
-                  }}
-                >
-                  ☎ Phone
-                </button>
+                <input
+                  id="register-name"
+                  className="login-input"
+                  type="text"
+                  placeholder="Enter your name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
 
               </div>
 
             </div>
-
 
             {/* EMAIL */}
 
-            {registerMethod === 'email' && (
-              <div className="lifeos-register-field">
+            {registrationMethod === 'email' && (
 
-                <label>Email address</label>
+              <div className="login-field">
 
-                <input
-                  type="email"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(event) =>
-                    setEmail(event.target.value)
-                  }
-                  autoComplete="email"
-                />
+                {emailError && (
+                  <div
+                    style={{
+                      color: '#ff4d4f',
+                      fontSize: '13px',
+                      fontWeight: '600',
+                      marginBottom: '6px'
+                    }}
+                  >
+                    {emailError}
+                  </div>
+                )}
+
+                <label htmlFor="register-email">
+                  Email address
+                </label>
+
+                <div className="login-input-wrap">
+
+                  <input
+                    id="register-email"
+                    className="login-input"
+                    type="email"
+                    placeholder="Enter your email"
+                    value={email}
+                    onChange={(e) => {
+                      setEmail(e.target.value)
+                      setEmailError('')
+                    }}
+                    required
+                  />
+
+                </div>
+
+                {checkingEmail && (
+                  <div
+                    style={{
+                      marginTop: '6px',
+                      fontSize: '12px',
+                      opacity: 0.65
+                    }}
+                  >
+                    Checking email...
+                  </div>
+                )}
 
               </div>
-            )}
 
+            )}
 
             {/* PHONE */}
 
-            {registerMethod === 'phone' && (
-              <div className="lifeos-register-field">
+            {registrationMethod === 'phone' && (
 
-                <label>Phone number</label>
+              <div className="login-field">
 
-                <PhoneInput
-                  international
-                  defaultCountry="IN"
-                  countryCallingCodeEditable={false}
-                  placeholder="98765 43210"
-                  value={phone}
-                  onChange={setPhone}
-                  className="lifeos-phone-input"
-                />
+                {phoneError && (
+                  <div
+                    style={{
+                      color: '#ff4d4f',
+                      fontSize: '13px',
+                      fontWeight: '600',
+                      marginBottom: '6px'
+                    }}
+                  >
+                    {phoneError}
+                  </div>
+                )}
+
+                <label htmlFor="register-phone">
+                  Phone number
+                </label>
+
+                <div
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    minHeight: '48px',
+                    padding: '0 12px',
+                    borderRadius: '12px',
+                    border: '1px solid rgba(255,255,255,0.12)',
+                    background: 'rgba(255,255,255,0.04)'
+                  }}
+                >
+
+                  <PhoneInput
+                    id="register-phone"
+                    international
+                    defaultCountry="IN"
+                    countryCallingCodeEditable={false}
+                    value={phone}
+                    onChange={(value) => {
+                      setPhone(value || '')
+                      setPhoneError('')
+                    }}
+                    placeholder="Enter phone number"
+                    style={{
+                      width: '100%',
+                      background: 'transparent'
+                    }}
+                  />
+
+                </div>
+
+                {checkingPhone && (
+                  <div
+                    style={{
+                      marginTop: '6px',
+                      fontSize: '12px',
+                      opacity: 0.65
+                    }}
+                  >
+                    Checking phone number...
+                  </div>
+                )}
 
               </div>
-            )}
 
+            )}
 
             {/* PASSWORD */}
 
-            <div className="lifeos-register-field">
+            <div className="login-field">
 
-              <label>Password</label>
+              <label htmlFor="register-password">
+                Create password
+              </label>
 
-              <input
-                type="password"
-                placeholder="Create a password"
-                value={password}
-                onChange={(event) =>
-                  setPassword(event.target.value)
-                }
-                autoComplete="new-password"
-              />
+              <div className="login-input-wrap">
 
-            </div>
+                <input
+                  id="register-password"
+                  className="login-input"
+                  type="password"
+                  placeholder="Create a password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  minLength={6}
+                  required
+                  autoFocus
+                />
 
-
-            {/* CONFIRM PASSWORD */}
-
-            <div className="lifeos-register-field">
-
-              <label>Confirm password</label>
-
-              <input
-                type="password"
-                placeholder="Enter password again"
-                value={confirmPassword}
-                onChange={(event) =>
-                  setConfirmPassword(event.target.value)
-                }
-                autoComplete="new-password"
-              />
+              </div>
 
             </div>
-
-
-            {/* SUBMIT */}
 
             <button
-              className="lifeos-register-submit"
+              className="login-submit"
               type="submit"
-              disabled={loading}
+              disabled={
+                loading ||
+                password.length < 6 ||
+                checkingEmail ||
+                checkingPhone ||
+                (registrationMethod === 'email' && !!emailError) ||
+                (registrationMethod === 'phone' && !!phoneError)
+              }
             >
               {loading
                 ? 'Creating account...'
-                : 'Create my account'}
+                : 'Create my account  →'}
             </button>
 
           </form>
 
+          <div className="login-divider">
+            OR
+          </div>
 
-          <div className="lifeos-register-login">
+          <p className="login-register">
 
-            Already have an account?
+            Already have an account?{' '}
 
             <button
               type="button"
-              onClick={() => navigate('/')}
+              onClick={() => navigate('/login')}
             >
               Sign in
             </button>
 
+          </p>
+
+          <div className="login-footer">
+            DISCIPLINE BUILDS FREEDOM
           </div>
 
-        </section>
-
-      </main>
-
-
-      {/* TOAST */}
-
-      {message && (
-        <div className="lifeos-register-toast">
-          <span>✓</span>
-          {message}
         </div>
-      )}
+
+      </section>
 
     </div>
   )
