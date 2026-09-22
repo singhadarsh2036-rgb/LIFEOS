@@ -33,10 +33,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) throws ServletException, IOException {
 
-        response.setHeader(
-                "Access-Control-Allow-Origin",
-                "https://lifeos-frontend-h7fb.onrender.com"
-        );
+        // Allow both local development and production frontend
+        String origin = request.getHeader("Origin");
+
+        if ("http://localhost:5173".equals(origin)
+                || "https://lifeos-frontend-h7fb.onrender.com".equals(origin)) {
+
+            response.setHeader(
+                    "Access-Control-Allow-Origin",
+                    origin
+            );
+        }
 
         response.setHeader(
                 "Access-Control-Allow-Methods",
