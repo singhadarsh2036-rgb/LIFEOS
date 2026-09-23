@@ -1088,230 +1088,73 @@
   }
 }
 
-/* ---------------------------------------------------------
-   Booking options
---------------------------------------------------------- */
 
-.booking-options-panel {
-  margin-top: 24px;
-  padding: 24px;
-  border: 1px solid rgba(255, 255, 255, 0.09);
-  border-radius: 22px;
-  background: rgba(36, 25, 54, 0.62);
-  box-shadow:
-    0 18px 45px rgba(4, 1, 15, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+/* =========================================================
+   FROM / TO SWAP BUTTON
+   Small circular control between the two airport fields
+========================================================= */
+
+.route-grid.route-grid-with-swap {
+  grid-template-columns: minmax(0, 1fr) 52px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 18px;
 }
 
-.booking-options-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-}
-
-.booking-options-header h3 {
-  margin: 8px 0 5px;
-  color: #fff;
-  font-size: 22px;
-  letter-spacing: -0.5px;
-}
-
-.booking-options-header p {
-  margin: 0;
-  color: rgba(245, 240, 255, 0.52);
-  font-size: 12px;
-}
-
-.booking-options-button {
-  flex: 0 0 auto;
-  padding: 11px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.10);
-  border-radius: 12px;
-  color: #fff;
-  background: linear-gradient(135deg, #a967ff, #e461b0);
-  box-shadow: 0 10px 24px rgba(153, 83, 207, 0.20);
-  font-size: 11px;
-  font-weight: 800;
-  cursor: pointer;
-  transition: 0.18s ease;
-}
-
-.booking-options-button:hover:not(:disabled) {
-  transform: translateY(-1px);
-  box-shadow: 0 14px 28px rgba(153, 83, 207, 0.28);
-}
-
-.booking-options-button:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
-}
-
-.booking-error {
-  margin-top: 16px;
-  padding: 12px 14px;
-  border: 1px solid rgba(246, 198, 101, 0.18);
-  border-radius: 12px;
-  color: #f6c665;
-  background: rgba(246, 198, 101, 0.07);
-  font-size: 11px;
-}
-
-.booking-links-list {
-  display: grid;
-  gap: 10px;
-  margin-top: 18px;
-}
-
-.booking-link-card {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  padding: 15px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 15px;
-  background: rgba(20, 14, 32, 0.55);
-  transition: 0.18s ease;
-}
-
-.booking-link-card:hover {
-  border-color: rgba(228, 134, 204, 0.25);
-  background: rgba(35, 24, 50, 0.75);
-  transform: translateY(-1px);
-}
-
-.booking-provider {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  min-width: 0;
-}
-
-.booking-provider-icon {
-  width: 40px;
-  height: 40px;
+.swap-route-button {
+  width: 52px;
+  height: 52px;
+  margin-top: 30px;
+  padding: 0;
+  border: 1px solid rgba(188, 106, 255, 0.55);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, rgba(185, 111, 255, 0.42), rgba(91, 47, 145, 0.48));
+  color: #ffffff;
   display: grid;
   place-items: center;
   flex: 0 0 auto;
-  border-radius: 12px;
-  background: rgba(164, 91, 255, 0.13);
-  font-size: 18px;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow:
+    0 10px 26px rgba(104, 51, 166, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  transition: transform 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 
-.booking-provider strong {
-  display: block;
-  color: #fff;
-  font-size: 13px;
+.swap-route-button:hover {
+  transform: scale(1.06);
+  background: radial-gradient(circle at 35% 30%, rgba(201, 126, 255, 0.5), rgba(105, 54, 164, 0.58));
+  box-shadow:
+    0 12px 30px rgba(104, 51, 166, 0.38),
+    0 0 0 4px rgba(174, 92, 255, 0.08);
 }
 
-.booking-provider span {
-  display: block;
-  margin-top: 3px;
-  color: rgba(255, 255, 255, 0.52);
-  font-size: 10px;
+.swap-route-button:active {
+  transform: scale(0.96);
 }
 
-.booking-provider small {
-  display: block;
-  margin-top: 3px;
-  color: rgba(255, 255, 255, 0.35);
-  font-size: 9px;
+.swap-route-button:focus-visible {
+  outline: 2px solid rgba(235, 167, 255, 0.9);
+  outline-offset: 3px;
 }
-
-.booking-link-button {
-  flex: 0 0 auto;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 15px;
-  border-radius: 11px;
-  color: #fff !important;
-  background: linear-gradient(135deg, #a967ff, #e461b0);
-  box-shadow: 0 8px 20px rgba(153, 83, 207, 0.18);
-  font-size: 11px;
-  font-weight: 800;
-  text-decoration: none !important;
-  transition: 0.18s ease;
-}
-
-.booking-link-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 12px 25px rgba(153, 83, 207, 0.27);
-}
-
-
-/* Booking responsive */
 
 @media (max-width: 700px) {
-  .booking-options-panel {
-    padding: 18px;
+  .route-grid.route-grid-with-swap {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 10px;
   }
 
-  .booking-options-header {
-    flex-direction: column;
-    align-items: stretch;
+  .swap-route-button {
+    margin: -2px auto 2px;
+    transform: none;
   }
 
-  .booking-options-button {
-    width: 100%;
+  .swap-route-button:hover {
+    transform: scale(1.06);
   }
 
-  .booking-link-card {
-    align-items: stretch;
-    flex-direction: column;
+  .swap-route-button:active {
+    transform: scale(0.96);
   }
-
-  .booking-link-button {
-    width: 100%;
-  }
-}
-/* ---------------------------------------------------------
-   Booking options — Light theme
---------------------------------------------------------- */
-
-html[data-lifeos-theme="light"] .booking-options-panel {
-  border-color: rgba(124, 58, 237, 0.10);
-  background: rgba(255, 255, 255, 0.78);
-  box-shadow:
-    0 18px 45px rgba(88, 55, 130, 0.10),
-    inset 0 1px 0 rgba(255, 255, 255, 0.85);
-}
-
-html[data-lifeos-theme="light"] .booking-options-header h3 {
-  color: #322742;
-}
-
-html[data-lifeos-theme="light"] .booking-options-header p {
-  color: #81738f;
-}
-
-html[data-lifeos-theme="light"] .booking-link-card {
-  border-color: rgba(124, 58, 237, 0.08);
-  background: rgba(248, 245, 255, 0.88);
-}
-
-html[data-lifeos-theme="light"] .booking-link-card:hover {
-  border-color: rgba(219, 39, 119, 0.16);
-  background: rgba(255, 249, 253, 0.95);
-}
-
-html[data-lifeos-theme="light"] .booking-provider strong {
-  color: #342844;
-}
-
-html[data-lifeos-theme="light"] .booking-provider span {
-  color: #8b7d96;
-}
-
-html[data-lifeos-theme="light"] .booking-provider small {
-  color: #a095aa;
-}
-
-html[data-lifeos-theme="light"] .booking-provider-icon {
-  background: linear-gradient(
-    135deg,
-    rgba(124, 58, 237, 0.10),
-    rgba(219, 39, 119, 0.08)
-  );
 }
