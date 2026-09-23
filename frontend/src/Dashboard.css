@@ -3373,3 +3373,240 @@
     border-radius: 22px !important;
   }
 }
+
+/* =========================================================
+   LIFEOS THEME SWITCH — Dashboard surface
+   The React toggle writes data-lifeos-theme on <html>.
+   The dashboard visual layer below now follows that state.
+   ========================================================= */
+
+html[data-lifeos-theme="light"] .dashboard-page {
+  background:
+    radial-gradient(circle at 82% 8%, rgba(236,72,153,.18), transparent 24%),
+    radial-gradient(circle at 50% 0%, rgba(124,58,237,.14), transparent 30%),
+    radial-gradient(circle at 15% 88%, rgba(249,115,22,.10), transparent 24%),
+    linear-gradient(135deg,#f3edff 0%,#fff1f7 52%,#fff8ef 100%) !important;
+  color: #2d2342 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .dashboard-main,
+html[data-lifeos-theme="light"] .dashboard-page .topbar {
+  background: transparent !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .topbar {
+  color: #2d2342 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .search-box {
+  background: rgba(255,255,255,.78) !important;
+  border-color: rgba(124,58,237,.10) !important;
+  box-shadow: 0 8px 25px rgba(88,55,130,.06) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .search-box input {
+  color: #332943 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .search-box input::placeholder {
+  color: #9a8da5 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .search-box kbd {
+  background: #f2eaff !important;
+  color: #7652ed !important;
+  border-color: rgba(124,58,237,.08) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .top-icon,
+html[data-lifeos-theme="light"] .dashboard-page .top-profile,
+html[data-lifeos-theme="light"] .dashboard-page .consistency,
+html[data-lifeos-theme="light"] .dashboard-page .theme-toggle {
+  background: rgba(255,255,255,.76) !important;
+  border-color: rgba(124,58,237,.10) !important;
+  color: #6d607d !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .top-profile {
+  background: linear-gradient(135deg,#7c3aed,#db2777) !important;
+  color: white !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .hero-panel {
+  background:
+    linear-gradient(90deg,
+      rgba(255,255,255,.91) 0%,
+      rgba(255,247,252,.78) 44%,
+      rgba(255,236,241,.28) 100%) !important;
+  border-color: rgba(255,255,255,.85) !important;
+  box-shadow: 0 24px 65px rgba(88,55,130,.10) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .hero-copy h1 {
+  color: #2d2342 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .hero-copy h1 span {
+  color: #db2777 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .hero-copy p,
+html[data-lifeos-theme="light"] .dashboard-page .date-label {
+  color: #81738f !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .hero-art {
+  background:
+    radial-gradient(circle at 72% 24%,rgba(255,208,117,.38),transparent 12%),
+    radial-gradient(circle at 47% 20%,rgba(236,72,153,.18),transparent 25%),
+    linear-gradient(135deg,#e8e1ff 0%,#f7dce9 53%,#ffe6c8 100%) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .hero-sun {
+  background: radial-gradient(circle,#fff5c7 0 25%,rgba(255,205,113,.68) 50%,transparent 73%) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .hero-mountain.back {
+  background: linear-gradient(180deg,#b8abd0,#d1bfd1) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .hero-mountain.front {
+  background: linear-gradient(180deg,#806da0,#a888a3) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .hero-quote {
+  color: #40304e !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .metric-card {
+  border-color: rgba(255,255,255,.84) !important;
+  box-shadow: 0 18px 46px rgba(88,55,130,.09) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .metric-purple {
+  background: linear-gradient(145deg,rgba(255,255,255,.90),#eee4ff) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .metric-pink {
+  background: linear-gradient(145deg,rgba(255,255,255,.90),#ffe3ef) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .metric-orange {
+  background: linear-gradient(145deg,rgba(255,255,255,.90),#fff0d7) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .metric-green {
+  background: linear-gradient(145deg,rgba(255,255,255,.90),#e4f8ed) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .metric-purple .metric-icon {
+  background: #e8dcff !important;
+  color: #7045df !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .metric-pink .metric-icon {
+  background: #ffdcea !important;
+  color: #d32978 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .metric-orange .metric-icon {
+  background: #ffe8c2 !important;
+  color: #d97706 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .metric-green .metric-icon {
+  background: #d9f4e4 !important;
+  color: #16915b !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .dashboard-card {
+  background: linear-gradient(145deg,rgba(255,255,255,.88),rgba(255,247,252,.74)) !important;
+  border-color: rgba(255,255,255,.86) !important;
+  box-shadow: 0 20px 52px rgba(88,55,130,.085) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .tasks-card {
+  background: linear-gradient(145deg,rgba(255,255,255,.90),rgba(246,239,255,.78)) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .events-card {
+  background: linear-gradient(145deg,rgba(255,255,255,.90),rgba(255,237,245,.76)) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .focus-card {
+  background: linear-gradient(145deg,rgba(255,255,255,.90),rgba(255,242,221,.76)) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .quote-card {
+  background: linear-gradient(145deg,rgba(255,255,255,.88),rgba(235,226,255,.72)) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .music-card {
+  background: linear-gradient(145deg,rgba(255,255,255,.88),rgba(255,228,239,.72)) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .task-row {
+  background: rgba(255,255,255,.62) !important;
+  border-color: rgba(124,58,237,.07) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .task-row:hover {
+  background: rgba(255,255,255,.88) !important;
+  border-color: rgba(219,39,119,.12) !important;
+  box-shadow: 0 8px 24px rgba(88,55,130,.07) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .task-row.completed {
+  background: rgba(244,239,249,.65) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .task-info strong,
+html[data-lifeos-theme="light"] .dashboard-page .task-info span {
+  color: #342844 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .task-info small,
+html[data-lifeos-theme="light"] .dashboard-page .task-time,
+html[data-lifeos-theme="light"] .dashboard-page .section-label,
+html[data-lifeos-theme="light"] .dashboard-page .card-label {
+  color: #8a7c95 !important;
+}
+
+/* Light mode for the mobile drawer/backdrop too. */
+html[data-lifeos-theme="light"] .mobile-nav-drawer {
+  background:
+    radial-gradient(circle at 15% 0%, rgba(132,81,255,.14), transparent 34%),
+    linear-gradient(180deg, rgba(255,255,255,.97), rgba(247,241,255,.98)) !important;
+  border-color: rgba(124,58,237,.14) !important;
+  box-shadow: 20px 20px 70px rgba(65,40,100,.22) !important;
+}
+
+html[data-lifeos-theme="light"] .mobile-drawer-brand strong {
+  color: #2d2342 !important;
+}
+
+html[data-lifeos-theme="light"] .mobile-drawer-brand span {
+  color: #857692 !important;
+}
+
+html[data-lifeos-theme="light"] .mobile-drawer-label {
+  color: #8a70b1 !important;
+}
+
+html[data-lifeos-theme="light"] .mobile-nav-item {
+  color: #5d506d !important;
+}
+
+html[data-lifeos-theme="light"] .mobile-nav-item.active {
+  color: #3e275c !important;
+  background: linear-gradient(90deg,rgba(124,58,237,.14),rgba(124,58,237,.04)) !important;
+  box-shadow: inset 3px 0 0 #7c3aed !important;
+}
+
+html[data-lifeos-theme="light"] .mobile-nav-icon {
+  color: #7c4fe6 !important;
+}
+
+html[data-lifeos-theme="light"] .mobile-nav-arrow {
+  color: rgba(91,65,117,.34) !important;
+}

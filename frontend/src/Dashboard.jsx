@@ -35,6 +35,7 @@ function Dashboard() {
 
   const [showProfilePanel, setShowProfilePanel] = useState(false)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
+  const [mobileSection, setMobileSection] = useState('')
   const [showSettingsPanel, setShowSettingsPanel] = useState(false)
   const [showNotificationPanel, setShowNotificationPanel] = useState(false)
   const [showConsistencyPanel, setShowConsistencyPanel] = useState(false)
@@ -408,16 +409,18 @@ function Dashboard() {
 
   const handleMobileSection = (name, selector) => {
     setActiveNav(name)
+    setMobileSection(name === 'Calendar' ? 'calendar' : name === 'Focus' ? 'focus' : name === 'Habits' ? 'habits' : '')
     closeMobileNav()
     window.setTimeout(() => {
       document.querySelector(selector)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }, 80)
+    }, 120)
   }
 
   const handleNavigation = (name) => {
     setActiveNav(name)
 
     if (name === 'Dashboard') {
+      setMobileSection('')
       navigate('/dashboard')
       return
     }
@@ -962,7 +965,7 @@ function Dashboard() {
                   type="button"
                   title={name}
                   onClick={() => {
-                    if (name === 'Dashboard') { setActiveNav(name); closeMobileNav(); navigate('/dashboard') }
+                    if (name === 'Dashboard') { setActiveNav(name); setMobileSection(''); closeMobileNav(); navigate('/dashboard') }
                     else if (name === 'Tasks') { closeMobileNav(); window.location.href = '/tasks' }
                     else if (name === 'Reminders') { closeMobileNav(); window.location.href = '/reminders' }
                     else if (name === 'Travel') { closeMobileNav(); window.location.href = '/trips' }
@@ -982,7 +985,7 @@ function Dashboard() {
         </>
       )}
 
-      <main className="dashboard-main">
+      <main className={`dashboard-main ${mobileSection ? `mobile-section-${mobileSection}` : ""}`}>
 
         <div
           className="topbar"
