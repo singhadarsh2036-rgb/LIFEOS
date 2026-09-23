@@ -72,7 +72,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         );
 
         // =========================
-        // REQUEST PATH
+        // PATH
         // =========================
 
         String path = request.getRequestURI();
@@ -94,13 +94,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         || path.equals("/otp/phone/verify")
                         || path.equals("/push/public-key")
         ) {
-
             filterChain.doFilter(request, response);
             return;
         }
 
         // =========================
-        // GET JWT TOKEN
+        // JWT
         // =========================
 
         String authHeader =
@@ -113,15 +112,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             response.setStatus(
                     HttpServletResponse.SC_UNAUTHORIZED
             );
-
             response.setContentType(
                     "text/plain;charset=UTF-8"
             );
-
             response.getWriter().write(
                     "Authentication required"
             );
-
             return;
         }
 
@@ -129,25 +125,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 authHeader.substring(7).trim();
 
         if (token.isEmpty()) {
-
             response.setStatus(
                     HttpServletResponse.SC_UNAUTHORIZED
             );
-
-            response.setContentType(
-                    "text/plain;charset=UTF-8"
-            );
-
             response.getWriter().write(
                     "Invalid authentication token"
             );
-
             return;
         }
-
-        // =========================
-        // VALIDATE JWT
-        // =========================
 
         try {
 
@@ -161,27 +146,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String email =
                     claims.getSubject();
 
-            if (
-                    email == null
-                            || email.isBlank()
-            ) {
-
+            if (email == null || email.isBlank()) {
                 response.setStatus(
                         HttpServletResponse.SC_UNAUTHORIZED
                 );
-
                 response.getWriter().write(
                         "Invalid token subject"
                 );
-
                 return;
             }
 
-            // =========================
             // IMPORTANT:
-            // TELL SPRING SECURITY
-            // USER IS AUTHENTICATED
-            // =========================
+            // Mark user as authenticated in Spring Security
 
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(
@@ -194,8 +170,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     .getContext()
                     .setAuthentication(authentication);
 
-            // Keep this because your controllers
-            // may use userEmail attribute.
+            // Keep email available for controllers
 
             request.setAttribute(
                     "userEmail",
@@ -216,25 +191,15 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             response.setStatus(
                     HttpServletResponse.SC_UNAUTHORIZED
             );
-
             response.setContentType(
                     "text/plain;charset=UTF-8"
             );
-
             response.getWriter().write(
                     "Invalid or expired token"
             );
-
             return;
         }
 
-        // =========================
-        // CONTINUE REQUEST
-        // =========================
-
-        filterChain.doFilter(
-                request,
-                response
-        );
+        filterChain.doFilter(request, response);
     }
 }
