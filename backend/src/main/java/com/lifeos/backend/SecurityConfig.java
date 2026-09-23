@@ -1,4 +1,4 @@
-package com.lifeos.config;
+package com.lifeos.backend.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
