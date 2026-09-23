@@ -1,12 +1,12 @@
-package com.lifeos.backend.config;
+package com.lifeos.backend;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.http.CorsConfiguration;
-import org.springframework.http.CorsConfigurationSource;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.List;
@@ -15,40 +15,22 @@ import java.util.List;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(
-            HttpSecurity http
-    ) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http)
+            throws Exception {
 
         http
-            .cors(cors ->
-                cors.configurationSource(corsConfigurationSource())
-            )
-
-            .csrf(csrf ->
-                csrf.disable()
-            )
-
-            .formLogin(form ->
-                form.disable()
-            )
-
-            .httpBasic(basic ->
-                basic.disable()
-            )
+            .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+            .csrf(csrf -> csrf.disable())
+            .formLogin(form -> form.disable())
+            .httpBasic(basic -> basic.disable())
 
             .authorizeHttpRequests(auth -> auth
 
-                // -------------------------
-                // CORS PREFLIGHT
-                // -------------------------
-                .requestMatchers(
-                    HttpMethod.OPTIONS,
-                    "/**"
-                ).permitAll()
+                // CORS preflight
+                .requestMatchers(HttpMethod.OPTIONS, "/**")
+                .permitAll()
 
-                // -------------------------
-                // PUBLIC AUTH ENDPOINTS
-                // -------------------------
+                // Public authentication endpoints
                 .requestMatchers(
                     "/users/login",
                     "/users/register",
@@ -56,18 +38,14 @@ public class SecurityConfig {
                     "/users/check-email",
                     "/users/check-phone",
                     "/otp/**"
-                ).permitAll()
+                )
+                .permitAll()
 
-                // -------------------------
-                // PUSH PUBLIC KEY
-                // -------------------------
-                .requestMatchers(
-                    "/push/public-key"
-                ).permitAll()
+                // Public push key
+                .requestMatchers("/push/public-key")
+                .permitAll()
 
-                // -------------------------
-                // EVERYTHING ELSE
-                // -------------------------
+                // Everything else requires JWT
                 .anyRequest()
                 .authenticated()
             );
@@ -75,60 +53,50 @@ public class SecurityConfig {
         return http.build();
     }
 
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
 
-        CorsConfiguration configuration =
-            new CorsConfiguration();
+        CorsConfiguration configuration = new CorsConfiguration();
 
-        configuration.setAllowedOrigins(
-            List.of(
-                "https://lifeos-frontend-h7fb.onrender.com",
-                "http://localhost:5173",
-                "http://localhost:5180",
-                "http://localhost:3000"
-            )
-        );
+        configuration.setAllowedOrigins(List.of(
+            "https://lifeos-frontend-h7fb.onrender.com",
+            "http://localhost:5173",
+            "http://localhost:5180",
+            "http://localhost:3000"
+        ));
 
-        configuration.setAllowedMethods(
-            List.of(
-                "GET",
-                "POST",
-                "PUT",
-                "PATCH",
-                "DELETE",
-                "OPTIONS"
-            )
-        );
+        configuration.setAllowedMethods(List.of(
+            "GET",
+            "POST",
+            "PUT",
+            "PATCH",
+            "DELETE",
+            "OPTIONS"
+        ));
 
-        configuration.setAllowedHeaders(
-            List.of(
-                "Origin",
-                "Content-Type",
-                "Accept",
-                "Authorization",
-                "X-Requested-With"
-            )
-        );
+        configuration.setAllowedHeaders(List.of(
+            "Origin",
+            "Content-Type",
+            "Accept",
+            "Authorization",
+            "X-Requested-With"
+        ));
 
-        configuration.setExposedHeaders(
-            List.of(
-                "Authorization",
-                "Content-Type"
-            )
-        );
+        configuration.setExposedHeaders(List.of(
+            "Authorization",
+            "Content-Type"
+        ));
 
         configuration.setAllowCredentials(true);
 
         configuration.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source =
-            new UrlBasedCorsConfigurationSource();
+                new UrlBasedCorsConfigurationSource();
 
         source.registerCorsConfiguration(
-            "/**",
-            configuration
+                "/**",
+                configuration
         );
 
         return source;
