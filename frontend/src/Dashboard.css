@@ -3883,3 +3883,234 @@ html[data-lifeos-theme="dark"] .lifeos-toast {
     padding: 12px !important;
   }
 }
+/* =========================================================
+   LIFEOS — MOBILE NAV HEIGHT FIX
+   FIX: dashboard content appearing far below navigation
+   ========================================================= */
+
+@media (max-width: 720px) {
+
+  /* Dashboard becomes a normal vertical mobile page */
+  .dashboard-page {
+    display: block !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    overflow-x: hidden !important;
+  }
+
+  /* IMPORTANT:
+     Desktop sidebar was 100vh + fixed.
+     On mobile it must become a small top navigation.
+  */
+  .dashboard-page .sidebar {
+    position: relative !important;
+
+    top: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    inset: auto !important;
+
+    width: 100% !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+
+    padding: 9px 10px 8px !important;
+
+    display: block !important;
+
+    box-sizing: border-box !important;
+    overflow: visible !important;
+  }
+
+  /* Brand stays compact */
+  .dashboard-page .brand {
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 2px 3px 8px !important;
+    margin: 0 !important;
+  }
+
+  /* Navigation itself should NOT stretch */
+  .dashboard-page .sidebar-nav {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+
+    gap: 4px !important;
+
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .dashboard-page .nav-item {
+    width: 100% !important;
+    height: 36px !important;
+    min-height: 36px !important;
+
+    padding: 4px !important;
+    margin: 0 !important;
+
+    justify-content: center !important;
+    align-items: center !important;
+
+    box-sizing: border-box !important;
+  }
+
+  .dashboard-page .nav-icon {
+    font-size: 16px !important;
+  }
+
+  .dashboard-page .nav-item > span:not(.nav-icon):not(.nav-active-dot) {
+    display: none !important;
+  }
+
+  /* Hide desktop-only sidebar sections */
+  .dashboard-page .quick-actions,
+  .dashboard-page .sidebar-bottom,
+  .dashboard-page .sidebar-profile {
+    display: none !important;
+  }
+
+
+  /* =====================================================
+     MAIN CONTENT MUST START IMMEDIATELY AFTER NAV
+     ===================================================== */
+
+  .dashboard-page .dashboard-main {
+    position: relative !important;
+
+    width: 100% !important;
+    min-height: 0 !important;
+
+    margin: 0 !important;
+
+    padding: 10px !important;
+
+    box-sizing: border-box !important;
+
+    display: block !important;
+  }
+
+
+  /* Top search */
+  .dashboard-page .topbar {
+    width: 100% !important;
+    height: auto !important;
+
+    margin: 0 0 9px !important;
+    padding: 0 !important;
+
+    display: flex !important;
+  }
+
+  .dashboard-page .search-box {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 40px !important;
+  }
+
+  .dashboard-page .top-actions {
+    display: none !important;
+  }
+
+
+  /* Hero */
+  .dashboard-page .hero-panel {
+    width: 100% !important;
+
+    height: 185px !important;
+    min-height: 185px !important;
+
+    margin: 0 0 10px !important;
+    padding: 17px !important;
+
+    box-sizing: border-box !important;
+  }
+
+
+  /* Stats */
+  .dashboard-page .metric-grid {
+    width: 100% !important;
+
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+
+    gap: 8px !important;
+
+    margin-bottom: 10px !important;
+  }
+
+  .dashboard-page .metric-card {
+    min-width: 0 !important;
+    min-height: 74px !important;
+    padding: 10px !important;
+
+    box-sizing: border-box !important;
+  }
+
+
+  /* Main cards */
+  .dashboard-page .content-grid {
+    width: 100% !important;
+
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+
+    gap: 10px !important;
+
+    margin: 0 !important;
+  }
+
+  .dashboard-page .tasks-card,
+  .dashboard-page .calendar-card,
+  .dashboard-page .quote-card,
+  .dashboard-page .music-card,
+  .dashboard-page .events-card,
+  .dashboard-page .focus-card {
+    width: 100% !important;
+    min-width: 0 !important;
+
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .dashboard-page .sidebar {
+    padding: 8px 9px 7px !important;
+  }
+
+  .dashboard-page .brand {
+    padding-bottom: 7px !important;
+  }
+
+  .dashboard-page .sidebar-nav {
+    gap: 4px !important;
+  }
+
+  .dashboard-page .nav-item {
+    height: 34px !important;
+    min-height: 34px !important;
+  }
+
+  .dashboard-page .dashboard-main {
+    padding: 8px !important;
+  }
+
+  .dashboard-page .hero-panel {
+    height: 175px !important;
+    min-height: 175px !important;
+  }
+}
