@@ -945,11 +945,10 @@ function Dashboard() {
 
       {mobileNavOpen && (
         <>
-          <div className="mobile-nav-backdrop" onClick={closeMobileNav} />
+          <div className="mobile-nav-backdrop" aria-hidden="true" />
           <aside className="mobile-nav-drawer" aria-label="Dashboard navigation">
             <div className="mobile-drawer-header">
               <div className="mobile-drawer-brand"><div className="brand-mark">L</div><div><strong>LIFEOS</strong><span>Your personal OS</span></div></div>
-              <button className="mobile-drawer-close" type="button" onClick={closeMobileNav} aria-label="Close menu" title="Close menu">×</button>
             </div>
             <div className="mobile-drawer-label">NAVIGATION</div>
             <nav className="mobile-drawer-nav">
@@ -979,12 +978,6 @@ function Dashboard() {
                 </button>
               ))}
             </nav>
-            <div className="mobile-drawer-footer">
-              <button type="button" onClick={() => { closeMobileNav(); setShowNotificationPanel(true) }}>🔔 <span>Notifications</span></button>
-              <button type="button" onClick={() => { closeMobileNav(); setShowSettingsPanel(true) }}>⚙ <span>Settings</span></button>
-              <button type="button" onClick={() => { const next = theme === 'light' ? 'dark' : 'light'; setTheme(next); localStorage.setItem('lifeosTheme', next) }}>◐ <span>{theme === 'light' ? 'Dark mode' : 'Light mode'}</span></button>
-              <button type="button" onClick={() => { closeMobileNav(); setShowProfilePanel(true) }}>◉ <span>Account</span></button>
-            </div>
           </aside>
         </>
       )}
@@ -1000,9 +993,9 @@ function Dashboard() {
           }}
         >
           <button
-            className="mobile-nav-trigger"
+            className={`mobile-nav-trigger ${mobileNavOpen ? 'open' : ''}`}
             type="button"
-            onClick={() => setMobileNavOpen(true)}
+            onClick={() => setMobileNavOpen((current) => !current)}
             aria-label="Open dashboard menu"
             title="Open dashboard menu"
           >
