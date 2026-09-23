@@ -3394,3 +3394,492 @@ html[data-lifeos-theme="dark"] .lifeos-toast {
     max-width: 88% !important;
   }
 }
+
+/* =========================================================
+   LIFEOS — MOBILE DASHBOARD CLEANUP
+   Mobile-only UI refinement
+   Desktop layout remains untouched
+   ========================================================= */
+
+@media (max-width: 720px) {
+
+  /* ---------- PAGE ---------- */
+
+  .dashboard-page {
+    width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
+  }
+
+  .dashboard-main {
+    width: 100% !important;
+    margin-left: 0 !important;
+    padding: 12px 12px 28px !important;
+    box-sizing: border-box;
+  }
+
+  /* ---------- MOBILE NAV ---------- */
+
+  .dashboard-page .sidebar {
+    width: 100% !important;
+    min-height: auto !important;
+    padding: 10px 12px 8px !important;
+    position: relative !important;
+    box-sizing: border-box;
+    border-radius: 0 0 20px 20px;
+  }
+
+  .brand {
+    padding: 4px 4px 10px !important;
+  }
+
+  .brand-mark {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 16px !important;
+  }
+
+  .brand-name {
+    font-size: 16px !important;
+  }
+
+  .brand-subtitle {
+    font-size: 9px !important;
+  }
+
+  .sidebar-nav {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr) !important;
+    gap: 5px !important;
+    width: 100%;
+  }
+
+  .nav-item {
+    min-height: 38px !important;
+    padding: 6px 3px !important;
+    border-radius: 11px !important;
+    justify-content: center !important;
+  }
+
+  .nav-icon {
+    font-size: 17px !important;
+  }
+
+  .nav-item > span:not(.nav-icon):not(.nav-active-dot) {
+    display: none !important;
+  }
+
+  .quick-actions,
+  .sidebar-bottom,
+  .sidebar-profile {
+    display: none !important;
+  }
+
+
+  /* ---------- TOP BAR ---------- */
+
+  .topbar {
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 0 12px !important;
+    gap: 8px !important;
+  }
+
+  .search-box {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 42px !important;
+    border-radius: 13px !important;
+  }
+
+  .search-box input {
+    font-size: 13px !important;
+  }
+
+  .top-actions {
+    display: none !important;
+  }
+
+
+  /* ---------- HERO ---------- */
+
+  .hero-panel {
+    min-height: 205px !important;
+    height: 205px !important;
+    padding: 20px !important;
+    margin-bottom: 12px !important;
+    border-radius: 20px !important;
+    overflow: hidden !important;
+  }
+
+  .hero-copy {
+    position: relative;
+    z-index: 5;
+    max-width: 72% !important;
+  }
+
+  .date-label {
+    font-size: 9px !important;
+    margin-bottom: 7px !important;
+  }
+
+  .hero-copy h1 {
+    font-size: 25px !important;
+    line-height: 1.08 !important;
+    letter-spacing: -0.8px !important;
+    margin: 0 !important;
+  }
+
+  .hero-copy p {
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    margin-top: 8px !important;
+    max-width: 190px;
+  }
+
+  .hero-art {
+    inset: 42% 0 0 !important;
+  }
+
+  .hero-sun {
+    transform: scale(.72);
+    transform-origin: center;
+  }
+
+  .hero-mountain.back {
+    transform: scale(.85);
+    transform-origin: bottom center;
+  }
+
+  .hero-mountain.front {
+    transform: scale(.9);
+    transform-origin: bottom center;
+  }
+
+  .hero-quote {
+    display: none !important;
+  }
+
+
+  /* ---------- STAT CARDS ---------- */
+
+  .metric-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 9px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .metric-card {
+    min-width: 0 !important;
+    min-height: 82px !important;
+    padding: 13px !important;
+    border-radius: 17px !important;
+    box-sizing: border-box;
+  }
+
+  .metric-icon {
+    width: 32px !important;
+    height: 32px !important;
+    min-width: 32px !important;
+    font-size: 14px !important;
+    border-radius: 10px !important;
+  }
+
+  .metric-card strong {
+    font-size: 20px !important;
+    line-height: 1 !important;
+  }
+
+  .metric-card span {
+    font-size: 9px !important;
+    line-height: 1.25 !important;
+  }
+
+  .metric-arrow,
+  .metric-card > b {
+    font-size: 13px !important;
+  }
+
+  .progress-ring {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+  }
+
+  .progress-ring span {
+    font-size: 9px !important;
+  }
+
+
+  /* ---------- MAIN CONTENT ---------- */
+
+  .content-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    width: 100% !important;
+  }
+
+  .tasks-card,
+  .calendar-card,
+  .quote-card,
+  .music-card,
+  .events-card,
+  .focus-card {
+    grid-column: auto !important;
+    grid-row: auto !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    box-sizing: border-box;
+  }
+
+  .glass-card,
+  .dashboard-card {
+    border-radius: 18px !important;
+  }
+
+  .dashboard-card {
+    padding: 16px !important;
+  }
+
+
+  /* ---------- CARD HEADINGS ---------- */
+
+  .card-heading {
+    gap: 8px !important;
+    margin-bottom: 12px !important;
+  }
+
+  .card-heading h2 {
+    font-size: 18px !important;
+    line-height: 1.15 !important;
+  }
+
+  .section-label,
+  .card-label {
+    font-size: 8px !important;
+    letter-spacing: .9px !important;
+  }
+
+  .link-button,
+  .add-button {
+    min-height: 34px !important;
+    padding: 7px 11px !important;
+    border-radius: 10px !important;
+    font-size: 10px !important;
+    white-space: nowrap;
+  }
+
+
+  /* ---------- TASKS ---------- */
+
+  .task-list {
+    width: 100% !important;
+  }
+
+  .task-row {
+    min-width: 0 !important;
+    padding: 11px !important;
+    border-radius: 12px !important;
+    gap: 9px !important;
+  }
+
+  .task-info {
+    min-width: 0 !important;
+  }
+
+  .task-info strong {
+    font-size: 12px !important;
+  }
+
+  .task-info span,
+  .task-info small,
+  .task-time {
+    font-size: 9px !important;
+  }
+
+
+  /* ---------- CALENDAR ---------- */
+
+  .calendar-card {
+    overflow: hidden !important;
+  }
+
+  .calendar-grid {
+    width: 100% !important;
+    gap: 4px !important;
+  }
+
+  .calendar-grid span {
+    min-width: 0 !important;
+    font-size: 10px !important;
+  }
+
+
+  /* ---------- FOCUS / HABITS / EXTRA CARDS ---------- */
+
+  .focus-card,
+  .quote-card,
+  .music-card,
+  .events-card {
+    padding: 16px !important;
+  }
+
+  .focus-card h2,
+  .quote-card h2,
+  .music-card h2,
+  .events-card h2 {
+    font-size: 17px !important;
+  }
+
+
+  /* ---------- BOTTOM BANNER ---------- */
+
+  .bottom-banner {
+    width: 100% !important;
+    box-sizing: border-box;
+    margin-top: 12px !important;
+    padding: 13px !important;
+    border-radius: 16px !important;
+  }
+
+  .bottom-banner button {
+    display: none !important;
+  }
+
+
+  /* ---------- TOAST ---------- */
+
+  .lifeos-toast {
+    left: 12px !important;
+    right: 12px !important;
+    bottom: 14px !important;
+    width: auto !important;
+    box-sizing: border-box;
+    font-size: 10px !important;
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .dashboard-main {
+    padding: 10px 10px 24px !important;
+  }
+
+  .dashboard-page .sidebar {
+    padding: 9px 10px 7px !important;
+  }
+
+  .brand {
+    padding-bottom: 8px !important;
+  }
+
+  .sidebar-nav {
+    gap: 4px !important;
+  }
+
+  .nav-item {
+    min-height: 36px !important;
+    border-radius: 10px !important;
+  }
+
+  .hero-panel {
+    min-height: 190px !important;
+    height: 190px !important;
+    padding: 17px !important;
+    border-radius: 18px !important;
+  }
+
+  .hero-copy {
+    max-width: 78% !important;
+  }
+
+  .hero-copy h1 {
+    font-size: 22px !important;
+  }
+
+  .hero-copy p {
+    font-size: 10px !important;
+    max-width: 165px;
+  }
+
+  .metric-grid {
+    gap: 8px !important;
+  }
+
+  .metric-card {
+    min-height: 76px !important;
+    padding: 11px !important;
+    border-radius: 15px !important;
+  }
+
+  .metric-icon {
+    width: 29px !important;
+    height: 29px !important;
+    min-width: 29px !important;
+  }
+
+  .metric-card strong {
+    font-size: 18px !important;
+  }
+
+  .metric-card span {
+    font-size: 8px !important;
+  }
+
+  .dashboard-card {
+    padding: 14px !important;
+    border-radius: 16px !important;
+  }
+
+  .card-heading h2 {
+    font-size: 16px !important;
+  }
+
+  .link-button,
+  .add-button {
+    font-size: 9px !important;
+    padding: 6px 9px !important;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .hero-copy h1 {
+    font-size: 20px !important;
+  }
+
+  .hero-panel {
+    min-height: 180px !important;
+    height: 180px !important;
+  }
+
+  .metric-card {
+    padding: 9px !important;
+  }
+
+  .metric-icon {
+    width: 27px !important;
+    height: 27px !important;
+    min-width: 27px !important;
+  }
+
+  .metric-card strong {
+    font-size: 17px !important;
+  }
+
+  .dashboard-card {
+    padding: 12px !important;
+  }
+}
