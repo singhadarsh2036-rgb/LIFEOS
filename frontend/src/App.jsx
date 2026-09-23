@@ -14,67 +14,89 @@ import Trips from './Trips.jsx'
 
 import './App.css'
 
-function App() {
+function ProtectedRoute({ children }) {
   const token = localStorage.getItem('token')
 
+  if (!token) {
+    return <Navigate to="/login" replace />
+  }
+
+  return children
+}
+
+function PublicRoute({ children }) {
+  const token = localStorage.getItem('token')
+
+  if (token) {
+    return <Navigate to="/dashboard" replace />
+  }
+
+  return children
+}
+
+function App() {
   return (
     <BrowserRouter>
       <Routes>
 
-        {/* Home */}
         <Route
           path="/"
-          element={
-            token
-              ? <Navigate to="/dashboard" replace />
-              : <Navigate to="/login" replace />
-          }
+          element={<Navigate to="/dashboard" replace />}
         />
 
-        {/* Login */}
         <Route
           path="/login"
           element={
-            token
-              ? <Navigate to="/dashboard" replace />
-              : <Login />
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
           }
         />
 
-        {/* Register */}
         <Route
           path="/register"
           element={<Register />}
         />
 
-        {/* Dashboard */}
         <Route
           path="/dashboard"
-          element={<Dashboard />}
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
         />
 
-        {/* Tasks */}
         <Route
           path="/tasks"
-          element={<Tasks />}
+          element={
+            <ProtectedRoute>
+              <Tasks />
+            </ProtectedRoute>
+          }
         />
 
-        {/* Reminders */}
         <Route
           path="/reminders"
-          element={<Reminders />}
+          element={
+            <ProtectedRoute>
+              <Reminders />
+            </ProtectedRoute>
+          }
         />
 
-        {/* Trips */}
         <Route
           path="/trips"
-          element={<Trips />}
+          element={
+            <ProtectedRoute>
+              <Trips />
+            </ProtectedRoute>
+          }
         />
 
-        {/* Unknown route */}
         <Route
           path="*"
-          element={<Navigate to="/" replace />}
+          element={<Navigate to="/login" replace />}
         />
 
       </Routes>
