@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Trips.css'
 
 function Trips() {
+  const navigate = useNavigate()
+
   const today = new Date().toISOString().split('T')[0]
 
   const [step, setStep] = useState(1)
@@ -179,6 +182,17 @@ function Trips() {
    * AIRPORT SELECTION
    * ---------------------------------------------------------
    */
+
+  const handleSwapLocations = () => {
+    setOrigin(destination)
+    setDestination(origin)
+
+    setOriginAirport(destinationAirport)
+    setDestinationAirport(originAirport)
+
+    setOriginSuggestions([])
+    setDestinationSuggestions([])
+  }
 
   const selectOriginAirport = (airport) => {
     setOriginAirport(airport)
@@ -626,6 +640,15 @@ function Trips() {
 
         {step === 1 && (
           <>
+            <div className="travel-page-back">
+              <button
+                type="button"
+                onClick={() => navigate(-1)}
+              >
+                ← Back
+              </button>
+            </div>
+
             <section className="trips-hero">
 
               <div className="trips-badge">
@@ -677,7 +700,7 @@ function Trips() {
                     FROM / TO
                 ========================================== */}
 
-                <div className="route-grid">
+                <div className="route-grid route-grid-with-swap">
 
                   {/* FROM */}
 
@@ -778,6 +801,16 @@ function Trips() {
                       )}
 
                   </div>
+
+                  <button
+                    type="button"
+                    className="swap-route-button"
+                    onClick={handleSwapLocations}
+                    aria-label="Swap From and To"
+                    title="Swap From and To"
+                  >
+                    ⇄
+                  </button>
 
 
                   {/* TO */}
