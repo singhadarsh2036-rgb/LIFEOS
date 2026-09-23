@@ -21,7 +21,7 @@ public class SecurityConfig {
             // Enable CORS before Spring Security authorization
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
 
-            // Disable CSRF because this is a REST API
+            // Disable CSRF for REST API
             .csrf(csrf -> csrf.disable())
 
             .authorizeHttpRequests(auth -> auth
@@ -47,16 +47,18 @@ public class SecurityConfig {
 
         CorsConfiguration configuration = new CorsConfiguration();
 
-        // Production frontend
+        // Allowed frontend origins
         configuration.setAllowedOrigins(List.of(
+            // Production
             "https://lifeos-frontend-h7fb.onrender.com",
 
             // Local development
             "http://localhost:5173",
+            "http://localhost:5180",
             "http://localhost:3000"
         ));
 
-        // Methods allowed from frontend
+        // Allowed HTTP methods
         configuration.setAllowedMethods(List.of(
             "GET",
             "POST",
@@ -66,7 +68,7 @@ public class SecurityConfig {
             "OPTIONS"
         ));
 
-        // Headers allowed in requests
+        // Allowed request headers
         configuration.setAllowedHeaders(List.of(
             "Origin",
             "Content-Type",
@@ -75,16 +77,16 @@ public class SecurityConfig {
             "X-Requested-With"
         ));
 
-        // Headers the frontend is allowed to read
+        // Headers frontend can read
         configuration.setExposedHeaders(List.of(
             "Authorization",
             "Content-Type"
         ));
 
-        // Required if frontend sends credentials/cookies
+        // Allow credentials
         configuration.setAllowCredentials(true);
 
-        // Cache preflight response for 1 hour
+        // Cache preflight response
         configuration.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source =
