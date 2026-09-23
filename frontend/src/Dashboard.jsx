@@ -856,6 +856,16 @@ function Dashboard() {
     })
     .toUpperCase()
 
+  const currentHour = today.getHours()
+  const greeting =
+    currentHour < 12
+      ? 'Good morning'
+      : currentHour < 17
+        ? 'Good afternoon'
+        : currentHour < 21
+          ? 'Good evening'
+          : 'Good night'
+
   const totalHabits = dashboardData?.totalHabits ?? 0
   const completedHabitsToday = dashboardData?.completedHabitsToday ?? 0
   const habitProgress =
@@ -1325,7 +1335,7 @@ function Dashboard() {
         <section className="hero-panel">
           <div className="hero-copy">
             <div className="date-label">{dateLabel}</div>
-            <h1>Good morning, {userName}! <span>👋</span></h1>
+            <h1>{greeting}, {userName}! <span>👋</span></h1>
             <p>A productive day starts with a clear mind.</p>
           </div>
 

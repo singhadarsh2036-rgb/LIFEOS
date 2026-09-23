@@ -3610,3 +3610,136 @@ html[data-lifeos-theme="light"] .mobile-nav-icon {
 html[data-lifeos-theme="light"] .mobile-nav-arrow {
   color: rgba(91,65,117,.34) !important;
 }
+
+
+/* =========================================================
+   LIFEOS LIGHT MODE — FINAL READABILITY OVERRIDES
+   These rules intentionally come last so the dark premium
+   layer above cannot wash out text when light mode is active.
+   ========================================================= */
+
+html[data-lifeos-theme="light"] .dashboard-page .metric-card strong {
+  color: #302744 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .metric-card span {
+  color: #756b82 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .metric-card > b {
+  color: #7350df !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .metric-pink > b {
+  color: #c52f78 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .metric-orange > b {
+  color: #bd6a05 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .metric-green > b {
+  color: #16845a !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .card-heading h2 {
+  color: #302744 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .section-label,
+html[data-lifeos-theme="light"] .dashboard-page .card-label {
+  color: #81758d !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .task-info strong,
+html[data-lifeos-theme="light"] .dashboard-page .task-info span {
+  color: #342844 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .task-info small,
+html[data-lifeos-theme="light"] .dashboard-page .task-time {
+  color: #8a7c95 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .task-menu,
+html[data-lifeos-theme="light"] .dashboard-page .task-loading,
+html[data-lifeos-theme="light"] .dashboard-page .empty-state,
+html[data-lifeos-theme="light"] .dashboard-page .empty-orb {
+  color: #756b82 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .event-row,
+html[data-lifeos-theme="light"] .dashboard-page .event-row strong,
+html[data-lifeos-theme="light"] .dashboard-page .event-row span {
+  color: #3d334b !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .calendar-week span,
+html[data-lifeos-theme="light"] .dashboard-page .calendar-grid span {
+  color: #756b82 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .calendar-grid span.today {
+  color: #fff !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .selected-date-heading h3,
+html[data-lifeos-theme="light"] .dashboard-page .selected-date-empty strong,
+html[data-lifeos-theme="light"] .dashboard-page .selected-date-reminder strong {
+  color: #342844 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .selected-date-empty small,
+html[data-lifeos-theme="light"] .dashboard-page .selected-date-reminder small {
+  color: #8a7c95 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .focus-content .section-label {
+  color: #81758d !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .focus-content strong,
+html[data-lifeos-theme="light"] .dashboard-page .focus-today {
+  color: #342844 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .focus-label-input {
+  color: #342844 !important;
+  background: rgba(255,255,255,.72) !important;
+  border-color: rgba(124,58,237,.12) !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .habit-row,
+html[data-lifeos-theme="light"] .dashboard-page .habit-row strong,
+html[data-lifeos-theme="light"] .dashboard-page .habit-summary,
+html[data-lifeos-theme="light"] .dashboard-page .habit-days {
+  color: #4a3d55 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .quote-content,
+html[data-lifeos-theme="light"] .dashboard-page .music-content {
+  color: #40304e !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .quick-title,
+html[data-lifeos-theme="light"] .dashboard-page .quick-actions {
+  color: #3e334d !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .bottom-banner {
+  color: #3e334d !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .lifeos-consistency-tip,
+html[data-lifeos-theme="light"] .dashboard-page .lifeos-settings-note,
+html[data-lifeos-theme="light"] .dashboard-page .lifeos-notification-empty,
+html[data-lifeos-theme="light"] .dashboard-page .lifeos-notification-copy,
+html[data-lifeos-theme="light"] .dashboard-page .lifeos-notification-footer {
+  color: #756b82 !important;
+}
+
+html[data-lifeos-theme="light"] .dashboard-page .lifeos-setting-row,
+html[data-lifeos-theme="light"] .dashboard-page .lifeos-setting-row strong,
+html[data-lifeos-theme="light"] .dashboard-page .lifeos-setting-row span {
+  color: #3d334b !important;
+}
