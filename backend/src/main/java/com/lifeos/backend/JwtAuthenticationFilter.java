@@ -3,16 +3,21 @@ package com.lifeos.backend;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.crypto.SecretKey;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -33,9 +38,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) throws ServletException, IOException {
 
-        // =========================================
+        // =========================
         // CORS
-        // =========================================
+        // =========================
 
         String origin = request.getHeader("Origin");
 
@@ -66,52 +71,37 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 "true"
         );
 
-        // =========================================
+        // =========================
         // REQUEST PATH
-        // =========================================
+        // =========================
 
         String path = request.getRequestURI();
 
-        // =========================================
+        // =========================
         // PUBLIC ENDPOINTS
-        // =========================================
-        //
-        // These DO NOT require JWT.
-        //
+        // =========================
 
         if (
                 request.getMethod().equalsIgnoreCase("OPTIONS")
-
-                        // Authentication
                         || path.equals("/users/login")
-                        || path.equals("/users")
                         || path.equals("/users/register")
-
-                        // Account checks
+                        || path.equals("/users")
                         || path.equals("/users/check-email")
                         || path.equals("/users/check-phone")
-
-                        // OTP
                         || path.equals("/otp/send")
                         || path.equals("/otp/verify")
                         || path.equals("/otp/phone/send")
                         || path.equals("/otp/phone/verify")
-
-                        // Push public VAPID key
                         || path.equals("/push/public-key")
         ) {
 
-            filterChain.doFilter(
-                    request,
-                    response
-            );
-
+            filterChain.doFilter(request, response);
             return;
         }
 
-        // =========================================
-        // JWT AUTHENTICATION
-        // =========================================
+        // =========================
+        // GET JWT TOKEN
+        // =========================
 
         String authHeader =
                 request.getHeader("Authorization");
@@ -120,7 +110,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 authHeader == null
                         || !authHeader.startsWith("Bearer ")
         ) {
-
             response.setStatus(
                     HttpServletResponse.SC_UNAUTHORIZED
             );
@@ -135,10 +124,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             return;
         }
-
-        // =========================================
-        // EXTRACT TOKEN
-        // =========================================
 
         String token =
                 authHeader.substring(7).trim();
@@ -160,9 +145,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        // =========================================
+        // =========================
         // VALIDATE JWT
-        // =========================================
+        // =========================
 
         try {
 
@@ -192,10 +177,33 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 return;
             }
 
-            // Make email available to controllers
+            // =========================
+            // IMPORTANT:
+            // TELL SPRING SECURITY
+            // USER IS AUTHENTICATED
+            // =========================
+
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(
+                            email,
+                            null,
+                            Collections.emptyList()
+                    );
+
+            SecurityContextHolder
+                    .getContext()
+                    .setAuthentication(authentication);
+
+            // Keep this because your controllers
+            // may use userEmail attribute.
+
             request.setAttribute(
                     "userEmail",
                     email
+            );
+
+            System.out.println(
+                    "JWT AUTHENTICATED USER: " + email
             );
 
         } catch (Exception e) {
@@ -220,9 +228,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
-        // =========================================
+        // =========================
         // CONTINUE REQUEST
-        // =========================================
+        // =========================
 
         filterChain.doFilter(
                 request,
