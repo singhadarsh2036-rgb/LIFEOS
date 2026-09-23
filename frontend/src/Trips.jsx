@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Trips.css'
+import MobileGlobalNav from './MobileGlobalNav'
 
 function Trips() {
   const navigate = useNavigate()
@@ -628,6 +629,8 @@ function Trips() {
 
   return (
     <div className="trips-page">
+
+      <MobileGlobalNav />
 
       <div className="trips-background-orb trips-orb-one"></div>
       <div className="trips-background-orb trips-orb-two"></div>
