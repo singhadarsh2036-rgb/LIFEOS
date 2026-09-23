@@ -34,6 +34,7 @@ function Dashboard() {
   const [savingTask, setSavingTask] = useState(false)
 
   const [showProfilePanel, setShowProfilePanel] = useState(false)
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
   const [showSettingsPanel, setShowSettingsPanel] = useState(false)
   const [showNotificationPanel, setShowNotificationPanel] = useState(false)
   const [showConsistencyPanel, setShowConsistencyPanel] = useState(false)
@@ -402,6 +403,16 @@ function Dashboard() {
   /* ================================
      NAVIGATION
   ================================= */
+
+  const closeMobileNav = () => setMobileNavOpen(false)
+
+  const handleMobileSection = (name, selector) => {
+    setActiveNav(name)
+    closeMobileNav()
+    window.setTimeout(() => {
+      document.querySelector(selector)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }, 80)
+  }
 
   const handleNavigation = (name) => {
     setActiveNav(name)
@@ -932,6 +943,52 @@ function Dashboard() {
         </button>
       </aside>
 
+      {mobileNavOpen && (
+        <>
+          <div className="mobile-nav-backdrop" onClick={closeMobileNav} />
+          <aside className="mobile-nav-drawer" aria-label="Dashboard navigation">
+            <div className="mobile-drawer-header">
+              <div className="mobile-drawer-brand"><div className="brand-mark">L</div><div><strong>LIFEOS</strong><span>Your personal OS</span></div></div>
+              <button className="mobile-drawer-close" type="button" onClick={closeMobileNav} aria-label="Close menu" title="Close menu">×</button>
+            </div>
+            <div className="mobile-drawer-label">NAVIGATION</div>
+            <nav className="mobile-drawer-nav">
+              {[
+                ['Dashboard', '⌂'], ['Tasks', '✓'], ['Calendar', '□'], ['Reminders', '◷'],
+                ['Travel', '✈'], ['Habits', '◈'], ['Notes', '▤'], ['Focus', '◉'], ['Analytics', '◌'],
+              ].map(([name, icon]) => (
+                <button
+                  key={name}
+                  className={`mobile-nav-item ${activeNav === name ? 'active' : ''}`}
+                  type="button"
+                  title={name}
+                  onClick={() => {
+                    if (name === 'Dashboard') { setActiveNav(name); closeMobileNav(); navigate('/dashboard') }
+                    else if (name === 'Tasks') { closeMobileNav(); window.location.href = '/tasks' }
+                    else if (name === 'Reminders') { closeMobileNav(); window.location.href = '/reminders' }
+                    else if (name === 'Travel') { closeMobileNav(); window.location.href = '/trips' }
+                    else if (name === 'Calendar') handleMobileSection(name, '.calendar-card')
+                    else if (name === 'Focus') handleMobileSection(name, '.focus-card')
+                    else if (name === 'Habits') handleMobileSection(name, '.habits-card')
+                    else { closeMobileNav(); showMessage(`${name} section coming soon`) }
+                  }}
+                >
+                  <span className="mobile-nav-icon">{icon}</span>
+                  <span>{name}</span>
+                  <span className="mobile-nav-arrow">›</span>
+                </button>
+              ))}
+            </nav>
+            <div className="mobile-drawer-footer">
+              <button type="button" onClick={() => { closeMobileNav(); setShowNotificationPanel(true) }}>🔔 <span>Notifications</span></button>
+              <button type="button" onClick={() => { closeMobileNav(); setShowSettingsPanel(true) }}>⚙ <span>Settings</span></button>
+              <button type="button" onClick={() => { const next = theme === 'light' ? 'dark' : 'light'; setTheme(next); localStorage.setItem('lifeosTheme', next) }}>◐ <span>{theme === 'light' ? 'Dark mode' : 'Light mode'}</span></button>
+              <button type="button" onClick={() => { closeMobileNav(); setShowProfilePanel(true) }}>◉ <span>Account</span></button>
+            </div>
+          </aside>
+        </>
+      )}
+
       <main className="dashboard-main">
 
         <div
@@ -942,6 +999,17 @@ function Dashboard() {
             overflow: 'visible',
           }}
         >
+          <button
+            className="mobile-nav-trigger"
+            type="button"
+            onClick={() => setMobileNavOpen(true)}
+            aria-label="Open dashboard menu"
+            title="Open dashboard menu"
+          >
+            <span>☰</span>
+            <small>Menu</small>
+          </button>
+
           <div
             className="search-box"
             style={{

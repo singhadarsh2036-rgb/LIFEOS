@@ -2044,2073 +2044,1016 @@
 }
 
 /* =========================================================
-   LIFEOS — GLOBAL LIGHT / DARK THEME SWITCH
-   Default remains the existing light theme.
-   Dark mode is activated by Dashboard.jsx via
-   [data-lifeos-theme="dark"] on <html>.
+   LIFEOS — DARK PLUM / TRIPS PREMIUM THEME
+   Final visual layer for the current Dashboard.
+   Layout, spacing, functionality and existing components
+   are intentionally preserved.
    ========================================================= */
 
-.theme-toggle {
-  height: 40px;
-  min-width: 72px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 7px;
-  padding: 0 11px;
-  border: 1px solid rgba(100,83,170,.10);
-  border-radius: 12px;
-  background: rgba(255,255,255,.72);
-  color: #5e5570;
-  cursor: pointer;
-  transition: transform .2s ease, background .25s ease, border-color .25s ease, color .25s ease, box-shadow .25s ease;
-}
+.dashboard-page {
+  --trips-bg: #171126;
+  --trips-bg-2: #211735;
+  --trips-panel: rgba(34, 25, 53, .88);
+  --trips-panel-2: rgba(43, 31, 66, .86);
+  --trips-border: rgba(190, 145, 255, .16);
+  --trips-border-soft: rgba(255,255,255,.08);
+  --trips-text: #f8f5ff;
+  --trips-muted: #a9a0bb;
+  --trips-purple: #9b6cff;
+  --trips-purple-light: #c7a9ff;
+  --trips-pink: #e5a1d1;
 
-.theme-toggle:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 22px rgba(72,53,130,.10);
-}
-
-.theme-toggle-icon {
-  width: 21px;
-  height: 21px;
-  display: grid;
-  place-items: center;
-  border-radius: 50%;
-  font-size: 13px;
-  background: #eee8ff;
-  color: #7049e8;
-}
-
-.theme-toggle-text {
-  font-size: 10px;
-  font-weight: 800;
-}
-
-/* ================= DARK THEME ================= */
-
-html[data-lifeos-theme="dark"],
-html[data-lifeos-theme="dark"] body {
-  background: #120d20 !important;
-}
-
-html[data-lifeos-theme="dark"] .dashboard-page {
-  color: #f7f2ff !important;
+  color: var(--trips-text) !important;
   background:
-    radial-gradient(circle at 82% 0%, rgba(122,72,190,.24), transparent 28%),
-    radial-gradient(circle at 35% 8%, rgba(219,39,119,.10), transparent 25%),
-    radial-gradient(circle at 5% 92%, rgba(91,53,145,.18), transparent 28%),
-    linear-gradient(135deg,#100b1c 0%,#171025 46%,#21132d 100%) !important;
+    radial-gradient(circle at 82% 0%, rgba(106, 67, 173, .38), transparent 30%),
+    radial-gradient(circle at 42% 0%, rgba(157, 86, 153, .16), transparent 27%),
+    radial-gradient(circle at 0% 82%, rgba(77, 49, 112, .28), transparent 30%),
+    linear-gradient(135deg, #120d20 0%, #1a122b 48%, #241735 100%) !important;
 }
 
-html[data-lifeos-theme="dark"] .sidebar {
+/* ================= SIDEBAR ================= */
+
+.dashboard-page .sidebar {
   background:
-    linear-gradient(180deg,#160f26 0%,#211335 54%,#301832 100%) !important;
-  border-right-color: rgba(255,255,255,.07) !important;
-  box-shadow: 14px 0 42px rgba(0,0,0,.25) !important;
+    linear-gradient(180deg, rgba(19,13,34,.97), rgba(28,18,45,.96)) !important;
+  border-right: 1px solid rgba(190,145,255,.10) !important;
+  box-shadow: 12px 0 45px rgba(7,4,15,.30) !important;
 }
 
-html[data-lifeos-theme="dark"] .brand-name,
-html[data-lifeos-theme="dark"] .nav-item {
-  color: rgba(255,255,255,.92) !important;
+.dashboard-page .brand-name {
+  color: #f8f5ff !important;
 }
 
-html[data-lifeos-theme="dark"] .brand-subtitle,
-html[data-lifeos-theme="dark"] .quick-title {
-  color: rgba(226,216,242,.52) !important;
+.dashboard-page .brand-subtitle {
+  color: rgba(216,202,237,.56) !important;
 }
 
-html[data-lifeos-theme="dark"] .brand-mark {
-  background: linear-gradient(135deg,#8056e8,#d14f91) !important;
-  color: white !important;
-  box-shadow: 0 10px 28px rgba(128,86,232,.28) !important;
+.dashboard-page .brand-mark {
+  background: linear-gradient(135deg,#8e62f7,#b98cff) !important;
+  color: #fff !important;
+  box-shadow: 0 10px 28px rgba(123,76,220,.30) !important;
 }
 
-html[data-lifeos-theme="dark"] .nav-item:hover {
-  background: rgba(160,111,238,.12) !important;
-  color: white !important;
+.dashboard-page .nav-item {
+  color: #aaa0bd !important;
 }
 
-html[data-lifeos-theme="dark"] .nav-item.active {
-  background: linear-gradient(90deg,rgba(157,104,235,.30),rgba(219,39,119,.10)) !important;
-  border-color: rgba(196,156,255,.18) !important;
-  box-shadow: inset 3px 0 0 #c69aff, 0 10px 28px rgba(0,0,0,.20) !important;
+.dashboard-page .nav-item:hover {
+  background: rgba(155,108,255,.10) !important;
+  color: #eee7fb !important;
 }
 
-html[data-lifeos-theme="dark"] .nav-active-dot {
-  background: #d9b7ff !important;
-  box-shadow: 0 0 12px rgba(217,183,255,.85) !important;
+.dashboard-page .nav-item.active {
+  background:
+    linear-gradient(135deg, rgba(145,96,235,.25), rgba(91,57,135,.20)) !important;
+  border-color: rgba(181,137,255,.18) !important;
+  color: #fff !important;
+  box-shadow:
+    inset 3px 0 0 #a779ff,
+    0 10px 30px rgba(74,41,117,.18) !important;
 }
 
-html[data-lifeos-theme="dark"] .quick-actions,
-html[data-lifeos-theme="dark"] .sidebar-bottom {
+.dashboard-page .nav-active-dot {
+  background: #caa8ff !important;
+  box-shadow: 0 0 12px rgba(202,168,255,.75) !important;
+}
+
+.dashboard-page .quick-actions,
+.dashboard-page .sidebar-bottom {
   border-top-color: rgba(255,255,255,.08) !important;
 }
 
-html[data-lifeos-theme="dark"] .quick-actions button,
-html[data-lifeos-theme="dark"] .sidebar-profile {
-  background: rgba(255,255,255,.055) !important;
+.dashboard-page .quick-title {
+  color: rgba(207,193,227,.48) !important;
+}
+
+.dashboard-page .quick-actions button {
+  background: rgba(255,255,255,.035) !important;
+  border-color: rgba(190,145,255,.09) !important;
+  color: #cfc5df !important;
+}
+
+.dashboard-page .quick-actions button:hover {
+  background: rgba(155,108,255,.10) !important;
+  border-color: rgba(190,145,255,.18) !important;
+}
+
+.dashboard-page .sidebar-profile {
+  background: rgba(255,255,255,.045) !important;
   border-color: rgba(255,255,255,.08) !important;
-  color: rgba(255,255,255,.86) !important;
 }
 
-html[data-lifeos-theme="dark"] .quick-actions button:hover,
-html[data-lifeos-theme="dark"] .sidebar-profile:hover {
-  background: rgba(255,255,255,.095) !important;
+.dashboard-page .sidebar-profile strong {
+  color: #eee8f7 !important;
 }
 
-html[data-lifeos-theme="dark"] .sidebar-profile small,
-html[data-lifeos-theme="dark"] .sidebar-profile > span {
-  color: rgba(235,225,245,.48) !important;
+.dashboard-page .sidebar-profile small,
+.dashboard-page .sidebar-profile > span {
+  color: #8f849f !important;
 }
 
-html[data-lifeos-theme="dark"] .mini-avatar {
-  background: linear-gradient(135deg,#8757e9,#d34d91) !important;
+.dashboard-page .mini-avatar {
+  background: linear-gradient(135deg,#8f62f6,#d16db2) !important;
 }
 
-/* Top bar */
-html[data-lifeos-theme="dark"] .search-box {
-  background: rgba(34,25,49,.78) !important;
-  border-color: rgba(205,168,255,.12) !important;
-  box-shadow: 0 12px 32px rgba(0,0,0,.18) !important;
+/* ================= TOPBAR ================= */
+
+.dashboard-page .topbar {
+  background: transparent !important;
 }
 
-html[data-lifeos-theme="dark"] .search-box > span {
-  color: #bca0e7 !important;
+.dashboard-page .search-box {
+  background: rgba(35,26,54,.82) !important;
+  border-color: rgba(190,145,255,.14) !important;
+  box-shadow:
+    0 12px 32px rgba(7,4,15,.18),
+    inset 0 1px 0 rgba(255,255,255,.035) !important;
+  backdrop-filter: blur(20px);
 }
 
-html[data-lifeos-theme="dark"] .search-box input {
-  color: #f6efff !important;
+.dashboard-page .search-box > span {
+  color: #a98ae9 !important;
 }
 
-html[data-lifeos-theme="dark"] .search-box input::placeholder {
-  color: #8f829e !important;
+.dashboard-page .search-box input {
+  color: #f4effb !important;
 }
 
-html[data-lifeos-theme="dark"] .search-box kbd {
-  background: rgba(139,92,246,.14) !important;
-  border-color: rgba(180,139,246,.14) !important;
-  color: #bfa7e8 !important;
+.dashboard-page .search-box input::placeholder {
+  color: #81768f !important;
 }
 
-html[data-lifeos-theme="dark"] .top-icon,
-html[data-lifeos-theme="dark"] .top-profile,
-html[data-lifeos-theme="dark"] .consistency,
-html[data-lifeos-theme="dark"] .theme-toggle {
-  background: rgba(34,25,49,.82) !important;
-  border-color: rgba(205,168,255,.12) !important;
-  color: #ded2ea !important;
+.dashboard-page .search-box kbd {
+  background: rgba(155,108,255,.10) !important;
+  border-color: rgba(190,145,255,.12) !important;
+  color: #a98ae9 !important;
 }
 
-html[data-lifeos-theme="dark"] .top-icon:hover,
-html[data-lifeos-theme="dark"] .consistency:hover,
-html[data-lifeos-theme="dark"] .theme-toggle:hover {
-  background: rgba(52,38,70,.92) !important;
-  border-color: rgba(205,168,255,.20) !important;
+.dashboard-page .top-icon,
+.dashboard-page .top-profile,
+.dashboard-page .consistency {
+  background: rgba(35,26,54,.82) !important;
+  border-color: rgba(190,145,255,.13) !important;
+  color: #c5b9d5 !important;
 }
 
-html[data-lifeos-theme="dark"] .top-profile {
-  background: linear-gradient(135deg,#7650d9,#b9367c) !important;
-  color: white !important;
+.dashboard-page .top-profile {
+  background: linear-gradient(135deg,#8657ed,#b56bd0) !important;
+  color: #fff !important;
+  box-shadow: 0 8px 24px rgba(104,57,172,.28) !important;
 }
 
-html[data-lifeos-theme="dark"] .theme-toggle-icon {
-  background: rgba(255,205,113,.13) !important;
-  color: #ffd77d !important;
+.dashboard-page .consistency {
+  color: #d7cce5 !important;
 }
 
-html[data-lifeos-theme="dark"] .theme-toggle.dark .theme-toggle-icon {
-  background: rgba(255,230,170,.14) !important;
-  color: #ffe19a !important;
-}
+/* ================= HERO ================= */
 
-/* Hero */
-html[data-lifeos-theme="dark"] .hero-panel {
-  background: linear-gradient(90deg,rgba(34,25,50,.94) 0%,rgba(38,27,56,.86) 48%,rgba(43,27,50,.34) 100%) !important;
-  border-color: rgba(210,178,255,.13) !important;
-  box-shadow: 0 24px 65px rgba(0,0,0,.28) !important;
-}
-
-html[data-lifeos-theme="dark"] .date-label,
-html[data-lifeos-theme="dark"] .hero-copy p {
-  color: #9d91ac !important;
-}
-
-html[data-lifeos-theme="dark"] .hero-copy h1 {
-  color: #faf5ff !important;
-}
-
-html[data-lifeos-theme="dark"] .hero-copy h1 span {
-  color: #d39cff !important;
-}
-
-html[data-lifeos-theme="dark"] .hero-art {
+.dashboard-page .hero-panel {
   background:
-    radial-gradient(circle at 73% 22%,rgba(255,207,117,.18),transparent 12%),
-    linear-gradient(135deg,#261c3a 0%,#3a2447 55%,#2c1b32 100%) !important;
+    linear-gradient(90deg,
+      rgba(38,28,57,.96) 0%,
+      rgba(43,31,65,.88) 48%,
+      rgba(43,31,65,.28) 100%
+    ) !important;
+  border-color: rgba(202,168,255,.13) !important;
+  box-shadow:
+    0 24px 65px rgba(5,3,12,.28),
+    inset 0 1px 0 rgba(255,255,255,.035) !important;
 }
 
-html[data-lifeos-theme="dark"] .hero-sun {
-  background: radial-gradient(circle,#ffe6a5 0 22%,rgba(255,196,92,.30) 50%,transparent 73%) !important;
+.dashboard-page .date-label {
+  color: #a89bb9 !important;
 }
 
-html[data-lifeos-theme="dark"] .hero-mountain.back {
-  background: linear-gradient(180deg,#5e5075,#493b5d) !important;
+.dashboard-page .hero-copy h1 {
+  color: #f7f3fc !important;
 }
 
-html[data-lifeos-theme="dark"] .hero-mountain.front {
-  background: linear-gradient(180deg,#40314f,#2e243a) !important;
+.dashboard-page .hero-copy h1 span {
+  color: #c29cff !important;
 }
 
-html[data-lifeos-theme="dark"] .hero-quote {
-  color: #eee4f6 !important;
+.dashboard-page .hero-copy p {
+  color: #a79caf !important;
 }
 
-html[data-lifeos-theme="dark"] .hero-quote small {
-  color: #a99ab5 !important;
+.dashboard-page .hero-art {
+  background:
+    radial-gradient(circle at 70% 22%, rgba(255,210,126,.18), transparent 13%),
+    radial-gradient(circle at 48% 12%, rgba(177,119,255,.14), transparent 26%),
+    linear-gradient(135deg,#2d2144 0%,#332345 55%,#3c2a43 100%) !important;
 }
 
-/* Metrics */
-html[data-lifeos-theme="dark"] .metric-card {
-  border-color: rgba(205,168,255,.11) !important;
-  box-shadow: 0 18px 46px rgba(0,0,0,.22) !important;
+.dashboard-page .hero-sun {
+  background:
+    radial-gradient(circle,#fff0c2 0 20%,rgba(255,208,126,.34) 48%,transparent 72%) !important;
 }
 
-html[data-lifeos-theme="dark"] .metric-purple {
-  background: linear-gradient(145deg,rgba(45,33,64,.96),rgba(56,39,78,.88)) !important;
-}
-html[data-lifeos-theme="dark"] .metric-pink {
-  background: linear-gradient(145deg,rgba(48,28,52,.96),rgba(72,34,61,.88)) !important;
-}
-html[data-lifeos-theme="dark"] .metric-orange {
-  background: linear-gradient(145deg,rgba(50,38,35,.96),rgba(68,47,39,.88)) !important;
-}
-html[data-lifeos-theme="dark"] .metric-green {
-  background: linear-gradient(145deg,rgba(27,45,43,.96),rgba(34,58,51,.88)) !important;
+.dashboard-page .hero-mountain.back {
+  background: linear-gradient(180deg,#66547e,#493b5e) !important;
+  opacity: .78 !important;
 }
 
-html[data-lifeos-theme="dark"] .metric-card strong,
-html[data-lifeos-theme="dark"] .metric-card span,
-html[data-lifeos-theme="dark"] .metric-card > b {
-  color: #f3eafa !important;
+.dashboard-page .hero-mountain.front {
+  background: linear-gradient(180deg,#493755,#30263e) !important;
+  opacity: .92 !important;
 }
 
-html[data-lifeos-theme="dark"] .metric-card span {
-  color: #9c8fa8 !important;
+.dashboard-page .hero-quote {
+  color: #e8dfef !important;
 }
 
-html[data-lifeos-theme="dark"] .metric-purple .metric-icon { background: rgba(139,92,246,.18) !important; color: #c5a4ff !important; }
-html[data-lifeos-theme="dark"] .metric-pink .metric-icon { background: rgba(236,72,153,.15) !important; color: #ff9bc9 !important; }
-html[data-lifeos-theme="dark"] .metric-orange .metric-icon { background: rgba(245,158,11,.14) !important; color: #ffd27d !important; }
-html[data-lifeos-theme="dark"] .metric-green .metric-icon { background: rgba(24,185,129,.14) !important; color: #78e0bc !important; }
-
-/* Main cards */
-html[data-lifeos-theme="dark"] .dashboard-card,
-html[data-lifeos-theme="dark"] .tasks-card,
-html[data-lifeos-theme="dark"] .events-card,
-html[data-lifeos-theme="dark"] .focus-card,
-html[data-lifeos-theme="dark"] .habits-card,
-html[data-lifeos-theme="dark"] .quote-card,
-html[data-lifeos-theme="dark"] .music-card,
-html[data-lifeos-theme="dark"] .bottom-banner {
-  border-color: rgba(205,168,255,.11) !important;
-  box-shadow: 0 20px 52px rgba(0,0,0,.24) !important;
+.dashboard-page .hero-quote small {
+  color: #988ba4 !important;
 }
 
-html[data-lifeos-theme="dark"] .dashboard-card {
-  background: linear-gradient(145deg,rgba(30,23,44,.94),rgba(39,27,52,.88)) !important;
+/* ================= METRICS ================= */
+
+.dashboard-page .metric-card {
+  border-color: rgba(202,168,255,.12) !important;
+  box-shadow:
+    0 18px 42px rgba(5,3,12,.22),
+    inset 0 1px 0 rgba(255,255,255,.035) !important;
+  backdrop-filter: blur(20px);
 }
 
-html[data-lifeos-theme="dark"] .tasks-card {
-  background: linear-gradient(145deg,rgba(31,24,47,.96),rgba(39,28,56,.88)) !important;
+.dashboard-page .metric-purple {
+  background: linear-gradient(145deg,rgba(43,31,65,.94),rgba(51,37,78,.88)) !important;
 }
 
-html[data-lifeos-theme="dark"] .events-card {
-  background: linear-gradient(145deg,rgba(37,24,45,.96),rgba(48,28,51,.88)) !important;
+.dashboard-page .metric-pink {
+  background: linear-gradient(145deg,rgba(47,30,58,.94),rgba(63,38,67,.88)) !important;
 }
 
-html[data-lifeos-theme="dark"] .focus-card {
-  background: linear-gradient(145deg,rgba(38,29,48,.96),rgba(51,35,48,.88)) !important;
+.dashboard-page .metric-orange {
+  background: linear-gradient(145deg,rgba(49,35,48,.94),rgba(64,45,55,.88)) !important;
 }
 
-html[data-lifeos-theme="dark"] .quote-card {
-  background: linear-gradient(145deg,#302345,#42263d) !important;
+.dashboard-page .metric-green {
+  background: linear-gradient(145deg,rgba(31,43,47,.94),rgba(37,57,57,.88)) !important;
 }
 
-html[data-lifeos-theme="dark"] .music-card {
-  background: linear-gradient(145deg,#171124,#34204b) !important;
+.dashboard-page .metric-card strong {
+  color: #f4eff9 !important;
 }
 
-html[data-lifeos-theme="dark"] .card-heading h2,
-html[data-lifeos-theme="dark"] .section-label,
-html[data-lifeos-theme="dark"] .dashboard-card strong,
-html[data-lifeos-theme="dark"] .dashboard-card h3 {
-  color: #f2eafa !important;
+.dashboard-page .metric-card span {
+  color: #968aa2 !important;
 }
 
-html[data-lifeos-theme="dark"] .section-label,
-html[data-lifeos-theme="dark"] .card-label {
-  color: #95869f !important;
+.dashboard-page .metric-card > b {
+  color: #b797ff !important;
 }
 
-html[data-lifeos-theme="dark"] .link-button {
-  color: #c69aff !important;
+.dashboard-page .metric-pink > b {
+  color: #e39ac8 !important;
 }
 
-html[data-lifeos-theme="dark"] .link-button:hover {
-  color: #ff9dcc !important;
+.dashboard-page .metric-orange > b {
+  color: #e4ad72 !important;
 }
 
-/* Tasks / events */
-html[data-lifeos-theme="dark"] .task-row {
-  background: rgba(255,255,255,.045) !important;
-  border-color: rgba(205,168,255,.08) !important;
-  color: #eee6f4 !important;
+.dashboard-page .metric-green > b {
+  color: #78c5a5 !important;
 }
 
-html[data-lifeos-theme="dark"] .task-row:hover {
-  background: rgba(255,255,255,.075) !important;
-  box-shadow: 0 8px 24px rgba(0,0,0,.18) !important;
+.dashboard-page .metric-purple .metric-icon {
+  background: rgba(155,108,255,.15) !important;
+  color: #b797ff !important;
 }
 
-html[data-lifeos-theme="dark"] .task-info span,
-html[data-lifeos-theme="dark"] .task-info strong {
-  color: #eee7f4 !important;
+.dashboard-page .metric-pink .metric-icon {
+  background: rgba(226,117,181,.14) !important;
+  color: #e9a1ce !important;
 }
 
-html[data-lifeos-theme="dark"] .task-info small,
-html[data-lifeos-theme="dark"] .task-time,
-html[data-lifeos-theme="dark"] .task-menu {
-  color: #91839d !important;
+.dashboard-page .metric-orange .metric-icon {
+  background: rgba(226,166,100,.14) !important;
+  color: #e6b37c !important;
 }
 
-html[data-lifeos-theme="dark"] .task-check {
-  border-color: #8566ad !important;
+.dashboard-page .metric-green .metric-icon {
+  background: rgba(72,177,139,.14) !important;
+  color: #83d0ae !important;
 }
 
-html[data-lifeos-theme="dark"] .event-row {
-  border-bottom-color: rgba(205,168,255,.07) !important;
+.dashboard-page .progress-ring,
+.dashboard-page .habit-ring {
+  background: conic-gradient(#75c9a5 var(--progress), #35433f 0) !important;
 }
 
-html[data-lifeos-theme="dark"] .event-row strong {
-  color: #eee7f4 !important;
+.dashboard-page .progress-ring span,
+.dashboard-page .habit-ring span {
+  background: #211b31 !important;
+  color: #9bd7bd !important;
 }
 
-html[data-lifeos-theme="dark"] .event-row small,
-html[data-lifeos-theme="dark"] .event-row > span {
-  color: #91839d !important;
+/* ================= MAIN CARDS ================= */
+
+.dashboard-page .dashboard-card {
+  background:
+    linear-gradient(145deg,rgba(39,29,59,.94),rgba(31,23,48,.90)) !important;
+  border-color: rgba(202,168,255,.12) !important;
+  box-shadow:
+    0 20px 52px rgba(5,3,12,.25),
+    inset 0 1px 0 rgba(255,255,255,.025) !important;
+  backdrop-filter: blur(20px);
 }
 
-html[data-lifeos-theme="dark"] .event-icon.purple { color:#c4a0ff !important; background:rgba(139,92,246,.14) !important; }
-html[data-lifeos-theme="dark"] .event-icon.pink { color:#ff9bc9 !important; background:rgba(236,72,153,.13) !important; }
-html[data-lifeos-theme="dark"] .event-icon.orange { color:#ffd17b !important; background:rgba(245,158,11,.12) !important; }
-
-html[data-lifeos-theme="dark"] .empty-state small,
-html[data-lifeos-theme="dark"] .empty-state strong {
-  color: #b0a2b9 !important;
+.dashboard-page .tasks-card {
+  background:
+    linear-gradient(145deg,rgba(40,29,61,.96),rgba(31,23,48,.92)) !important;
 }
 
-html[data-lifeos-theme="dark"] .empty-state strong {
-  color: #f0e7f5 !important;
+.dashboard-page .events-card {
+  background:
+    linear-gradient(145deg,rgba(43,29,57,.96),rgba(32,23,47,.92)) !important;
 }
 
-html[data-lifeos-theme="dark"] .empty-orb {
-  background: linear-gradient(135deg,rgba(139,92,246,.18),rgba(236,72,153,.14)) !important;
-  color: #c69aff !important;
+.dashboard-page .calendar-card {
+  background:
+    linear-gradient(145deg,rgba(40,30,60,.96),rgba(31,24,48,.92)) !important;
 }
 
-html[data-lifeos-theme="dark"] .primary-action,
-html[data-lifeos-theme="dark"] .add-button {
-  background: linear-gradient(135deg,#7650dc,#b23f8c) !important;
-  box-shadow: 0 10px 25px rgba(118,80,220,.24) !important;
+.dashboard-page .focus-card {
+  background:
+    linear-gradient(145deg,rgba(45,31,55,.96),rgba(34,25,47,.92)) !important;
 }
 
-/* Calendar */
-html[data-lifeos-theme="dark"] .calendar-card {
-  background: linear-gradient(145deg,rgba(31,24,46,.96),rgba(42,29,55,.88)) !important;
+.dashboard-page .quote-card {
+  background:
+    linear-gradient(145deg,rgba(46,31,64,.96),rgba(35,25,52,.92)) !important;
 }
 
-html[data-lifeos-theme="dark"] .calendar-arrows button,
-html[data-lifeos-theme="dark"] .calendar-today-button {
-  background: rgba(139,92,246,.13) !important;
-  color: #c5a4ff !important;
+.dashboard-page .music-card {
+  background:
+    linear-gradient(145deg,#21172f,#35234e) !important;
 }
 
-html[data-lifeos-theme="dark"] .calendar-week span {
-  color: #887a96 !important;
+.dashboard-page .section-label,
+.dashboard-page .card-label {
+  color: #8f829d !important;
 }
 
-html[data-lifeos-theme="dark"] .calendar-grid span {
-  color: #b4a8bd !important;
+.dashboard-page .card-heading h2 {
+  color: #f2edf8 !important;
 }
 
-html[data-lifeos-theme="dark"] .calendar-grid span.today {
-  background: linear-gradient(135deg,#7650d9,#b23f8c) !important;
-  color: white !important;
-  box-shadow: 0 5px 16px rgba(118,80,217,.30) !important;
+.dashboard-page .link-button {
+  color: #b595ff !important;
+  background: transparent !important;
+  box-shadow: none !important;
 }
 
-html[data-lifeos-theme="dark"] .calendar-grid span.selected-day {
-  outline-color: rgba(255,151,202,.58) !important;
+.dashboard-page .link-button:hover {
+  color: #e2a5d1 !important;
 }
 
-html[data-lifeos-theme="dark"] .selected-date-reminders {
-  background: rgba(255,255,255,.045) !important;
-  border-color: rgba(205,168,255,.09) !important;
-  box-shadow: 0 10px 30px rgba(0,0,0,.18) !important;
+/* ================= TASKS ================= */
+
+.dashboard-page .task-row {
+  background: rgba(255,255,255,.035) !important;
+  border-color: rgba(202,168,255,.08) !important;
+  color: #eee8f5 !important;
 }
 
-html[data-lifeos-theme="dark"] .selected-date-count {
-  background: rgba(236,72,153,.13) !important;
-  color: #ff9bc9 !important;
+.dashboard-page .task-row:hover {
+  background: rgba(155,108,255,.075) !important;
+  border-color: rgba(202,168,255,.15) !important;
+  box-shadow: 0 8px 24px rgba(7,4,15,.22) !important;
 }
 
-html[data-lifeos-theme="dark"] .selected-date-empty,
-html[data-lifeos-theme="dark"] .selected-date-reminder {
-  background: rgba(255,255,255,.04) !important;
+.dashboard-page .task-info span,
+.dashboard-page .task-info strong {
+  color: #eee8f5 !important;
 }
 
-html[data-lifeos-theme="dark"] .selected-date-empty > span,
-html[data-lifeos-theme="dark"] .selected-reminder-icon {
-  background: rgba(236,72,153,.11) !important;
-  color: #ff91c4 !important;
+.dashboard-page .task-info small,
+.dashboard-page .task-time {
+  color: #8f849d !important;
 }
 
-html[data-lifeos-theme="dark"] .selected-date-empty strong,
-html[data-lifeos-theme="dark"] .selected-date-reminder strong {
-  color: #eee5f3 !important;
+.dashboard-page .task-check {
+  border-color: #77628e !important;
 }
 
-html[data-lifeos-theme="dark"] .selected-date-empty small,
-html[data-lifeos-theme="dark"] .selected-date-reminder small {
-  color: #95879e !important;
+.dashboard-page .task-check.checked {
+  background: linear-gradient(135deg,#8257ef,#bd72d2) !important;
 }
 
-/* Focus */
-html[data-lifeos-theme="dark"] .focus-art {
-  background: linear-gradient(180deg,#2c2242,#21192f) !important;
+.dashboard-page .task-menu {
+  color: #756b80 !important;
 }
 
-html[data-lifeos-theme="dark"] .focus-mountain.back { background: #514267 !important; }
-html[data-lifeos-theme="dark"] .focus-mountain.front { background: #34283f !important; }
-html[data-lifeos-theme="dark"] .focus-overlay { background: linear-gradient(180deg,rgba(139,92,246,.04),rgba(0,0,0,.25)) !important; }
-html[data-lifeos-theme="dark"] .focus-content .section-label { color: #b09dbd !important; }
-html[data-lifeos-theme="dark"] .focus-content strong { color: #fff7ff !important; }
-html[data-lifeos-theme="dark"] .focus-content button { background: linear-gradient(135deg,#7650dc,#b23f8c) !important; }
-html[data-lifeos-theme="dark"] .focus-tabs button.selected { color:#d1adff !important; background:rgba(139,92,246,.13) !important; }
-html[data-lifeos-theme="dark"] .focus-tabs button,
-html[data-lifeos-theme="dark"] .focus-today { color:#94859d !important; }
-
-/* Habits */
-html[data-lifeos-theme="dark"] .habit-summary {
-  background: rgba(255,255,255,.045) !important;
-}
-html[data-lifeos-theme="dark"] .habit-summary small { color:#93859e !important; }
-html[data-lifeos-theme="dark"] .habit-row { border-bottom-color:rgba(205,168,255,.06) !important; }
-html[data-lifeos-theme="dark"] .habit-row strong { color:#eee6f3 !important; }
-html[data-lifeos-theme="dark"] .habit-days i { background:#3b3441 !important; }
-html[data-lifeos-theme="dark"] .habit-days i.done { background:#2bbd91 !important; }
-
-/* Quote / music */
-html[data-lifeos-theme="dark"] .quote-content span,
-html[data-lifeos-theme="dark"] .music-content span { color:#a998b5 !important; }
-html[data-lifeos-theme="dark"] .quote-content strong { color:#f4eafa !important; }
-html[data-lifeos-theme="dark"] .quote-art { background:radial-gradient(circle at 78% 28%,rgba(255,224,160,.18) 0 7%,transparent 18%),linear-gradient(180deg,rgba(139,92,246,.08),rgba(0,0,0,.08)) !important; }
-html[data-lifeos-theme="dark"] .quote-art::after { background:linear-gradient(180deg,#5e4a70,#392c48) !important; }
-html[data-lifeos-theme="dark"] .music-content small { color:#a99ab4 !important; }
-html[data-lifeos-theme="dark"] .music-controls button { color:#47336c !important; background:#f7efff !important; }
-
-/* Buttons / panels / overlays */
-html[data-lifeos-theme="dark"] .lifeos-panel-overlay,
-html[data-lifeos-theme="dark"] .modal-overlay {
-  background: rgba(4,2,9,.68) !important;
+.dashboard-page .completed-row {
+  opacity: .48;
 }
 
-html[data-lifeos-theme="dark"] .lifeos-premium-panel,
-html[data-lifeos-theme="dark"] .lifeos-notification-panel,
-html[data-lifeos-theme="dark"] .lifeos-consistency-panel,
-html[data-lifeos-theme="dark"] .task-modal {
-  background: linear-gradient(145deg,#21172e,#2b1b35) !important;
-  border-color: rgba(205,168,255,.13) !important;
-  color: #f4ebfa !important;
-  box-shadow: 0 28px 75px rgba(0,0,0,.42) !important;
+.dashboard-page .empty-state strong {
+  color: #eee8f5 !important;
 }
 
-html[data-lifeos-theme="dark"] .lifeos-panel-header,
-html[data-lifeos-theme="dark"] .lifeos-notification-header,
-html[data-lifeos-theme="dark"] .lifeos-consistency-top,
-html[data-lifeos-theme="dark"] .modal-header {
-  border-bottom-color: rgba(205,168,255,.09) !important;
+.dashboard-page .empty-state small {
+  color: #8f849d !important;
 }
 
-html[data-lifeos-theme="dark"] .lifeos-premium-panel h2,
-html[data-lifeos-theme="dark"] .lifeos-premium-panel h3,
-html[data-lifeos-theme="dark"] .lifeos-notification-panel h3,
-html[data-lifeos-theme="dark"] .lifeos-consistency-panel h3,
-html[data-lifeos-theme="dark"] .modal-header h2,
-html[data-lifeos-theme="dark"] .modal-header h3 {
-  color:#f7effb !important;
+.dashboard-page .empty-orb {
+  color: #c09dff !important;
+  background: linear-gradient(135deg,rgba(155,108,255,.15),rgba(215,128,194,.12)) !important;
 }
 
-html[data-lifeos-theme="dark"] .lifeos-notification-item,
-html[data-lifeos-theme="dark"] .lifeos-settings-list button,
-html[data-lifeos-theme="dark"] .lifeos-consistency-tip {
-  background: rgba(255,255,255,.045) !important;
-  border-color: rgba(205,168,255,.08) !important;
-  color:#eee6f4 !important;
+.dashboard-page .primary-action {
+  background: linear-gradient(135deg,#7c55ed,#a969df) !important;
+  box-shadow: 0 9px 25px rgba(111,68,185,.28) !important;
 }
 
-html[data-lifeos-theme="dark"] .lifeos-notification-item:hover,
-html[data-lifeos-theme="dark"] .lifeos-settings-list button:hover {
-  background: rgba(255,255,255,.075) !important;
+/* ================= EVENTS ================= */
+
+.dashboard-page .event-row {
+  border-bottom-color: rgba(255,255,255,.07) !important;
 }
 
-html[data-lifeos-theme="dark"] .lifeos-notification-copy small,
-html[data-lifeos-theme="dark"] .lifeos-notification-empty small,
-html[data-lifeos-theme="dark"] .lifeos-settings-note {
-  color:#95879f !important;
+.dashboard-page .event-row strong {
+  color: #eee8f5 !important;
 }
 
-html[data-lifeos-theme="dark"] .lifeos-notification-footer {
-  color:#c69aff !important;
-  border-top-color:rgba(205,168,255,.08) !important;
+.dashboard-page .event-row small,
+.dashboard-page .event-row > span {
+  color: #8f849d !important;
 }
 
-html[data-lifeos-theme="dark"] .lifeos-panel-close,
-html[data-lifeos-theme="dark"] .modal-close {
-  background:rgba(255,255,255,.06) !important;
-  color:#d6c8df !important;
-  border-color:rgba(255,255,255,.08) !important;
+.dashboard-page .event-icon.purple {
+  color: #bd9dff !important;
+  background: rgba(155,108,255,.13) !important;
 }
 
-/* Global search in dark mode */
-html[data-lifeos-theme="dark"] .lifeos-global-search-dropdown {
-  background: linear-gradient(145deg,#241531 0%,#382044 52%,#52253e 100%) !important;
-  border-color: rgba(244,114,182,.28) !important;
-  box-shadow: 0 24px 60px rgba(0,0,0,.40) !important;
+.dashboard-page .event-icon.pink {
+  color: #e4a0cc !important;
+  background: rgba(226,117,181,.12) !important;
 }
 
-/* Toast */
-html[data-lifeos-theme="dark"] .lifeos-toast {
-  background: rgba(31,20,43,.96) !important;
-  border-color: rgba(180,139,246,.20) !important;
+.dashboard-page .event-icon.orange {
+  color: #e7b47d !important;
+  background: rgba(226,166,100,.12) !important;
+}
+
+/* ================= CALENDAR ================= */
+
+.dashboard-page .calendar-arrows button {
+  color: #b99cff !important;
+  background: rgba(155,108,255,.10) !important;
+}
+
+.dashboard-page .calendar-week span {
+  color: #7f748d !important;
+}
+
+.dashboard-page .calendar-grid span {
+  color: #a79bab !important;
+}
+
+.dashboard-page .calendar-grid span.today {
+  background: linear-gradient(135deg,#8157ed,#a86ad9) !important;
+  color: #fff !important;
+  box-shadow: 0 5px 18px rgba(119,75,194,.32) !important;
+}
+
+.dashboard-page .calendar-grid span.selected-day {
+  outline-color: rgba(205,160,255,.62) !important;
+}
+
+.dashboard-page .selected-date-reminders {
+  background: rgba(255,255,255,.035) !important;
+  border-color: rgba(202,168,255,.10) !important;
+  box-shadow: 0 10px 30px rgba(5,3,12,.20) !important;
+}
+
+.dashboard-page .selected-date-heading h3,
+.dashboard-page .selected-date-empty strong,
+.dashboard-page .selected-date-reminder strong {
+  color: #eee8f5 !important;
+}
+
+.dashboard-page .selected-date-count {
+  background: rgba(226,117,181,.13) !important;
+  color: #e3a1ca !important;
+}
+
+.dashboard-page .selected-date-empty,
+.dashboard-page .selected-date-reminder {
+  background: rgba(255,255,255,.035) !important;
+}
+
+.dashboard-page .selected-date-empty > span {
+  background: rgba(226,117,181,.10) !important;
+  color: #e3a1ca !important;
+}
+
+.dashboard-page .selected-date-empty small,
+.dashboard-page .selected-date-reminder small {
+  color: #9a8da4 !important;
+}
+
+.dashboard-page .selected-reminder-icon {
+  background: linear-gradient(135deg,rgba(226,117,181,.12),rgba(155,108,255,.12)) !important;
+  color: #e2a1cc !important;
+}
+
+.dashboard-page .calendar-today-button {
+  background: rgba(226,117,181,.10) !important;
+  color: #e3a1ca !important;
+}
+
+/* ================= FOCUS ================= */
+
+.dashboard-page .focus-art {
+  background: linear-gradient(180deg,#312344,#21192e) !important;
+}
+
+.dashboard-page .focus-mountain.back {
+  background: #59466e !important;
+}
+
+.dashboard-page .focus-mountain.front {
+  background: #392b49 !important;
+}
+
+.dashboard-page .focus-overlay {
+  background: linear-gradient(180deg,rgba(36,25,55,.08),rgba(12,8,20,.38)) !important;
+}
+
+.dashboard-page .focus-content .section-label {
+  color: #a99bb6 !important;
+}
+
+.dashboard-page .focus-content strong {
+  color: #f4eef9 !important;
+}
+
+.dashboard-page .focus-content button {
+  background: linear-gradient(135deg,#7c55ed,#a66bd7) !important;
+  box-shadow: 0 8px 22px rgba(104,62,176,.28) !important;
+}
+
+.dashboard-page .focus-tabs button {
+  color: #82758e !important;
+}
+
+.dashboard-page .focus-tabs button.selected {
+  color: #c09dff !important;
+  background: rgba(155,108,255,.11) !important;
+}
+
+/* ================= HABITS ================= */
+
+.dashboard-page .habit-summary {
+  background: rgba(255,255,255,.035) !important;
+}
+
+.dashboard-page .habit-summary strong {
+  color: #eee8f5 !important;
+}
+
+.dashboard-page .habit-summary small {
+  color: #8f849d !important;
+}
+
+.dashboard-page .habit-row {
+  border-bottom-color: rgba(255,255,255,.055) !important;
+}
+
+.dashboard-page .habit-row strong {
+  color: #ddd4e8 !important;
+}
+
+.dashboard-page .habit-days i {
+  background: #393242 !important;
+}
+
+.dashboard-page .habit-days i.done {
+  background: #65bd98 !important;
+  box-shadow: 0 2px 7px rgba(70,170,130,.20) !important;
+}
+
+.dashboard-page .dot-0 { background: rgba(74,183,143,.13) !important; }
+.dashboard-page .dot-1 { background: rgba(155,108,255,.13) !important; }
+.dashboard-page .dot-2 { background: rgba(226,117,181,.12) !important; }
+.dashboard-page .dot-3 { background: rgba(226,166,100,.12) !important; }
+
+/* ================= QUOTE / MUSIC ================= */
+
+.dashboard-page .quote-art {
+  background:
+    radial-gradient(circle at 78% 28%,rgba(255,220,153,.18) 0 7%,transparent 18%),
+    linear-gradient(180deg,rgba(155,108,255,.05),rgba(15,9,26,.20)) !important;
+}
+
+.dashboard-page .quote-art::after,
+.dashboard-page .music-mountain {
+  background: linear-gradient(180deg,#675477,#382b48) !important;
+  opacity: .72 !important;
+}
+
+.dashboard-page .quote-content span,
+.dashboard-page .music-content span {
+  color: #8f829d !important;
+}
+
+.dashboard-page .quote-content strong {
+  color: #eee8f5 !important;
+}
+
+.dashboard-page .music-card {
+  color: #f5effa !important;
+}
+
+.dashboard-page .music-content span {
+  color: #bbaed0 !important;
+}
+
+.dashboard-page .music-content small {
+  color: #a69ab5 !important;
+}
+
+.dashboard-page .music-controls button {
+  color: #4d396d !important;
+  background: #f4edf9 !important;
+}
+
+.dashboard-page .music-controls span {
+  background: linear-gradient(90deg,#b995ff 52%,rgba(255,255,255,.10) 52%) !important;
+}
+
+/* ================= BOTTOM ================= */
+
+.dashboard-page .bottom-banner {
+  background: rgba(35,26,54,.76) !important;
+  border-color: rgba(202,168,255,.10) !important;
+  box-shadow: 0 10px 30px rgba(5,3,12,.18) !important;
+}
+
+.dashboard-page .bottom-banner strong {
+  color: #bdb2ca !important;
+}
+
+.dashboard-page .bottom-banner button {
+  color: #b595ff !important;
+}
+
+/* ================= SEARCH DROPDOWN ================= */
+
+.dashboard-page .lifeos-global-search-dropdown {
+  background:
+    linear-gradient(145deg,#241532 0%,#35204d 52%,#492542 100%) !important;
+  border-color: rgba(202,168,255,.22) !important;
+  box-shadow: 0 22px 55px rgba(5,2,12,.42) !important;
+}
+
+.dashboard-page .lifeos-search-recent-item,
+.dashboard-page .lifeos-search-result-item {
+  background: rgba(255,255,255,.055) !important;
+}
+
+.dashboard-page .lifeos-search-recent-item:hover,
+.dashboard-page .lifeos-search-result-item:hover {
+  background: rgba(155,108,255,.13) !important;
+}
+
+.dashboard-page .lifeos-search-heading {
+  color: rgba(235,225,245,.68) !important;
+}
+
+/* ================= TOAST ================= */
+
+.dashboard-page .lifeos-toast {
+  background: rgba(27,18,42,.95) !important;
+  border-color: rgba(174,126,255,.20) !important;
+  box-shadow: 0 18px 45px rgba(5,2,12,.42) !important;
+}
+
+.dashboard-page .lifeos-toast span {
+  background: #8158ec !important;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 950px) {
+  .dashboard-page .sidebar {
+    background: linear-gradient(180deg,#171025,#281936) !important;
+  }
 }
 
 @media (max-width: 720px) {
-  .theme-toggle {
-    min-width: 40px;
-    width: 40px;
-    padding: 0;
-  }
-
-  .theme-toggle-text {
-    display: none;
+  .dashboard-page .sidebar {
+    border-bottom: 1px solid rgba(190,145,255,.10) !important;
   }
 }
+
+
 /* =========================================================
-   LIFEOS — PREMIUM MOBILE APP LAYOUT
-   Left navigation rail + top-right controls
+   LIFEOS — PREMIUM MOBILE DASHBOARD / DRAWER
+   Desktop styles above remain untouched.
    ========================================================= */
 
-@media (max-width: 720px) {
+.mobile-menu-trigger,
+.mobile-drawer-backdrop,
+.mobile-theme-menu-item {
+  display: none;
+}
 
-  /* PAGE */
+@media (max-width: 720px) {
   .dashboard-page {
     display: block !important;
     min-height: 100vh;
-    width: 100%;
-  }
-
-  /* =======================================================
-     LEFT NAVIGATION RAIL
-     ======================================================= */
-
-  .sidebar {
-    position: fixed !important;
-
-    top: 0 !important;
-    left: 0 !important;
-    bottom: 0 !important;
-
-    width: 76px !important;
-    min-height: 100vh !important;
-    height: 100vh !important;
-
-    padding: 16px 9px !important;
-    box-sizing: border-box;
-
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-
-    background:
-      linear-gradient(
-        180deg,
-        rgba(103, 50, 160, 0.98),
-        rgba(126, 56, 157, 0.96)
-      ) !important;
-
-    border-right: 1px solid rgba(255,255,255,.14) !important;
-    border-radius: 0 !important;
-
-    box-shadow:
-      10px 0 35px rgba(66, 25, 100, .14);
-
-    z-index: 999;
-  }
-
-
-  /* =======================================================
-     BRAND
-     ======================================================= */
-
-  .brand {
-    width: 100% !important;
-
-    padding: 0 !important;
-    margin: 0 0 20px !important;
-
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-  }
-
-  .brand-mark {
-    width: 45px !important;
-    height: 45px !important;
-
-    border-radius: 14px !important;
-
-    display: flex !important;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 20px !important;
-    font-weight: 800;
-
-    background:
-      linear-gradient(
-        145deg,
-        #a878ff,
-        #70c4ff
-      ) !important;
-
-    box-shadow:
-      0 10px 28px rgba(80,50,160,.30);
-  }
-
-  .brand > div:last-child {
-    display: none !important;
-  }
-
-
-  /* =======================================================
-     NAV
-     ======================================================= */
-
-  .sidebar-nav {
-    width: 100% !important;
-
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-
-    gap: 7px !important;
-
-    overflow-y: auto !important;
-    overflow-x: hidden !important;
-
-    scrollbar-width: none;
-  }
-
-  .sidebar-nav::-webkit-scrollbar {
-    display: none;
-  }
-
-
-  .nav-item {
-    position: relative;
-
-    width: 50px !important;
-    min-width: 50px !important;
-    height: 48px !important;
-
-    padding: 0 !important;
-    margin: 0 !important;
-
-    flex: 0 0 48px !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-
-    border-radius: 15px !important;
-
-    background: transparent !important;
-    border: 1px solid transparent !important;
-
-    color: rgba(255,255,255,.68) !important;
-  }
-
-
-  .nav-item:hover {
-    background: rgba(255,255,255,.08) !important;
-  }
-
-
-  .nav-item.active {
-    background:
-      rgba(255,255,255,.18) !important;
-
-    border-color:
-      rgba(255,255,255,.16) !important;
-
-    color: #fff !important;
-
-    box-shadow:
-      inset 0 1px rgba(255,255,255,.18),
-      0 8px 22px rgba(45,15,75,.16);
-  }
-
-
-  .nav-icon {
-    font-size: 19px !important;
-    line-height: 1 !important;
-  }
-
-
-  .nav-item > span:not(.nav-icon):not(.nav-active-dot) {
-    display: none !important;
-  }
-
-  .nav-active-dot {
-    display: none !important;
-  }
-
-
-  /* =======================================================
-     REMOVE SIDEBAR EXTRAS
-     ======================================================= */
-
-  .quick-actions,
-  .sidebar-bottom,
-  .sidebar-profile {
-    display: none !important;
-  }
-
-
-  /* =======================================================
-     MAIN
-     ======================================================= */
-
-  .dashboard-main {
-    width: calc(100% - 76px) !important;
-
-    margin-left: 76px !important;
-
-    padding: 11px 14px 30px !important;
-
-    box-sizing: border-box;
-  }
-
-
-  /* =======================================================
-     TOP BAR
-     ======================================================= */
-
-  .topbar {
-    width: 100% !important;
-
-    height: auto !important;
-    min-height: 46px !important;
-
-    margin-bottom: 12px !important;
-
-    display: flex !important;
-    align-items: center !important;
-
-    gap: 7px !important;
-  }
-
-
-  .search-box {
-    flex: 1 !important;
-
-    width: auto !important;
-    min-width: 0 !important;
-
-    height: 44px !important;
-
-    border-radius: 14px !important;
-  }
-
-
-  .top-actions {
-    display: flex !important;
-
-    align-items: center !important;
-
-    gap: 6px !important;
-
-    flex-shrink: 0 !important;
-  }
-
-
-  .lifeos-notification-wrap {
-    display: flex !important;
-  }
-
-
-  .top-icon {
-    width: 40px !important;
-    height: 40px !important;
-
-    border-radius: 12px !important;
-  }
-
-
-  .theme-toggle {
-    width: 40px !important;
-    min-width: 40px !important;
-    height: 40px !important;
-
-    padding: 0 !important;
-
-    border-radius: 12px !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-
-
-  .theme-toggle-text {
-    display: none !important;
-  }
-
-
-  .top-profile {
-    width: 40px !important;
-    min-width: 40px !important;
-    height: 40px !important;
-
-    padding: 0 !important;
-
-    border-radius: 50% !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-
-
-  .consistency {
-    display: none !important;
-  }
-
-
-  /* =======================================================
-     HERO
-     ======================================================= */
-
-  .hero-panel {
-    min-height: 245px !important;
-
-    border-radius: 23px !important;
-
-    overflow: hidden;
-  }
-
-  .hero-copy {
-    padding: 22px !important;
-  }
-
-  .hero-copy h1 {
-    font-size: clamp(30px, 7vw, 38px) !important;
-    line-height: 1.03 !important;
-  }
-
-  .hero-copy p {
-    font-size: 13px !important;
-    line-height: 1.5 !important;
-  }
-
-
-  .hero-art {
-    inset: 43% 0 0 !important;
-  }
-
-
-  /* =======================================================
-     METRICS
-     ======================================================= */
-
-  .metric-grid {
-    display: grid !important;
-
-    grid-template-columns:
-      repeat(2, minmax(0, 1fr)) !important;
-
-    gap: 9px !important;
-  }
-
-
-  .metric-card {
-    min-width: 0 !important;
-
-    padding: 15px !important;
-
-    border-radius: 19px !important;
-  }
-
-}
-
-
-/* =========================================================
-   VERY SMALL PHONES
-   ========================================================= */
-
-@media (max-width: 480px) {
-
-  .sidebar {
-    width: 68px !important;
-    padding: 12px 7px !important;
-  }
-
-  .brand-mark {
-    width: 42px !important;
-    height: 42px !important;
-  }
-
-  .sidebar-nav {
-    gap: 5px !important;
-  }
-
-  .nav-item {
-    width: 46px !important;
-    min-width: 46px !important;
-    height: 45px !important;
-    flex-basis: 45px !important;
-    border-radius: 14px !important;
-  }
-
-  .nav-icon {
-    font-size: 18px !important;
-  }
-
-  .dashboard-main {
-    width: calc(100% - 68px) !important;
-    margin-left: 68px !important;
-    padding: 9px 10px 28px !important;
-  }
-
-  .topbar {
-    gap: 5px !important;
-  }
-
-  .search-box {
-    height: 41px !important;
-  }
-
-  .top-icon,
-  .theme-toggle,
-  .top-profile {
-    width: 37px !important;
-    min-width: 37px !important;
-    height: 37px !important;
-  }
-
-  .hero-panel {
-    min-height: 230px !important;
-    border-radius: 21px !important;
-  }
-
-  .hero-copy {
-    padding: 19px !important;
-  }
-
-  .hero-copy h1 {
-    font-size: 30px !important;
-  }
-
-  .metric-grid {
-    gap: 8px !important;
-  }
-
-  .metric-card {
-    padding: 13px !important;
-    border-radius: 17px !important;
-  }
-
-}
-/* =========================================================
-   PREMIUM MOBILE POLISH
-   ========================================================= */
-
-@media (max-width: 720px) {
-
-  /* ---------- LEFT NAV ---------- */
-
-  .sidebar {
-    width: 88px !important;
-  }
-
-  .dashboard-main {
-    width: calc(100% - 88px) !important;
-    margin-left: 88px !important;
-  }
-
-  .sidebar-nav {
-    gap: 6px !important;
-  }
-
-  .nav-item {
-    width: 64px !important;
-    min-width: 64px !important;
-    height: 52px !important;
-    flex-basis: 52px !important;
-
-    flex-direction: column !important;
-    gap: 3px !important;
-
-    justify-content: center !important;
-  }
-
-  .nav-icon {
-    font-size: 17px !important;
-    line-height: 1 !important;
-  }
-
-  /* Show the navigation name under the icon */
-  .nav-item > span:not(.nav-icon):not(.nav-active-dot) {
-    display: block !important;
-
-    font-size: 7px !important;
-    line-height: 1 !important;
-
-    font-weight: 700 !important;
-    letter-spacing: .04em !important;
-
-    text-align: center;
-
-    color: rgba(255,255,255,.68) !important;
-
-    white-space: nowrap;
-  }
-
-  .nav-item.active > span:not(.nav-icon):not(.nav-active-dot) {
-    color: #fff !important;
-  }
-
-
-  /* ---------- HERO ---------- */
-
-  .hero-panel {
-    min-height: 235px !important;
-  }
-
-  /*
-     The quote is decorative on desktop but overlaps
-     the heading on small screens.
-  */
-  .hero-quote {
-    display: none !important;
-  }
-
-  .hero-copy {
-    position: relative !important;
-    z-index: 5 !important;
-  }
-
-  .hero-copy h1 {
-    max-width: 100% !important;
-    font-size: 30px !important;
-    line-height: 1.04 !important;
-  }
-
-  .hero-copy p {
-    max-width: 90% !important;
-  }
-
-
-  /* ---------- TOP RIGHT CONTROLS ---------- */
-
-  .top-actions {
-    gap: 5px !important;
-  }
-
-  .top-icon,
-  .theme-toggle,
-  .top-profile {
-    width: 38px !important;
-    min-width: 38px !important;
-    height: 38px !important;
-  }
-
-  .consistency {
-    display: none !important;
-  }
-}
-
-
-/* =========================================================
-   VERY SMALL PHONES
-   ========================================================= */
-
-@media (max-width: 480px) {
-
-  .sidebar {
-    width: 82px !important;
-    padding-left: 7px !important;
-    padding-right: 7px !important;
-  }
-
-  .dashboard-main {
-    width: calc(100% - 82px) !important;
-    margin-left: 82px !important;
-  }
-
-  .nav-item {
-    width: 60px !important;
-    min-width: 60px !important;
-    height: 50px !important;
-    flex-basis: 50px !important;
-  }
-
-  .nav-item > span:not(.nav-icon):not(.nav-active-dot) {
-    font-size: 6.8px !important;
-  }
-
-  .nav-icon {
-    font-size: 16px !important;
-  }
-
-  .hero-panel {
-    min-height: 225px !important;
-  }
-
-  .hero-copy h1 {
-    font-size: 28px !important;
-  }
-
-  .hero-copy p {
-    font-size: 12px !important;
-  }
-}
-/* =========================================================
-   FINAL MOBILE HERO + NAV POLISH
-   ========================================================= */
-
-@media (max-width: 720px) {
-
-  /* ---------- LEFT RAIL ---------- */
-
-  .sidebar {
-    width: 84px !important;
-    padding: 14px 8px !important;
-  }
-
-  .dashboard-main {
-    width: calc(100% - 84px) !important;
-    margin-left: 84px !important;
-    padding: 10px 12px 30px !important;
-  }
-
-  .sidebar-nav {
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 6px !important;
-  }
-
-  .sidebar-nav .nav-item {
-    width: 66px !important;
-    min-width: 66px !important;
-    height: 53px !important;
-    flex: 0 0 53px !important;
-
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 4px !important;
-
-    padding: 0 !important;
-    margin: 0 !important;
-    border-radius: 15px !important;
-  }
-
-  .sidebar-nav .nav-item .nav-icon {
-    display: block !important;
-    font-size: 17px !important;
-    line-height: 1 !important;
-  }
-
-  /* EXACT nav label span */
-  .sidebar-nav .nav-item > span:nth-child(2) {
-    display: block !important;
-    font-size: 7px !important;
-    line-height: 1 !important;
-    font-weight: 750 !important;
-    color: rgba(255,255,255,.72) !important;
-    white-space: nowrap !important;
-  }
-
-  .sidebar-nav .nav-item.active > span:nth-child(2) {
-    color: #fff !important;
-  }
-
-  .sidebar-nav .nav-active-dot {
-    display: none !important;
-  }
-
-  .quick-actions,
-  .sidebar-bottom,
-  .sidebar-profile {
-    display: none !important;
-  }
-
-
-  /* ---------- HERO ---------- */
-
-  .hero-panel {
-    position: relative !important;
-    min-height: 235px !important;
-    overflow: hidden !important;
-  }
-
-  .hero-copy {
-    position: relative !important;
-    z-index: 20 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-    padding: 22px !important;
-  }
-
-  .hero-copy h1 {
-    position: relative !important;
-    z-index: 25 !important;
-
-    max-width: 100% !important;
-    margin: 8px 0 10px !important;
-
-    font-size: 30px !important;
-    line-height: 1.03 !important;
-    letter-spacing: -.045em !important;
-  }
-
-  .hero-copy p {
-    position: relative !important;
-    z-index: 25 !important;
-
-    max-width: 82% !important;
-    margin: 0 !important;
-
-    font-size: 13px !important;
-    line-height: 1.5 !important;
-  }
-
-  /* REMOVE overlapping quote completely on phone */
-  .hero-art .hero-quote {
-    display: none !important;
-  }
-
-  .hero-art {
-    position: absolute !important;
-    z-index: 1 !important;
-    inset: 42% 0 0 !important;
-  }
-
-  .hero-art .hero-sun,
-  .hero-art .hero-mountain {
-    z-index: 1 !important;
-  }
-
-
-  /* ---------- TOP RIGHT ---------- */
-
-  .top-actions {
-    display: flex !important;
-    align-items: center !important;
-    gap: 5px !important;
-  }
-
-  .top-icon,
-  .theme-toggle,
-  .top-profile {
-    width: 38px !important;
-    min-width: 38px !important;
-    height: 38px !important;
-  }
-
-  .theme-toggle-text {
-    display: none !important;
-  }
-
-  .consistency {
-    display: none !important;
-  }
-}
-
-
-@media (max-width: 480px) {
-
-  .sidebar {
-    width: 80px !important;
-  }
-
-  .dashboard-main {
-    width: calc(100% - 80px) !important;
-    margin-left: 80px !important;
-    padding: 9px 10px 28px !important;
-  }
-
-  .sidebar-nav .nav-item {
-    width: 62px !important;
-    min-width: 62px !important;
-    height: 51px !important;
-    flex-basis: 51px !important;
-  }
-
-  .sidebar-nav .nav-item > span:nth-child(2) {
-    font-size: 6.5px !important;
-  }
-
-  .hero-panel {
-    min-height: 225px !important;
-  }
-
-  .hero-copy {
-    padding: 19px !important;
-  }
-
-  .hero-copy h1 {
-    font-size: 28px !important;
-  }
-
-  .hero-copy p {
-    font-size: 12px !important;
-    max-width: 88% !important;
-  }
-}
-
-/* =========================================================
-   LIFEOS — MOBILE DASHBOARD CLEANUP
-   Mobile-only UI refinement
-   Desktop layout remains untouched
-   ========================================================= */
-
-@media (max-width: 720px) {
-
-  /* ---------- PAGE ---------- */
-
-  .dashboard-page {
-    width: 100%;
-    min-width: 0;
     overflow-x: hidden;
   }
 
-  .dashboard-main {
-    width: 100% !important;
-    margin-left: 0 !important;
-    padding: 12px 12px 28px !important;
-    box-sizing: border-box;
+  /* Floating menu button */
+  .mobile-menu-trigger {
+    display: grid;
+    position: fixed;
+    top: 16px;
+    left: 16px;
+    width: 46px;
+    height: 46px;
+    z-index: 10002;
+    place-content: center;
+    gap: 5px;
+    border: 1px solid rgba(255,255,255,.42);
+    border-radius: 15px;
+    background: rgba(255,255,255,.78);
+    box-shadow: 0 12px 32px rgba(77,45,120,.16);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    cursor: pointer;
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
   }
 
-  /* ---------- MOBILE NAV ---------- */
-
-  .dashboard-page .sidebar {
-    width: 100% !important;
-    min-height: auto !important;
-    padding: 10px 12px 8px !important;
-    position: relative !important;
-    box-sizing: border-box;
-    border-radius: 0 0 20px 20px;
+  .mobile-menu-trigger span {
+    display: block;
+    width: 19px;
+    height: 2px;
+    border-radius: 99px;
+    background: #3c2b52;
+    transition: transform .25s ease, opacity .2s ease;
   }
 
-  .brand {
-    padding: 4px 4px 10px !important;
+  .mobile-menu-trigger:hover {
+    transform: translateY(-2px);
   }
 
-  .brand-mark {
-    width: 36px !important;
-    height: 36px !important;
-    font-size: 16px !important;
+  .mobile-menu-trigger.open {
+    box-shadow: 0 16px 38px rgba(124,58,237,.25);
   }
 
-  .brand-name {
-    font-size: 16px !important;
+  .mobile-menu-trigger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
   }
 
-  .brand-subtitle {
-    font-size: 9px !important;
+  .mobile-menu-trigger.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .mobile-menu-trigger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  .mobile-drawer-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 9997;
+    border: 0;
+    background: rgba(30,18,47,.32);
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+    animation: lifeosBackdropIn .22s ease both;
+  }
+
+  /* Premium slide-in drawer */
+  .sidebar {
+    width: min(310px, 84vw) !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 9999 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 22px 16px !important;
+    margin: 0 !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    border-radius: 0 28px 28px 0;
+    transform: translateX(-105%);
+    transition: transform .38s cubic-bezier(.22,1,.36,1), box-shadow .38s ease;
+    box-shadow: none;
+  }
+
+  .sidebar.mobile-open {
+    transform: translateX(0);
+    box-shadow: 22px 0 70px rgba(42,23,68,.28);
+  }
+
+  .sidebar .brand {
+    flex-shrink: 0;
+    padding: 8px 8px 22px !important;
+  }
+
+  .sidebar .brand-mark {
+    width: 42px;
+    height: 42px;
   }
 
   .sidebar-nav {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-    gap: 5px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    margin-top: 8px;
+  }
+
+  .sidebar .nav-item {
+    width: 100%;
+    min-height: 48px;
+    justify-content: flex-start !important;
+    padding: 0 14px !important;
+    border-radius: 15px;
+    text-align: left;
+  }
+
+  .sidebar .nav-item > span:not(.nav-icon):not(.nav-active-dot) {
+    display: inline !important;
+  }
+
+  .sidebar .nav-icon {
+    width: 26px;
+    min-width: 26px;
+    text-align: center;
+  }
+
+  .sidebar .quick-actions {
+    display: block !important;
+    margin-top: 18px;
+  }
+
+  .sidebar .quick-actions button {
     width: 100%;
   }
 
-  .nav-item {
-    min-height: 38px !important;
-    padding: 6px 3px !important;
-    border-radius: 11px !important;
-    justify-content: center !important;
+  .sidebar .sidebar-bottom {
+    display: flex !important;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: auto;
+    padding-top: 18px;
   }
 
-  .nav-icon {
-    font-size: 17px !important;
+  .sidebar .sidebar-profile {
+    display: grid !important;
+    flex-shrink: 0;
+    margin-top: 12px;
   }
 
-  .nav-item > span:not(.nav-icon):not(.nav-active-dot) {
-    display: none !important;
+  .mobile-theme-menu-item {
+    display: flex !important;
   }
 
-  .quick-actions,
-  .sidebar-bottom,
-  .sidebar-profile {
-    display: none !important;
+  /* Keep the actual dashboard spacious while the drawer is closed. */
+  .dashboard-main {
+    width: 100% !important;
+    min-height: 100vh;
+    margin-left: 0 !important;
+    padding: 76px 16px 28px !important;
   }
-
-
-  /* ---------- TOP BAR ---------- */
 
   .topbar {
-    width: 100% !important;
     height: auto !important;
-    margin: 0 0 12px !important;
-    gap: 8px !important;
+    margin-bottom: 14px !important;
   }
 
   .search-box {
     width: 100% !important;
-    min-width: 0 !important;
-    height: 42px !important;
-    border-radius: 13px !important;
-  }
-
-  .search-box input {
-    font-size: 13px !important;
   }
 
   .top-actions {
     display: none !important;
   }
 
-
-  /* ---------- HERO ---------- */
-
   .hero-panel {
-    min-height: 205px !important;
-    height: 205px !important;
-    padding: 20px !important;
-    margin-bottom: 12px !important;
-    border-radius: 20px !important;
-    overflow: hidden !important;
-  }
-
-  .hero-copy {
-    position: relative;
-    z-index: 5;
-    max-width: 72% !important;
-  }
-
-  .date-label {
-    font-size: 9px !important;
-    margin-bottom: 7px !important;
+    min-height: 245px !important;
+    margin-top: 0 !important;
   }
 
   .hero-copy h1 {
-    font-size: 25px !important;
-    line-height: 1.08 !important;
-    letter-spacing: -0.8px !important;
-    margin: 0 !important;
+    font-size: clamp(28px, 8vw, 36px) !important;
+    line-height: 1.08;
   }
-
-  .hero-copy p {
-    font-size: 11px !important;
-    line-height: 1.4 !important;
-    margin-top: 8px !important;
-    max-width: 190px;
-  }
-
-  .hero-art {
-    inset: 42% 0 0 !important;
-  }
-
-  .hero-sun {
-    transform: scale(.72);
-    transform-origin: center;
-  }
-
-  .hero-mountain.back {
-    transform: scale(.85);
-    transform-origin: bottom center;
-  }
-
-  .hero-mountain.front {
-    transform: scale(.9);
-    transform-origin: bottom center;
-  }
-
-  .hero-quote {
-    display: none !important;
-  }
-
-
-  /* ---------- STAT CARDS ---------- */
 
   .metric-grid {
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 9px !important;
-    margin-bottom: 12px !important;
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
+    gap: 10px !important;
   }
 
   .metric-card {
-    min-width: 0 !important;
-    min-height: 82px !important;
-    padding: 13px !important;
-    border-radius: 17px !important;
-    box-sizing: border-box;
+    min-width: 0;
+    padding: 16px !important;
   }
 
-  .metric-icon {
-    width: 32px !important;
-    height: 32px !important;
-    min-width: 32px !important;
-    font-size: 14px !important;
-    border-radius: 10px !important;
+  /* Front page = only the important information. */
+  .events-card,
+  .calendar-card,
+  .focus-card,
+  .quote-card,
+  .music-card {
+    display: none !important;
   }
-
-  .metric-card strong {
-    font-size: 20px !important;
-    line-height: 1 !important;
-  }
-
-  .metric-card span {
-    font-size: 9px !important;
-    line-height: 1.25 !important;
-  }
-
-  .metric-arrow,
-  .metric-card > b {
-    font-size: 13px !important;
-  }
-
-  .progress-ring {
-    width: 42px !important;
-    height: 42px !important;
-    min-width: 42px !important;
-  }
-
-  .progress-ring span {
-    font-size: 9px !important;
-  }
-
-
-  /* ---------- MAIN CONTENT ---------- */
 
   .content-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
-    gap: 12px !important;
-    width: 100% !important;
+    gap: 14px !important;
   }
 
   .tasks-card,
-  .calendar-card,
-  .quote-card,
-  .music-card,
-  .events-card,
-  .focus-card {
+  .habits-card {
     grid-column: auto !important;
     grid-row: auto !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    box-sizing: border-box;
   }
 
-  .glass-card,
-  .dashboard-card {
-    border-radius: 18px !important;
+  /* Drawer can bring secondary sections back when selected. */
+  .dashboard-main.mobile-section-calendar .calendar-card,
+  .dashboard-main.mobile-section-focus .focus-card {
+    display: block !important;
+    grid-column: 1 !important;
+    grid-row: auto !important;
   }
 
-  .dashboard-card {
-    padding: 16px !important;
+  .dashboard-main.mobile-section-calendar .tasks-card,
+  .dashboard-main.mobile-section-calendar .habits-card,
+  .dashboard-main.mobile-section-focus .tasks-card,
+  .dashboard-main.mobile-section-focus .habits-card {
+    display: none !important;
   }
 
-
-  /* ---------- CARD HEADINGS ---------- */
-
-  .card-heading {
-    gap: 8px !important;
-    margin-bottom: 12px !important;
+  .dashboard-main.mobile-section-calendar .metric-grid,
+  .dashboard-main.mobile-section-focus .metric-grid {
+    display: none !important;
   }
 
-  .card-heading h2 {
-    font-size: 18px !important;
-    line-height: 1.15 !important;
+  .dashboard-main.mobile-section-calendar .hero-panel,
+  .dashboard-main.mobile-section-focus .hero-panel {
+    min-height: 120px !important;
   }
 
-  .section-label,
-  .card-label {
-    font-size: 8px !important;
-    letter-spacing: .9px !important;
+  .dashboard-main.mobile-section-calendar .hero-copy h1,
+  .dashboard-main.mobile-section-focus .hero-copy h1 {
+    font-size: 26px !important;
   }
 
-  .link-button,
-  .add-button {
-    min-height: 34px !important;
-    padding: 7px 11px !important;
-    border-radius: 10px !important;
-    font-size: 10px !important;
-    white-space: nowrap;
+  .dashboard-main.mobile-section-calendar .hero-art,
+  .dashboard-main.mobile-section-focus .hero-art {
+    display: none;
   }
-
-
-  /* ---------- TASKS ---------- */
-
-  .task-list {
-    width: 100% !important;
-  }
-
-  .task-row {
-    min-width: 0 !important;
-    padding: 11px !important;
-    border-radius: 12px !important;
-    gap: 9px !important;
-  }
-
-  .task-info {
-    min-width: 0 !important;
-  }
-
-  .task-info strong {
-    font-size: 12px !important;
-  }
-
-  .task-info span,
-  .task-info small,
-  .task-time {
-    font-size: 9px !important;
-  }
-
-
-  /* ---------- CALENDAR ---------- */
-
-  .calendar-card {
-    overflow: hidden !important;
-  }
-
-  .calendar-grid {
-    width: 100% !important;
-    gap: 4px !important;
-  }
-
-  .calendar-grid span {
-    min-width: 0 !important;
-    font-size: 10px !important;
-  }
-
-
-  /* ---------- FOCUS / HABITS / EXTRA CARDS ---------- */
-
-  .focus-card,
-  .quote-card,
-  .music-card,
-  .events-card {
-    padding: 16px !important;
-  }
-
-  .focus-card h2,
-  .quote-card h2,
-  .music-card h2,
-  .events-card h2 {
-    font-size: 17px !important;
-  }
-
-
-  /* ---------- BOTTOM BANNER ---------- */
 
   .bottom-banner {
-    width: 100% !important;
-    box-sizing: border-box;
-    margin-top: 12px !important;
-    padding: 13px !important;
-    border-radius: 16px !important;
+    margin-top: 14px !important;
   }
 
   .bottom-banner button {
     display: none !important;
   }
-
-
-  /* ---------- TOAST ---------- */
-
-  .lifeos-toast {
-    left: 12px !important;
-    right: 12px !important;
-    bottom: 14px !important;
-    width: auto !important;
-    box-sizing: border-box;
-    font-size: 10px !important;
-  }
 }
 
-
-/* =========================================================
-   SMALL PHONES
-   ========================================================= */
-
 @media (max-width: 480px) {
-
   .dashboard-main {
-    padding: 10px 10px 24px !important;
-  }
-
-  .dashboard-page .sidebar {
-    padding: 9px 10px 7px !important;
-  }
-
-  .brand {
-    padding-bottom: 8px !important;
-  }
-
-  .sidebar-nav {
-    gap: 4px !important;
-  }
-
-  .nav-item {
-    min-height: 36px !important;
-    border-radius: 10px !important;
-  }
-
-  .hero-panel {
-    min-height: 190px !important;
-    height: 190px !important;
-    padding: 17px !important;
-    border-radius: 18px !important;
-  }
-
-  .hero-copy {
-    max-width: 78% !important;
-  }
-
-  .hero-copy h1 {
-    font-size: 22px !important;
-  }
-
-  .hero-copy p {
-    font-size: 10px !important;
-    max-width: 165px;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
   }
 
   .metric-grid {
-    gap: 8px !important;
+    grid-template-columns: repeat(2, minmax(0,1fr)) !important;
   }
 
   .metric-card {
-    min-height: 76px !important;
-    padding: 11px !important;
-    border-radius: 15px !important;
-  }
-
-  .metric-icon {
-    width: 29px !important;
-    height: 29px !important;
-    min-width: 29px !important;
+    padding: 14px 12px !important;
   }
 
   .metric-card strong {
-    font-size: 18px !important;
-  }
-
-  .metric-card span {
-    font-size: 8px !important;
-  }
-
-  .dashboard-card {
-    padding: 14px !important;
-    border-radius: 16px !important;
-  }
-
-  .card-heading h2 {
-    font-size: 16px !important;
-  }
-
-  .link-button,
-  .add-button {
-    font-size: 9px !important;
-    padding: 6px 9px !important;
-  }
-}
-
-
-/* =========================================================
-   VERY SMALL PHONES
-   ========================================================= */
-
-@media (max-width: 360px) {
-
-  .hero-copy h1 {
-    font-size: 20px !important;
+    font-size: 20px;
   }
 
   .hero-panel {
-    min-height: 180px !important;
-    height: 180px !important;
+    padding: 20px !important;
   }
 
-  .metric-card {
-    padding: 9px !important;
-  }
-
-  .metric-icon {
-    width: 27px !important;
-    height: 27px !important;
-    min-width: 27px !important;
-  }
-
-  .metric-card strong {
-    font-size: 17px !important;
-  }
-
-  .dashboard-card {
-    padding: 12px !important;
-  }
-}
-/* =========================================================
-   LIFEOS — MOBILE NAV HEIGHT FIX
-   FIX: dashboard content appearing far below navigation
-   ========================================================= */
-
-@media (max-width: 720px) {
-
-  /* Dashboard becomes a normal vertical mobile page */
-  .dashboard-page {
-    display: block !important;
-    width: 100% !important;
-    min-height: 100vh !important;
-    overflow-x: hidden !important;
-  }
-
-  /* IMPORTANT:
-     Desktop sidebar was 100vh + fixed.
-     On mobile it must become a small top navigation.
-  */
-  .dashboard-page .sidebar {
-    position: relative !important;
-
-    top: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    left: auto !important;
-    inset: auto !important;
-
-    width: 100% !important;
-
-    height: auto !important;
-    min-height: 0 !important;
-    max-height: none !important;
-
-    padding: 9px 10px 8px !important;
-
-    display: block !important;
-
-    box-sizing: border-box !important;
-    overflow: visible !important;
-  }
-
-  /* Brand stays compact */
-  .dashboard-page .brand {
-    height: auto !important;
-    min-height: 0 !important;
-    padding: 2px 3px 8px !important;
-    margin: 0 !important;
-  }
-
-  /* Navigation itself should NOT stretch */
-  .dashboard-page .sidebar-nav {
-    width: 100% !important;
-    height: auto !important;
-    min-height: 0 !important;
-
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
-
-    gap: 4px !important;
-
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
-  .dashboard-page .nav-item {
-    width: 100% !important;
-    height: 36px !important;
-    min-height: 36px !important;
-
-    padding: 4px !important;
-    margin: 0 !important;
-
-    justify-content: center !important;
-    align-items: center !important;
-
-    box-sizing: border-box !important;
-  }
-
-  .dashboard-page .nav-icon {
-    font-size: 16px !important;
-  }
-
-  .dashboard-page .nav-item > span:not(.nav-icon):not(.nav-active-dot) {
+  .hero-quote {
     display: none !important;
-  }
-
-  /* Hide desktop-only sidebar sections */
-  .dashboard-page .quick-actions,
-  .dashboard-page .sidebar-bottom,
-  .dashboard-page .sidebar-profile {
-    display: none !important;
-  }
-
-
-  /* =====================================================
-     MAIN CONTENT MUST START IMMEDIATELY AFTER NAV
-     ===================================================== */
-
-  .dashboard-page .dashboard-main {
-    position: relative !important;
-
-    width: 100% !important;
-    min-height: 0 !important;
-
-    margin: 0 !important;
-
-    padding: 10px !important;
-
-    box-sizing: border-box !important;
-
-    display: block !important;
-  }
-
-
-  /* Top search */
-  .dashboard-page .topbar {
-    width: 100% !important;
-    height: auto !important;
-
-    margin: 0 0 9px !important;
-    padding: 0 !important;
-
-    display: flex !important;
-  }
-
-  .dashboard-page .search-box {
-    width: 100% !important;
-    min-width: 0 !important;
-    height: 40px !important;
-  }
-
-  .dashboard-page .top-actions {
-    display: none !important;
-  }
-
-
-  /* Hero */
-  .dashboard-page .hero-panel {
-    width: 100% !important;
-
-    height: 185px !important;
-    min-height: 185px !important;
-
-    margin: 0 0 10px !important;
-    padding: 17px !important;
-
-    box-sizing: border-box !important;
-  }
-
-
-  /* Stats */
-  .dashboard-page .metric-grid {
-    width: 100% !important;
-
-    display: grid !important;
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-
-    gap: 8px !important;
-
-    margin-bottom: 10px !important;
-  }
-
-  .dashboard-page .metric-card {
-    min-width: 0 !important;
-    min-height: 74px !important;
-    padding: 10px !important;
-
-    box-sizing: border-box !important;
-  }
-
-
-  /* Main cards */
-  .dashboard-page .content-grid {
-    width: 100% !important;
-
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-
-    gap: 10px !important;
-
-    margin: 0 !important;
-  }
-
-  .dashboard-page .tasks-card,
-  .dashboard-page .calendar-card,
-  .dashboard-page .quote-card,
-  .dashboard-page .music-card,
-  .dashboard-page .events-card,
-  .dashboard-page .focus-card {
-    width: 100% !important;
-    min-width: 0 !important;
-
-    grid-column: auto !important;
-    grid-row: auto !important;
   }
 }
 
-
-/* =========================================================
-   SMALL PHONES
-   ========================================================= */
-
-@media (max-width: 480px) {
-
-  .dashboard-page .sidebar {
-    padding: 8px 9px 7px !important;
-  }
-
-  .dashboard-page .brand {
-    padding-bottom: 7px !important;
-  }
-
-  .dashboard-page .sidebar-nav {
-    gap: 4px !important;
-  }
-
-  .dashboard-page .nav-item {
-    height: 34px !important;
-    min-height: 34px !important;
-  }
-
-  .dashboard-page .dashboard-main {
-    padding: 8px !important;
-  }
-
-  .dashboard-page .hero-panel {
-    height: 175px !important;
-    min-height: 175px !important;
-  }
+@keyframes lifeosBackdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
