@@ -995,39 +995,26 @@ function Dashboard() {
         </>
       )}
 
-      <main className={`dashboard-main ${mobileSection ? `mobile-section-${mobileSection}` : ""}`}>
-
-        <div
-          className="topbar"
-          style={{
-            position: 'relative',
-            zIndex: 9999,
-            overflow: 'visible',
-          }}
-        >
+      <main className={`dashboard-main lifeos-premium-dashboard ${mobileSection ? `mobile-section-${mobileSection}` : ''}`}>
+        <header className="lifeos-topbar">
           <button
-            className={`mobile-nav-trigger ${mobileNavOpen ? 'open' : ''}`}
+            className={`lifeos-menu-button ${mobileNavOpen ? 'open' : ''}`}
             type="button"
             onClick={() => setMobileNavOpen((current) => !current)}
-            aria-label="Open dashboard menu"
-            title="Open dashboard menu"
+            aria-label={mobileNavOpen ? 'Close LIFEOS menu' : 'Open LIFEOS menu'}
           >
-            <span>☰</span>
-            <small>Menu</small>
+            <span>{mobileNavOpen ? '×' : '☰'}</span>
           </button>
 
-          <div
-            className="search-box"
-            style={{
-              position: 'relative',
-              zIndex: 10000,
-              overflow: 'visible',
-            }}
-            onMouseLeave={() => setShowSearchResults(false)}
-          >
-            <span>⌕</span>
+          <button className="lifeos-mobile-brand" type="button" onClick={() => navigate('/dashboard')}>
+            <span className="lifeos-logo-mark">⌛</span>
+            <span>LIFEOS</span>
+          </button>
+
+          <div className="lifeos-search-shell" onMouseLeave={() => setShowSearchResults(false)}>
+            <span className="lifeos-search-icon">⌕</span>
             <input
-              placeholder="Search anything... (tasks, notes, reminders)"
+              placeholder="Search anything..."
               value={searchQuery}
               onChange={(event) => {
                 setSearchQuery(event.target.value)
@@ -1039,7 +1026,6 @@ function Dashboard() {
                   setShowSearchResults(false)
                   setSearchQuery('')
                 }
-
                 if (event.key === 'Enter' && searchTerm && searchResults[0]) {
                   saveRecentSearch(searchQuery)
                   setShowSearchResults(false)
@@ -1048,91 +1034,31 @@ function Dashboard() {
                 }
               }}
             />
-            <kbd>Ctrl K</kbd>
+            <button className="lifeos-search-mic" type="button" aria-label="Voice search">⌕</button>
+            <button className="lifeos-search-filter" type="button" aria-label="Filter search">☷</button>
 
             {showSearchResults && (
               <div className="lifeos-global-search-dropdown">
                 {!searchTerm ? (
                   <div className="lifeos-search-recent">
-                    <div className="lifeos-search-heading">
-                      <span>Recent searches</span>
-                      {recentSearches.length > 0 && (
-                        <button type="button" onClick={clearRecentSearches}>
-                          Clear
-                        </button>
-                      )}
-                    </div>
-
-                    {recentSearches.length > 0 ? (
-                      recentSearches.map((item) => (
-                        <button
-                          key={item}
-                          type="button"
-                          className="lifeos-search-recent-item"
-                          onClick={() => {
-                            setSearchQuery(item)
-                            setShowSearchResults(true)
-                          }}
-                        >
-                          <span>◷</span>
-                          <span>{item}</span>
-                        </button>
-                      ))
-                    ) : (
-                      <div className="lifeos-search-empty compact">
-                        <span>⌕</span>
-                        <strong>Search your LIFEOS</strong>
-                        <small>Try a task, reminder, page, profile or setting.</small>
-                      </div>
+                    <div className="lifeos-search-heading"><span>Recent searches</span>{recentSearches.length > 0 && <button type="button" onClick={clearRecentSearches}>Clear</button>}</div>
+                    {recentSearches.length > 0 ? recentSearches.map((item) => (
+                      <button key={item} type="button" className="lifeos-search-recent-item" onClick={() => { setSearchQuery(item); setShowSearchResults(true) }}>
+                        <span>◷</span><span>{item}</span>
+                      </button>
+                    )) : (
+                      <div className="lifeos-search-empty compact"><span>⌕</span><strong>Search your LIFEOS</strong><small>Try a task, reminder or page.</small></div>
                     )}
-
-                    <div className="lifeos-search-shortcuts">
-                      <span>ESC</span> close
-                      <span>CTRL K</span> focus search
-                    </div>
                   </div>
                 ) : searchResults.length === 0 ? (
-                  <div className="lifeos-search-empty compact">
-                    <span>⌕</span>
-                    <strong>No results found</strong>
-                    <small>Try another task, reminder or page name.</small>
-                  </div>
+                  <div className="lifeos-search-empty compact"><span>⌕</span><strong>No results found</strong><small>Try another task, reminder or page name.</small></div>
                 ) : (
                   <div className="lifeos-search-results">
-                    <div className="lifeos-search-heading">
-                      <span>Results</span>
-                      <small>{Math.min(searchResults.length, 8)} found</small>
-                    </div>
-
+                    <div className="lifeos-search-heading"><span>Results</span><small>{Math.min(searchResults.length, 8)} found</small></div>
                     {searchResults.slice(0, 8).map((result, index) => (
-                      <button
-                        key={`${result.type}-${result.title}-${index}`}
-                        type="button"
-                        className="lifeos-search-result-item"
-                        onClick={() => {
-                          saveRecentSearch(searchQuery)
-                          setShowSearchResults(false)
-                          setSearchQuery('')
-                          result.action()
-                        }}
-                      >
-                        <span className="lifeos-search-result-icon">
-                          {result.type === 'Task'
-                            ? '✓'
-                            : result.type === 'Reminder'
-                              ? '◷'
-                              : result.title === 'Profile'
-                                ? '◉'
-                                : result.title === 'Settings'
-                                  ? '⚙'
-                                  : result.title === 'Focus'
-                                    ? '🎯'
-                                    : '⌂'}
-                        </span>
-                        <span className="lifeos-search-result-copy">
-                          <strong>{result.title}</strong>
-                          <small>{result.subtitle}</small>
-                        </span>
+                      <button key={`${result.type}-${result.title}-${index}`} type="button" className="lifeos-search-result-item" onClick={() => { saveRecentSearch(searchQuery); setShowSearchResults(false); setSearchQuery(''); result.action() }}>
+                        <span className="lifeos-search-result-icon">{result.type === 'Task' ? '✓' : result.type === 'Reminder' ? '◷' : '✦'}</span>
+                        <span className="lifeos-search-result-copy"><strong>{result.title}</strong><small>{result.subtitle}</small></span>
                         <span className="lifeos-search-arrow">›</span>
                       </button>
                     ))}
@@ -1141,621 +1067,131 @@ function Dashboard() {
               </div>
             )}
           </div>
-          <div className="top-actions">
-            <div className="lifeos-notification-wrap">
-              <button
-                className="top-icon"
-                onClick={() => setShowNotificationPanel((current) => !current)}
-                aria-label="Notifications"
-              >
-                ♧
-                {reminders.filter(
-                  (reminder) =>
-                    reminder.reminderTime &&
-                    new Date(reminder.reminderTime) > new Date()
-                ).length > 0 && (
-                  <span className="lifeos-notification-badge">
-                    {Math.min(
-                      reminders.filter(
-                        (reminder) =>
-                          reminder.reminderTime &&
-                          new Date(reminder.reminderTime) > new Date()
-                      ).length,
-                      9
-                    )}
-                  </span>
-                )}
-              </button>
 
-              {showNotificationPanel && (
-                <div className="lifeos-notification-panel">
-                  <div className="lifeos-notification-header">
-                    <div>
-                      <span className="section-label">LIFEOS</span>
-                      <h3>Notifications</h3>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setShowNotificationPanel(false)}
-                    >
-                      ×
-                    </button>
-                  </div>
-
-                  <div className="lifeos-notification-list">
-                    {reminders
-                      .filter(
-                        (reminder) =>
-                          reminder.reminderTime &&
-                          new Date(reminder.reminderTime) > new Date()
-                      )
-                      .sort(
-                        (a, b) =>
-                          new Date(a.reminderTime) -
-                          new Date(b.reminderTime)
-                      )
-                      .slice(0, 5)
-                      .map((reminder) => {
-                        const reminderDate = new Date(reminder.reminderTime)
-
-                        return (
-                          <button
-                            className="lifeos-notification-item"
-                            key={reminder.id}
-                            type="button"
-                            onClick={() => {
-                              setShowNotificationPanel(false)
-                              window.location.href = '/reminders'
-                            }}
-                          >
-                            <span className="lifeos-notification-icon">◷</span>
-
-                            <span className="lifeos-notification-copy">
-                              <strong>{reminder.title}</strong>
-                              <small>
-                                {reminderDate.toLocaleDateString('en-IN', {
-                                  day: 'numeric',
-                                  month: 'short',
-                                })}
-                                {' · '}
-                                {reminderDate.toLocaleTimeString('en-IN', {
-                                  hour: 'numeric',
-                                  minute: '2-digit',
-                                })}
-                              </small>
-                            </span>
-
-                            <span className="lifeos-notification-arrow">›</span>
-                          </button>
-                        )
-                      })}
-
-                    {reminders.filter(
-                      (reminder) =>
-                        reminder.reminderTime &&
-                        new Date(reminder.reminderTime) > new Date()
-                    ).length === 0 && (
-                      <div className="lifeos-notification-empty">
-                        <span>✦</span>
-                        <strong>You're all clear</strong>
-                        <small>No upcoming reminders.</small>
-                      </div>
-                    )}
-                  </div>
-
-                  <button
-                    className="lifeos-notification-footer"
-                    type="button"
-                    onClick={() => {
-                      setShowNotificationPanel(false)
-                      window.location.href = '/reminders'
-                    }}
-                  >
-                    View all reminders <span>→</span>
-                  </button>
-                </div>
+          <div className="lifeos-top-actions">
+            <button className="lifeos-icon-button" type="button" onClick={() => setShowNotificationPanel((current) => !current)} aria-label="Notifications">
+              ♧
+              {reminders.filter((reminder) => reminder.reminderTime && new Date(reminder.reminderTime) > new Date()).length > 0 && (
+                <span className="lifeos-notification-badge">{Math.min(reminders.filter((reminder) => reminder.reminderTime && new Date(reminder.reminderTime) > new Date()).length, 9)}</span>
               )}
+            </button>
+            <button className="lifeos-avatar-button" type="button" onClick={() => setShowProfilePanel(true)} aria-label="Open profile">{userName.charAt(0).toUpperCase()}</button>
+          </div>
+        </header>
+
+        <section className="lifeos-hero">
+          <div className="lifeos-hero-image" aria-hidden="true" />
+          <div className="lifeos-hero-overlay" aria-hidden="true" />
+          <div className="lifeos-hero-content">
+            <span className="lifeos-date-label">{dateLabel}</span>
+            <h1>{greeting}, <strong>{userName}!</strong> <span>👋</span></h1>
+            <p>Small steps today, a bigger tomorrow.</p>
+            <div className="lifeos-hero-meta">
+              <span>✦ {longestStreak > 0 ? `${longestStreak}-day streak` : 'Start your streak today'}</span>
+              <span>{reminders.length} upcoming reminder{reminders.length === 1 ? '' : 's'}</span>
             </div>
+          </div>
+        </section>
 
-            <button
-              className={`theme-toggle ${theme === 'dark' ? 'dark' : ''}`}
-              type="button"
-              onClick={() => setTheme((current) => current === 'dark' ? 'light' : 'dark')}
-              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
-              title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
-            >
-              <span className="theme-toggle-icon">{theme === 'dark' ? '☀' : '☾'}</span>
-              <span className="theme-toggle-text">{theme === 'dark' ? 'Light' : 'Dark'}</span>
-            </button>
-
-            <button
-              className="top-profile"
-              onClick={() => setShowProfilePanel(true)}
-              aria-label="Open profile"
-            >
-              {userName.charAt(0).toUpperCase()}
-            </button>
-            <button
-              className="consistency"
-              onClick={() => {
-                setShowConsistencyPanel((current) => !current)
-                setShowProfilePanel(false)
-                setShowSettingsPanel(false)
-              }}
-            >
-              <span>🔥 Stay Consistent</span>⌄
-            </button>
-
-            {showConsistencyPanel && (() => {
-              const stats = getConsistencyStats()
-
+        <section className="lifeos-week-section">
+          <div className="lifeos-section-heading">
+            <div><span className="lifeos-eyebrow">YOUR WEEK</span><h2>This Week</h2></div>
+            <button type="button" className="lifeos-link-button" onClick={() => setMobileSection('calendar')}>View Calendar <span>→</span></button>
+          </div>
+          <div className="lifeos-week-grid">
+            {Array.from({ length: 7 }, (_, index) => {
+              const day = new Date(today)
+              day.setDate(today.getDate() + index - (today.getDay() === 0 ? 0 : today.getDay() - 1))
+              const isToday = day.toDateString() === today.toDateString()
+              const weekday = day.toLocaleDateString('en-IN', { weekday: 'short' })
+              const number = day.getDate()
+              const dayReminderCount = reminders.filter((reminder) => reminder.reminderTime && new Date(reminder.reminderTime).toDateString() === day.toDateString()).length
               return (
-                <div className="lifeos-consistency-panel">
-                  <div className="lifeos-consistency-top">
-                    <div>
-                      <span className="section-label">YOUR MOMENTUM</span>
-                      <h3>Stay Consistent</h3>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setShowConsistencyPanel(false)}
-                    >
-                      ×
-                    </button>
-                  </div>
-
-                  <div className="lifeos-streak-hero">
-                    <div className="lifeos-fire-orb">🔥</div>
-                    <div>
-                      <strong>{stats.currentStreak} day{stats.currentStreak === 1 ? '' : 's'}</strong>
-                      <span>current streak</span>
-                    </div>
-                  </div>
-
-                  <div className="lifeos-streak-grid">
-                    <div>
-                      <strong>{stats.bestStreak}</strong>
-                      <span>Best streak</span>
-                    </div>
-                    <div>
-                      <strong>{stats.activeDays}</strong>
-                      <span>Active days</span>
-                    </div>
-                  </div>
-
-                  <p className="lifeos-consistency-tip">
-                    Complete at least one task today to keep your streak alive.
-                  </p>
-                </div>
+                <button key={day.toISOString()} type="button" className={`lifeos-day-chip ${isToday ? 'active' : ''}`} onClick={() => { setSelectedCalendarDate(day); setMobileSection('calendar') }}>
+                  <span>{weekday}</span><strong>{number}</strong>{dayReminderCount > 0 && <i />}
+                </button>
               )
-            })()}
-          </div>
-        </div>
-
-        <section className="hero-panel">
-          <div className="hero-copy">
-            <div className="date-label">{dateLabel}</div>
-            <h1>{greeting}, {userName}! <span>👋</span></h1>
-            <p>A productive day starts with a clear mind.</p>
-          </div>
-
-          <div className="hero-art">
-            <div className="hero-sun" />
-            <div className="hero-mountain back" />
-            <div className="hero-mountain front" />
-            <div className="hero-quote">
-              <strong>“Discipline today,<br />a brighter tomorrow.”</strong>
-              <small>— LIFEOS</small>
-            </div>
+            })}
           </div>
         </section>
 
-        <section className="metric-grid">
-          <div className="metric-card metric-purple">
-            <div className="metric-icon">✓</div>
-            <div>
-              <strong>{tasks.filter((task) => !task.completed).length}</strong>
-              <span>Tasks due</span>
-            </div>
-            <button
-              className="metric-arrow"
-              type="button"
-              onClick={() => window.location.href = '/tasks'}
-              aria-label="Open tasks"
-            >
-              →
-            </button>
+        <section className="lifeos-focus-card">
+          <div className="lifeos-focus-glow" />
+          <div className="lifeos-card-heading">
+            <div><span className="lifeos-card-icon">◉</span><div><span className="lifeos-eyebrow">TODAY</span><h2>Today's Focus</h2></div></div>
+            <span className="lifeos-progress-pill">{completedTasks}/{totalTasks || 0}</span>
           </div>
-
-          <div className="metric-card metric-pink">
-            <div className="metric-icon">◷</div>
-            <div>
-              <strong>{reminders.length}</strong>
-              <span>Reminders</span>
+          {tasksLoading ? (
+            <div className="lifeos-empty-focus"><strong>Loading your focus...</strong></div>
+          ) : tasks.length === 0 ? (
+            <div className="lifeos-empty-focus">
+              <div className="lifeos-sprout">✦</div>
+              <strong>No active tasks yet</strong>
+              <span>Add a task or let LIFEOS suggest one for you.</span>
+              <div className="lifeos-focus-actions">
+                <button type="button" className="lifeos-primary-button" onClick={() => setShowTaskModal(true)}>＋ Add Task</button>
+                <button type="button" className="lifeos-secondary-button" onClick={() => showMessage('AI suggestions are coming next')}>✦ Suggest with AI</button>
+              </div>
             </div>
-            <button
-              className="metric-arrow"
-              type="button"
-              onClick={() => window.location.href = '/reminders'}
-              aria-label="Open reminders"
-            >
-              →
-            </button>
-          </div>
-
-          <div className="metric-card metric-orange">
-            <div className="metric-icon">◈</div>
-            <div>
-              <strong>{totalHabits}</strong>
-              <span>Habits</span>
+          ) : (
+            <div className="lifeos-task-list">
+              {tasks.slice(0, 4).map((task) => (
+                <button key={task.id} type="button" className={`lifeos-task-item ${task.completed ? 'completed' : ''}`} onClick={() => toggleTask(task)}>
+                  <span className="lifeos-task-check">{task.completed ? '✓' : ''}</span>
+                  <span className="lifeos-task-copy"><strong>{task.title}</strong><small>{task.completed ? 'Completed' : 'Today · Focus item'}</small></span>
+                  <span>›</span>
+                </button>
+              ))}
+              <button type="button" className="lifeos-add-inline" onClick={() => setShowTaskModal(true)}>＋ Add another task</button>
             </div>
-            <b>→</b>
-          </div>
-
-          <div className="metric-card metric-green">
-            <div className="progress-ring" style={{ '--progress': `${progress}%` }}>
-              <span>{progress}%</span>
-            </div>
-            <div>
-              <strong>Day Progress</strong>
-              <span>{completedTasks} of {totalTasks} tasks complete</span>
-            </div>
-            <b>→</b>
-          </div>
+          )}
         </section>
 
-        <section className="content-grid">
-
-          <div className="glass-card dashboard-card tasks-card">
-            <div className="card-heading">
-              <div>
-                <span className="section-label">TODAY'S TASKS</span>
-                <h2>Your focus</h2>
-              </div>
-              <button className="link-button" onClick={() => setShowTaskModal(true)}>＋ Add Task</button>
+        <section className="lifeos-deadline-card">
+          <div className="lifeos-deadline-copy">
+            <div className="lifeos-card-heading">
+              <div><span className="lifeos-ai-icon">✦</span><div><span className="lifeos-eyebrow">AI POWERED</span><h2>Smart Deadline Detection</h2></div></div>
+              <span className="lifeos-beta">BETA</span>
             </div>
-
-            <div className="task-list">
-              {tasksLoading ? (
-                <div className="task-loading">Loading your tasks...</div>
-              ) : tasks.length === 0 ? (
-                <div className="empty-state">
-                  <div className="empty-orb">✦</div>
-                  <strong>No tasks yet</strong>
-                  <small>Add your first task and start organizing your day.</small>
-                  <button className="primary-action" onClick={() => setShowTaskModal(true)}>＋ Create your first task</button>
-                </div>
-              ) : (
-                tasks.slice(0, 5).map((task) => {
-                  const completed = Boolean(task.completed)
-                  return (
-                    <button
-                      className={`task-row ${completed ? 'completed-row' : ''}`}
-                      key={task.id}
-                      onClick={() => toggleTask(task)}
-                    >
-                      <div className={`task-check ${completed ? 'checked' : ''}`}>
-                        {completed && '✓'}
-                      </div>
-                      <div className="task-info">
-                        <span>{task.title}</span>
-                        <small>Personal</small>
-                      </div>
-                      <span className="task-time">{completed ? 'Done' : 'Today'}</span>
-                      <span className="task-menu">⋮</span>
-                    </button>
-                  )
-                })
-              )}
-            </div>
+            <p>Drop a syllabus, brief, screenshot or PDF and let LIFEOS extract the important deadlines automatically.</p>
+            <button type="button" className="lifeos-primary-button" onClick={() => showMessage('Smart Deadline Detection UI is ready — AI connection next')}>Scan for Deadlines <span>→</span></button>
           </div>
+          <div className="lifeos-deadline-art" aria-hidden="true"><span>▤</span><i>✦</i><b>✦</b></div>
+        </section>
 
-          <div className="glass-card dashboard-card events-card">
-            <div className="card-heading">
-              <div>
-                <span className="section-label">UPCOMING</span>
-                <h2>Events & reminders</h2>
-              </div>
-              <button className="link-button" onClick={() => window.location.href = '/reminders'}>View all</button>
-            </div>
-
-            <div className="event-list">
-              {remindersLoading ? (
-                <div className="event-row">
-                  <div className="event-icon purple">◷</div>
-                  <div>
-                    <strong>Loading reminders...</strong>
-                    <small>Fetching your upcoming reminders</small>
-                  </div>
-                  <span>...</span>
-                </div>
-              ) : reminders.length === 0 ? (
-                <div className="event-row">
-                  <div className="event-icon pink">✦</div>
-                  <div>
-                    <strong>No upcoming reminders</strong>
-                    <small>Create a reminder to stay on track</small>
-                  </div>
-                  <span>—</span>
-                </div>
-              ) : (
-                reminders
-                  .filter((reminder) => {
-                    if (!reminder.reminderTime) return false
-
-                    return new Date(reminder.reminderTime) > new Date()
-                  })
-                  .sort(
-                    (a, b) =>
-                      new Date(a.reminderTime) -
-                      new Date(b.reminderTime)
-                  )
-                  .slice(0, 3)
-                  .map((reminder) => {
-                    const reminderDate = new Date(
-                      reminder.reminderTime
-                    )
-
-                    const dateText =
-                      reminderDate.toLocaleDateString(
-                        'en-IN',
-                        {
-                          day: 'numeric',
-                          month: 'short',
-                        }
-                      )
-
-                    const timeText =
-                      reminderDate.toLocaleTimeString(
-                        'en-IN',
-                        {
-                          hour: 'numeric',
-                          minute: '2-digit',
-                        }
-                      )
-
-                    return (
-                      <div
-                        className="event-row"
-                        key={reminder.id}
-                      >
-                        <div className="event-icon orange">
-                          ◷
-                        </div>
-
-                        <div>
-                          <strong>{reminder.title}</strong>
-                          <small>
-                            {dateText} · {timeText}
-                          </small>
-                        </div>
-
-                        <span>{dateText}</span>
-                      </div>
-                    )
-                  })
-              )}
-            </div>
+        <section className="lifeos-upcoming-section">
+          <div className="lifeos-section-heading">
+            <div><span className="lifeos-eyebrow">DON'T MISS</span><h2>Upcoming Deadlines</h2></div>
+            <button type="button" className="lifeos-link-button" onClick={() => window.location.href = '/reminders'}>See All <span>→</span></button>
           </div>
-
-          <div className="glass-card dashboard-card calendar-card">
-            <div className="card-heading compact">
-              <div>
-                <span className="section-label">YOUR MONTH</span>
-                <h2>{monthName} {yearNumber}</h2>
-              </div>
-              <div className="calendar-arrows">
-                <button
-                  type="button"
-                  onClick={goToPreviousMonth}
-                  aria-label="Previous month"
-                >
-                  ←
-                </button>
-
-                {!isCurrentMonth && (
-                  <button
-                    type="button"
-                    onClick={goToToday}
-                    className="calendar-today-button"
-                  >
-                    Today
-                  </button>
-                )}
-
-                <button
-                  type="button"
-                  onClick={goToNextMonth}
-                  aria-label="Next month"
-                >
-                  →
-                </button>
-              </div>
-            </div>
-
-            <div className="calendar-week">
-              {['S','M','T','W','T','F','S'].map((d, i) => <span key={`${d}-${i}`}>{d}</span>)}
-            </div>
-            <div className="calendar-grid">
-              {calendarCells.map((day, index) => {
-                const hasReminder = day && reminderDates.has(day)
-
+          <div className="lifeos-deadline-list">
+            {remindersLoading ? (
+              <div className="lifeos-deadline-empty">Loading upcoming reminders...</div>
+            ) : reminders.filter((reminder) => reminder.reminderTime && new Date(reminder.reminderTime) >= new Date()).slice(0, 4).length === 0 ? (
+              <div className="lifeos-deadline-empty"><span>✦</span><strong>Nothing urgent.</strong><small>Your upcoming reminders will appear here.</small></div>
+            ) : (
+              reminders.filter((reminder) => reminder.reminderTime && new Date(reminder.reminderTime) >= new Date()).sort((a,b) => new Date(a.reminderTime) - new Date(b.reminderTime)).slice(0,4).map((reminder) => {
+                const d = new Date(reminder.reminderTime)
+                const diffHours = Math.max(0, Math.round((d - new Date()) / 3600000))
                 return (
-                  <span
-                    key={index}
-                    className={[
-                      day === dayNumber ? 'today' : '',
-                      hasReminder ? 'has-reminder' : '',
-                      day &&
-                      selectedCalendarDate.getFullYear() === yearNumber &&
-                      selectedCalendarDate.getMonth() === calendarMonthNumber &&
-                      selectedCalendarDate.getDate() === day
-                        ? 'selected-day'
-                        : '',
-                    ]
-                      .filter(Boolean)
-                      .join(' ')}
-                    onClick={() => selectCalendarDay(day)}
-                  >
-                    {day || ''}
-                    {hasReminder && <i className="calendar-reminder-dot" />}
-                  </span>
-                )
-              })}
-            </div>
-
-            <div className="selected-date-reminders">
-              <div className="selected-date-heading">
-                <div>
-                  <span className="section-label">SELECTED DATE</span>
-                  <h3>
-                    {selectedCalendarDate.toLocaleDateString(
-                      'en-IN',
-                      {
-                        weekday: 'long',
-                        day: 'numeric',
-                        month: 'long',
-                      }
-                    )}
-                  </h3>
-                </div>
-
-                <span className="selected-date-count">
-                  {selectedDateReminders.length}
-                </span>
-              </div>
-
-              {selectedDateReminders.length === 0 ? (
-                <div className="selected-date-empty">
-                  <span>✦</span>
-                  <div>
-                    <strong>No reminders</strong>
-                    <small>Nothing scheduled for this date.</small>
-                  </div>
-                </div>
-              ) : (
-                <div className="selected-date-list">
-                  {selectedDateReminders.map((reminder) => {
-                    const reminderDate = new Date(
-                      reminder.reminderTime
-                    )
-
-                    return (
-                      <div
-                        className="selected-date-reminder"
-                        key={reminder.id}
-                      >
-                        <div className="selected-reminder-icon">
-                          ◷
-                        </div>
-
-                        <div>
-                          <strong>{reminder.title}</strong>
-                          <small>
-                            {reminderDate.toLocaleTimeString(
-                              'en-IN',
-                              {
-                                hour: 'numeric',
-                                minute: '2-digit',
-                              }
-                            )}
-                          </small>
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="glass-card dashboard-card focus-card">
-            <div className="focus-art">
-              <div className="focus-mountain back" />
-              <div className="focus-mountain front" />
-              <div className="focus-overlay" />
-              <div className="focus-content">
-                <span className="section-label">FOCUS MODE</span>
-                <strong>{formatFocusTime(focusSeconds)}</strong>
-                <input
-                  className="focus-label-input"
-                  value={focusLabel}
-                  onChange={(event) => setFocusLabel(event.target.value)}
-                  placeholder="What are you focusing on?"
-                  disabled={focusRunning}
-                />
-                <div className="focus-actions">
-                  <button onClick={focusRunning ? () => setFocusRunning(false) : startFocus}>
-                    {focusRunning ? 'Ⅱ Pause' : '▶ Start Focus'}
+                  <button key={reminder.id} type="button" className="lifeos-deadline-row" onClick={() => window.location.href = '/reminders'}>
+                    <span className={`lifeos-deadline-dot ${diffHours < 3 ? 'urgent' : diffHours < 24 ? 'soon' : ''}`}>!</span>
+                    <span className="lifeos-deadline-info"><strong>{reminder.title}</strong><small>{d.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })} · {d.toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' })}</small></span>
+                    <span className={`lifeos-due-pill ${diffHours < 3 ? 'urgent' : diffHours < 24 ? 'soon' : ''}`}>{diffHours < 1 ? 'Due now' : diffHours < 24 ? `In ${diffHours}h` : `In ${Math.ceil(diffHours / 24)}d`}</span>
                   </button>
-                  <button className="focus-reset" onClick={resetFocus}>↻</button>
-                </div>
-              </div>
-            </div>
-            <div className="focus-tabs">
-              <button className="selected">25 min Focus</button>
-              <span className="focus-today">{focusMinutesToday} min today</span>
-            </div>
+                )
+              })
+            )}
           </div>
-
-          <div className="glass-card dashboard-card habits-card">
-            <div className="card-heading">
-              <div>
-                <span className="section-label">DAILY ROUTINE</span>
-                <h2>Habits</h2>
-              </div>
-              <button className="link-button" onClick={() => showMessage('Habits section coming soon')}>View all</button>
-            </div>
-
-            <div className="habit-summary">
-              <div className="habit-ring" style={{ '--habit-progress': `${habitProgress}%` }}>
-                <span>{habitProgress}%</span>
-              </div>
-              <div>
-                <strong>{completedHabitsToday} of {totalHabits} completed today</strong>
-                <small>{longestStreak > 0 ? `${longestStreak}-day best streak. Keep going.` : 'Build your first streak.'}</small>
-              </div>
-            </div>
-
-            {['Drink water', 'Exercise', 'Read', 'Sleep before 12'].map((habit, index) => (
-              <div className="habit-row" key={habit}>
-                <span className={`habit-dot dot-${index}`}>{index === 0 ? '💧' : index === 1 ? '✦' : index === 2 ? '▣' : '☾'}</span>
-                <strong>{habit}</strong>
-                <div className="habit-days">
-                  {[0,1,2,3,4,5,6].map((d) => <i className={d < (index + 3) ? 'done' : ''} key={d} />)}
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="quote-card">
-            <div className="quote-art" />
-            <div className="quote-content">
-              <span>YOUR DAILY NOTE</span>
-              <strong>Good things<br />take time.</strong>
-            </div>
-          </div>
-
-          <div className="music-card">
-            <div className="music-art">
-              <div className="music-mountain" />
-            </div>
-            <div className="music-content">
-              <span>FOCUS MUSIC</span>
-              <strong>Lo-fi Vibes</strong>
-              <small>A calmer mind,<br />a stronger you.</small>
-              <div className="music-controls"><button>▶</button><span /><button>›</button></div>
-            </div>
-          </div>
-
         </section>
 
-        <div className="bottom-banner">
-          <span className="sun-icon">☀</span>
-          <strong>"Small steps every day lead to big results."</strong>
-          <button onClick={() => showMessage('Keep going!')}>Keep going →</button>
-        </div>
-
+        <nav className="lifeos-bottom-nav" aria-label="Primary navigation">
+          <button className="active" type="button" onClick={() => { setActiveNav('Dashboard'); setMobileSection('') }}><span>⌂</span><small>Today</small></button>
+          <button type="button" onClick={() => setMobileSection('calendar')}><span>□</span><small>Calendar</small></button>
+          <button className="lifeos-add-button" type="button" onClick={() => setShowTaskModal(true)} aria-label="Add task">＋</button>
+          <button type="button" onClick={() => window.location.href = '/reminders'}><span>♧</span><small>Inbox</small>{reminders.length > 0 && <i>{Math.min(reminders.length, 9)}</i>}</button>
+          <button type="button" onClick={() => setShowProfilePanel(true)}><span>◯</span><small>Profile</small></button>
+        </nav>
       </main>
 
       {showProfilePanel && (

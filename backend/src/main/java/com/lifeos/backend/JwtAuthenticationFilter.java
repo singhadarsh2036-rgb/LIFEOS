@@ -33,12 +33,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             FilterChain filterChain
     ) throws ServletException, IOException {
 
-        // Allow both local development and production frontend
+        // =========================================
+        // CORS
+        // =========================================
+
         String origin = request.getHeader("Origin");
 
-        if ("http://localhost:5173".equals(origin)
-                || "https://lifeos-frontend-h7fb.onrender.com".equals(origin)) {
-
+        if (
+                "http://localhost:5173".equals(origin)
+                        || "http://localhost:5180".equals(origin)
+                        || "http://localhost:3000".equals(origin)
+                        || "https://lifeos-frontend-h7fb.onrender.com".equals(origin)
+        ) {
             response.setHeader(
                     "Access-Control-Allow-Origin",
                     origin
@@ -47,12 +53,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         response.setHeader(
                 "Access-Control-Allow-Methods",
-                "GET, POST, PUT, DELETE, OPTIONS"
+                "GET, POST, PUT, PATCH, DELETE, OPTIONS"
         );
 
         response.setHeader(
                 "Access-Control-Allow-Headers",
-                "Authorization, Content-Type"
+                "Origin, Authorization, Content-Type, Accept, X-Requested-With"
         );
 
         response.setHeader(
@@ -60,34 +66,53 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 "true"
         );
 
+        // =========================================
+        // REQUEST PATH
+        // =========================================
+
         String path = request.getRequestURI();
 
-        /*
-         * PUBLIC ENDPOINTS
-         *
-         * These endpoints can be accessed
-         * without a JWT token.
-         */
+        // =========================================
+        // PUBLIC ENDPOINTS
+        // =========================================
+        //
+        // These DO NOT require JWT.
+        //
+
         if (
                 request.getMethod().equalsIgnoreCase("OPTIONS")
+
+                        // Authentication
                         || path.equals("/users/login")
                         || path.equals("/users")
+                        || path.equals("/users/register")
+
+                        // Account checks
                         || path.equals("/users/check-email")
                         || path.equals("/users/check-phone")
+
+                        // OTP
                         || path.equals("/otp/send")
                         || path.equals("/otp/verify")
                         || path.equals("/otp/phone/send")
                         || path.equals("/otp/phone/verify")
+
+                        // Push public VAPID key
                         || path.equals("/push/public-key")
         ) {
 
-            filterChain.doFilter(request, response);
+            filterChain.doFilter(
+                    request,
+                    response
+            );
+
             return;
         }
 
-        /*
-         * ALL OTHER ENDPOINTS REQUIRE JWT
-         */
+        // =========================================
+        // JWT AUTHENTICATION
+        // =========================================
+
         String authHeader =
                 request.getHeader("Authorization");
 
@@ -100,6 +125,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     HttpServletResponse.SC_UNAUTHORIZED
             );
 
+            response.setContentType(
+                    "text/plain;charset=UTF-8"
+            );
+
             response.getWriter().write(
                     "Authentication required"
             );
@@ -107,20 +136,63 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return;
         }
 
+        // =========================================
+        // EXTRACT TOKEN
+        // =========================================
+
         String token =
-                authHeader.substring(7);
+                authHeader.substring(7).trim();
+
+        if (token.isEmpty()) {
+
+            response.setStatus(
+                    HttpServletResponse.SC_UNAUTHORIZED
+            );
+
+            response.setContentType(
+                    "text/plain;charset=UTF-8"
+            );
+
+            response.getWriter().write(
+                    "Invalid authentication token"
+            );
+
+            return;
+        }
+
+        // =========================================
+        // VALIDATE JWT
+        // =========================================
 
         try {
 
-            Claims claims = Jwts.parser()
-                    .verifyWith(getSigningKey())
-                    .build()
-                    .parseSignedClaims(token)
-                    .getPayload();
+            Claims claims =
+                    Jwts.parser()
+                            .verifyWith(getSigningKey())
+                            .build()
+                            .parseSignedClaims(token)
+                            .getPayload();
 
             String email =
                     claims.getSubject();
 
+            if (
+                    email == null
+                            || email.isBlank()
+            ) {
+
+                response.setStatus(
+                        HttpServletResponse.SC_UNAUTHORIZED
+                );
+
+                response.getWriter().write(
+                        "Invalid token subject"
+                );
+
+                return;
+            }
+
+            // Make email available to controllers
             request.setAttribute(
                     "userEmail",
                     email
@@ -128,8 +200,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         } catch (Exception e) {
 
+            System.out.println(
+                    "JWT VALIDATION ERROR: "
+                            + e.getMessage()
+            );
+
             response.setStatus(
                     HttpServletResponse.SC_UNAUTHORIZED
+            );
+
+            response.setContentType(
+                    "text/plain;charset=UTF-8"
             );
 
             response.getWriter().write(
@@ -138,6 +219,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
             return;
         }
+
+        // =========================================
+        // CONTINUE REQUEST
+        // =========================================
 
         filterChain.doFilter(
                 request,

@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
 import './Reminders.css'
-import MobileGlobalNav from './MobileGlobalNav'
 
 function Reminders() {
   const [reminders, setReminders] = useState([])
@@ -14,6 +13,16 @@ function Reminders() {
   const [saving, setSaving] = useState(false)
 
   const [message, setMessage] = useState('')
+
+  const [notificationPermission, setNotificationPermission] =
+    useState(
+      typeof Notification !== 'undefined'
+        ? Notification.permission
+        : 'default'
+    )
+
+  const [notificationLoading, setNotificationLoading] =
+    useState(false)
 
   const notifiedReminders = useRef(new Set())
 
@@ -33,38 +42,76 @@ function Reminders() {
   // PUSH NOTIFICATION SETUP
   // ==============================
 
-  const setupPushNotifications = async () => {
+  const setupPushNotifications = async (
+    requestPermission = false
+  ) => {
     try {
+      setNotificationLoading(true)
+
       if (!('serviceWorker' in navigator)) {
-        console.log('Service Worker is not supported')
-        return
+        showMessage(
+          'Notifications are not supported on this device'
+        )
+        return false
       }
 
-      if (!('PushManager' in window)) {
-        console.log('Push notifications are not supported')
-        return
+      if (!('Notification' in window)) {
+        showMessage(
+          'Notifications are not supported'
+        )
+        return false
       }
 
       const token = getToken()
 
       if (!token) {
-        console.log('No login token found')
-        return
+        console.log('❌ No login token found')
+        return false
       }
 
-      const permission = await Notification.requestPermission()
+      let permission = Notification.permission
+
+      if (
+        permission === 'default' &&
+        requestPermission
+      ) {
+        permission =
+          await Notification.requestPermission()
+
+        setNotificationPermission(permission)
+      }
+
+      if (permission === 'denied') {
+        showMessage(
+          'Notifications are blocked. Enable them in iPhone Settings/Safari for LIFEOS.'
+        )
+        return false
+      }
 
       if (permission !== 'granted') {
-        console.log('Notification permission not granted')
-        return
+        showMessage(
+          'Tap Enable Notifications and allow notifications.'
+        )
+        return false
       }
+
+      setNotificationPermission('granted')
 
       const registration =
         await navigator.serviceWorker.ready
 
-      const publicKeyResponse = await fetch(
-        'http://127.0.0.1:8081/push/public-key'
-      )
+      if (!registration.pushManager) {
+        showMessage(
+          'Push notifications are unavailable here. Open LIFEOS from the Home Screen.'
+        )
+        return false
+      }
+
+      // GET VAPID PUBLIC KEY
+      const publicKeyResponse =
+        await fetch(
+          'https://lifeos-v22r.onrender.com/push/public-key'
+        )
 
       if (!publicKeyResponse.ok) {
         throw new Error(
@@ -75,89 +122,138 @@ function Reminders() {
       const publicKey =
         await publicKeyResponse.text()
 
+      if (!publicKey) {
+        throw new Error(
+          'VAPID public key is empty'
+        )
+      }
+
       const urlBase64ToUint8Array = (
         base64String
       ) => {
-        const padding = '='.repeat(
-          (4 - (base64String.length % 4)) % 4
-        )
+        const padding =
+          '='.repeat(
+            (4 -
+              (base64String.length % 4)) %
+              4
+          )
 
-        const base64 = (
-          base64String + padding
-        )
-          .replace(/-/g, '+')
-          .replace(/_/g, '/')
+        const base64 =
+          (
+            base64String + padding
+          )
+            .replace(/-/g, '+')
+            .replace(/_/g, '/')
 
-        const rawData = window.atob(base64)
+        const rawData =
+          window.atob(base64)
 
         return Uint8Array.from(
-          [...rawData].map((char) =>
-            char.charCodeAt(0)
+          [...rawData].map(
+            (char) =>
+              char.charCodeAt(0)
           )
         )
       }
 
       let subscription =
-        await registration.pushManager.getSubscription()
+        await registration.pushManager
+          .getSubscription()
 
       if (!subscription) {
         subscription =
-          await registration.pushManager.subscribe({
-            userVisibleOnly: true,
-            applicationServerKey:
-              urlBase64ToUint8Array(
-                publicKey
-              ),
-          })
+          await registration.pushManager.subscribe(
+            {
+              userVisibleOnly: true,
+
+              applicationServerKey:
+                urlBase64ToUint8Array(
+                  publicKey
+                ),
+            }
+          )
       }
 
       const subscriptionJson =
         subscription.toJSON()
 
+      if (
+        !subscriptionJson.endpoint ||
+        !subscriptionJson.keys?.p256dh ||
+        !subscriptionJson.keys?.auth
+      ) {
+        throw new Error(
+          'Invalid push subscription data'
+        )
+      }
+
       const subscriptionData = {
-        endpoint: subscriptionJson.endpoint,
+        endpoint:
+          subscriptionJson.endpoint,
+
         keys: {
-          p256dh: subscriptionJson.keys?.p256dh,
-          auth: subscriptionJson.keys?.auth,
+          p256dh:
+            subscriptionJson.keys.p256dh,
+
+          auth:
+            subscriptionJson.keys.auth,
         },
       }
 
-      const response = await fetch(
-        'http://127.0.0.1:8081/push/subscribe',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(subscriptionData),
-        }
-      )
+      const response =
+        await fetch(
+          'https://lifeos-v22r.onrender.com/push/subscribe',
+          {
+            method: 'POST',
 
-      if (!response.ok) {
-        const errorText = await response.text()
+            headers: {
+              'Content-Type':
+                'application/json',
 
-        console.error(
-          'SUBSCRIBE RESPONSE:',
-          response.status,
-          errorText
+              Authorization:
+                `Bearer ${token}`,
+            },
+
+            body: JSON.stringify(
+              subscriptionData
+            ),
+          }
         )
 
+      const responseText =
+        await response.text()
+
+      if (!response.ok) {
         throw new Error(
-          `Subscription failed: ${response.status} ${errorText}`
+          `Subscription failed: ${response.status} ${responseText}`
         )
       }
 
-      console.log(
-        '🔔 LIFEOS Push Subscription Saved'
+      showMessage(
+        'Notifications enabled ✓'
       )
+
+      return true
 
     } catch (error) {
       console.error(
-        'Push notification setup failed:',
+        '❌ PUSH NOTIFICATION SETUP ERROR:',
         error
       )
+
+      showMessage(
+        'Could not enable notifications'
+      )
+
+      return false
+
+    } finally {
+      setNotificationLoading(false)
     }
+  }
+
+  const enableNotifications = async () => {
+    await setupPushNotifications(true)
   }
 
   // ==============================
@@ -166,14 +262,16 @@ function Reminders() {
 
   const loadReminders = async () => {
     try {
-      const response = await fetch(
-        'http://127.0.0.1:8081/reminders',
-        {
-          headers: {
-            Authorization: `Bearer ${getToken()}`,
-          },
-        }
-      )
+      const response =
+        await fetch(
+          'https://lifeos-v22r.onrender.com/reminders',
+          {
+            headers: {
+              Authorization:
+                `Bearer ${getToken()}`,
+            },
+          }
+        )
 
       if (!response.ok) {
         throw new Error(
@@ -181,10 +279,13 @@ function Reminders() {
         )
       }
 
-      const data = await response.json()
+      const data =
+        await response.json()
 
       setReminders(
-        Array.isArray(data) ? data : []
+        Array.isArray(data)
+          ? data
+          : []
       )
 
     } catch (error) {
@@ -208,10 +309,21 @@ function Reminders() {
 
   useEffect(() => {
     loadReminders()
-    setupPushNotifications()
 
     if ('Notification' in window) {
-      Notification.requestPermission()
+      const currentPermission =
+        Notification.permission
+
+      setNotificationPermission(
+        currentPermission
+      )
+
+      if (
+        currentPermission ===
+        'granted'
+      ) {
+        setupPushNotifications(false)
+      }
     }
   }, [])
 
@@ -219,11 +331,15 @@ function Reminders() {
   // CREATE REMINDER
   // ==============================
 
-  const createReminder = async (event) => {
+  const createReminder = async (
+    event
+  ) => {
     event.preventDefault()
 
     if (!title.trim()) {
-      showMessage('Enter a reminder')
+      showMessage(
+        'Enter a reminder'
+      )
       return
     }
 
@@ -234,7 +350,8 @@ function Reminders() {
       return
     }
 
-    const timeParts = time.split(':')
+    const timeParts =
+      time.split(':')
 
     if (
       timeParts.length !== 2 ||
@@ -252,13 +369,15 @@ function Reminders() {
     try {
       setSaving(true)
 
-      // Convert 12-hour time to 24-hour time
-      let hour = parseInt(
-        timeParts[0],
-        10
-      )
+      let hour =
+        parseInt(
+          timeParts[0],
+          10
+        )
 
-      if (timePeriod === 'AM') {
+      if (
+        timePeriod === 'AM'
+      ) {
         if (hour === 12) {
           hour = 0
         }
@@ -269,57 +388,75 @@ function Reminders() {
       }
 
       const formattedHour =
-        String(hour).padStart(2, '0')
+        String(hour)
+          .padStart(2, '0')
 
       const reminderTime =
         `${date}T${formattedHour}:${timeParts[1]}:00`
 
-      const selectedDateTime = new Date(reminderTime)
-      const now = new Date()
+      const selectedDateTime =
+        new Date(reminderTime)
 
-      if (selectedDateTime <= now) {
+      const now =
+        new Date()
+
+      if (
+        selectedDateTime <=
+        now
+      ) {
         showMessage(
           'Please select a future date and time'
         )
         return
       }
 
-      const response = await fetch(
-        'http://127.0.0.1:8081/reminders',
-        {
-          method: 'POST',
+      const response =
+        await fetch(
+          'https://lifeos-v22r.onrender.com/reminders',
+          {
+            method: 'POST',
 
-          headers: {
-            'Content-Type':
-              'application/json',
+            headers: {
+              'Content-Type':
+                'application/json',
 
-            Authorization:
-              `Bearer ${getToken()}`,
-          },
+              Authorization:
+                `Bearer ${getToken()}`,
+            },
 
-          body: JSON.stringify({
-            title: title.trim(),
-            reminderTime,
-            completed: false,
-            notificationSent: false,
-          }),
-        }
-      )
+            body: JSON.stringify({
+              title:
+                title.trim(),
+
+              reminderTime,
+
+              completed: false,
+
+              notificationSent:
+                false,
+            }),
+          }
+        )
 
       if (!response.ok) {
         const errorText =
           await response.text()
 
-        throw new Error(errorText)
+        throw new Error(
+          errorText ||
+          `Request failed with status ${response.status}`
+        )
       }
 
       const createdReminder =
         await response.json()
 
-      setReminders((current) => [
-        ...current,
-        createdReminder,
-      ])
+      setReminders(
+        (current) => [
+          ...current,
+          createdReminder,
+        ]
+      )
 
       setTitle('')
       setDate('')
@@ -337,87 +474,91 @@ function Reminders() {
         error
       )
 
+      const errorMessage =
+        error?.message?.trim()
+
       showMessage(
-        'Could not create reminder'
+        errorMessage
+          ? `Couldn't create reminder: ${errorMessage}`
+          : 'Could not create reminder'
       )
 
     } finally {
       setSaving(false)
     }
   }
-
-  // ==============================
+    // ==============================
   // DELETE REMINDER
   // ==============================
 
-  const deleteReminder = async (id) => {
-    try {
-      const response = await fetch(
-        `http://127.0.0.1:8081/reminders/${id}`,
-        {
-          method: 'DELETE',
+  const deleteReminder =
+    async (id) => {
+      try {
+        const response =
+          await fetch(
+            `https://lifeos-v22r.onrender.com/reminders/${id}`,
+            {
+              method: 'DELETE',
 
-          headers: {
-            Authorization:
-              `Bearer ${getToken()}`,
-          },
+              headers: {
+                Authorization:
+                  `Bearer ${getToken()}`,
+              },
+            }
+          )
+
+        if (!response.ok) {
+          throw new Error(
+            'Could not delete reminder'
+          )
         }
-      )
 
-      if (!response.ok) {
-        throw new Error(
+        setReminders(
+          (current) =>
+            current.filter(
+              (reminder) =>
+                reminder.id !== id
+            )
+        )
+
+        showMessage(
+          'Reminder deleted'
+        )
+
+      } catch (error) {
+        console.error(error)
+
+        showMessage(
           'Could not delete reminder'
         )
       }
-
-      setReminders((current) =>
-        current.filter(
-          (reminder) =>
-            reminder.id !== id
-        )
-      )
-
-      showMessage(
-        'Reminder deleted'
-      )
-
-    } catch (error) {
-      console.error(error)
-
-      showMessage(
-        'Could not delete reminder'
-      )
     }
-  }
 
   // ==============================
   // FORMAT DATE
   // ==============================
 
-  const formatReminderDate = (
-    value
-  ) => {
-    if (!value) return ''
+  const formatReminderDate =
+    (value) => {
+      if (!value) return ''
 
-    const dateObject =
-      new Date(value)
+      const dateObject =
+        new Date(value)
 
-    return dateObject.toLocaleString(
-      'en-IN',
-      {
-        day: 'numeric',
-        month: 'short',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true,
-      }
-    )
-  }
+      return dateObject.toLocaleString(
+        'en-IN',
+        {
+          day: 'numeric',
+          month: 'short',
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true,
+        }
+      )
+    }
 
   return (
     <div className="reminders-page">
-
-      <MobileGlobalNav />
 
       <header className="reminders-header">
 
@@ -450,6 +591,83 @@ function Reminders() {
 
       </header>
 
+
+      {/* ==============================
+          NOTIFICATION PERMISSION
+         ============================== */}
+
+      {notificationPermission !==
+        'granted' && (
+
+        <div
+          className="reminders-card"
+          style={{
+            marginBottom: '18px',
+          }}
+        >
+
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent:
+                'space-between',
+              gap: '16px',
+              flexWrap: 'wrap',
+            }}
+          >
+
+            <div>
+
+              <span className="reminders-label">
+                LIFEOS NOTIFICATIONS
+              </span>
+
+              <h2
+                style={{
+                  margin:
+                    '6px 0 4px',
+                }}
+              >
+                Enable reminders
+              </h2>
+
+              <p
+                style={{
+                  margin: 0,
+                  opacity: 0.7,
+                }}
+              >
+                Allow notifications so
+                LIFEOS can remind you on
+                this device.
+              </p>
+
+            </div>
+
+            <button
+              className="reminder-add-button"
+              onClick={
+                enableNotifications
+              }
+              disabled={
+                notificationLoading
+              }
+            >
+              {notificationLoading
+                ? 'Enabling...'
+                : '🔔 Enable Notifications'}
+            </button>
+
+          </div>
+
+        </div>
+      )}
+
+
+      {/* ==============================
+          REMINDERS LIST
+         ============================== */}
 
       <section className="reminders-card">
 
@@ -567,7 +785,9 @@ function Reminders() {
       </section>
 
 
-      {/* CREATE REMINDER MODAL */}
+      {/* ==============================
+          CREATE REMINDER MODAL
+         ============================== */}
 
       {showModal && (
 
@@ -612,7 +832,9 @@ function Reminders() {
 
 
             <form
-              onSubmit={createReminder}
+              onSubmit={
+                createReminder
+              }
             >
 
               <label>
@@ -646,7 +868,11 @@ function Reminders() {
                     className="reminder-input"
                     type="date"
                     value={date}
-                    min={new Date().toISOString().split('T')[0]}
+                    min={
+                      new Date()
+                        .toISOString()
+                        .split('T')[0]
+                    }
                     onChange={(event) =>
                       setDate(
                         event.target.value
@@ -680,7 +906,8 @@ function Reminders() {
                             )
 
                         if (
-                          value.length > 4
+                          value.length >
+                          4
                         ) {
                           value =
                             value.slice(
@@ -690,7 +917,8 @@ function Reminders() {
                         }
 
                         if (
-                          value.length > 2
+                          value.length >
+                          2
                         ) {
                           value =
                             value.slice(
@@ -769,8 +997,11 @@ function Reminders() {
       {message && (
 
         <div className="lifeos-toast">
+
           <span>✓</span>
+
           {message}
+
         </div>
 
       )}
