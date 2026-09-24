@@ -15,7 +15,7 @@ public class JwtService {
             "LIFEOS_SECRET_KEY_123456789012345678901234567890";
 
     private final long EXPIRATION_TIME =
-            1000 * 60 * 60 * 24; // 24 hours
+            1000L * 60 * 60 * 24 * 30; // 30 days
 
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(
