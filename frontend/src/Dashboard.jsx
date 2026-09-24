@@ -255,7 +255,7 @@ function Dashboard() {
       title: 'Calendar',
       subtitle: 'Open Calendar',
       keywords: 'calendar date schedule events',
-      action: () => showMessage('Calendar is available on the Dashboard'),
+      action: () => navigate('/calendar'),
     },
     {
       type: 'Page',
@@ -875,9 +875,122 @@ function Dashboard() {
 
 
   return (
-    <div className="dashboard-page">
+    <>
+      <style>{`
+        .lifeos-top-actions {
+          display: flex !important;
+          align-items: center !important;
+          justify-content: flex-end !important;
+          gap: 10px !important;
+          position: relative !important;
+          z-index: 10050 !important;
+        }
 
-      <aside className="sidebar">
+        .lifeos-theme-toggle {
+          height: 44px !important;
+          min-width: 78px !important;
+          display: inline-flex !important;
+          align-items: center !important;
+          justify-content: center !important;
+          gap: 7px !important;
+          padding: 0 12px !important;
+          border-radius: 14px !important;
+          border: 1px solid rgba(112,73,232,.14) !important;
+          background: rgba(255,255,255,.88) !important;
+          color: #51466a !important;
+          cursor: pointer !important;
+          box-shadow: 0 8px 24px rgba(80,50,130,.08) !important;
+          transition: .2s ease !important;
+        }
+
+        .lifeos-theme-toggle:hover {
+          transform: translateY(-1px) !important;
+          background: #fff !important;
+          box-shadow: 0 12px 30px rgba(80,50,130,.14) !important;
+        }
+
+        .lifeos-theme-icon {
+          width: 26px !important;
+          height: 26px !important;
+          display: grid !important;
+          place-items: center !important;
+          border-radius: 50% !important;
+          background: #eee7ff !important;
+          color: #7049e8 !important;
+          font-size: 15px !important;
+          line-height: 1 !important;
+        }
+
+        .lifeos-theme-label {
+          font-size: 11px !important;
+          font-weight: 800 !important;
+          color: #51466a !important;
+        }
+
+        .lifeos-hero {
+          position: relative !important;
+          overflow: hidden !important;
+        }
+
+        .lifeos-hero-overlay {
+          position: absolute !important;
+          inset: 0 !important;
+          z-index: 1 !important;
+          background: linear-gradient(90deg, rgba(5,3,12,.84) 0%, rgba(5,3,12,.62) 32%, rgba(5,3,12,.28) 62%, rgba(5,3,12,.08) 100%) !important;
+        }
+
+        .lifeos-hero-content {
+          position: relative !important;
+          z-index: 3 !important;
+        }
+
+        .lifeos-hero-content .lifeos-date-label,
+        .lifeos-hero-content h1,
+        .lifeos-hero-content p {
+          text-shadow: 0 3px 14px rgba(0,0,0,.72) !important;
+        }
+
+        .lifeos-hero-content h1 { color: #fff !important; }
+        .lifeos-hero-content h1 strong { color: #d7c2ff !important; }
+        .lifeos-hero-content p { color: rgba(255,255,255,.94) !important; }
+
+        .lifeos-hero-meta span {
+          color: #fff !important;
+          background: rgba(8,5,17,.52) !important;
+          border-color: rgba(255,255,255,.16) !important;
+          backdrop-filter: blur(12px) !important;
+        }
+
+        html[data-lifeos-theme="dark"] .lifeos-theme-toggle {
+          background: rgba(30,21,48,.94) !important;
+          border-color: rgba(167,139,250,.24) !important;
+          color: #f5f3ff !important;
+        }
+
+        html[data-lifeos-theme="dark"] .lifeos-theme-icon {
+          background: rgba(139,92,246,.20) !important;
+          color: #d8c5ff !important;
+        }
+
+        html[data-lifeos-theme="dark"] .lifeos-theme-label {
+          color: #f5f3ff !important;
+        }
+
+        @media (max-width: 700px) {
+          .lifeos-top-actions { gap: 6px !important; }
+          .lifeos-theme-toggle {
+            width: 44px !important;
+            min-width: 44px !important;
+            height: 44px !important;
+            padding: 0 !important;
+          }
+          .lifeos-theme-label { display: none !important; }
+          .lifeos-theme-icon { width: 27px !important; height: 27px !important; }
+        }
+      `}</style>
+      <div className="dashboard-page">
+
+      <aside className="sidebar" style={{ display: 'none' }}>
         <div className="brand">
           <div className="brand-mark">L</div>
           <div>
@@ -912,6 +1025,10 @@ function Dashboard() {
                 }
                 if (name === 'Travel') {
                   navigate('/trips')
+                  return
+                }
+                if (name === 'Calendar') {
+                  navigate('/calendar')
                   return
                 }
                 handleNavigation(name)
@@ -958,39 +1075,145 @@ function Dashboard() {
 
       {mobileNavOpen && (
         <>
-          <div className="mobile-nav-backdrop" aria-hidden="true" />
-          <aside className="mobile-nav-drawer" aria-label="Dashboard navigation">
-            <div className="mobile-drawer-header">
-              <div className="mobile-drawer-brand"><div className="brand-mark">L</div><div><strong>LIFEOS</strong><span>Your personal OS</span></div></div>
+          <button
+            type="button"
+            className="lifeos-menu-backdrop"
+            aria-label="Close LIFEOS menu"
+            onClick={() => setMobileNavOpen(false)}
+          />
+
+          <aside
+            className="lifeos-menu-drawer"
+            aria-label="LIFEOS navigation menu"
+          >
+            <div className="lifeos-drawer-header">
+              <div className="lifeos-drawer-brand">
+                <div className="lifeos-drawer-logo">L</div>
+                <div>
+                  <strong>LIFEOS</strong>
+                  <span>MAKE LIFE FLOW.</span>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                className="lifeos-drawer-close"
+                onClick={() => setMobileNavOpen(false)}
+                aria-label="Close menu"
+              >
+                ×
+              </button>
             </div>
-            <div className="mobile-drawer-label">NAVIGATION</div>
-            <nav className="mobile-drawer-nav">
+
+            <div className="lifeos-drawer-label">YOUR LIFE</div>
+
+            <nav className="lifeos-drawer-nav">
               {[
-                ['Dashboard', '⌂'], ['Tasks', '✓'], ['Calendar', '□'], ['Reminders', '◷'],
-                ['Travel', '✈'], ['Habits', '◈'], ['Notes', '▤'], ['Focus', '◉'], ['Analytics', '◌'],
+                ['Dashboard', '⌂'],
+                ['Tasks', '✓'],
+                ['Calendar', '□'],
+                ['Reminders', '◷'],
+                ['Travel', '✈'],
+                ['Habits', '◈'],
+                ['Notes', '▤'],
+                ['Focus', '◉'],
+                ['Analytics', '◌'],
               ].map(([name, icon]) => (
                 <button
                   key={name}
-                  className={`mobile-nav-item ${activeNav === name ? 'active' : ''}`}
+                  className={`lifeos-drawer-item ${
+                    activeNav === name ? 'active' : ''
+                  }`}
                   type="button"
-                  title={name}
                   onClick={() => {
-                    if (name === 'Dashboard') { setActiveNav(name); setMobileSection(''); closeMobileNav(); navigate('/dashboard') }
-                    else if (name === 'Tasks') { closeMobileNav(); window.location.href = '/tasks' }
-                    else if (name === 'Reminders') { closeMobileNav(); window.location.href = '/reminders' }
-                    else if (name === 'Travel') { closeMobileNav(); window.location.href = '/trips' }
-                    else if (name === 'Calendar') handleMobileSection(name, '.calendar-card')
-                    else if (name === 'Focus') handleMobileSection(name, '.focus-card')
-                    else if (name === 'Habits') handleMobileSection(name, '.habits-card')
-                    else { closeMobileNav(); showMessage(`${name} section coming soon`) }
+                    if (name === 'Dashboard') {
+                      setActiveNav(name)
+                      setMobileSection('')
+                      setMobileNavOpen(false)
+                      navigate('/dashboard')
+                      return
+                    }
+
+                    if (name === 'Tasks') {
+                      setMobileNavOpen(false)
+                      window.location.href = '/tasks'
+                      return
+                    }
+
+                    if (name === 'Reminders') {
+                      setMobileNavOpen(false)
+                      window.location.href = '/reminders'
+                      return
+                    }
+
+                    if (name === 'Travel') {
+                      setMobileNavOpen(false)
+                      navigate('/trips')
+                      return
+                    }
+
+                    if (name === 'Calendar') {
+                      setActiveNav('Calendar')
+                      setMobileNavOpen(false)
+                      navigate('/calendar')
+                      return
+                    }
+
+                    if (name === 'Focus') {
+                      handleMobileSection(name, '.focus-card')
+                      return
+                    }
+
+                    if (name === 'Habits') {
+                      handleMobileSection(name, '.habits-card')
+                      return
+                    }
+
+                    setMobileNavOpen(false)
+                    showMessage(`${name} section coming soon`)
                   }}
                 >
-                  <span className="mobile-nav-icon">{icon}</span>
-                  <span>{name}</span>
-                  <span className="mobile-nav-arrow">›</span>
+                  <span className="lifeos-drawer-icon">{icon}</span>
+                  <span className="lifeos-drawer-text">{name}</span>
+                  <span className="lifeos-drawer-arrow">›</span>
                 </button>
               ))}
             </nav>
+
+            <div className="lifeos-drawer-divider" />
+
+            <button
+              type="button"
+              className="lifeos-drawer-item"
+              onClick={() => {
+                setMobileNavOpen(false)
+                setShowSettingsPanel(true)
+              }}
+            >
+              <span className="lifeos-drawer-icon">⚙</span>
+              <span className="lifeos-drawer-text">Settings</span>
+              <span className="lifeos-drawer-arrow">›</span>
+            </button>
+
+            <button
+              type="button"
+              className="lifeos-drawer-profile"
+              onClick={() => {
+                setMobileNavOpen(false)
+                setShowProfilePanel(true)
+              }}
+            >
+              <div className="lifeos-drawer-avatar">
+                {userName.charAt(0).toUpperCase()}
+              </div>
+
+              <div className="lifeos-drawer-profile-copy">
+                <strong>{userName}</strong>
+                <span>Free Plan</span>
+              </div>
+
+              <span className="lifeos-drawer-arrow">›</span>
+            </button>
           </aside>
         </>
       )}
@@ -1069,13 +1292,67 @@ function Dashboard() {
           </div>
 
           <div className="lifeos-top-actions">
-            <button className="lifeos-icon-button" type="button" onClick={() => setShowNotificationPanel((current) => !current)} aria-label="Notifications">
+            <button
+              className="lifeos-icon-button"
+              type="button"
+              onClick={() => setShowNotificationPanel((current) => !current)}
+              aria-label="Notifications"
+              title="Notifications"
+            >
               ♧
-              {reminders.filter((reminder) => reminder.reminderTime && new Date(reminder.reminderTime) > new Date()).length > 0 && (
-                <span className="lifeos-notification-badge">{Math.min(reminders.filter((reminder) => reminder.reminderTime && new Date(reminder.reminderTime) > new Date()).length, 9)}</span>
+              {reminders.filter(
+                (reminder) =>
+                  reminder.reminderTime &&
+                  new Date(reminder.reminderTime) > new Date()
+              ).length > 0 && (
+                <span className="lifeos-notification-badge">
+                  {Math.min(
+                    reminders.filter(
+                      (reminder) =>
+                        reminder.reminderTime &&
+                        new Date(reminder.reminderTime) > new Date()
+                    ).length,
+                    9
+                  )}
+                </span>
               )}
             </button>
-            <button className="lifeos-avatar-button" type="button" onClick={() => setShowProfilePanel(true)} aria-label="Open profile">{userName.charAt(0).toUpperCase()}</button>
+
+            <button
+              className="lifeos-theme-toggle"
+              type="button"
+              onClick={() => {
+                setTheme((current) =>
+                  current === 'light' ? 'dark' : 'light'
+                )
+              }}
+              aria-label={
+                theme === 'light'
+                  ? 'Switch to dark mode'
+                  : 'Switch to light mode'
+              }
+              title={
+                theme === 'light'
+                  ? 'Switch to dark mode'
+                  : 'Switch to light mode'
+              }
+            >
+              <span className="lifeos-theme-icon">
+                {theme === 'light' ? '☾' : '☀'}
+              </span>
+              <span className="lifeos-theme-label">
+                {theme === 'light' ? 'Dark' : 'Light'}
+              </span>
+            </button>
+
+            <button
+              className="lifeos-avatar-button"
+              type="button"
+              onClick={() => setShowProfilePanel(true)}
+              aria-label="Open profile"
+            >
+              {userName.charAt(0).toUpperCase()}
+            </button>
           </div>
         </header>
 
@@ -1096,7 +1373,7 @@ function Dashboard() {
         <section className="lifeos-week-section">
           <div className="lifeos-section-heading">
             <div><span className="lifeos-eyebrow">YOUR WEEK</span><h2>This Week</h2></div>
-            <button type="button" className="lifeos-link-button" onClick={() => setMobileSection('calendar')}>View Calendar <span>→</span></button>
+            <button type="button" className="lifeos-link-button" onClick={() => navigate('/calendar')}>View Calendar <span>→</span></button>
           </div>
           <div className="lifeos-week-grid">
             {Array.from({ length: 7 }, (_, index) => {
@@ -1107,7 +1384,7 @@ function Dashboard() {
               const number = day.getDate()
               const dayReminderCount = reminders.filter((reminder) => reminder.reminderTime && new Date(reminder.reminderTime).toDateString() === day.toDateString()).length
               return (
-                <button key={day.toISOString()} type="button" className={`lifeos-day-chip ${isToday ? 'active' : ''}`} onClick={() => { setSelectedCalendarDate(day); setMobileSection('calendar') }}>
+                <button key={day.toISOString()} type="button" className={`lifeos-day-chip ${isToday ? 'active' : ''}`} onClick={() => navigate('/calendar')}>
                   <span>{weekday}</span><strong>{number}</strong>{dayReminderCount > 0 && <i />}
                 </button>
               )
@@ -1187,7 +1464,7 @@ function Dashboard() {
 
         <nav className="lifeos-bottom-nav" aria-label="Primary navigation">
           <button className="active" type="button" onClick={() => { setActiveNav('Dashboard'); setMobileSection('') }}><span>⌂</span><small>Today</small></button>
-          <button type="button" onClick={() => setMobileSection('calendar')}><span>□</span><small>Calendar</small></button>
+          <button type="button" onClick={() => navigate('/calendar')}><span>□</span><small>Calendar</small></button>
           <button className="lifeos-add-button" type="button" onClick={() => setShowTaskModal(true)} aria-label="Add task">＋</button>
           <button type="button" onClick={() => window.location.href = '/reminders'}><span>♧</span><small>Inbox</small>{reminders.length > 0 && <i>{Math.min(reminders.length, 9)}</i>}</button>
           <button type="button" onClick={() => setShowProfilePanel(true)}><span>◯</span><small>Profile</small></button>
@@ -1338,7 +1615,8 @@ function Dashboard() {
         </div>
       )}
 
-    </div>
+      </div>
+    </>
   )
 
 }

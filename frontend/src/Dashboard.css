@@ -2734,3 +2734,1839 @@ html[data-lifeos-theme="light"]
 button.active {
   color: #7447df;
 }
+
+/* =========================================================
+   LIFEOS — FINAL DASHBOARD LAYOUT REPAIR
+   Keep this block LAST so old CSS cannot override it.
+   ========================================================= */
+
+/* ---------- PAGE ---------- */
+
+.dashboard-page {
+  min-height: 100vh !important;
+  width: 100% !important;
+  position: relative !important;
+  overflow-x: hidden !important;
+  background:
+    radial-gradient(
+      circle at 80% 0%,
+      rgba(139, 92, 246, 0.16),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #f5f1ff 0%,
+      #faf8ff 50%,
+      #f4f0ff 100%
+    ) !important;
+}
+
+
+/* =========================================================
+   REMOVE OLD PERMANENT SIDEBAR
+   ========================================================= */
+
+.dashboard-page > .sidebar {
+  display: none !important;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.dashboard-page .dashboard-main {
+  width: 100% !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 22px 28px 110px !important;
+  box-sizing: border-box !important;
+}
+
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+.dashboard-page .topbar {
+  width: 100% !important;
+  max-width: 1180px !important;
+  margin: 0 auto 18px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  gap: 14px !important;
+
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+
+  position: relative !important;
+  z-index: 1000 !important;
+}
+
+
+/* Hamburger */
+
+.dashboard-page .mobile-nav-trigger {
+  width: 52px !important;
+  height: 52px !important;
+  min-width: 52px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  border-radius: 16px !important;
+  border: 1px solid rgba(124, 58, 237, 0.10) !important;
+
+  background: rgba(255, 255, 255, 0.82) !important;
+
+  color: #34284b !important;
+
+  box-shadow:
+    0 8px 28px rgba(74, 49, 120, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+
+  cursor: pointer !important;
+
+  font-size: 24px !important;
+  line-height: 1 !important;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease !important;
+}
+
+.dashboard-page .mobile-nav-trigger:hover {
+  transform: translateY(-1px) !important;
+
+  box-shadow:
+    0 12px 32px rgba(74, 49, 120, 0.12) !important;
+}
+
+.dashboard-page .mobile-nav-trigger small {
+  display: none !important;
+}
+
+
+/* Search */
+
+.dashboard-page .search-box {
+  flex: 1 !important;
+  width: auto !important;
+  height: 52px !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  padding: 0 18px !important;
+
+  border-radius: 16px !important;
+
+  background: rgba(255, 255, 255, 0.84) !important;
+
+  border: 1px solid rgba(124, 58, 237, 0.08) !important;
+
+  box-shadow:
+    0 10px 32px rgba(74, 49, 120, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95) !important;
+
+  backdrop-filter: blur(22px) !important;
+}
+
+.dashboard-page .search-box input {
+  flex: 1 !important;
+  min-width: 0 !important;
+
+  border: 0 !important;
+  outline: none !important;
+
+  background: transparent !important;
+
+  color: #332743 !important;
+
+  font-size: 15px !important;
+}
+
+.dashboard-page .search-box input::placeholder {
+  color: #a39ab2 !important;
+}
+
+.dashboard-page .search-box > span {
+  color: #8b72c9 !important;
+  font-size: 20px !important;
+  margin-right: 10px !important;
+}
+
+
+/* Top right icons */
+
+.dashboard-page .top-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;
+}
+
+.dashboard-page .top-icon,
+.dashboard-page .top-profile,
+.dashboard-page .consistency {
+  width: 52px !important;
+  height: 52px !important;
+
+  border-radius: 16px !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  background: rgba(255, 255, 255, 0.84) !important;
+
+  border: 1px solid rgba(124, 58, 237, 0.08) !important;
+
+  box-shadow:
+    0 8px 26px rgba(74, 49, 120, 0.07) !important;
+}
+
+.dashboard-page .top-profile {
+  border: 0 !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8b5cf6,
+      #6d45d9
+    ) !important;
+
+  color: white !important;
+
+  box-shadow:
+    0 10px 28px rgba(109, 69, 217, 0.25) !important;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+.dashboard-page .hero-panel {
+  width: 100% !important;
+  max-width: 1180px !important;
+
+  min-height: 370px !important;
+
+  margin: 0 auto 28px !important;
+
+  position: relative !important;
+  overflow: hidden !important;
+
+  border-radius: 28px !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(10, 7, 20, 0.82) 0%,
+      rgba(10, 7, 20, 0.50) 48%,
+      rgba(10, 7, 20, 0.08) 100%
+    ) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.65) !important;
+
+  box-shadow:
+    0 28px 70px rgba(62, 40, 100, 0.18) !important;
+}
+
+
+/* Hero image */
+
+.dashboard-page .hero-art {
+  position: absolute !important;
+  inset: 0 !important;
+
+  width: 100% !important;
+  height: 100% !important;
+
+  background-size: cover !important;
+  background-position: center !important;
+
+  z-index: 0 !important;
+}
+
+
+/* Hero content ABOVE image */
+
+.dashboard-page .hero-copy {
+  position: relative !important;
+  z-index: 2 !important;
+
+  max-width: 680px !important;
+
+  padding: 58px 56px !important;
+}
+
+.dashboard-page .hero-copy h1 {
+  color: #ffffff !important;
+
+  font-size: clamp(
+    42px,
+    5vw,
+    68px
+  ) !important;
+
+  line-height: 0.98 !important;
+
+  letter-spacing: -2.8px !important;
+
+  text-shadow:
+    0 4px 25px rgba(0, 0, 0, 0.35) !important;
+}
+
+.dashboard-page .hero-copy h1 span {
+  color: #d9c4ff !important;
+}
+
+.dashboard-page .date-label {
+  color: rgba(255, 255, 255, 0.78) !important;
+}
+
+.dashboard-page .hero-copy p {
+  color: rgba(255, 255, 255, 0.84) !important;
+
+  font-size: 17px !important;
+
+  text-shadow:
+    0 2px 12px rgba(0, 0, 0, 0.35) !important;
+}
+
+
+/* Hero pills */
+
+.dashboard-page .hero-stat,
+.dashboard-page .hero-chip {
+  background: rgba(255, 255, 255, 0.12) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.16) !important;
+
+  color: white !important;
+
+  backdrop-filter: blur(14px) !important;
+}
+
+
+/* =========================================================
+   CONTENT WIDTH
+   ========================================================= */
+
+.dashboard-page .dashboard-content,
+.dashboard-page .main-content,
+.dashboard-page .content-wrapper {
+  width: 100% !important;
+  max-width: 1180px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+
+/* =========================================================
+   WEEK SECTION
+   ========================================================= */
+
+.dashboard-page .week-section,
+.dashboard-page .weekly-section {
+  max-width: 1180px !important;
+  margin: 0 auto 28px !important;
+}
+
+.dashboard-page .week-days,
+.dashboard-page .week-grid {
+  display: grid !important;
+
+  grid-template-columns:
+    repeat(7, minmax(0, 1fr)) !important;
+
+  gap: 12px !important;
+}
+
+.dashboard-page .day-card,
+.dashboard-page .week-day {
+  min-height: 76px !important;
+
+  border-radius: 18px !important;
+
+  background: rgba(255, 255, 255, 0.78) !important;
+
+  border: 1px solid rgba(124, 58, 237, 0.08) !important;
+
+  box-shadow:
+    0 8px 25px rgba(74, 49, 120, 0.06) !important;
+}
+
+
+/* =========================================================
+   REMOVE OLD QUICK ACTIONS FROM VIEW
+   ========================================================= */
+
+.dashboard-page .quick-actions {
+  display: none !important;
+}
+
+.dashboard-page .sidebar-bottom {
+  display: none !important;
+}
+
+.dashboard-page .sidebar-profile {
+  display: none !important;
+}
+
+
+/* =========================================================
+   MOBILE DRAWER
+   ========================================================= */
+
+.dashboard-page .mobile-nav-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+
+  z-index: 9998 !important;
+
+  background: rgba(8, 5, 18, 0.42) !important;
+
+  backdrop-filter: blur(5px) !important;
+}
+
+
+.dashboard-page .mobile-nav-drawer {
+  position: fixed !important;
+
+  top: 14px !important;
+  left: 14px !important;
+  bottom: 14px !important;
+
+  width: min(
+    340px,
+    calc(100vw - 28px)
+  ) !important;
+
+  z-index: 9999 !important;
+
+  padding: 22px 16px !important;
+
+  overflow-y: auto !important;
+
+  border-radius: 26px !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(24, 16, 40, 0.98),
+      rgba(14, 10, 25, 0.98)
+    ) !important;
+
+  border: 1px solid rgba(167, 139, 250, 0.16) !important;
+
+  box-shadow:
+    20px 0 70px rgba(0, 0, 0, 0.35) !important;
+
+  backdrop-filter: blur(28px) !important;
+
+  animation: lifeosDrawerIn 0.22s ease-out !important;
+}
+
+@keyframes lifeosDrawerIn {
+  from {
+    opacity: 0;
+    transform: translateX(-22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+.dashboard-page .mobile-drawer-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+
+  padding: 8px 8px 22px !important;
+}
+
+.dashboard-page .mobile-drawer-brand strong {
+  display: block !important;
+
+  color: #f7f3ff !important;
+
+  font-size: 20px !important;
+
+  letter-spacing: 1.5px !important;
+}
+
+.dashboard-page .mobile-drawer-brand span {
+  display: block !important;
+
+  margin-top: 2px !important;
+
+  color: rgba(255, 255, 255, 0.48) !important;
+
+  font-size: 10px !important;
+}
+
+
+.dashboard-page .mobile-drawer-label {
+  padding: 8px 10px !important;
+
+  color: rgba(255, 255, 255, 0.38) !important;
+
+  font-size: 10px !important;
+
+  font-weight: 800 !important;
+
+  letter-spacing: 1.5px !important;
+}
+
+
+.dashboard-page .mobile-drawer-nav {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 5px !important;
+}
+
+
+.dashboard-page .mobile-nav-item {
+  width: 100% !important;
+  min-height: 50px !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  gap: 12px !important;
+
+  padding: 0 13px !important;
+
+  border: 1px solid transparent !important;
+
+  border-radius: 15px !important;
+
+  background: transparent !important;
+
+  color: rgba(255, 255, 255, 0.68) !important;
+
+  font-size: 14px !important;
+
+  text-align: left !important;
+
+  cursor: pointer !important;
+}
+
+.dashboard-page .mobile-nav-item:hover {
+  background: rgba(139, 92, 246, 0.10) !important;
+
+  color: #ffffff !important;
+}
+
+.dashboard-page .mobile-nav-item.active {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(139, 92, 246, 0.25),
+      rgba(124, 58, 237, 0.10)
+    ) !important;
+
+  border-color:
+    rgba(167, 139, 250, 0.16) !important;
+
+  color: #ffffff !important;
+
+  box-shadow:
+    inset 3px 0 0 #9b72ff !important;
+}
+
+.dashboard-page .mobile-nav-icon {
+  width: 28px !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  color: #b89aff !important;
+
+  font-size: 17px !important;
+}
+
+.dashboard-page .mobile-nav-arrow {
+  margin-left: auto !important;
+
+  color: rgba(255, 255, 255, 0.25) !important;
+
+  font-size: 20px !important;
+}
+
+
+/* =========================================================
+   BOTTOM NAV
+   ========================================================= */
+
+.dashboard-page .mobile-bottom-nav,
+.dashboard-page .bottom-nav {
+  position: fixed !important;
+
+  left: 50% !important;
+  bottom: 16px !important;
+
+  transform: translateX(-50%) !important;
+
+  width: min(
+    520px,
+    calc(100vw - 28px)
+  ) !important;
+
+  height: 68px !important;
+
+  z-index: 9000 !important;
+
+  border-radius: 24px !important;
+
+  background: rgba(255, 255, 255, 0.90) !important;
+
+  border: 1px solid rgba(124, 58, 237, 0.08) !important;
+
+  box-shadow:
+    0 18px 55px rgba(59, 39, 100, 0.16) !important;
+
+  backdrop-filter: blur(22px) !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .dashboard-page .dashboard-main {
+    padding:
+      14px
+      14px
+      100px !important;
+  }
+
+  .dashboard-page .topbar {
+    gap: 8px !important;
+  }
+
+  .dashboard-page .mobile-nav-trigger {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px !important;
+  }
+
+  .dashboard-page .search-box {
+    height: 48px !important;
+  }
+
+  .dashboard-page .top-actions {
+    display: none !important;
+  }
+
+  .dashboard-page .hero-panel {
+    min-height: 330px !important;
+
+    border-radius: 24px !important;
+  }
+
+  .dashboard-page .hero-copy {
+    padding: 40px 28px !important;
+  }
+
+  .dashboard-page .hero-copy h1 {
+    font-size: 42px !important;
+    letter-spacing: -1.8px !important;
+  }
+
+  .dashboard-page .week-days,
+  .dashboard-page .week-grid {
+    grid-template-columns:
+      repeat(4, minmax(0, 1fr)) !important;
+  }
+}
+
+
+@media (max-width: 520px) {
+
+  .dashboard-page .dashboard-main {
+    padding:
+      10px
+      10px
+      96px !important;
+  }
+
+  .dashboard-page .hero-panel {
+    min-height: 300px !important;
+  }
+
+  .dashboard-page .hero-copy {
+    padding: 32px 22px !important;
+  }
+
+  .dashboard-page .hero-copy h1 {
+    font-size: 36px !important;
+  }
+
+  .dashboard-page .week-days,
+  .dashboard-page .week-grid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .dashboard-page .mobile-bottom-nav,
+  .dashboard-page .bottom-nav {
+    bottom: 10px !important;
+    width: calc(100vw - 20px) !important;
+  }
+}
+/* =========================================================
+   LIFEOS — NEW GLASS DRAWER
+   FINAL OVERRIDE
+   ========================================================= */
+
+.lifeos-menu-backdrop {
+  position: fixed !important;
+  inset: 0 !important;
+
+  width: 100vw !important;
+  height: 100vh !important;
+
+  padding: 0 !important;
+  margin: 0 !important;
+
+  border: 0 !important;
+
+  background: rgba(8, 5, 18, 0.46) !important;
+
+  backdrop-filter: blur(7px) !important;
+  -webkit-backdrop-filter: blur(7px) !important;
+
+  cursor: pointer !important;
+
+  z-index: 2147483640 !important;
+}
+
+
+.lifeos-menu-drawer {
+  position: fixed !important;
+
+  top: 14px !important;
+  left: 14px !important;
+  bottom: 14px !important;
+
+  width: min(340px, calc(100vw - 28px)) !important;
+
+  box-sizing: border-box !important;
+
+  padding: 20px 14px 14px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+
+  border-radius: 26px !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(25, 17, 43, 0.985) 0%,
+      rgba(13, 9, 25, 0.99) 100%
+    ) !important;
+
+  border: 1px solid rgba(167, 139, 250, 0.20) !important;
+
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.48),
+    inset 0 1px 0 rgba(255,255,255,0.07) !important;
+
+  backdrop-filter: blur(30px) !important;
+  -webkit-backdrop-filter: blur(30px) !important;
+
+  z-index: 2147483641 !important;
+
+  animation: lifeosDrawerOpen 0.22s cubic-bezier(.2,.8,.2,1) !important;
+}
+
+
+@keyframes lifeosDrawerOpen {
+  from {
+    opacity: 0;
+    transform: translateX(-28px) scale(.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+
+/* HEADER */
+
+.lifeos-drawer-header {
+  width: 100% !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  padding: 4px 4px 22px !important;
+}
+
+
+.lifeos-drawer-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 11px !important;
+}
+
+
+.lifeos-drawer-logo {
+  width: 44px !important;
+  height: 44px !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  border-radius: 14px !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8b5cf6,
+      #6d45d9
+    ) !important;
+
+  color: white !important;
+
+  font-size: 20px !important;
+  font-weight: 800 !important;
+
+  box-shadow:
+    0 10px 30px rgba(124,58,237,.30) !important;
+}
+
+
+.lifeos-drawer-brand strong {
+  display: block !important;
+
+  color: #f8f5ff !important;
+
+  font-size: 19px !important;
+  font-weight: 750 !important;
+
+  letter-spacing: 1.5px !important;
+}
+
+
+.lifeos-drawer-brand span {
+  display: block !important;
+
+  margin-top: 3px !important;
+
+  color: rgba(255,255,255,.43) !important;
+
+  font-size: 9px !important;
+  font-weight: 700 !important;
+
+  letter-spacing: 1.2px !important;
+}
+
+
+.lifeos-drawer-close {
+  width: 40px !important;
+  height: 40px !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  border-radius: 13px !important;
+
+  border: 1px solid rgba(255,255,255,.08) !important;
+
+  background: rgba(255,255,255,.055) !important;
+
+  color: rgba(255,255,255,.75) !important;
+
+  font-size: 25px !important;
+  font-weight: 300 !important;
+
+  cursor: pointer !important;
+
+  transition:
+    background .18s ease,
+    transform .18s ease,
+    color .18s ease !important;
+}
+
+
+.lifeos-drawer-close:hover {
+  background: rgba(139,92,246,.20) !important;
+
+  color: #fff !important;
+
+  transform: rotate(90deg) !important;
+}
+
+
+/* LABEL */
+
+.lifeos-drawer-label {
+  padding: 0 10px 8px !important;
+
+  color: rgba(255,255,255,.32) !important;
+
+  font-size: 9px !important;
+  font-weight: 800 !important;
+
+  letter-spacing: 1.5px !important;
+}
+
+
+/* NAV */
+
+.lifeos-drawer-nav {
+  display: flex !important;
+
+  flex-direction: column !important;
+
+  gap: 4px !important;
+}
+
+
+.lifeos-drawer-item {
+  width: 100% !important;
+  min-height: 49px !important;
+
+  box-sizing: border-box !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  gap: 12px !important;
+
+  padding: 0 12px !important;
+
+  border: 1px solid transparent !important;
+
+  border-radius: 14px !important;
+
+  background: transparent !important;
+
+  color: rgba(255,255,255,.64) !important;
+
+  text-align: left !important;
+
+  font-size: 14px !important;
+  font-weight: 600 !important;
+
+  cursor: pointer !important;
+
+  transition:
+    background .16s ease,
+    color .16s ease,
+    transform .16s ease !important;
+}
+
+
+.lifeos-drawer-item:hover {
+  background: rgba(139,92,246,.11) !important;
+
+  color: #fff !important;
+
+  transform: translateX(2px) !important;
+}
+
+
+.lifeos-drawer-item.active {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(139,92,246,.24),
+      rgba(139,92,246,.08)
+    ) !important;
+
+  border-color:
+    rgba(167,139,250,.14) !important;
+
+  color: #fff !important;
+
+  box-shadow:
+    inset 3px 0 0 #9b72ff !important;
+}
+
+
+.lifeos-drawer-icon {
+  width: 30px !important;
+  height: 30px !important;
+
+  flex: 0 0 30px !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  border-radius: 9px !important;
+
+  background: rgba(255,255,255,.045) !important;
+
+  color: #b79aff !important;
+
+  font-size: 15px !important;
+}
+
+
+.lifeos-drawer-item.active .lifeos-drawer-icon {
+  background: rgba(139,92,246,.18) !important;
+
+  color: #d5c1ff !important;
+}
+
+
+.lifeos-drawer-text {
+  flex: 1 !important;
+}
+
+
+.lifeos-drawer-arrow {
+  color: rgba(255,255,255,.22) !important;
+
+  font-size: 20px !important;
+
+  line-height: 1 !important;
+}
+
+
+/* DIVIDER */
+
+.lifeos-drawer-divider {
+  height: 1px !important;
+
+  width: calc(100% - 12px) !important;
+
+  margin: 16px auto 12px !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255,255,255,.10),
+      transparent
+    ) !important;
+}
+
+
+/* PROFILE */
+
+.lifeos-drawer-profile {
+  width: 100% !important;
+
+  margin-top: auto !important;
+
+  min-height: 64px !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  gap: 11px !important;
+
+  padding: 9px !important;
+
+  border-radius: 17px !important;
+
+  border: 1px solid rgba(255,255,255,.07) !important;
+
+  background: rgba(255,255,255,.045) !important;
+
+  color: white !important;
+
+  text-align: left !important;
+
+  cursor: pointer !important;
+}
+
+
+.lifeos-drawer-avatar {
+  width: 42px !important;
+  height: 42px !important;
+
+  flex: 0 0 42px !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  border-radius: 13px !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      #8b5cf6,
+      #b56bd0
+    ) !important;
+
+  color: white !important;
+
+  font-weight: 800 !important;
+}
+
+
+.lifeos-drawer-profile-copy {
+  flex: 1 !important;
+  min-width: 0 !important;
+}
+
+
+.lifeos-drawer-profile-copy strong {
+  display: block !important;
+
+  color: #f5f0ff !important;
+
+  font-size: 13px !important;
+}
+
+
+.lifeos-drawer-profile-copy span {
+  display: block !important;
+
+  margin-top: 2px !important;
+
+  color: rgba(255,255,255,.40) !important;
+
+  font-size: 10px !important;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .lifeos-menu-drawer {
+    top: 8px !important;
+    left: 8px !important;
+    bottom: 8px !important;
+
+    width: calc(100vw - 16px) !important;
+
+    border-radius: 24px !important;
+  }
+
+}/* =========================================================
+   LIFEOS FINAL VISUAL FIX
+   Greeting + Theme Toggle + Drawer
+   ========================================================= */
+
+/* ---------------------------------------------------------
+   GREETING — FORCE PROPER CONTRAST
+   --------------------------------------------------------- */
+
+.dashboard-page .hero-copy h1,
+.dashboard-page .hero-copy h1 *,
+.dashboard-page .hero-greeting,
+.dashboard-page .hero-greeting *,
+.dashboard-page .greeting-title,
+.dashboard-page .greeting-title * {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  text-shadow:
+    0 3px 18px rgba(0, 0, 0, 0.65),
+    0 1px 3px rgba(0, 0, 0, 0.9) !important;
+}
+
+/* Purple highlight for Adarsh / name */
+
+.dashboard-page .hero-copy h1 span,
+.dashboard-page .hero-greeting span,
+.dashboard-page .greeting-title span {
+  color: #d8c1ff !important;
+  opacity: 1 !important;
+}
+
+
+/* Greeting paragraph */
+
+.dashboard-page .hero-copy p,
+.dashboard-page .hero-copy .hero-subtitle {
+  color: #ffffff !important;
+  opacity: .90 !important;
+
+  text-shadow:
+    0 2px 12px rgba(0,0,0,.65) !important;
+}
+
+
+/* Date */
+
+.dashboard-page .hero-copy .date-label,
+.dashboard-page .hero-copy .hero-date {
+  color: rgba(255,255,255,.86) !important;
+  opacity: 1 !important;
+
+  text-shadow:
+    0 2px 10px rgba(0,0,0,.65) !important;
+}
+
+
+/* ---------------------------------------------------------
+   HERO OVERLAY
+   Make left side darker so text NEVER disappears.
+   --------------------------------------------------------- */
+
+.dashboard-page .hero-panel::after {
+  content: "" !important;
+
+  position: absolute !important;
+  inset: 0 !important;
+
+  pointer-events: none !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(4,2,10,.78) 0%,
+      rgba(4,2,10,.55) 32%,
+      rgba(4,2,10,.18) 62%,
+      transparent 100%
+    ) !important;
+
+  z-index: 1 !important;
+}
+
+.dashboard-page .hero-copy {
+  position: relative !important;
+  z-index: 3 !important;
+}
+
+
+/* ---------------------------------------------------------
+   THEME BUTTON
+   JSX already contains .theme-toggle.
+   Force it visible.
+   --------------------------------------------------------- */
+
+.dashboard-page .top-actions {
+  display: flex !important;
+
+  align-items: center !important;
+
+  gap: 10px !important;
+
+  position: relative !important;
+
+  z-index: 10050 !important;
+}
+
+
+.dashboard-page .top-actions .theme-toggle {
+  display: inline-flex !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  gap: 7px !important;
+
+  width: auto !important;
+  min-width: 72px !important;
+  height: 46px !important;
+
+  padding: 0 13px !important;
+
+  border-radius: 14px !important;
+
+  border: 1px solid rgba(124,58,237,.14) !important;
+
+  background:
+    rgba(255,255,255,.86) !important;
+
+  color: #51466a !important;
+
+  box-shadow:
+    0 8px 24px rgba(74,49,120,.08) !important;
+
+  cursor: pointer !important;
+
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+
+.dashboard-page .top-actions .theme-toggle:hover {
+  transform: translateY(-1px) !important;
+
+  background: #ffffff !important;
+
+  box-shadow:
+    0 12px 30px rgba(74,49,120,.13) !important;
+}
+
+
+.dashboard-page .top-actions .theme-toggle-icon {
+  width: 26px !important;
+  height: 26px !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  border-radius: 50% !important;
+
+  background: #eee7ff !important;
+
+  color: #7049e8 !important;
+
+  font-size: 14px !important;
+}
+
+
+.dashboard-page .top-actions .theme-toggle-text {
+  display: inline !important;
+
+  color: #55486d !important;
+
+  font-size: 11px !important;
+
+  font-weight: 800 !important;
+
+  letter-spacing: .2px !important;
+}
+
+
+/* ---------------------------------------------------------
+   DARK THEME
+   --------------------------------------------------------- */
+
+html[data-lifeos-theme="dark"] .dashboard-page {
+  background:
+    radial-gradient(
+      circle at 80% 0%,
+      rgba(139,92,246,.18),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      #0f0a1f,
+      #171027 52%,
+      #201330
+    ) !important;
+
+  color: #f5f3ff !important;
+}
+
+
+html[data-lifeos-theme="dark"] .dashboard-page .theme-toggle {
+  background:
+    rgba(31,22,48,.90) !important;
+
+  border-color:
+    rgba(167,139,250,.20) !important;
+
+  color: #eee7ff !important;
+}
+
+
+html[data-lifeos-theme="dark"] .dashboard-page .theme-toggle-icon {
+  background:
+    rgba(139,92,246,.18) !important;
+
+  color:
+    #d4bfff !important;
+}
+
+
+html[data-lifeos-theme="dark"] .dashboard-page .theme-toggle-text {
+  color:
+    #eee7ff !important;
+}
+
+
+/* Dark search */
+
+html[data-lifeos-theme="dark"] .dashboard-page .search-box {
+  background:
+    rgba(24,17,39,.82) !important;
+
+  border-color:
+    rgba(167,139,250,.14) !important;
+
+  box-shadow:
+    0 10px 32px rgba(0,0,0,.22) !important;
+}
+
+
+html[data-lifeos-theme="dark"] .dashboard-page .search-box input {
+  color:
+    #f5f3ff !important;
+}
+
+
+html[data-lifeos-theme="dark"] .dashboard-page .search-box input::placeholder {
+  color:
+    rgba(232,222,247,.48) !important;
+}
+
+
+/* Dark week cards */
+
+html[data-lifeos-theme="dark"] .dashboard-page .day-card,
+html[data-lifeos-theme="dark"] .dashboard-page .week-day {
+  background:
+    rgba(255,255,255,.045) !important;
+
+  border-color:
+    rgba(255,255,255,.07) !important;
+
+  color:
+    #f5f3ff !important;
+}
+
+
+/* Dark Today's Focus */
+
+html[data-lifeos-theme="dark"] .dashboard-page .focus-card {
+  background:
+    rgba(255,255,255,.035) !important;
+
+  border-color:
+    rgba(255,255,255,.07) !important;
+}
+
+
+/* ---------------------------------------------------------
+   DRAWER — MAKE SURE IT STAYS ABOVE EVERYTHING
+   --------------------------------------------------------- */
+
+.lifeos-menu-backdrop {
+  position: fixed !important;
+
+  inset: 0 !important;
+
+  z-index: 2147483640 !important;
+
+  display: block !important;
+
+  cursor: pointer !important;
+}
+
+
+.lifeos-menu-drawer {
+  position: fixed !important;
+
+  top: 14px !important;
+  left: 14px !important;
+  bottom: 14px !important;
+
+  z-index: 2147483641 !important;
+
+  display: flex !important;
+
+  flex-direction: column !important;
+
+  width: min(
+    340px,
+    calc(100vw - 28px)
+  ) !important;
+
+  padding: 20px 14px !important;
+
+  border-radius: 26px !important;
+
+  overflow-y: auto !important;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(25,17,43,.99),
+      rgba(12,8,23,.99)
+    ) !important;
+
+  border:
+    1px solid rgba(167,139,250,.20) !important;
+
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.50) !important;
+}
+
+
+.lifeos-drawer-close {
+  display: grid !important;
+
+  place-items: center !important;
+
+  width: 40px !important;
+  height: 40px !important;
+
+  border-radius: 13px !important;
+
+  background:
+    rgba(255,255,255,.06) !important;
+
+  border:
+    1px solid rgba(255,255,255,.09) !important;
+
+  color:
+    #ffffff !important;
+
+  font-size: 25px !important;
+
+  cursor: pointer !important;
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 800px) {
+
+  .dashboard-page .top-actions {
+    position: absolute !important;
+
+    right: 8px !important;
+
+    top: 0 !important;
+
+    gap: 5px !important;
+  }
+
+  .dashboard-page .top-actions .theme-toggle {
+    width: 44px !important;
+    min-width: 44px !important;
+    height: 44px !important;
+
+    padding: 0 !important;
+  }
+
+  .dashboard-page .top-actions .theme-toggle-text {
+    display: none !important;
+  }
+
+  .dashboard-page .top-actions .theme-toggle-icon {
+    font-size: 16px !important;
+  }
+
+  .dashboard-page .hero-copy h1 {
+    font-size: 38px !important;
+
+    line-height: 1 !important;
+  }
+
+  .lifeos-menu-drawer {
+    top: 8px !important;
+    left: 8px !important;
+    bottom: 8px !important;
+
+    width:
+      calc(100vw - 16px) !important;
+
+    border-radius: 24px !important;
+  }
+}
+/* =========================================================
+   LIFEOS FINAL TOPBAR + HERO FIX
+   ========================================================= */
+
+/* ---------- TOP ACTIONS ---------- */
+
+.lifeos-top-actions {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 10px !important;
+  position: relative !important;
+  z-index: 10050 !important;
+}
+
+
+/* ---------- THEME BUTTON ---------- */
+
+.lifeos-theme-toggle {
+  height: 44px !important;
+  min-width: 78px !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+
+  gap: 7px !important;
+
+  padding: 0 12px !important;
+
+  border-radius: 14px !important;
+
+  border: 1px solid rgba(112,73,232,.14) !important;
+
+  background: rgba(255,255,255,.82) !important;
+
+  color: #51466a !important;
+
+  cursor: pointer !important;
+
+  box-shadow:
+    0 8px 24px rgba(80,50,130,.08) !important;
+
+  transition:
+    .2s ease !important;
+}
+
+.lifeos-theme-toggle:hover {
+  transform: translateY(-1px) !important;
+
+  background: #ffffff !important;
+
+  box-shadow:
+    0 12px 30px rgba(80,50,130,.14) !important;
+}
+
+.lifeos-theme-icon {
+  width: 26px !important;
+  height: 26px !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  border-radius: 50% !important;
+
+  background: #eee7ff !important;
+
+  color: #7049e8 !important;
+
+  font-size: 15px !important;
+
+  line-height: 1 !important;
+}
+
+.lifeos-theme-label {
+  font-size: 11px !important;
+
+  font-weight: 800 !important;
+
+  color: #51466a !important;
+}
+
+
+/* ---------- HERO ---------- */
+
+.lifeos-hero {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+.lifeos-hero-overlay {
+  position: absolute !important;
+  inset: 0 !important;
+
+  z-index: 1 !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(5,3,12,.82) 0%,
+      rgba(5,3,12,.62) 30%,
+      rgba(5,3,12,.28) 58%,
+      rgba(5,3,12,.08) 100%
+    ) !important;
+}
+
+.lifeos-hero-content {
+  position: relative !important;
+
+  z-index: 3 !important;
+}
+
+
+/* DATE */
+
+.lifeos-date-label {
+  color: rgba(255,255,255,.88) !important;
+
+  text-shadow:
+    0 2px 10px rgba(0,0,0,.8) !important;
+}
+
+
+/* GREETING */
+
+.lifeos-hero-content h1 {
+  color: #ffffff !important;
+
+  text-shadow:
+    0 4px 20px rgba(0,0,0,.75),
+    0 2px 5px rgba(0,0,0,.9) !important;
+}
+
+
+/* NAME */
+
+.lifeos-hero-content h1 strong {
+  color: #d7c2ff !important;
+
+  text-shadow:
+    0 4px 20px rgba(0,0,0,.65) !important;
+}
+
+
+/* WAVE */
+
+.lifeos-hero-content h1 span {
+  color: #ffffff !important;
+
+  text-shadow:
+    0 3px 12px rgba(0,0,0,.7) !important;
+}
+
+
+/* SUBTITLE */
+
+.lifeos-hero-content p {
+  color: rgba(255,255,255,.92) !important;
+
+  text-shadow:
+    0 2px 12px rgba(0,0,0,.75) !important;
+}
+
+
+/* HERO PILLS */
+
+.lifeos-hero-meta span {
+  color: #ffffff !important;
+
+  background: rgba(8,5,17,.48) !important;
+
+  border-color:
+    rgba(255,255,255,.16) !important;
+
+  backdrop-filter: blur(12px) !important;
+}
+
+
+/* =========================================================
+   DARK MODE
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-theme-toggle {
+  background:
+    rgba(30,21,48,.90) !important;
+
+  border-color:
+    rgba(167,139,250,.22) !important;
+
+  color: #f5f3ff !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-theme-icon {
+  background:
+    rgba(139,92,246,.18) !important;
+
+  color: #d8c5ff !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-theme-label {
+  color: #f5f3ff !important;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .lifeos-top-actions {
+    gap: 6px !important;
+  }
+
+  .lifeos-theme-toggle {
+    width: 44px !important;
+    min-width: 44px !important;
+
+    height: 44px !important;
+
+    padding: 0 !important;
+  }
+
+  .lifeos-theme-label {
+    display: none !important;
+  }
+
+  .lifeos-theme-icon {
+    width: 27px !important;
+    height: 27px !important;
+  }
+
+  .lifeos-hero-content h1 {
+    font-size: clamp(34px, 9vw, 48px) !important;
+
+    line-height: .98 !important;
+  }
+}
+/* =========================================================
+   MOBILE DASHBOARD — HIDE OLD DESKTOP SIDEBAR
+   ========================================================= */
+
+@media (max-width: 720px) {
+
+  .dashboard-page {
+    display: block !important;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* OLD DESKTOP SIDEBAR — HIDE ON MOBILE */
+  .dashboard-page > .sidebar {
+    display: none !important;
+  }
+
+  /* NEW MOBILE DASHBOARD */
+  .dashboard-page > .dashboard-main {
+    display: block !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-height: 100vh;
+    margin: 0 !important;
+    padding: 12px 14px 110px !important;
+    box-sizing: border-box;
+  }
+
+  .dashboard-main .topbar {
+    width: 100%;
+  }
+
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+
+  .dashboard-page > .dashboard-main {
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    padding-bottom: 110px !important;
+  }
+
+}
+/* =========================================
+   REMOVE LEGACY SIDEBAR
+   ========================================= */
+
+.dashboard-page > .sidebar {
+  display: none !important;
+}
+
+.dashboard-page > .dashboard-main {
+  width: 100% !important;
+  margin-left: 0 !important;
+  max-width: 100% !important;
+}
+
+@media (max-width: 720px) {
+  .dashboard-page > .dashboard-main {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 12px 14px 110px !important;
+  }
+}
