@@ -4,6 +4,7 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 import Login from './Login.jsx'
 import Register from './Register.jsx'
@@ -11,6 +12,7 @@ import Dashboard from './Dashboard.jsx'
 import Tasks from './Tasks.jsx'
 import Reminders from './Reminders.jsx'
 import Trips from './Trips.jsx'
+import Calendar from './Calendar.jsx'
 
 import './App.css'
 
@@ -35,13 +37,40 @@ function PublicRoute({ children }) {
 }
 
 function App() {
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('lifeosTheme') || 'light'
+  })
+
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      'data-lifeos-theme',
+      theme
+    )
+
+    localStorage.setItem(
+      'lifeosTheme',
+      theme
+    )
+  }, [theme])
+
+  useEffect(() => {
+    window.lifeosTheme = theme
+    window.setLifeosTheme = setTheme
+  }, [theme])
+
   return (
     <BrowserRouter>
+
       <Routes>
 
         <Route
           path="/"
-          element={<Navigate to="/dashboard" replace />}
+          element={
+            <Navigate
+              to="/dashboard"
+              replace
+            />
+          }
         />
 
         <Route
@@ -63,6 +92,15 @@ function App() {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/calendar"
+          element={
+            <ProtectedRoute>
+              <Calendar />
             </ProtectedRoute>
           }
         />
@@ -96,10 +134,16 @@ function App() {
 
         <Route
           path="*"
-          element={<Navigate to="/login" replace />}
+          element={
+            <Navigate
+              to="/login"
+              replace
+            />
+          }
         />
 
       </Routes>
+
     </BrowserRouter>
   )
 }
