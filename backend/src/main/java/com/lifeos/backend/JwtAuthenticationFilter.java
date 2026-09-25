@@ -101,11 +101,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         || path.equals("/otp/phone/send")
                         || path.equals("/otp/phone/verify")
                         || path.equals("/push/public-key")
-                        || path.equals("/ai/deadlines/extract-text")
+                        
                         
 
-                        // TEMPORARY AI DEBUG BYPASS
-                        || path.equals("/ai/deadlines/extract")
+                        
+                
         ) {
 
             System.out.println(
