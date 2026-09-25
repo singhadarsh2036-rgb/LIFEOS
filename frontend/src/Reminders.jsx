@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import './Reminders.css'
+import { apiFetch } from './api'
 
 function Reminders() {
   const [reminders, setReminders] = useState([])
@@ -26,9 +27,22 @@ function Reminders() {
 
   const notifiedReminders = useRef(new Set())
 
+  // =====================================================
+  // TOKEN
+  // =====================================================
+
   const getToken = () => {
-    return localStorage.getItem('token')
+    return (
+      localStorage.getItem('token') ||
+      localStorage.getItem('jwt') ||
+      localStorage.getItem('accessToken') ||
+      ''
+    )
   }
+
+  // =====================================================
+  // MESSAGE
+  // =====================================================
 
   const showMessage = (text) => {
     setMessage(text)
@@ -38,9 +52,9 @@ function Reminders() {
     }, 2200)
   }
 
-  // ==============================
-  // PUSH NOTIFICATION SETUP
-  // ==============================
+  // =====================================================
+  // PUSH NOTIFICATIONS
+  // =====================================================
 
   const setupPushNotifications = async (
     requestPermission = false
@@ -83,7 +97,7 @@ function Reminders() {
 
       if (permission === 'denied') {
         showMessage(
-          'Notifications are blocked. Enable them in iPhone Settings/Safari for LIFEOS.'
+          'Notifications are blocked. Enable them in browser settings for LIFEOS.'
         )
         return false
       }
@@ -102,15 +116,16 @@ function Reminders() {
 
       if (!registration.pushManager) {
         showMessage(
-          'Push notifications are unavailable here. Open LIFEOS from the Home Screen.'
+          'Push notifications are unavailable here.'
         )
         return false
       }
 
       // GET VAPID PUBLIC KEY
+
       const publicKeyResponse =
-        await fetch(
-          'https://lifeos-v22r.onrender.com/push/public-key'
+        await apiFetch(
+          '/push/public-key'
         )
 
       if (!publicKeyResponse.ok) {
@@ -127,6 +142,8 @@ function Reminders() {
           'VAPID public key is empty'
         )
       }
+
+      // Base64 → Uint8Array
 
       const urlBase64ToUint8Array = (
         base64String
@@ -162,16 +179,14 @@ function Reminders() {
 
       if (!subscription) {
         subscription =
-          await registration.pushManager.subscribe(
-            {
-              userVisibleOnly: true,
+          await registration.pushManager.subscribe({
+            userVisibleOnly: true,
 
-              applicationServerKey:
-                urlBase64ToUint8Array(
-                  publicKey
-                ),
-            }
-          )
+            applicationServerKey:
+              urlBase64ToUint8Array(
+                publicKey
+              ),
+          })
       }
 
       const subscriptionJson =
@@ -201,22 +216,15 @@ function Reminders() {
       }
 
       const response =
-        await fetch(
-          'https://lifeos-v22r.onrender.com/push/subscribe',
+        await apiFetch(
+          '/push/subscribe',
           {
             method: 'POST',
 
-            headers: {
-              'Content-Type':
-                'application/json',
-
-              Authorization:
-                `Bearer ${token}`,
-            },
-
-            body: JSON.stringify(
-              subscriptionData
-            ),
+            body:
+              JSON.stringify(
+                subscriptionData
+              ),
           }
         )
 
@@ -256,31 +264,54 @@ function Reminders() {
     await setupPushNotifications(true)
   }
 
-  // ==============================
+  // =====================================================
   // LOAD REMINDERS
-  // ==============================
+  // =====================================================
 
   const loadReminders = async () => {
     try {
+      setLoading(true)
+
+      const token = getToken()
+
+      if (!token) {
+        console.error(
+          '❌ No authentication token found'
+        )
+
+        setReminders([])
+        return
+      }
+
       const response =
-        await fetch(
-          'https://lifeos-v22r.onrender.com/reminders',
+        await apiFetch(
+          '/reminders',
           {
+            method: 'GET',
+
             headers: {
-              Authorization:
-                `Bearer ${getToken()}`,
+              Accept:
+                'application/json',
             },
           }
         )
 
       if (!response.ok) {
+        const errorText =
+          await response.text()
+
         throw new Error(
-          'Could not load reminders'
+          `Could not load reminders: ${response.status} ${errorText}`
         )
       }
 
       const data =
         await response.json()
+
+      console.log(
+        '✅ REMINDERS LOADED:',
+        data
+      )
 
       setReminders(
         Array.isArray(data)
@@ -290,7 +321,7 @@ function Reminders() {
 
     } catch (error) {
       console.error(
-        'REMINDER ERROR:',
+        '❌ REMINDER LOAD ERROR:',
         error
       )
 
@@ -303,9 +334,9 @@ function Reminders() {
     }
   }
 
-  // ==============================
+  // =====================================================
   // INITIAL SETUP
-  // ==============================
+  // =====================================================
 
   useEffect(() => {
     loadReminders()
@@ -327,14 +358,18 @@ function Reminders() {
     }
   }, [])
 
-  // ==============================
+  // =====================================================
   // CREATE REMINDER
-  // ==============================
+  // =====================================================
 
   const createReminder = async (
     event
   ) => {
     event.preventDefault()
+
+    if (saving) {
+      return
+    }
 
     if (!title.trim()) {
       showMessage(
@@ -355,10 +390,22 @@ function Reminders() {
 
     if (
       timeParts.length !== 2 ||
-      parseInt(timeParts[0], 10) < 1 ||
-      parseInt(timeParts[0], 10) > 12 ||
-      parseInt(timeParts[1], 10) < 0 ||
-      parseInt(timeParts[1], 10) > 59
+      parseInt(
+        timeParts[0],
+        10
+      ) < 1 ||
+      parseInt(
+        timeParts[0],
+        10
+      ) > 12 ||
+      parseInt(
+        timeParts[1],
+        10
+      ) < 0 ||
+      parseInt(
+        timeParts[1],
+        10
+      ) > 59
     ) {
       showMessage(
         'Enter a valid time'
@@ -410,31 +457,34 @@ function Reminders() {
         return
       }
 
+      const token = getToken()
+
+      if (!token) {
+        showMessage(
+          'Please login again'
+        )
+        return
+      }
+
       const response =
-        await fetch(
-          'https://lifeos-v22r.onrender.com/reminders',
+        await apiFetch(
+          '/reminders',
           {
             method: 'POST',
 
-            headers: {
-              'Content-Type':
-                'application/json',
+            body:
+              JSON.stringify({
+                title:
+                  title.trim(),
 
-              Authorization:
-                `Bearer ${getToken()}`,
-            },
+                reminderTime,
 
-            body: JSON.stringify({
-              title:
-                title.trim(),
+                completed:
+                  false,
 
-              reminderTime,
-
-              completed: false,
-
-              notificationSent:
-                false,
-            }),
+                notificationSent:
+                  false,
+              }),
           }
         )
 
@@ -448,15 +498,12 @@ function Reminders() {
         )
       }
 
-      const createdReminder =
-        await response.json()
+      await response.json()
 
-      setReminders(
-        (current) => [
-          ...current,
-          createdReminder,
-        ]
-      )
+      // Reload from backend
+      // so UI always matches database
+
+      await loadReminders()
 
       setTitle('')
       setDate('')
@@ -465,12 +512,12 @@ function Reminders() {
       setShowModal(false)
 
       showMessage(
-        'Reminder created'
+        'Reminder created ✓'
       )
 
     } catch (error) {
       console.error(
-        'CREATE REMINDER ERROR:',
+        '❌ CREATE REMINDER ERROR:',
         error
       )
 
@@ -487,23 +534,29 @@ function Reminders() {
       setSaving(false)
     }
   }
-    // ==============================
+
+  // =====================================================
   // DELETE REMINDER
-  // ==============================
+  // =====================================================
 
   const deleteReminder =
     async (id) => {
       try {
+        const token =
+          getToken()
+
+        if (!token) {
+          showMessage(
+            'Please login again'
+          )
+          return
+        }
+
         const response =
-          await fetch(
-            `https://lifeos-v22r.onrender.com/reminders/${id}`,
+          await apiFetch(
+            `/reminders/${id}`,
             {
               method: 'DELETE',
-
-              headers: {
-                Authorization:
-                  `Bearer ${getToken()}`,
-              },
             }
           )
 
@@ -526,7 +579,9 @@ function Reminders() {
         )
 
       } catch (error) {
-        console.error(error)
+        console.error(
+          error
+        )
 
         showMessage(
           'Could not delete reminder'
@@ -534,9 +589,9 @@ function Reminders() {
       }
     }
 
-  // ==============================
+  // =====================================================
   // FORMAT DATE
-  // ==============================
+  // =====================================================
 
   const formatReminderDate =
     (value) => {
@@ -550,6 +605,7 @@ function Reminders() {
         {
           day: 'numeric',
           month: 'short',
+          year: 'numeric',
           hour: 'numeric',
           minute: '2-digit',
           hour12: true,
@@ -557,8 +613,14 @@ function Reminders() {
       )
     }
 
+  // =====================================================
+  // RENDER
+  // =====================================================
+
   return (
     <div className="reminders-page">
+
+      {/* HEADER */}
 
       <header className="reminders-header">
 
@@ -592,9 +654,7 @@ function Reminders() {
       </header>
 
 
-      {/* ==============================
-          NOTIFICATION PERMISSION
-         ============================== */}
+      {/* NOTIFICATION PERMISSION */}
 
       {notificationPermission !==
         'granted' && (
@@ -665,9 +725,7 @@ function Reminders() {
       )}
 
 
-      {/* ==============================
-          REMINDERS LIST
-         ============================== */}
+      {/* REMINDERS LIST */}
 
       <section className="reminders-card">
 
@@ -769,6 +827,7 @@ function Reminders() {
                         reminder.id
                       )
                     }
+                    aria-label={`Delete ${reminder.title}`}
                   >
                     ×
                   </button>
@@ -785,9 +844,7 @@ function Reminders() {
       </section>
 
 
-      {/* ==============================
-          CREATE REMINDER MODAL
-         ============================== */}
+      {/* CREATE REMINDER MODAL */}
 
       {showModal && (
 
@@ -824,6 +881,7 @@ function Reminders() {
                 onClick={() =>
                   setShowModal(false)
                 }
+                type="button"
               >
                 ×
               </button>
@@ -993,6 +1051,8 @@ function Reminders() {
 
       )}
 
+
+      {/* TOAST */}
 
       {message && (
 

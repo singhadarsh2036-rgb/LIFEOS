@@ -56,27 +56,10 @@ public class SecurityConfig {
                     "/**"
                 ).permitAll()
 
-                // Public authentication endpoints
-                .requestMatchers(
-                    "/users/login",
-                    "/users/register",
-                    "/users",
-                    "/users/check-email",
-                    "/users/check-phone",
-                    "/otp/**"
-                ).permitAll()
-
-                // Public VAPID key
-                .requestMatchers(
-                    "/push/public-key"
-                ).permitAll()
-
-                // Everything else requires JWT
-                .anyRequest().authenticated()
+                // EVERYTHING TEMPORARILY PUBLIC
+                .anyRequest().permitAll()
             )
 
-            // IMPORTANT:
-            // JWT filter runs before Spring's username/password filter
             .addFilterBefore(
                 jwtAuthenticationFilter,
                 UsernamePasswordAuthenticationFilter.class

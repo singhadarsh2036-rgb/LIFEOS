@@ -85,15 +85,21 @@ function Login() {
 
   const handleMethodChange = (method) => {
     setLoginMethod(method)
-    if (method === 'email') setPhone('')
-    else setEmail('')
+
+    if (method === 'email') {
+      setPhone('')
+    } else {
+      setEmail('')
+    }
   }
 
   const handleLogin = async (event) => {
     event.preventDefault()
 
     const loginValue =
-      loginMethod === 'email' ? email.trim() : phone.trim()
+      loginMethod === 'email'
+        ? email.trim()
+        : phone.trim()
 
     if (!loginValue) {
       alert(
@@ -108,10 +114,12 @@ function Login() {
 
     try {
       const response = await fetch(
-        'https://lifeos-v22r.onrender.com/users/login',
+        'http://localhost:8081/users/login',
         {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: {
+            'Content-Type': 'application/json'
+          },
           body: JSON.stringify({
             login: loginValue,
             password
@@ -127,6 +135,7 @@ function Login() {
       }
 
       localStorage.setItem('token', data)
+
       navigate('/dashboard')
     } catch (error) {
       console.error('LOGIN ERROR:', error)
@@ -151,8 +160,13 @@ function Login() {
         </div>
 
         <div>
-          <div className="lifeos-login-brand-name">LIFEOS</div>
-          <div className="lifeos-login-brand-tagline">YOUR LIFE. ONE SYSTEM.</div>
+          <div className="lifeos-login-brand-name">
+            LIFEOS
+          </div>
+
+          <div className="lifeos-login-brand-tagline">
+            YOUR LIFE. ONE SYSTEM.
+          </div>
         </div>
       </header>
 
@@ -184,9 +198,12 @@ function Login() {
               <div className="lifeos-login-feature-icon purple">
                 <FeatureIcon type="check" />
               </div>
+
               <div>
                 <strong>Stay Organized</strong>
-                <small>Tasks, reminders, habits and more</small>
+                <small>
+                  Tasks, reminders, habits and more
+                </small>
               </div>
             </div>
 
@@ -194,9 +211,12 @@ function Login() {
               <div className="lifeos-login-feature-icon blue">
                 <FeatureIcon type="chart" />
               </div>
+
               <div>
                 <strong>Track Progress</strong>
-                <small>Small steps. Big changes.</small>
+                <small>
+                  Small steps. Big changes.
+                </small>
               </div>
             </div>
 
@@ -204,9 +224,12 @@ function Login() {
               <div className="lifeos-login-feature-icon peach">
                 <FeatureIcon type="star" />
               </div>
+
               <div>
                 <strong>Build a Better You</strong>
-                <small>Discipline today, freedom tomorrow.</small>
+                <small>
+                  Discipline today, freedom tomorrow.
+                </small>
               </div>
             </div>
 
@@ -214,6 +237,7 @@ function Login() {
 
           <div className="lifeos-login-quote">
             <span />
+
             <p>
               “A system for a
               <br />
@@ -235,7 +259,9 @@ function Login() {
               <span />
             </div>
 
-            <h2>Welcome back <span>👋</span></h2>
+            <h2>
+              Welcome back <span>👋</span>
+            </h2>
 
             <p className="lifeos-login-subtitle">
               Log in to continue your journey
@@ -247,8 +273,14 @@ function Login() {
 
                 <button
                   type="button"
-                  className={loginMethod === 'email' ? 'active' : ''}
-                  onClick={() => handleMethodChange('email')}
+                  className={
+                    loginMethod === 'email'
+                      ? 'active'
+                      : ''
+                  }
+                  onClick={() =>
+                    handleMethodChange('email')
+                  }
                 >
                   <MailIcon />
                   Email
@@ -256,8 +288,14 @@ function Login() {
 
                 <button
                   type="button"
-                  className={loginMethod === 'phone' ? 'active' : ''}
-                  onClick={() => handleMethodChange('phone')}
+                  className={
+                    loginMethod === 'phone'
+                      ? 'active'
+                      : ''
+                  }
+                  onClick={() =>
+                    handleMethodChange('phone')
+                  }
                 >
                   <PhoneIcon />
                   Phone
@@ -267,23 +305,37 @@ function Login() {
 
               {loginMethod === 'email' ? (
                 <div className="lifeos-login-field">
-                  <label htmlFor="lifeos-email">Email</label>
+
+                  <label htmlFor="lifeos-email">
+                    Email
+                  </label>
+
                   <div className="lifeos-login-input">
+
                     <MailIcon />
+
                     <input
                       id="lifeos-email"
                       type="email"
                       placeholder="Enter your email"
                       value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      onChange={(e) =>
+                        setEmail(e.target.value)
+                      }
                       required
                     />
+
                   </div>
                 </div>
               ) : (
                 <div className="lifeos-login-field">
-                  <label htmlFor="lifeos-phone">Phone number</label>
+
+                  <label htmlFor="lifeos-phone">
+                    Phone number
+                  </label>
+
                   <div className="lifeos-login-phone">
+
                     <PhoneInput
                       id="lifeos-phone"
                       international
@@ -291,39 +343,66 @@ function Login() {
                       countryCallingCodeEditable={false}
                       placeholder="Enter your phone number"
                       value={phone}
-                      onChange={(value) => setPhone(value || '')}
+                      onChange={(value) =>
+                        setPhone(value || '')
+                      }
                     />
+
                   </div>
                 </div>
               )}
 
               <div className="lifeos-login-field">
-                <label htmlFor="lifeos-password">Password</label>
+
+                <label htmlFor="lifeos-password">
+                  Password
+                </label>
 
                 <div className="lifeos-login-input">
+
                   <LockIcon />
 
                   <input
                     id="lifeos-password"
-                    type={showPassword ? 'text' : 'password'}
+                    type={
+                      showPassword
+                        ? 'text'
+                        : 'password'
+                    }
                     placeholder="Enter your password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) =>
+                      setPassword(e.target.value)
+                    }
                     required
                   />
 
                   <button
                     type="button"
                     className="lifeos-login-eye"
-                    onClick={() => setShowPassword((value) => !value)}
-                    aria-label={showPassword ? 'Hide password' : 'Show password'}
+                    onClick={() =>
+                      setShowPassword(
+                        (value) => !value
+                      )
+                    }
+                    aria-label={
+                      showPassword
+                        ? 'Hide password'
+                        : 'Show password'
+                    }
                   >
-                    <EyeIcon open={showPassword} />
+                    <EyeIcon
+                      open={showPassword}
+                    />
                   </button>
+
                 </div>
               </div>
 
-              <button type="button" className="lifeos-login-forgot">
+              <button
+                type="button"
+                className="lifeos-login-forgot"
+              >
                 Forgot password?
               </button>
 
@@ -332,8 +411,15 @@ function Login() {
                 className="lifeos-login-submit"
                 disabled={loading}
               >
-                <span>{loading ? 'Logging in...' : 'Login'}</span>
-                {!loading && <span>→</span>}
+                <span>
+                  {loading
+                    ? 'Logging in...'
+                    : 'Login'}
+                </span>
+
+                {!loading && (
+                  <span>→</span>
+                )}
               </button>
 
             </form>
@@ -346,7 +432,13 @@ function Login() {
 
             <p className="lifeos-login-register">
               Don’t have an account?
-              <button type="button" onClick={() => navigate('/register')}>
+
+              <button
+                type="button"
+                onClick={() =>
+                  navigate('/register')
+                }
+              >
                 Register
               </button>
             </p>
@@ -371,4 +463,3 @@ function Login() {
 }
 
 export default Login
-

@@ -1164,3 +1164,366 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* =========================================================
+   LIFEOS TRAVEL — FINAL UI PATCH
+   Keeps existing travel/flight functionality untouched.
+   ========================================================= */
+
+/* Desktop From / Swap / To layout */
+.route-grid.route-grid-with-swap {
+  grid-template-columns: minmax(0, 1fr) 54px minmax(0, 1fr);
+  align-items: end;
+  gap: 14px;
+}
+
+.route-grid.route-grid-with-swap .form-group {
+  min-width: 0;
+}
+
+.swap-route-button {
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  align-self: end;
+  margin-bottom: 18px;
+  border: 1px solid rgba(168, 85, 247, .28);
+  border-radius: 50%;
+  color: #d8bdff;
+  background: rgba(124, 58, 237, .13);
+  box-shadow: 0 8px 25px rgba(124, 58, 237, .12);
+  font: inherit;
+  font-size: 21px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform .22s ease, background .22s ease, border-color .22s ease;
+}
+
+.swap-route-button:hover {
+  transform: rotate(180deg) scale(1.06);
+  border-color: rgba(168, 85, 247, .55);
+  background: rgba(124, 58, 237, .22);
+}
+
+.swap-route-button:active {
+  transform: rotate(180deg) scale(.96);
+}
+
+.swap-route-button:focus-visible {
+  outline: 2px solid rgba(167, 139, 250, .9);
+  outline-offset: 3px;
+}
+
+/* Make airport dropdown feel like a proper command/search surface */
+.form-group:has(.airport-suggestions) {
+  z-index: 40;
+}
+
+.airport-suggestions {
+  top: calc(100% - 7px);
+  max-height: 300px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.airport-suggestions::-webkit-scrollbar {
+  width: 5px;
+}
+
+.airport-suggestions::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: rgba(168, 85, 247, .35);
+}
+
+/* Selected airport input */
+.input-with-icon input:not(:placeholder-shown) {
+  color: #fff;
+}
+
+/* Better planner spacing */
+.trip-planner-card form {
+  position: relative;
+}
+
+.plan-trip-button {
+  margin-top: 8px;
+  min-height: 54px;
+}
+
+.plan-trip-button span:last-child {
+  font-size: 18px;
+  transition: transform .2s ease;
+}
+
+.plan-trip-button:hover span:last-child {
+  transform: translateX(3px);
+}
+
+/* =========================================================
+   LIGHT THEME
+   ========================================================= */
+
+html[data-lifeos-theme="light"] .trips-page {
+  color: #181322;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(124, 58, 237, .10), transparent 28%),
+    radial-gradient(circle at 88% 12%, rgba(168, 85, 247, .08), transparent 25%),
+    linear-gradient(145deg, #faf8ff 0%, #f4f1fa 48%, #fbfaff 100%);
+}
+
+html[data-lifeos-theme="light"] .trips-background-orb {
+  opacity: .10;
+}
+
+html[data-lifeos-theme="light"] .trips-badge {
+  color: #7040c8;
+  border-color: rgba(124, 58, 237, .16);
+  background: rgba(124, 58, 237, .07);
+}
+
+html[data-lifeos-theme="light"] .trips-hero h1,
+html[data-lifeos-theme="light"] .flight-hero h1 {
+  color: #181322;
+}
+
+html[data-lifeos-theme="light"] .trips-hero h1 span,
+html[data-lifeos-theme="light"] .flight-hero h1 span {
+  color: #7546d4;
+}
+
+html[data-lifeos-theme="light"] .trips-hero p,
+html[data-lifeos-theme="light"] .flight-hero p {
+  color: #6f687b;
+}
+
+html[data-lifeos-theme="light"] .trip-planner-card,
+html[data-lifeos-theme="light"] .flight-search-card,
+html[data-lifeos-theme="light"] .hotel-search-card,
+html[data-lifeos-theme="light"] .flight-route-card,
+html[data-lifeos-theme="light"] .hotel-route-card {
+  border-color: rgba(53, 39, 76, .09);
+  background: rgba(255, 255, 255, .78);
+  box-shadow: 0 24px 65px rgba(67, 45, 103, .10);
+}
+
+html[data-lifeos-theme="light"] .planner-step {
+  color: #7546d4;
+}
+
+html[data-lifeos-theme="light"] .planner-header h2,
+html[data-lifeos-theme="light"] .flight-search-header h2,
+html[data-lifeos-theme="light"] .hotel-search-header h2,
+html[data-lifeos-theme="light"] .booking-options-header h3,
+html[data-lifeos-theme="light"] .flight-empty-state h3,
+html[data-lifeos-theme="light"] .hotel-empty-state h3 {
+  color: #21192d;
+}
+
+html[data-lifeos-theme="light"] .planner-header p,
+html[data-lifeos-theme="light"] .flight-search-header p,
+html[data-lifeos-theme="light"] .hotel-search-header p {
+  color: #7d7588;
+}
+
+html[data-lifeos-theme="light"] .form-group label {
+  color: #655d70;
+}
+
+html[data-lifeos-theme="light"] .input-with-icon,
+html[data-lifeos-theme="light"] .traveler-control,
+html[data-lifeos-theme="light"] .trip-type,
+html[data-lifeos-theme="light"] .feature-card,
+html[data-lifeos-theme="light"] .hotel-preference-card,
+html[data-lifeos-theme="light"] .flight-card,
+html[data-lifeos-theme="light"] .booking-link-card {
+  border-color: rgba(53, 39, 76, .10);
+  background: rgba(255, 255, 255, .72);
+}
+
+html[data-lifeos-theme="light"] .input-with-icon:focus-within {
+  border-color: rgba(124, 58, 237, .42);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, .08);
+}
+
+html[data-lifeos-theme="light"] .input-with-icon input,
+html[data-lifeos-theme="light"] .trip-type,
+html[data-lifeos-theme="light"] .airport-suggestion {
+  color: #261d32;
+}
+
+html[data-lifeos-theme="light"] .input-with-icon input::placeholder {
+  color: #a29aaa;
+}
+
+html[data-lifeos-theme="light"] .input-with-icon input::-webkit-calendar-picker-indicator {
+  filter: none;
+  opacity: .55;
+}
+
+html[data-lifeos-theme="light"] .airport-suggestions {
+  border-color: rgba(124, 58, 237, .14);
+  background: rgba(255, 255, 255, .97);
+  box-shadow: 0 22px 55px rgba(54, 38, 82, .16);
+}
+
+html[data-lifeos-theme="light"] .airport-loading,
+html[data-lifeos-theme="light"] .airport-suggestion-info span {
+  color: #81788d;
+}
+
+html[data-lifeos-theme="light"] .airport-suggestion {
+  border-bottom-color: rgba(53, 39, 76, .07);
+}
+
+html[data-lifeos-theme="light"] .airport-suggestion:hover {
+  background: rgba(124, 58, 237, .06);
+}
+
+html[data-lifeos-theme="light"] .airport-code {
+  color: #7040c8;
+  background: rgba(124, 58, 237, .08);
+}
+
+html[data-lifeos-theme="light"] .swap-route-button {
+  color: #7040c8;
+  border-color: rgba(124, 58, 237, .20);
+  background: rgba(124, 58, 237, .07);
+}
+
+html[data-lifeos-theme="light"] .trip-type {
+  color: #6a6272;
+}
+
+html[data-lifeos-theme="light"] .trip-type:hover,
+html[data-lifeos-theme="light"] .trip-type.active {
+  border-color: rgba(124, 58, 237, .28);
+  background: rgba(124, 58, 237, .07);
+}
+
+html[data-lifeos-theme="light"] .trip-type strong,
+html[data-lifeos-theme="light"] .traveler-control strong,
+html[data-lifeos-theme="light"] .feature-card strong,
+html[data-lifeos-theme="light"] .hotel-preference-card strong,
+html[data-lifeos-theme="light"] .flight-airline strong,
+html[data-lifeos-theme="light"] .flight-timing strong,
+html[data-lifeos-theme="light"] .flight-price strong,
+html[data-lifeos-theme="light"] .booking-provider strong,
+html[data-lifeos-theme="light"] .route-point strong,
+html[data-lifeos-theme="light"] .hotel-destination strong,
+html[data-lifeos-theme="light"] .route-meta strong,
+html[data-lifeos-theme="light"] .hotel-meta-item strong,
+html[data-lifeos-theme="light"] .hotel-data-grid strong,
+html[data-lifeos-theme="light"] .flight-footer strong,
+html[data-lifeos-theme="light"] .hotel-footer strong {
+  color: #21192d;
+}
+
+html[data-lifeos-theme="light"] .trip-type small,
+html[data-lifeos-theme="light"] .traveler-control span,
+html[data-lifeos-theme="light"] .feature-card p,
+html[data-lifeos-theme="light"] .hotel-preference-card p,
+html[data-lifeos-theme="light"] .route-point span,
+html[data-lifeos-theme="light"] .hotel-destination span,
+html[data-lifeos-theme="light"] .route-point small,
+html[data-lifeos-theme="light"] .route-meta small,
+html[data-lifeos-theme="light"] .hotel-destination small,
+html[data-lifeos-theme="light"] .hotel-meta-item small,
+html[data-lifeos-theme="light"] .flight-timing span,
+html[data-lifeos-theme="light"] .flight-line small,
+html[data-lifeos-theme="light"] .flight-price span,
+html[data-lifeos-theme="light"] .flight-footer p,
+html[data-lifeos-theme="light"] .hotel-footer p,
+html[data-lifeos-theme="light"] .booking-options-header p,
+html[data-lifeos-theme="light"] .hotel-data-grid span,
+html[data-lifeos-theme="light"] .flight-empty-state p,
+html[data-lifeos-theme="light"] .hotel-empty-state p {
+  color: #837a8e;
+}
+
+html[data-lifeos-theme="light"] .flight-route-card,
+html[data-lifeos-theme="light"] .hotel-route-card {
+  background: rgba(255,255,255,.82);
+}
+
+html[data-lifeos-theme="light"] .route-arrow,
+html[data-lifeos-theme="light"] .empty-flight-icon,
+html[data-lifeos-theme="light"] .empty-hotel-icon,
+html[data-lifeos-theme="light"] .airline-logo,
+html[data-lifeos-theme="light"] .booking-provider-icon,
+html[data-lifeos-theme="light"] .planner-icon {
+  background: rgba(124,58,237,.07);
+  color: #7546d4;
+}
+
+html[data-lifeos-theme="light"] .route-divider,
+html[data-lifeos-theme="light"] .hotel-meta-divider,
+html[data-lifeos-theme="light"] .flight-search-header,
+html[data-lifeos-theme="light"] .hotel-search-header,
+html[data-lifeos-theme="light"] .flight-footer,
+html[data-lifeos-theme="light"] .hotel-footer {
+  border-color: rgba(53, 39, 76, .08);
+}
+
+html[data-lifeos-theme="light"] .flight-api-notice,
+html[data-lifeos-theme="light"] .hotel-api-notice,
+html[data-lifeos-theme="light"] .booking-options-panel {
+  border-color: rgba(124,58,237,.12);
+  background: rgba(124,58,237,.045);
+}
+
+html[data-lifeos-theme="light"] .flight-empty-state,
+html[data-lifeos-theme="light"] .hotel-empty-state,
+html[data-lifeos-theme="light"] .hotel-data-grid > div {
+  border-color: rgba(53,39,76,.10);
+  background: rgba(255,255,255,.50);
+}
+
+html[data-lifeos-theme="light"] .back-button {
+  color: #5f5668;
+  border-color: rgba(53,39,76,.10);
+  background: rgba(255,255,255,.68);
+}
+
+html[data-lifeos-theme="light"] .back-button:hover {
+  color: #21192d;
+  background: #fff;
+}
+
+html[data-lifeos-theme="light"] .flight-card:hover,
+html[data-lifeos-theme="light"] .flight-card.selected {
+  border-color: rgba(124,58,237,.28);
+  background: rgba(124,58,237,.045);
+}
+
+html[data-lifeos-theme="light"] .flight-line i {
+  background: rgba(53,39,76,.13);
+}
+
+/* Mobile: keep swap button between From and To */
+@media (max-width: 720px) {
+  .route-grid.route-grid-with-swap {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .route-grid.route-grid-with-swap .swap-route-button {
+    justify-self: center;
+    align-self: center;
+    margin: -2px 0 14px;
+    transform: rotate(90deg);
+  }
+
+  .route-grid.route-grid-with-swap .swap-route-button:hover {
+    transform: rotate(270deg) scale(1.06);
+  }
+}
+
+/* Prevent bottom navigation from covering the last content on phones */
+@media (max-width: 720px) {
+  .trips-page {
+    padding-bottom: 105px;
+  }
+}

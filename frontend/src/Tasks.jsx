@@ -1,13 +1,17 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Tasks.css'
 import MobileGlobalNav from './MobileGlobalNav'
 
 function Tasks() {
+  const navigate = useNavigate()
+
   const [tasks, setTasks] = useState([])
   const [loading, setLoading] = useState(true)
   const [newTaskTitle, setNewTaskTitle] = useState('')
   const [saving, setSaving] = useState(false)
   const [message, setMessage] = useState('')
+  const [filter, setFilter] = useState('all')
 
   const getToken = () => localStorage.getItem('token')
 
@@ -88,8 +92,7 @@ function Tasks() {
       setTasks((current) => [...current, createdTask])
       setNewTaskTitle('')
 
-      showMessage('Task created')
-
+      showMessage('Task created ✓')
     } catch (error) {
       console.error(error)
       showMessage('Could not create task')
@@ -129,15 +132,13 @@ function Tasks() {
         throw new Error('Could not update task')
       }
 
-      // Completed tasks are deleted by the backend.
-      // Remove the task from the page after the server confirms success.
       if (completed) {
         setTasks((current) =>
           current.filter((item) => item.id !== task.id)
         )
+
         showMessage('Task completed ✓')
       }
-
     } catch (error) {
       console.error(error)
 
@@ -174,194 +175,350 @@ function Tasks() {
       )
 
       showMessage('Task deleted')
-
     } catch (error) {
       console.error(error)
       showMessage('Could not delete task')
     }
   }
 
+  const filteredTasks = useMemo(() => {
+    if (filter === 'active') {
+      return tasks.filter((task) => !task.completed)
+    }
+
+    if (filter === 'completed') {
+      return tasks.filter((task) => task.completed)
+    }
+
+    return tasks
+  }, [tasks, filter])
+
   const completedCount =
     tasks.filter((task) => task.completed).length
 
+  const activeCount =
+    tasks.filter((task) => !task.completed).length
+
+  const progress =
+    tasks.length > 0
+      ? Math.round((completedCount / tasks.length) * 100)
+      : 0
+
   return (
-    <div className="tasks-page">
+    <div className="tasks-page lifeos-page">
 
       <MobileGlobalNav />
 
-      <header className="tasks-header">
+      <main className="tasks-main">
 
-        <div>
-          <div className="tasks-eyebrow">
-            LIFEOS · TASKS
-          </div>
-
-          <h1>
-            Get things done<span>.</span>
-          </h1>
-
-          <p>
-            Turn everything on your mind into clear,
-            manageable tasks.
-          </p>
-        </div>
-
-        <div className="tasks-counter">
-          <strong>{completedCount}</strong>
-          <span>
-            / {tasks.length} completed
-          </span>
-        </div>
-
-      </header>
-
-
-      <section className="task-create-card">
-
-        <div className="create-icon">
-          +
-        </div>
-
-        <form onSubmit={createTask}>
-
-          <input
-            type="text"
-            placeholder="What needs to be done?"
-            value={newTaskTitle}
-            onChange={(event) =>
-              setNewTaskTitle(event.target.value)
-            }
-            maxLength={100}
-          />
+        {/* TOP BAR */}
+        <header className="tasks-topbar">
 
           <button
-            type="submit"
-            disabled={saving}
+            type="button"
+            className="tasks-back"
+            onClick={() => navigate(-1)}
+            aria-label="Go back"
           >
-            {saving ? 'Adding...' : 'Add task'}
+            ←
           </button>
 
-        </form>
+          <button
+            type="button"
+            className="tasks-brand"
+            onClick={() => navigate('/dashboard')}
+          >
+            <span className="tasks-brand-mark">⌛</span>
 
-      </section>
+            <span className="tasks-brand-copy">
+              <strong>LIFEOS</strong>
+              <small>MAKE LIFE FLOW.</small>
+            </span>
+          </button>
+
+          <div className="tasks-top-spacer" />
+
+          <button
+            type="button"
+            className="tasks-dashboard-button"
+            onClick={() => navigate('/dashboard')}
+          >
+            Dashboard
+            <span>→</span>
+          </button>
+
+        </header>
 
 
-      <section className="tasks-list-card">
+        {/* HERO */}
+        <section className="tasks-hero">
 
-        <div className="tasks-list-header">
+          <div className="tasks-hero-copy">
 
-          <div>
-            <span>
-              YOUR TASKS
+            <span className="tasks-eyebrow">
+              LIFEOS · TASKS
             </span>
 
-            <h2>
-              Everything in one place
-            </h2>
-          </div>
-
-          <span className="task-count">
-            {tasks.length} tasks
-          </span>
-
-        </div>
-
-
-        {loading ? (
-
-          <div className="tasks-empty">
-            Loading your tasks...
-          </div>
-
-        ) : tasks.length === 0 ? (
-
-          <div className="tasks-empty">
-
-            <div className="empty-icon">
-              ✓
-            </div>
-
-            <h3>
-              You're all caught up.
-            </h3>
+            <h1>
+              Get things done<span>.</span>
+            </h1>
 
             <p>
-              Create your first task above and
-              start organizing your day.
+              Turn everything on your mind into clear,
+              manageable tasks.
             </p>
 
           </div>
 
-        ) : (
+          <div className="tasks-progress-card">
 
-          <div className="tasks-items">
+            <div className="tasks-progress-ring">
+              <strong>{progress}%</strong>
+            </div>
 
-            {tasks.map((task) => (
-
-              <div
-                className={`full-task-row ${
-                  task.completed
-                    ? 'task-completed'
-                    : ''
-                }`}
-                key={task.id}
-              >
-
-                <button
-                  className={`full-task-check ${
-                    task.completed
-                      ? 'checked'
-                      : ''
-                  }`}
-                  onClick={() =>
-                    toggleTask(task)
-                  }
-                >
-                  {task.completed && '✓'}
-                </button>
-
-
-                <div className="full-task-info">
-
-                  <span>
-                    {task.title}
-                  </span>
-
-                  <small>
-                    {task.completed
-                      ? 'Completed'
-                      : 'Personal task'}
-                  </small>
-
-                </div>
-
-
-                <span className="full-task-status">
-                  {task.completed
-                    ? 'DONE'
-                    : 'TODO'}
-                </span>
-
-
-                <button
-                  className="delete-task"
-                  onClick={() =>
-                    deleteTask(task.id)
-                  }
-                  title="Delete task"
-                >
-                  ×
-                </button>
-
-              </div>
-
-            ))}
+            <div>
+              <span>YOUR PROGRESS</span>
+              <strong>
+                {completedCount} of {tasks.length}
+              </strong>
+              <small>tasks completed</small>
+            </div>
 
           </div>
 
-        )}
+        </section>
 
-      </section>
+
+        {/* CREATE TASK */}
+        <section className="task-create-card">
+
+          <div className="create-icon">
+            +
+          </div>
+
+          <form onSubmit={createTask}>
+
+            <div className="task-create-input">
+
+              <span>✦</span>
+
+              <input
+                type="text"
+                placeholder="What needs to be done?"
+                value={newTaskTitle}
+                onChange={(event) =>
+                  setNewTaskTitle(event.target.value)
+                }
+                maxLength={100}
+                aria-label="New task"
+              />
+
+            </div>
+
+            <button
+              type="submit"
+              disabled={saving}
+            >
+              {saving ? 'Adding...' : 'Add task'}
+              {!saving && <span>→</span>}
+            </button>
+
+          </form>
+
+        </section>
+
+
+        {/* TASKS */}
+        <section className="tasks-list-card">
+
+          <div className="tasks-list-header">
+
+            <div>
+              <span className="tasks-section-eyebrow">
+                YOUR TASKS
+              </span>
+
+              <h2>
+                Everything in one place
+              </h2>
+
+              <p>
+                Stay focused on what actually needs your attention.
+              </p>
+            </div>
+
+            <div className="tasks-counter">
+              <strong>{activeCount}</strong>
+              <span>active</span>
+            </div>
+
+          </div>
+
+
+          {/* FILTERS */}
+          <div className="tasks-filters">
+
+            <button
+              type="button"
+              className={filter === 'all' ? 'active' : ''}
+              onClick={() => setFilter('all')}
+            >
+              All
+              <span>{tasks.length}</span>
+            </button>
+
+            <button
+              type="button"
+              className={filter === 'active' ? 'active' : ''}
+              onClick={() => setFilter('active')}
+            >
+              Active
+              <span>{activeCount}</span>
+            </button>
+
+            <button
+              type="button"
+              className={filter === 'completed' ? 'active' : ''}
+              onClick={() => setFilter('completed')}
+            >
+              Completed
+              <span>{completedCount}</span>
+            </button>
+
+          </div>
+
+
+          {/* CONTENT */}
+          {loading ? (
+
+            <div className="tasks-empty">
+
+              <div className="tasks-loading-orb">
+                ✦
+              </div>
+
+              <h3>
+                Loading your tasks...
+              </h3>
+
+              <p>
+                Getting your LIFEOS workspace ready.
+              </p>
+
+            </div>
+
+          ) : filteredTasks.length === 0 ? (
+
+            <div className="tasks-empty">
+
+              <div className="empty-icon">
+                {filter === 'completed' ? '✓' : '✦'}
+              </div>
+
+              <h3>
+                {filter === 'completed'
+                  ? 'No completed tasks yet.'
+                  : filter === 'active'
+                    ? 'You are all caught up.'
+                    : "You're all caught up."}
+              </h3>
+
+              <p>
+                {filter === 'completed'
+                  ? 'Complete a task and it will appear here.'
+                  : 'Create your first task above and start organizing your day.'}
+              </p>
+
+            </div>
+
+          ) : (
+
+            <div className="tasks-items">
+
+              {filteredTasks.map((task, index) => (
+
+                <div
+                  className={`full-task-row ${
+                    task.completed
+                      ? 'task-completed'
+                      : ''
+                  }`}
+                  key={task.id}
+                >
+
+                  <button
+                    type="button"
+                    className={`full-task-check ${
+                      task.completed
+                        ? 'checked'
+                        : ''
+                    }`}
+                    onClick={() => toggleTask(task)}
+                    aria-label={
+                      task.completed
+                        ? `Mark ${task.title} incomplete`
+                        : `Complete ${task.title}`
+                    }
+                  >
+                    {task.completed && '✓'}
+                  </button>
+
+
+                  <div className="full-task-info">
+
+                    <span>
+                      {task.title}
+                    </span>
+
+                    <small>
+                      {task.completed
+                        ? 'Completed'
+                        : 'Personal task · Focus item'}
+                    </small>
+
+                  </div>
+
+
+                  <span className="full-task-status">
+                    {task.completed
+                      ? 'DONE'
+                      : 'TODO'}
+                  </span>
+
+
+                  <button
+                    type="button"
+                    className="delete-task"
+                    onClick={() => deleteTask(task.id)}
+                    title="Delete task"
+                    aria-label={`Delete ${task.title}`}
+                  >
+                    ×
+                  </button>
+
+                </div>
+
+              ))}
+
+            </div>
+
+          )}
+
+        </section>
+
+
+        {/* FOOTER TIP */}
+        <div className="tasks-footer-tip">
+          <span>✦</span>
+          <div>
+            <strong>Small steps. Big progress.</strong>
+            <p>
+              Keep your task list focused and let LIFEOS handle the rest.
+            </p>
+          </div>
+        </div>
+
+      </main>
 
 
       {message && (

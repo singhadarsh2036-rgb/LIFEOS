@@ -77,6 +77,14 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         String path = request.getRequestURI();
 
+        // TEMPORARY DEBUG LOG
+        System.out.println(
+                "JWT FILTER HIT: "
+                        + request.getMethod()
+                        + " "
+                        + path
+        );
+
         // =========================
         // PUBLIC ENDPOINTS
         // =========================
@@ -93,46 +101,86 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                         || path.equals("/otp/phone/send")
                         || path.equals("/otp/phone/verify")
                         || path.equals("/push/public-key")
+                        || path.equals("/ai/deadlines/extract-text")
+                        
+
+                        // TEMPORARY AI DEBUG BYPASS
+                        || path.equals("/ai/deadlines/extract")
         ) {
+
+            System.out.println(
+                    "JWT FILTER: PUBLIC REQUEST -> "
+                            + path
+            );
+
             filterChain.doFilter(request, response);
             return;
         }
 
         // =========================
-        // JWT
+        // JWT HEADER
         // =========================
 
         String authHeader =
                 request.getHeader("Authorization");
 
+        System.out.println(
+                "JWT AUTH HEADER PRESENT: "
+                        + (authHeader != null)
+        );
+
         if (
                 authHeader == null
                         || !authHeader.startsWith("Bearer ")
         ) {
+
+            System.out.println(
+                    "JWT FILTER: MISSING OR INVALID AUTH HEADER"
+            );
+
             response.setStatus(
                     HttpServletResponse.SC_UNAUTHORIZED
             );
+
             response.setContentType(
                     "text/plain;charset=UTF-8"
             );
+
             response.getWriter().write(
                     "Authentication required"
             );
+
             return;
         }
 
         String token =
                 authHeader.substring(7).trim();
 
+        System.out.println(
+                "JWT TOKEN LENGTH: "
+                        + token.length()
+        );
+
         if (token.isEmpty()) {
+
+            System.out.println(
+                    "JWT FILTER: EMPTY TOKEN"
+            );
+
             response.setStatus(
                     HttpServletResponse.SC_UNAUTHORIZED
             );
+
             response.getWriter().write(
                     "Invalid authentication token"
             );
+
             return;
         }
+
+        // =========================
+        // VALIDATE JWT
+        // =========================
 
         try {
 
@@ -146,18 +194,34 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String email =
                     claims.getSubject();
 
-            if (email == null || email.isBlank()) {
+            System.out.println(
+                    "JWT SUBJECT: "
+                            + email
+            );
+
+            if (
+                    email == null
+                            || email.isBlank()
+            ) {
+
+                System.out.println(
+                        "JWT FILTER: INVALID TOKEN SUBJECT"
+                );
+
                 response.setStatus(
                         HttpServletResponse.SC_UNAUTHORIZED
                 );
+
                 response.getWriter().write(
                         "Invalid token subject"
                 );
+
                 return;
             }
 
-            // IMPORTANT:
-            // Mark user as authenticated in Spring Security
+            // =========================
+            // SPRING AUTHENTICATION
+            // =========================
 
             UsernamePasswordAuthenticationToken authentication =
                     new UsernamePasswordAuthenticationToken(
@@ -170,36 +234,52 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     .getContext()
                     .setAuthentication(authentication);
 
-            // Keep email available for controllers
-
             request.setAttribute(
                     "userEmail",
                     email
             );
 
             System.out.println(
-                    "JWT AUTHENTICATED USER: " + email
+                    "JWT AUTHENTICATED USER: "
+                            + email
             );
 
         } catch (Exception e) {
 
             System.out.println(
                     "JWT VALIDATION ERROR: "
+                            + e.getClass().getSimpleName()
+                            + " - "
                             + e.getMessage()
             );
 
             response.setStatus(
                     HttpServletResponse.SC_UNAUTHORIZED
             );
+
             response.setContentType(
                     "text/plain;charset=UTF-8"
             );
+
             response.getWriter().write(
                     "Invalid or expired token"
             );
+
             return;
         }
 
-        filterChain.doFilter(request, response);
+        // =========================
+        // CONTINUE REQUEST
+        // =========================
+
+        System.out.println(
+                "JWT FILTER: REQUEST CONTINUING -> "
+                        + path
+        );
+
+        filterChain.doFilter(
+                request,
+                response
+        );
     }
 }

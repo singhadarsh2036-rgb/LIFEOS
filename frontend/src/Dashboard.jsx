@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { apiFetch } from './api'
 import './Dashboard.css'
 import './DashboardPanels.css'
 import './TaskModal.css'
+import SmartDeadlineDetection from './SmartDeadlineDetection'
 
 function Dashboard() {
   const navigate = useNavigate()
@@ -12,7 +14,7 @@ function Dashboard() {
   const [tasks, setTasks] = useState([])
   const [reminders, setReminders] = useState([])
   const [remindersLoading, setRemindersLoading] = useState(true)
-  const [userName, setUserName] = useState('Adarsh')
+  const [userName, setUserName] = useState('')
   const [userLoginIdentifier, setUserLoginIdentifier] = useState('')
 
   const [loading, setLoading] = useState(true)
@@ -30,6 +32,7 @@ function Dashboard() {
   })
 
   const [showTaskModal, setShowTaskModal] = useState(false)
+  const [showSmartDeadline, setShowSmartDeadline] = useState(false)
   const [newTaskTitle, setNewTaskTitle] = useState('')
   const [savingTask, setSavingTask] = useState(false)
 
@@ -104,7 +107,12 @@ function Dashboard() {
   }
 
   const getToken = () => {
-    return localStorage.getItem('token')
+    return (
+      localStorage.getItem('token') ||
+      localStorage.getItem('jwt') ||
+      localStorage.getItem('accessToken') ||
+      ''
+    )
   }
 
   const getConsistencyDates = () => {
@@ -364,10 +372,7 @@ function Dashboard() {
         throw new Error('Invalid JWT token')
       }
 
-      const payload = JSON.parse(
-        atob(parts[1])
-      )
-
+      const payload = JSON.parse(atob(parts[1]))
       const loginIdentifier = payload.sub
 
       if (!loginIdentifier) {
@@ -376,9 +381,9 @@ function Dashboard() {
 
       setUserLoginIdentifier(loginIdentifier)
 
-      const response = await fetch(
-        'https://lifeos-v22r.onrender.com/users'
-      )
+      // Get the current user's profile from the backend.
+      // The JWT contains the login identifier, not the user's name.
+      const response = await apiFetch('/users')
 
       if (!response.ok) {
         throw new Error('Could not load users')
@@ -386,18 +391,33 @@ function Dashboard() {
 
       const users = await response.json()
 
-      const currentUser = users.find(
-        (user) =>
-          user.email === loginIdentifier ||
-          user.phone === loginIdentifier
-      )
+      const currentUser = Array.isArray(users)
+        ? users.find(
+            (user) =>
+              user.email === loginIdentifier ||
+              user.phone === loginIdentifier
+          )
+        : null
 
-      if (currentUser?.name) {
-        setUserName(currentUser.name)
+      if (currentUser?.name?.trim()) {
+        setUserName(currentUser.name.trim())
+      } else {
+        // Never silently show someone else's name.
+        setUserName(
+          loginIdentifier?.includes('@')
+            ? loginIdentifier.split('@')[0]
+            : 'there'
+        )
       }
-
     } catch (error) {
       console.error('USER LOAD ERROR:', error)
+
+      // Do not fall back to a hardcoded personal name.
+      setUserName(
+        userLoginIdentifier?.includes('@')
+          ? userLoginIdentifier.split('@')[0]
+          : 'there'
+      )
     }
   }
 
@@ -451,14 +471,11 @@ function Dashboard() {
         return
       }
 
-      const response = await fetch(
-        'https://lifeos-v22r.onrender.com/dashboard',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const response = await apiFetch('/dashboard', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
 
       if (!response.ok) {
         throw new Error('Could not load dashboard')
@@ -487,14 +504,11 @@ function Dashboard() {
         return
       }
 
-      const response = await fetch(
-        'https://lifeos-v22r.onrender.com/tasks',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const response = await apiFetch('/tasks', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
 
       if (!response.ok) {
         throw new Error('Could not load tasks')
@@ -523,14 +537,11 @@ function Dashboard() {
         return
       }
 
-      const response = await fetch(
-        'https://lifeos-v22r.onrender.com/reminders',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      )
+      const response = await apiFetch('/reminders', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
 
       if (!response.ok) {
         throw new Error('Could not load reminders')
@@ -587,20 +598,17 @@ function Dashboard() {
 
       const token = getToken()
 
-      const response = await fetch(
-        'https://lifeos-v22r.onrender.com/tasks',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            title: title,
-            completed: false,
-          }),
-        }
-      )
+      const response = await apiFetch('/tasks', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: title,
+          completed: false,
+        }),
+      })
 
       if (!response.ok) {
         const errorText = await response.text()
@@ -652,20 +660,17 @@ function Dashboard() {
     try {
       const token = getToken()
 
-      const response = await fetch(
-        `https://lifeos-v22r.onrender.com/tasks/${task.id}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify({
-            title: task.title,
-            completed: newCompleted,
-          }),
-        }
-      )
+      const response = await apiFetch(`/tasks/${task.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          title: task.title,
+          completed: newCompleted,
+        }),
+      })
 
       if (!response.ok) {
         throw new Error('Could not update task')
@@ -1431,7 +1436,13 @@ function Dashboard() {
               <span className="lifeos-beta">BETA</span>
             </div>
             <p>Drop a syllabus, brief, screenshot or PDF and let LIFEOS extract the important deadlines automatically.</p>
-            <button type="button" className="lifeos-primary-button" onClick={() => showMessage('Smart Deadline Detection UI is ready — AI connection next')}>Scan for Deadlines <span>→</span></button>
+            <button
+                type="button"
+                className="lifeos-primary-button"
+                onClick={() => setShowSmartDeadline(true)}
+              >
+                Scan for Deadlines <span>→</span>
+              </button>
           </div>
           <div className="lifeos-deadline-art" aria-hidden="true"><span>▤</span><i>✦</i><b>✦</b></div>
         </section>
@@ -1576,6 +1587,15 @@ function Dashboard() {
             </div>
           </div>
         </div>
+      )}
+
+      {showSmartDeadline && (
+        <SmartDeadlineDetection
+          onClose={() => setShowSmartDeadline(false)}
+          onDetected={(data) => {
+            console.log('LIFEOS DETECTED DEADLINES:', data)
+          }}
+        />
       )}
 
       {showTaskModal && (
