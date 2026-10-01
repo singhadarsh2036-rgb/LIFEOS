@@ -53,7 +53,15 @@ function Trips() {
 
   const formatPlannerDate = (date) => {
     if (!date) return 'Select date'
-    return formatDate(date)
+
+    return new Date(`${date}T00:00:00`).toLocaleDateString(
+      'en-IN',
+      {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+      }
+    )
   }
 
   /*
