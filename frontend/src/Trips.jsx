@@ -51,6 +51,11 @@ function Trips() {
     )
   }
 
+  const formatPlannerDate = (date) => {
+    if (!date) return 'Select date'
+    return formatDate(date)
+  }
+
   /*
    * ---------------------------------------------------------
    * AIRPORT SEARCH
@@ -732,7 +737,7 @@ function Trips() {
                       (loadingOriginAirports ||
                         originSuggestions.length > 0) && (
 
-                        <div className="airport-suggestions">
+                        <div className="airport-suggestions airport-suggestions-flow">
 
                           {loadingOriginAirports && (
                             <div className="airport-loading">
@@ -843,7 +848,7 @@ function Trips() {
                       (loadingDestinationAirports ||
                         destinationSuggestions.length > 0) && (
 
-                        <div className="airport-suggestions">
+                        <div className="airport-suggestions airport-suggestions-flow">
 
                           {loadingDestinationAirports && (
                             <div className="airport-loading">
@@ -993,16 +998,24 @@ function Trips() {
 
                     <label>Departure</label>
 
-                    <div className="input-with-icon">
+                    <div className="input-with-icon date-input-shell">
 
-                      <span>📅</span>
+                      <span className="date-icon">📅</span>
+
+                      <div className="date-display">
+                        {formatPlannerDate(departureDate)}
+                      </div>
 
                       <input
+                        className="native-date-input"
                         type="date"
                         min={today}
                         value={departureDate}
                         onChange={handleDepartureChange}
+                        aria-label="Departure date"
                       />
+
+                      <span className="date-arrow">⌄</span>
 
                     </div>
 
@@ -1015,18 +1028,26 @@ function Trips() {
 
                       <label>Return</label>
 
-                      <div className="input-with-icon">
+                      <div className="input-with-icon date-input-shell">
 
-                        <span>📅</span>
+                        <span className="date-icon">📅</span>
+
+                        <div className="date-display">
+                          {formatPlannerDate(returnDate)}
+                        </div>
 
                         <input
+                          className="native-date-input"
                           type="date"
                           min={departureDate || today}
                           value={returnDate}
                           onChange={(e) =>
                             setReturnDate(e.target.value)
                           }
+                          aria-label="Return date"
                         />
+
+                        <span className="date-arrow">⌄</span>
 
                       </div>
 

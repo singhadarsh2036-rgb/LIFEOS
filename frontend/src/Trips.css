@@ -2276,3 +2276,55 @@ html[data-lifeos-theme="dark"] .trip-planner-card {
   }
 
 }
+/* =========================================================
+   TRAVEL — AIRPORT DROPDOWN FLOW FIX
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .form-group:has(.airport-suggestions) {
+  z-index: 100 !important;
+}
+
+html[data-lifeos-theme="dark"] .airport-suggestions {
+  position: relative !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+
+  width: 100% !important;
+  box-sizing: border-box !important;
+
+  margin-top: 7px !important;
+
+  max-height: 230px !important;
+  overflow-y: auto !important;
+
+  border-radius: 14px !important;
+
+  background: rgba(17,19,23,.98) !important;
+  border: 1px solid rgba(201,161,90,.18) !important;
+
+  box-shadow:
+    0 14px 35px rgba(0,0,0,.35) !important;
+}
+
+html[data-lifeos-theme="dark"] .airport-suggestion {
+  min-height: 50px !important;
+  padding: 8px 11px !important;
+}
+
+html[data-lifeos-theme="dark"] .airport-suggestion-icon {
+  width: 32px !important;
+  height: 32px !important;
+
+  background: rgba(201,161,90,.08) !important;
+}
+
+html[data-lifeos-theme="dark"] .airport-suggestion:hover {
+  background: rgba(201,161,90,.07) !important;
+}
+
+html[data-lifeos-theme="dark"] .airport-code {
+  color: #e0bd78 !important;
+  background: rgba(201,161,90,.10) !important;
+  border: 1px solid rgba(201,161,90,.14) !important;
+}
