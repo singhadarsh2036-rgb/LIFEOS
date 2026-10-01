@@ -2537,3 +2537,96 @@ html[data-lifeos-theme="dark"] .trip-type-selector.oneway-selected .trip-type.ac
     text-align: center;
   }
 }
+
+
+/* =========================================================
+   LIFEOS TRAVEL — BACK BUTTON FINAL FIX
+   Dark mode only
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .travel-page-back {
+  display: flex !important;
+  align-items: center !important;
+
+  width: 100% !important;
+
+  margin: 0 0 18px !important;
+  padding: 0 !important;
+
+  background: transparent !important;
+  border: 0 !important;
+}
+
+html[data-lifeos-theme="dark"] .travel-page-back button,
+html[data-lifeos-theme="dark"] .travel-page-back .back-button {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+
+  min-width: 82px !important;
+  height: 38px !important;
+
+  padding: 0 14px !important;
+
+  border: 1px solid rgba(201,161,90,.22) !important;
+  border-radius: 11px !important;
+
+  background: rgba(255,255,255,.035) !important;
+
+  color: rgba(244,241,233,.78) !important;
+
+  font-family: inherit !important;
+  font-size: 12px !important;
+  font-weight: 650 !important;
+  line-height: 1 !important;
+
+  box-shadow:
+    0 6px 20px rgba(0,0,0,.18),
+    inset 0 1px 0 rgba(255,255,255,.035) !important;
+
+  cursor: pointer !important;
+
+  transition:
+    transform .2s ease,
+    color .2s ease,
+    background .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease !important;
+}
+
+html[data-lifeos-theme="dark"] .travel-page-back button:hover,
+html[data-lifeos-theme="dark"] .travel-page-back .back-button:hover {
+  color: #f4f1e9 !important;
+
+  background: rgba(201,161,90,.08) !important;
+  border-color: rgba(201,161,90,.38) !important;
+
+  transform: translateX(-2px) !important;
+
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.24),
+    0 0 0 3px rgba(201,161,90,.045) !important;
+}
+
+html[data-lifeos-theme="dark"] .travel-page-back button:active,
+html[data-lifeos-theme="dark"] .travel-page-back .back-button:active {
+  transform: translateX(-1px) scale(.98) !important;
+}
+
+@media (max-width: 720px) {
+  html[data-lifeos-theme="dark"] .travel-page-back {
+    margin-bottom: 14px !important;
+    padding-left: 2px !important;
+  }
+
+  html[data-lifeos-theme="dark"] .travel-page-back button,
+  html[data-lifeos-theme="dark"] .travel-page-back .back-button {
+    min-width: 76px !important;
+    height: 36px !important;
+    padding: 0 12px !important;
+  }
+}
