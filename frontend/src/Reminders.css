@@ -1282,3 +1282,265 @@ html[data-lifeos-theme="light"] .lifeos-toast {
     transition: none !important;
   }
 }
+/* =========================================================
+   LIFEOS — REMINDERS
+   TRUE DARK PREMIUM • GOLD + SAGE
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .reminders-page {
+  background:
+    radial-gradient(circle at 85% 5%, rgba(201,161,90,.09), transparent 28%),
+    radial-gradient(circle at 12% 88%, rgba(113,136,121,.06), transparent 25%),
+    linear-gradient(135deg, #08090c 0%, #0b0d11 52%, #0e1014 100%) !important;
+  color: #f4f1e9 !important;
+}
+
+/* HEADER */
+
+html[data-lifeos-theme="dark"] .reminders-eyebrow {
+  color: #9a9b93 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminders-header h1 {
+  color: #f4f1e9 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminders-header h1 span {
+  color: #d2ad68 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminders-header p {
+  color: #969891 !important;
+}
+
+/* ADD BUTTON */
+
+html[data-lifeos-theme="dark"] .reminder-add-button {
+  border-color: rgba(201,161,90,.25) !important;
+  background: linear-gradient(
+    135deg,
+    #c9a15a,
+    #e0bd78
+  ) !important;
+  color: #171713 !important;
+  box-shadow: 0 12px 30px rgba(201,161,90,.13) !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-add-button:hover {
+  box-shadow: 0 16px 36px rgba(201,161,90,.22) !important;
+}
+
+/* CARDS */
+
+html[data-lifeos-theme="dark"] .reminders-card {
+  border-color: rgba(255,255,255,.07) !important;
+  background: rgba(20,22,27,.90) !important;
+  box-shadow: 0 24px 70px rgba(0,0,0,.30) !important;
+}
+
+/* CARD HEADER */
+
+html[data-lifeos-theme="dark"] .reminders-label {
+  color: #85877f !important;
+}
+
+html[data-lifeos-theme="dark"] .reminders-card h2 {
+  color: #eeeae1 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-count {
+  border-color: rgba(201,161,90,.18) !important;
+  background: rgba(201,161,90,.09) !important;
+  color: #d5b36b !important;
+}
+
+/* EMPTY / LOADING */
+
+html[data-lifeos-theme="dark"] .reminders-empty {
+  border-color: rgba(255,255,255,.08) !important;
+  background: rgba(255,255,255,.018) !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-empty-icon {
+  background: linear-gradient(
+    145deg,
+    rgba(201,161,90,.13),
+    rgba(113,136,121,.07)
+  ) !important;
+  border-color: rgba(201,161,90,.17) !important;
+  color: #d2ad68 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminders-empty h3 {
+  color: #eeeae1 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminders-empty p {
+  color: #85877f !important;
+}
+
+html[data-lifeos-theme="dark"] .empty-add-button {
+  border-color: rgba(201,161,90,.18) !important;
+  background: rgba(201,161,90,.09) !important;
+  color: #d5b36b !important;
+}
+
+html[data-lifeos-theme="dark"] .empty-add-button:hover {
+  background: rgba(201,161,90,.15) !important;
+}
+
+/* REMINDER ROWS */
+
+html[data-lifeos-theme="dark"] .reminder-row {
+  border-color: rgba(255,255,255,.055) !important;
+  background: rgba(13,15,18,.68) !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-row:hover {
+  background: rgba(24,26,30,.92) !important;
+  border-color: rgba(201,161,90,.20) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+}
+
+html[data-lifeos-theme="dark"] .reminder-icon {
+  background: linear-gradient(
+    145deg,
+    rgba(201,161,90,.13),
+    rgba(113,136,121,.06)
+  ) !important;
+  border-color: rgba(201,161,90,.15) !important;
+  color: #d2ad68 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-info strong {
+  color: #eeeae1 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-info span {
+  color: #777a73 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-status {
+  background: rgba(201,161,90,.10) !important;
+  color: #d5b36b !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-delete {
+  color: #686b66 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-delete:hover {
+  background: rgba(239,68,68,.08) !important;
+  color: #f87171 !important;
+}
+
+/* MODAL */
+
+html[data-lifeos-theme="dark"] .reminder-modal-overlay {
+  background: rgba(3,4,6,.76) !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-modal {
+  background: linear-gradient(
+    145deg,
+    rgba(25,27,31,.99),
+    rgba(13,15,18,.99)
+  ) !important;
+  border-color: rgba(255,255,255,.08) !important;
+  box-shadow:
+    0 35px 100px rgba(0,0,0,.58),
+    0 0 0 1px rgba(201,161,90,.035) !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-modal-header h2 {
+  color: #eeeae1 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-close {
+  border-color: rgba(255,255,255,.07) !important;
+  background: rgba(255,255,255,.035) !important;
+  color: #aaa9a0 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-close:hover {
+  background: rgba(201,161,90,.08) !important;
+  color: #e0bd78 !important;
+}
+
+/* FORM */
+
+html[data-lifeos-theme="dark"] .reminder-modal label {
+  color: #999b94 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-input {
+  border-color: rgba(255,255,255,.08) !important;
+  background: rgba(9,11,14,.82) !important;
+  color: #f1eee6 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-input::placeholder {
+  color: #686b66 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-input:focus {
+  border-color: rgba(201,161,90,.40) !important;
+  background: rgba(12,14,17,.95) !important;
+  box-shadow: 0 0 0 3px rgba(201,161,90,.07) !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-modal-actions {
+  border-color: rgba(255,255,255,.06) !important;
+}
+
+/* MODAL BUTTONS */
+
+html[data-lifeos-theme="dark"] .reminder-cancel {
+  border-color: rgba(255,255,255,.08) !important;
+  background: rgba(255,255,255,.035) !important;
+  color: #aaa9a0 !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-cancel:hover {
+  background: rgba(255,255,255,.07) !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-save {
+  border-color: rgba(201,161,90,.22) !important;
+  background: linear-gradient(
+    135deg,
+    #c9a15a,
+    #e0bd78
+  ) !important;
+  color: #171713 !important;
+  box-shadow: 0 10px 25px rgba(201,161,90,.14) !important;
+}
+
+html[data-lifeos-theme="dark"] .reminder-save:hover {
+  box-shadow: 0 14px 30px rgba(201,161,90,.22) !important;
+}
+
+/* TOAST */
+
+html[data-lifeos-theme="dark"] .lifeos-toast {
+  border-color: rgba(201,161,90,.16) !important;
+  background: rgba(20,22,26,.96) !important;
+  color: #eeeae1 !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-toast span {
+  color: #dfbd78 !important;
+}
+
+/* FOCUS */
+
+html[data-lifeos-theme="dark"] .reminder-add-button:focus-visible,
+html[data-lifeos-theme="dark"] .empty-add-button:focus-visible,
+html[data-lifeos-theme="dark"] .reminder-delete:focus-visible,
+html[data-lifeos-theme="dark"] .reminder-close:focus-visible,
+html[data-lifeos-theme="dark"] .reminder-cancel:focus-visible,
+html[data-lifeos-theme="dark"] .reminder-save:focus-visible,
+html[data-lifeos-theme="dark"] .reminder-input:focus-visible {
+  outline-color: #c9a15a !important;
+}

@@ -937,3 +937,332 @@ html[data-lifeos-theme="dark"] .tasks-footer-tip p {
     margin-bottom: 15px;
   }
 }
+/* =========================================================
+   LIFEOS — TASKS
+   TRUE DARK PREMIUM • GOLD + SAGE
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .tasks-page {
+  color: #f4f1e9 !important;
+  background:
+    radial-gradient(circle at 85% 5%, rgba(201,161,90,.09), transparent 26%),
+    radial-gradient(circle at 12% 90%, rgba(113,136,121,.06), transparent 25%),
+    linear-gradient(135deg, #08090c 0%, #0b0d11 52%, #0e1014 100%) !important;
+}
+
+/* TOP BAR */
+
+html[data-lifeos-theme="dark"] .tasks-back,
+html[data-lifeos-theme="dark"] .tasks-dashboard-button {
+  color: #c9c5ba !important;
+  border-color: rgba(255,255,255,.08) !important;
+  background: rgba(20,22,26,.82) !important;
+  box-shadow: 0 8px 25px rgba(0,0,0,.20) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-back:hover,
+html[data-lifeos-theme="dark"] .tasks-dashboard-button:hover {
+  color: #e0bd78 !important;
+  border-color: rgba(201,161,90,.28) !important;
+  box-shadow: 0 10px 30px rgba(201,161,90,.08) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-brand-mark {
+  color: #171713 !important;
+  background: linear-gradient(135deg, #c9a15a, #e0bd78) !important;
+  box-shadow: 0 9px 24px rgba(201,161,90,.16) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-brand-copy strong {
+  color: #f4f1e9 !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-brand-copy small {
+  color: #77786f !important;
+}
+
+/* HERO */
+
+html[data-lifeos-theme="dark"] .tasks-eyebrow,
+html[data-lifeos-theme="dark"] .tasks-section-eyebrow {
+  color: #898b82 !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-hero h1 {
+  color: #f4f1e9 !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-hero h1 span {
+  color: #d2ad68 !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-hero-copy p {
+  color: #9b9c95 !important;
+}
+
+/* PROGRESS CARD */
+
+html[data-lifeos-theme="dark"] .tasks-progress-card {
+  border-color: rgba(255,255,255,.07) !important;
+  background: rgba(22,24,29,.90) !important;
+  box-shadow: 0 22px 55px rgba(0,0,0,.28) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-progress-ring {
+  background:
+    radial-gradient(circle at center, #16181d 58%, transparent 59%),
+    conic-gradient(#c9a15a var(--progress, 0%), #292c30 0) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-progress-ring strong {
+  color: #e0bd78 !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-progress-card span {
+  color: #85877f !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-progress-card strong {
+  color: #eeeae0 !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-progress-card small {
+  color: #777971 !important;
+}
+
+/* CREATE TASK */
+
+html[data-lifeos-theme="dark"] .task-create-card {
+  border-color: rgba(255,255,255,.07) !important;
+  background: rgba(22,24,29,.90) !important;
+  box-shadow: 0 22px 55px rgba(0,0,0,.28) !important;
+}
+
+html[data-lifeos-theme="dark"] .task-create-card::after {
+  background: radial-gradient(
+    circle,
+    rgba(201,161,90,.10),
+    transparent 68%
+  ) !important;
+}
+
+html[data-lifeos-theme="dark"] .create-icon {
+  color: #171713 !important;
+  background: linear-gradient(135deg, #c9a15a, #e0bd78) !important;
+  box-shadow: 0 10px 27px rgba(201,161,90,.13) !important;
+}
+
+html[data-lifeos-theme="dark"] .task-create-input {
+  border-color: rgba(255,255,255,.07) !important;
+  background: rgba(12,14,17,.78) !important;
+}
+
+html[data-lifeos-theme="dark"] .task-create-input:focus-within {
+  border-color: rgba(201,161,90,.35) !important;
+  box-shadow: 0 0 0 4px rgba(201,161,90,.06) !important;
+}
+
+html[data-lifeos-theme="dark"] .task-create-input > span {
+  color: #c9a15a !important;
+}
+
+html[data-lifeos-theme="dark"] .task-create-card input {
+  color: #f1eee6 !important;
+}
+
+html[data-lifeos-theme="dark"] .task-create-card input::placeholder {
+  color: #6f716c !important;
+}
+
+html[data-lifeos-theme="dark"] .task-create-card form > button {
+  color: #171713 !important;
+  background: linear-gradient(135deg, #c9a15a, #e0bd78) !important;
+  box-shadow: 0 10px 25px rgba(201,161,90,.13) !important;
+}
+
+html[data-lifeos-theme="dark"] .task-create-card form > button:hover:not(:disabled) {
+  box-shadow: 0 15px 32px rgba(201,161,90,.22) !important;
+}
+
+/* TASK LIST */
+
+html[data-lifeos-theme="dark"] .tasks-list-card {
+  border-color: rgba(255,255,255,.07) !important;
+  background: rgba(20,22,27,.90) !important;
+  box-shadow: 0 22px 58px rgba(0,0,0,.30) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-list-header {
+  border-bottom-color: rgba(255,255,255,.06) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-list-header h2 {
+  color: #eeeae1 !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-list-header p {
+  color: #80827b !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-counter {
+  background: rgba(201,161,90,.10) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-counter strong {
+  color: #d8b66f !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-counter span {
+  color: #85867f !important;
+}
+
+/* FILTERS */
+
+html[data-lifeos-theme="dark"] .tasks-filters button {
+  color: #85877f !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-filters button:hover {
+  color: #d2ad68 !important;
+  background: rgba(201,161,90,.06) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-filters button span {
+  background: rgba(255,255,255,.06) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-filters button.active {
+  color: #dfbd78 !important;
+  border-color: rgba(201,161,90,.18) !important;
+  background: rgba(201,161,90,.10) !important;
+}
+
+/* TASK ROWS */
+
+html[data-lifeos-theme="dark"] .full-task-row {
+  border-color: rgba(255,255,255,.055) !important;
+  background: rgba(13,15,18,.68) !important;
+}
+
+html[data-lifeos-theme="dark"] .full-task-row:hover {
+  transform: translateY(-2px) !important;
+  border-color: rgba(201,161,90,.20) !important;
+  background: rgba(24,26,30,.92) !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,.25),
+              0 0 22px rgba(201,161,90,.035) !important;
+}
+
+html[data-lifeos-theme="dark"] .full-task-check {
+  border-color: #5d605b !important;
+}
+
+html[data-lifeos-theme="dark"] .full-task-check:hover {
+  border-color: #c9a15a !important;
+  transform: scale(1.08);
+}
+
+html[data-lifeos-theme="dark"] .full-task-check.checked {
+  background: linear-gradient(135deg, #c9a15a, #e0bd78) !important;
+  box-shadow: 0 7px 18px rgba(201,161,90,.18) !important;
+}
+
+html[data-lifeos-theme="dark"] .full-task-info span {
+  color: #eeeae1 !important;
+}
+
+html[data-lifeos-theme="dark"] .full-task-info small {
+  color: #777a73 !important;
+}
+
+html[data-lifeos-theme="dark"] .full-task-status {
+  color: #d5b36b !important;
+  background: rgba(201,161,90,.10) !important;
+}
+
+/* DELETE */
+
+html[data-lifeos-theme="dark"] .delete-task {
+  color: #686b66 !important;
+}
+
+html[data-lifeos-theme="dark"] .delete-task:hover {
+  color: #f87171 !important;
+  background: rgba(239,68,68,.08) !important;
+}
+
+/* EMPTY STATE */
+
+html[data-lifeos-theme="dark"] .empty-icon,
+html[data-lifeos-theme="dark"] .tasks-loading-orb {
+  color: #d2ad68 !important;
+  background: linear-gradient(
+    135deg,
+    rgba(201,161,90,.13),
+    rgba(113,136,121,.07)
+  ) !important;
+  box-shadow: 0 13px 30px rgba(0,0,0,.18) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-empty h3 {
+  color: #eeeae1 !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-empty p {
+  color: #85877f !important;
+}
+
+/* FOOTER */
+
+html[data-lifeos-theme="dark"] .tasks-footer-tip {
+  border-color: rgba(255,255,255,.06) !important;
+  background: rgba(20,22,26,.52) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-footer-tip > span {
+  color: #c9a15a !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-footer-tip strong {
+  color: #aaa9a0 !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-footer-tip p {
+  color: #70736d !important;
+}
+
+/* TOAST */
+
+html[data-lifeos-theme="dark"] .tasks-page .lifeos-toast {
+  color: #eeeae1 !important;
+  background: rgba(20,22,26,.96) !important;
+  border-color: rgba(201,161,90,.16) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-page .lifeos-toast span {
+  background: rgba(201,161,90,.18) !important;
+  color: #dfbd78 !important;
+}
+
+/* SUBTLE INTERACTIONS */
+
+html[data-lifeos-theme="dark"] .tasks-progress-card,
+html[data-lifeos-theme="dark"] .task-create-card,
+html[data-lifeos-theme="dark"] .tasks-list-card {
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    box-shadow .25s ease !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-progress-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(201,161,90,.14) !important;
+  box-shadow: 0 26px 65px rgba(0,0,0,.32) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html[data-lifeos-theme="dark"] .full-task-row,
+  html[data-lifeos-theme="dark"] .tasks-progress-card {
+    transition: none !important;
+  }
+}
