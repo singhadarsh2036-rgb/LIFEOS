@@ -1906,3 +1906,286 @@ html[data-lifeos-theme="dark"] .back-button {
     transition: none;
   }
 }
+/* =========================================================
+   LIFEOS TRAVEL — FINAL PREMIUM POLISH
+   Dark mode only
+   Functionality untouched
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .travel-page-back {
+  margin-bottom: 18px;
+}
+
+html[data-lifeos-theme="dark"] .travel-page-back button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 38px;
+  padding: 0 13px;
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 11px;
+  color: rgba(244,241,233,.72);
+  background: rgba(255,255,255,.035);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+  transition: .22s ease;
+}
+
+html[data-lifeos-theme="dark"] .travel-page-back button:hover {
+  color: #f4f1e9;
+  border-color: rgba(201,161,90,.32);
+  background: rgba(201,161,90,.07);
+  transform: translateX(-2px);
+}
+
+
+/* ---------- HERO ---------- */
+
+html[data-lifeos-theme="dark"] .trips-hero {
+  margin-bottom: 38px;
+}
+
+html[data-lifeos-theme="dark"] .trips-hero h1,
+html[data-lifeos-theme="dark"] .flight-hero h1 {
+  color: #f4f1e9;
+  text-shadow: 0 8px 35px rgba(0,0,0,.25);
+}
+
+html[data-lifeos-theme="dark"] .trips-hero h1 span,
+html[data-lifeos-theme="dark"] .flight-hero h1 span {
+  background: linear-gradient(135deg,#c9a15a,#e0bd78);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+
+/* ---------- MAIN PLANNER ---------- */
+
+html[data-lifeos-theme="dark"] .trip-planner-card {
+  position: relative;
+  overflow: visible;
+}
+
+html[data-lifeos-theme="dark"] .trip-planner-card::before,
+html[data-lifeos-theme="dark"] .flight-search-card::before,
+html[data-lifeos-theme="dark"] .hotel-search-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201,161,90,.35),
+    transparent
+  );
+  pointer-events: none;
+}
+
+html[data-lifeos-theme="dark"] .trip-planner-card,
+html[data-lifeos-theme="dark"] .flight-search-card,
+html[data-lifeos-theme="dark"] .hotel-search-card {
+  position: relative;
+}
+
+
+/* ---------- INPUTS ---------- */
+
+html[data-lifeos-theme="dark"] .input-with-icon:hover {
+  border-color: rgba(201,161,90,.22);
+  background: rgba(255,255,255,.045);
+}
+
+html[data-lifeos-theme="dark"] .input-with-icon > span {
+  opacity: .78;
+}
+
+html[data-lifeos-theme="dark"] .input-with-icon input {
+  color: #f4f1e9;
+}
+
+
+/* ---------- SWAP ---------- */
+
+html[data-lifeos-theme="dark"] .swap-route-button {
+  box-shadow:
+    0 8px 24px rgba(0,0,0,.25),
+    0 0 0 1px rgba(201,161,90,.025);
+}
+
+
+/* ---------- TRIP TYPE ---------- */
+
+html[data-lifeos-theme="dark"] .trip-type {
+  position: relative;
+  overflow: hidden;
+}
+
+html[data-lifeos-theme="dark"] .trip-type.active::after {
+  content: "";
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#c9a15a,#e0bd78);
+}
+
+
+/* ---------- FEATURE CARDS ---------- */
+
+html[data-lifeos-theme="dark"] .feature-card,
+html[data-lifeos-theme="dark"] .hotel-preference-card {
+  cursor: default;
+}
+
+html[data-lifeos-theme="dark"] .feature-card > span,
+html[data-lifeos-theme="dark"] .hotel-preference-card > span {
+  filter: saturate(.7);
+}
+
+
+/* ---------- FLIGHT CARDS ---------- */
+
+html[data-lifeos-theme="dark"] .flight-card {
+  position: relative;
+  overflow: hidden;
+}
+
+html[data-lifeos-theme="dark"] .flight-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 2px;
+  background: transparent;
+  transition: background .22s ease;
+}
+
+html[data-lifeos-theme="dark"] .flight-card:hover::before,
+html[data-lifeos-theme="dark"] .flight-card.selected::before {
+  background: #c9a15a;
+}
+
+html[data-lifeos-theme="dark"] .flight-card.selected {
+  box-shadow:
+    0 12px 34px rgba(0,0,0,.24),
+    inset 0 0 0 1px rgba(201,161,90,.035);
+}
+
+html[data-lifeos-theme="dark"] .flight-price strong {
+  color: #e0bd78;
+}
+
+
+/* ---------- BOOKING ---------- */
+
+html[data-lifeos-theme="dark"] .booking-link-button {
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
+}
+
+html[data-lifeos-theme="dark"] .booking-link-button:hover {
+  background: #e0bd78;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(201,161,90,.18);
+}
+
+
+/* ---------- LIVE STATUS ---------- */
+
+html[data-lifeos-theme="dark"] .live-status {
+  border: 1px solid rgba(113,136,121,.14);
+}
+
+
+/* ---------- EMPTY STATES ---------- */
+
+html[data-lifeos-theme="dark"] .flight-empty-state,
+html[data-lifeos-theme="dark"] .hotel-empty-state {
+  box-shadow: inset 0 0 30px rgba(0,0,0,.08);
+}
+
+
+/* ---------- MOBILE SAFETY ---------- */
+
+@media (max-width: 720px) {
+
+  html[data-lifeos-theme="dark"] .travel-page-back {
+    padding-left: 2px;
+    margin-bottom: 15px;
+  }
+
+  html[data-lifeos-theme="dark"] .travel-page-back button {
+    min-height: 36px;
+    padding: 0 11px;
+  }
+
+  html[data-lifeos-theme="dark"] .trips-hero {
+    margin-bottom: 28px;
+  }
+
+  html[data-lifeos-theme="dark"] .trips-hero h1,
+  html[data-lifeos-theme="dark"] .flight-hero h1 {
+    line-height: 1;
+  }
+
+  html[data-lifeos-theme="dark"] .flight-topbar {
+    position: relative;
+    z-index: 5;
+  }
+
+  html[data-lifeos-theme="dark"] .flight-topbar .back-button {
+    flex-shrink: 0;
+  }
+
+  html[data-lifeos-theme="dark"] .flight-topbar .trips-badge {
+    max-width: 48%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+
+/* ---------- VERY SMALL PHONES ---------- */
+
+@media (max-width: 380px) {
+
+  html[data-lifeos-theme="dark"] .trips-page {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  html[data-lifeos-theme="dark"] .trip-planner-card,
+  html[data-lifeos-theme="dark"] .flight-search-card,
+  html[data-lifeos-theme="dark"] .hotel-search-card {
+    padding: 14px;
+  }
+
+  html[data-lifeos-theme="dark"] .trips-hero h1,
+  html[data-lifeos-theme="dark"] .flight-hero h1 {
+    font-size: 32px;
+  }
+
+}
+
+
+/* ---------- REDUCED MOTION ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  html[data-lifeos-theme="dark"] .travel-page-back button,
+  html[data-lifeos-theme="dark"] .booking-link-button,
+  html[data-lifeos-theme="dark"] .flight-card::before {
+    transition: none;
+  }
+
+}

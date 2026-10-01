@@ -1,8 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './Reminders.css'
 import { apiFetch } from './api'
 
 function Reminders() {
+  const navigate = useNavigate()
+
   const [reminders, setReminders] = useState([])
   const [loading, setLoading] = useState(true)
   const [showModal, setShowModal] = useState(false)
@@ -623,6 +626,15 @@ function Reminders() {
       {/* HEADER */}
 
       <header className="reminders-header">
+
+        <button
+          type="button"
+          className="reminders-back-button"
+          onClick={() => navigate(-1)}
+          aria-label="Go back"
+        >
+          ←
+        </button>
 
         <div>
 

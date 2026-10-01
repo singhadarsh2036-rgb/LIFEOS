@@ -614,3 +614,344 @@ html[data-lifeos-theme="dark"] .calendar-agenda-item {
     font-size: 8px;
   }
 }
+/* =========================================================
+   LIFEOS — CALENDAR TRUE DARK PREMIUM
+   BLACK + GOLD + SAGE
+   Dark mode only — Light mode untouched
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .calendar-page {
+  color: #f4f1e9;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(201, 161, 90, 0.055), transparent 30%),
+    radial-gradient(circle at 88% 12%, rgba(113, 136, 121, 0.035), transparent 28%),
+    #08090c;
+}
+
+/* ---------- TOP BAR ---------- */
+
+html[data-lifeos-theme="dark"] .calendar-topbar {
+  position: relative;
+  z-index: 20;
+}
+
+html[data-lifeos-theme="dark"] .calendar-back {
+  color: #e8e3d9;
+  background: rgba(20, 22, 26, 0.92);
+  border-color: rgba(201, 161, 90, 0.16);
+  box-shadow:
+    0 8px 25px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+}
+
+html[data-lifeos-theme="dark"] .calendar-back:hover {
+  color: #e0bd78;
+  border-color: rgba(201, 161, 90, 0.42);
+  background: rgba(25, 26, 29, 0.98);
+  box-shadow: 0 10px 28px rgba(201, 161, 90, 0.08);
+}
+
+html[data-lifeos-theme="dark"] .calendar-logo {
+  color: #11100d;
+  background: linear-gradient(135deg, #c9a15a, #e0bd78);
+  box-shadow: 0 8px 22px rgba(201, 161, 90, 0.16);
+}
+
+html[data-lifeos-theme="dark"] .calendar-brand strong {
+  color: #f4f1e9;
+}
+
+html[data-lifeos-theme="dark"] .calendar-brand span {
+  color: #777a73;
+}
+
+html[data-lifeos-theme="dark"] .calendar-today-button {
+  color: #e0bd78;
+  background: rgba(201, 161, 90, 0.08);
+  border-color: rgba(201, 161, 90, 0.20);
+}
+
+html[data-lifeos-theme="dark"] .calendar-today-button:hover {
+  color: #f0d28f;
+  background: rgba(201, 161, 90, 0.14);
+  border-color: rgba(201, 161, 90, 0.34);
+  box-shadow: 0 8px 22px rgba(201, 161, 90, 0.08);
+}
+
+/* ---------- PAGE HEADER ---------- */
+
+html[data-lifeos-theme="dark"] .calendar-eyebrow {
+  color: #c9a15a;
+}
+
+html[data-lifeos-theme="dark"] .calendar-page-header h1 {
+  color: #f4f1e9;
+}
+
+html[data-lifeos-theme="dark"] .calendar-page-header h1 span {
+  color: #d2ad68;
+}
+
+html[data-lifeos-theme="dark"] .calendar-page-header p {
+  color: #85877f;
+}
+
+html[data-lifeos-theme="dark"] .calendar-stat {
+  background: rgba(20, 22, 26, 0.88);
+  border-color: rgba(255, 255, 255, 0.065);
+  box-shadow:
+    0 15px 40px rgba(0, 0, 0, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+html[data-lifeos-theme="dark"] .calendar-stat strong {
+  color: #f4f1e9;
+}
+
+html[data-lifeos-theme="dark"] .calendar-stat span {
+  color: #777a73;
+}
+
+/* ---------- MAIN CARDS ---------- */
+
+html[data-lifeos-theme="dark"] .calendar-card,
+html[data-lifeos-theme="dark"] .calendar-agenda {
+  background: rgba(18, 20, 24, 0.92);
+  border-color: rgba(255, 255, 255, 0.065);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+/* ---------- MONTH HEADER ---------- */
+
+html[data-lifeos-theme="dark"] .calendar-month-title strong {
+  color: #f4f1e9;
+}
+
+html[data-lifeos-theme="dark"] .calendar-month-title span {
+  color: #777a73;
+}
+
+html[data-lifeos-theme="dark"] .calendar-month-arrow {
+  color: #d2ad68;
+  background: rgba(201, 161, 90, 0.075);
+  border-color: rgba(201, 161, 90, 0.14);
+}
+
+html[data-lifeos-theme="dark"] .calendar-month-arrow:hover {
+  color: #f0d28f;
+  background: rgba(201, 161, 90, 0.14);
+  border-color: rgba(201, 161, 90, 0.30);
+  box-shadow: 0 7px 20px rgba(201, 161, 90, 0.07);
+}
+
+/* ---------- WEEKDAYS ---------- */
+
+html[data-lifeos-theme="dark"] .calendar-weekdays span {
+  color: #686b65;
+}
+
+/* ---------- CALENDAR DAYS ---------- */
+
+html[data-lifeos-theme="dark"] .calendar-day {
+  color: #e8e4da;
+}
+
+html[data-lifeos-theme="dark"] .calendar-day:hover:not(:disabled) {
+  background: rgba(201, 161, 90, 0.055);
+  border-color: rgba(201, 161, 90, 0.13);
+}
+
+html[data-lifeos-theme="dark"] .calendar-day.today .calendar-day-number {
+  color: #15130f;
+  background: linear-gradient(135deg, #c9a15a, #e0bd78);
+  box-shadow: 0 7px 20px rgba(201, 161, 90, 0.16);
+}
+
+html[data-lifeos-theme="dark"] .calendar-day.selected {
+  background: rgba(201, 161, 90, 0.085);
+  border-color: rgba(201, 161, 90, 0.38);
+  box-shadow: inset 0 0 0 1px rgba(201, 161, 90, 0.025);
+}
+
+html[data-lifeos-theme="dark"] .calendar-day.selected .calendar-day-number {
+  color: #e0bd78;
+}
+
+html[data-lifeos-theme="dark"] .calendar-day.today.selected .calendar-day-number {
+  color: #15130f;
+}
+
+html[data-lifeos-theme="dark"] .calendar-event-dot {
+  background: #c9a15a;
+  box-shadow: 0 0 0 4px rgba(201, 161, 90, 0.08);
+}
+
+/* ---------- AGENDA ---------- */
+
+html[data-lifeos-theme="dark"] .calendar-agenda-header {
+  border-bottom-color: rgba(255, 255, 255, 0.065);
+}
+
+html[data-lifeos-theme="dark"] .calendar-agenda-header h2 {
+  color: #f4f1e9;
+}
+
+html[data-lifeos-theme="dark"] .calendar-agenda-count {
+  color: #e0bd78;
+  background: rgba(201, 161, 90, 0.10);
+  border: 1px solid rgba(201, 161, 90, 0.12);
+}
+
+html[data-lifeos-theme="dark"] .calendar-agenda-item {
+  background: rgba(255, 255, 255, 0.025);
+  border-color: rgba(255, 255, 255, 0.055);
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+html[data-lifeos-theme="dark"] .calendar-agenda-item:hover {
+  transform: translateX(3px);
+  background: rgba(201, 161, 90, 0.045);
+  border-color: rgba(201, 161, 90, 0.16);
+}
+
+html[data-lifeos-theme="dark"] .calendar-agenda-icon.reminder {
+  color: #d2ad68;
+  background: rgba(201, 161, 90, 0.10);
+}
+
+html[data-lifeos-theme="dark"] .calendar-agenda-icon.task {
+  color: #9aaa9a;
+  background: rgba(113, 136, 121, 0.12);
+}
+
+html[data-lifeos-theme="dark"] .calendar-agenda-copy strong {
+  color: #eeeae1;
+}
+
+html[data-lifeos-theme="dark"] .calendar-agenda-copy span {
+  color: #777a73;
+}
+
+/* ---------- EMPTY STATE ---------- */
+
+html[data-lifeos-theme="dark"] .calendar-empty-icon {
+  color: #c9a15a;
+  background: rgba(201, 161, 90, 0.08);
+  border: 1px solid rgba(201, 161, 90, 0.10);
+}
+
+html[data-lifeos-theme="dark"] .calendar-empty strong {
+  color: #e8e4da;
+}
+
+html[data-lifeos-theme="dark"] .calendar-empty span {
+  color: #777a73;
+}
+
+/* ---------- FOCUS ---------- */
+
+html[data-lifeos-theme="dark"] .calendar-back:focus-visible,
+html[data-lifeos-theme="dark"] .calendar-month-arrow:focus-visible,
+html[data-lifeos-theme="dark"] .calendar-today-button:focus-visible,
+html[data-lifeos-theme="dark"] .calendar-day:focus-visible {
+  outline: 2px solid rgba(201, 161, 90, 0.55);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   MOBILE NAVIGATION SAFETY
+   Prevent Calendar back button from colliding
+   with LIFEOS mobile menu / hamburger.
+   ========================================================= */
+
+@media (max-width: 850px) {
+  .calendar-topbar {
+    position: relative;
+    z-index: 50;
+  }
+
+  html[data-lifeos-theme="dark"] .calendar-back {
+    position: relative;
+    z-index: 55;
+  }
+}
+
+@media (max-width: 560px) {
+  .calendar-page {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .calendar-topbar {
+    min-height: 68px;
+    gap: 10px;
+    padding-left: 48px;
+  }
+
+  .calendar-back {
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    border-radius: 12px;
+    font-size: 18px;
+  }
+
+  .calendar-brand {
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .calendar-logo {
+    width: 34px;
+    height: 34px;
+    min-width: 34px;
+  }
+
+  .calendar-brand strong {
+    font-size: 12px;
+  }
+
+  .calendar-today-button {
+    padding: 8px 11px;
+    font-size: 11px;
+    white-space: nowrap;
+  }
+
+  .calendar-card,
+  .calendar-agenda {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .calendar-page-header {
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+}
+
+/* Extra-small phones */
+@media (max-width: 390px) {
+  .calendar-topbar {
+    padding-left: 44px;
+    gap: 7px;
+  }
+
+  .calendar-logo {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+  }
+
+  .calendar-brand strong {
+    font-size: 11px;
+  }
+
+  .calendar-today-button {
+    padding: 7px 9px;
+  }
+}
