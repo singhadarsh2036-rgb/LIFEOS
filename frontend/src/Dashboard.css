@@ -6497,3 +6497,237 @@ html[data-lifeos-theme="dark"] .dashboard-page ::selection {
   color: #17130c !important;
   background: #d0a65e !important;
 }
+/* =========================================================
+   LIFEOS — PREMIUM MICRO INTERACTIONS
+   Hover / Cursor Effects
+   ========================================================= */
+
+/* Smooth everything */
+.lifeos-premium-dashboard button,
+.lifeos-premium-dashboard .lifeos-focus-card,
+.lifeos-premium-dashboard .lifeos-deadline-card,
+.lifeos-premium-dashboard .lifeos-task-item,
+.lifeos-premium-dashboard .lifeos-day-chip {
+  transition:
+    transform .22s cubic-bezier(.2,.8,.2,1),
+    border-color .22s ease,
+    background .22s ease,
+    box-shadow .22s ease,
+    color .22s ease;
+}
+
+
+/* =========================================================
+   TOP BUTTONS
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-menu-button,
+html[data-lifeos-theme="dark"] .lifeos-icon-button,
+html[data-lifeos-theme="dark"] .lifeos-theme-toggle {
+  cursor: pointer;
+}
+
+@media (hover: hover) and (pointer: fine) {
+
+  html[data-lifeos-theme="dark"] .lifeos-menu-button:hover,
+  html[data-lifeos-theme="dark"] .lifeos-icon-button:hover,
+  html[data-lifeos-theme="dark"] .lifeos-theme-toggle:hover {
+    transform: translateY(-3px);
+
+    border-color: rgba(201,161,90,.38) !important;
+
+    box-shadow:
+      0 10px 30px rgba(0,0,0,.30),
+      0 0 22px rgba(201,161,90,.08) !important;
+  }
+
+  html[data-lifeos-theme="dark"] .lifeos-menu-button:active,
+  html[data-lifeos-theme="dark"] .lifeos-icon-button:active,
+  html[data-lifeos-theme="dark"] .lifeos-theme-toggle:active {
+    transform: translateY(-1px) scale(.97);
+  }
+
+
+  /* =======================================================
+     AVATAR
+     ======================================================= */
+
+  html[data-lifeos-theme="dark"] .lifeos-avatar-button {
+    cursor: pointer;
+  }
+
+  html[data-lifeos-theme="dark"] .lifeos-avatar-button:hover {
+    transform: translateY(-3px) scale(1.04);
+
+    box-shadow:
+      0 12px 32px rgba(201,161,90,.25),
+      0 0 24px rgba(201,161,90,.12) !important;
+  }
+
+
+  /* =======================================================
+     WEEK CARDS
+     ======================================================= */
+
+  html[data-lifeos-theme="dark"] .lifeos-day-chip:not(.active):hover {
+    transform: translateY(-5px);
+
+    background:
+      linear-gradient(
+        145deg,
+        rgba(201,161,90,.09),
+        rgba(255,255,255,.035)
+      ) !important;
+
+    border-color:
+      rgba(201,161,90,.30) !important;
+
+    box-shadow:
+      0 14px 32px rgba(0,0,0,.28),
+      0 0 18px rgba(201,161,90,.06);
+  }
+
+
+  /* =======================================================
+     FOCUS / DEADLINE CARDS
+     ======================================================= */
+
+  html[data-lifeos-theme="dark"] .lifeos-focus-card:hover,
+  html[data-lifeos-theme="dark"] .lifeos-deadline-card:hover {
+    transform: translateY(-4px);
+
+    border-color:
+      rgba(201,161,90,.20) !important;
+
+    box-shadow:
+      0 30px 80px rgba(0,0,0,.32),
+      0 0 35px rgba(201,161,90,.045) !important;
+  }
+
+
+  /* =======================================================
+     TASK ITEMS
+     ======================================================= */
+
+  html[data-lifeos-theme="dark"] .lifeos-task-item:hover {
+    transform: translateX(5px);
+
+    background:
+      rgba(201,161,90,.055) !important;
+
+    border-color:
+      rgba(201,161,90,.20) !important;
+
+    box-shadow:
+      0 10px 28px rgba(0,0,0,.20);
+  }
+
+
+  /* =======================================================
+     PRIMARY BUTTON
+     ======================================================= */
+
+  html[data-lifeos-theme="dark"] .lifeos-primary-button,
+  html[data-lifeos-theme="dark"] .lifeos-add-button {
+    cursor: pointer;
+  }
+
+  html[data-lifeos-theme="dark"] .lifeos-primary-button:hover,
+  html[data-lifeos-theme="dark"] .lifeos-add-button:hover {
+    transform: translateY(-3px) scale(1.02);
+
+    box-shadow:
+      0 16px 38px rgba(201,161,90,.24),
+      0 0 24px rgba(201,161,90,.10) !important;
+  }
+
+  html[data-lifeos-theme="dark"] .lifeos-primary-button:active,
+  html[data-lifeos-theme="dark"] .lifeos-add-button:active {
+    transform: translateY(-1px) scale(.98);
+  }
+
+
+  /* =======================================================
+     SECONDARY BUTTON
+     ======================================================= */
+
+  html[data-lifeos-theme="dark"] .lifeos-secondary-button:hover {
+    transform: translateY(-2px);
+
+    border-color:
+      rgba(201,161,90,.34) !important;
+
+    background:
+      rgba(201,161,90,.10) !important;
+  }
+
+
+  /* =======================================================
+     CALENDAR LINK
+     ======================================================= */
+
+  html[data-lifeos-theme="dark"] .lifeos-link-button {
+    cursor: pointer;
+  }
+
+  html[data-lifeos-theme="dark"] .lifeos-link-button:hover {
+    transform: translateX(4px);
+    color: #e3bf79 !important;
+  }
+
+
+  /* =======================================================
+     ICON EFFECT
+     ======================================================= */
+
+  html[data-lifeos-theme="dark"] .lifeos-card-icon,
+  html[data-lifeos-theme="dark"] .lifeos-ai-icon {
+    transition:
+      transform .25s ease,
+      background .25s ease,
+      box-shadow .25s ease;
+  }
+
+  html[data-lifeos-theme="dark"]
+  .lifeos-focus-card:hover
+  .lifeos-card-icon,
+
+  html[data-lifeos-theme="dark"]
+  .lifeos-deadline-card:hover
+  .lifeos-ai-icon {
+    transform: rotate(-5deg) scale(1.08);
+
+    background:
+      rgba(201,161,90,.16) !important;
+
+    box-shadow:
+      0 0 22px rgba(201,161,90,.10);
+  }
+
+}
+
+
+/* =========================================================
+   KEYBOARD ACCESSIBILITY
+   ========================================================= */
+
+.lifeos-premium-dashboard button:focus-visible {
+  outline: 2px solid rgba(201,161,90,.70);
+  outline-offset: 3px;
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .lifeos-premium-dashboard *,
+  .lifeos-premium-dashboard *::before,
+  .lifeos-premium-dashboard *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+
+}
