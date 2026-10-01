@@ -5979,3 +5979,521 @@ html[data-lifeos-theme="dark"] .lifeos-theme-label {
   color: #fff;
   background: rgba(184, 137, 69, .35);
 }
+/* =========================================================
+   LIFEOS — TRUE DARK PREMIUM THEME
+   BLACK / CHARCOAL + CHAMPAGNE GOLD + SAGE
+   THIS BLOCK MUST STAY LAST
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .dashboard-page {
+  background:
+    radial-gradient(
+      circle at 82% 0%,
+      rgba(201, 161, 90, 0.12),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 8% 85%,
+      rgba(113, 136, 121, 0.08),
+      transparent 25%
+    ),
+    linear-gradient(
+      145deg,
+      #07080b 0%,
+      #0b0d11 48%,
+      #0f1115 100%
+    ) !important;
+
+  color: #f4f1e9 !important;
+}
+
+
+/* =========================================================
+   MAIN DASHBOARD
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-premium-dashboard {
+  --lo-bg: #08090c;
+  --lo-card: rgba(19, 21, 25, 0.78);
+  --lo-card-strong: rgba(24, 26, 30, 0.94);
+
+  --lo-line: rgba(255, 255, 255, 0.075);
+
+  --lo-text: #f4f1e9;
+  --lo-muted: #98958d;
+
+  --lo-purple: #c9a15a;
+  --lo-purple-2: #e0bd78;
+  --lo-pink: #c9a15a;
+  --lo-green: #718879;
+
+  background:
+    radial-gradient(
+      circle at 85% 0%,
+      rgba(201, 161, 90, 0.10),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #0a0b0e 0%,
+      #0b0d11 55%,
+      #0d0f13 100%
+    ) !important;
+
+  color: #f4f1e9 !important;
+}
+
+
+/* =========================================================
+   TOP BAR
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-topbar {
+  background: rgba(10, 11, 14, 0.72) !important;
+  border-bottom: 1px solid rgba(255,255,255,.055) !important;
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+html[data-lifeos-theme="dark"] .lifeos-search-shell {
+  background: rgba(255,255,255,.045) !important;
+  border: 1px solid rgba(255,255,255,.075) !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.025),
+    0 12px 35px rgba(0,0,0,.20) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-search-shell:focus-within {
+  border-color: rgba(201,161,90,.42) !important;
+
+  box-shadow:
+    0 0 0 4px rgba(201,161,90,.08),
+    0 15px 40px rgba(0,0,0,.25) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-search-shell input {
+  color: #f4f1e9 !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-search-shell input::placeholder {
+  color: rgba(244,241,233,.38) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-search-icon {
+  color: #9e978b !important;
+}
+
+
+/* =========================================================
+   TOP ACTION BUTTONS
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-menu-button,
+html[data-lifeos-theme="dark"] .lifeos-icon-button {
+  background: rgba(255,255,255,.045) !important;
+
+  border: 1px solid rgba(255,255,255,.075) !important;
+
+  color: #d7d2c7 !important;
+
+  box-shadow:
+    0 10px 28px rgba(0,0,0,.18) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-menu-button:hover,
+html[data-lifeos-theme="dark"] .lifeos-icon-button:hover {
+  background: rgba(201,161,90,.10) !important;
+  border-color: rgba(201,161,90,.25) !important;
+  color: #e0bd78 !important;
+}
+
+
+/* =========================================================
+   THEME BUTTON
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-theme-toggle,
+html[data-lifeos-theme="dark"] .dashboard-page .theme-toggle {
+  background: rgba(255,255,255,.055) !important;
+
+  border-color: rgba(201,161,90,.20) !important;
+
+  color: #f4f1e9 !important;
+
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.20) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-theme-icon,
+html[data-lifeos-theme="dark"] .dashboard-page .theme-toggle-icon {
+  background: rgba(201,161,90,.14) !important;
+  color: #e0bd78 !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-theme-label,
+html[data-lifeos-theme="dark"] .dashboard-page .theme-toggle-text {
+  color: #eee9df !important;
+}
+
+
+/* =========================================================
+   AVATAR
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-avatar-button {
+  background:
+    linear-gradient(
+      135deg,
+      #d3aa63,
+      #94703b
+    ) !important;
+
+  color: #17130c !important;
+
+  border: 1px solid rgba(255,255,255,.10) !important;
+
+  box-shadow:
+    0 10px 30px rgba(201,161,90,.18) !important;
+}
+
+
+/* =========================================================
+   HERO
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-hero {
+  border-color: rgba(255,255,255,.06) !important;
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.35) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-hero-overlay {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(3,4,6,.88) 0%,
+      rgba(5,6,8,.62) 35%,
+      rgba(5,6,8,.22) 70%,
+      rgba(5,6,8,.05) 100%
+    ),
+    linear-gradient(
+      0deg,
+      rgba(3,4,6,.60),
+      transparent 60%
+    ) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-hero-content h1 {
+  color: #ffffff !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-hero-content h1 strong {
+  color: #e0bd78 !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-hero-content p {
+  color: rgba(255,255,255,.82) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-date-label {
+  color: rgba(255,255,255,.72) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-hero-meta span {
+  color: #eee9df !important;
+
+  background: rgba(8,9,11,.62) !important;
+
+  border-color: rgba(255,255,255,.10) !important;
+
+  backdrop-filter: blur(14px);
+}
+
+
+/* =========================================================
+   SECTION HEADINGS
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-eyebrow {
+  color: #9f937f !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-section-heading h2 {
+  color: #f4f1e9 !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-link-button {
+  color: #d2ad6b !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-link-button:hover {
+  color: #e5c581 !important;
+}
+
+
+/* =========================================================
+   WEEK CARDS
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-day-chip {
+  background:
+    rgba(255,255,255,.035) !important;
+
+  border: 1px solid rgba(255,255,255,.065) !important;
+
+  color: #aaa69e !important;
+
+  box-shadow:
+    0 8px 25px rgba(0,0,0,.12) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-day-chip strong {
+  color: #eeeae1 !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-day-chip:hover {
+  background: rgba(201,161,90,.07) !important;
+  border-color: rgba(201,161,90,.22) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-day-chip.active {
+  background:
+    linear-gradient(
+      145deg,
+      #c9a15a,
+      #98713a
+    ) !important;
+
+  border-color: #d8b66f !important;
+
+  color: #18140d !important;
+
+  box-shadow:
+    0 15px 35px rgba(201,161,90,.20) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-day-chip.active strong {
+  color: #18140d !important;
+}
+
+
+/* =========================================================
+   TODAY'S FOCUS / CARDS
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-focus-card,
+html[data-lifeos-theme="dark"] .lifeos-deadline-card {
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22,24,29,.88),
+      rgba(15,17,21,.82)
+    ) !important;
+
+  border: 1px solid rgba(255,255,255,.065) !important;
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.25) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-focus-card h2,
+html[data-lifeos-theme="dark"] .lifeos-focus-card h3,
+html[data-lifeos-theme="dark"] .lifeos-deadline-card h2,
+html[data-lifeos-theme="dark"] .lifeos-deadline-card h3 {
+  color: #f3f0e8 !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-focus-card p,
+html[data-lifeos-theme="dark"] .lifeos-deadline-card p {
+  color: #97938a !important;
+}
+
+
+/* =========================================================
+   ICONS
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-card-icon,
+html[data-lifeos-theme="dark"] .lifeos-ai-icon {
+  background: rgba(201,161,90,.10) !important;
+
+  border: 1px solid rgba(201,161,90,.16) !important;
+
+  color: #d5ad68 !important;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-primary-button {
+  background:
+    linear-gradient(
+      135deg,
+      #d0a65e,
+      #9d763c
+    ) !important;
+
+  color: #17130c !important;
+
+  box-shadow:
+    0 12px 30px rgba(201,161,90,.18) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-secondary-button {
+  background: rgba(201,161,90,.055) !important;
+
+  border-color: rgba(201,161,90,.20) !important;
+
+  color: #cbb383 !important;
+}
+
+
+/* =========================================================
+   TASKS
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-task-item,
+html[data-lifeos-theme="dark"] .lifeos-deadline-list {
+  background: rgba(255,255,255,.028) !important;
+
+  border: 1px solid rgba(255,255,255,.055) !important;
+
+  color: #ddd8cf !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-task-item:hover,
+html[data-lifeos-theme="dark"] .lifeos-deadline-list:hover {
+  background: rgba(201,161,90,.055) !important;
+
+  border-color: rgba(201,161,90,.16) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-task-check {
+  border-color: #746d61 !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-task-item.completed .lifeos-task-check {
+  background: #718879 !important;
+  border-color: #718879 !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-add-inline {
+  color: #d1aa64 !important;
+}
+
+
+/* =========================================================
+   DEADLINE ART
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-deadline-art {
+  background:
+    radial-gradient(
+      circle,
+      rgba(201,161,90,.10),
+      transparent 70%
+    ) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-deadline-art span {
+  color: #d1aa64 !important;
+
+  text-shadow:
+    0 0 35px rgba(201,161,90,.20) !important;
+}
+
+
+/* =========================================================
+   DUE / STATUS
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-deadline-dot.soon {
+  border-color: #c89443 !important;
+  color: #d3a456 !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-due-pill.soon {
+  color: #d4a75b !important;
+
+  background: rgba(201,161,90,.09) !important;
+}
+
+
+/* =========================================================
+   BOTTOM NAV
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-bottom-nav {
+  background:
+    rgba(14,16,20,.88) !important;
+
+  border: 1px solid rgba(255,255,255,.075) !important;
+
+  box-shadow:
+    0 25px 80px rgba(0,0,0,.42) !important;
+
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+html[data-lifeos-theme="dark"]
+.lifeos-bottom-nav
+button:not(.lifeos-add-button) {
+  color: #817d74 !important;
+}
+
+html[data-lifeos-theme="dark"]
+.lifeos-bottom-nav
+button.active {
+  color: #d3aa63 !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-add-button {
+  background:
+    linear-gradient(
+      135deg,
+      #d0a65e,
+      #9b7339
+    ) !important;
+
+  color: #17130c !important;
+
+  box-shadow:
+    0 12px 35px rgba(201,161,90,.25) !important;
+}
+
+
+/* =========================================================
+   PURPLE KILL SWITCH
+   Remove the remaining purple leftovers
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-premium-dashboard * {
+  --purple: #c9a15a;
+  --purple-light: #e0bd78;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-premium-dashboard
+.lifeos-hero-content h1 strong {
+  color: #e0bd78 !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-premium-dashboard
+.lifeos-link-button {
+  color: #d0a45c !important;
+}
+
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .dashboard-page ::selection {
+  color: #17130c !important;
+  background: #d0a65e !important;
+}
