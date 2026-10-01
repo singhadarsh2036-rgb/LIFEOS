@@ -6731,3 +6731,150 @@ html[data-lifeos-theme="dark"] .lifeos-theme-toggle {
   }
 
 }
+/* =========================================================
+   LIFEOS — MOBILE DRAWER FINAL DARK GOLD FIX
+   Dark mode only
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-menu-backdrop {
+  background: rgba(0, 0, 0, .62) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+}
+
+/* Drawer */
+html[data-lifeos-theme="dark"] .lifeos-menu-drawer {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(18, 20, 23, .99) 0%,
+      rgba(10, 12, 15, .99) 100%
+    ) !important;
+
+  border: 1px solid rgba(201,161,90,.20) !important;
+
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.65),
+    inset 0 1px 0 rgba(255,255,255,.045) !important;
+
+  color: #f4f1e9 !important;
+}
+
+/* LIFEOS logo */
+html[data-lifeos-theme="dark"] .lifeos-drawer-logo {
+  background:
+    linear-gradient(
+      135deg,
+      #c9a15a,
+      #e0bd78
+    ) !important;
+
+  color: #15130f !important;
+
+  box-shadow:
+    0 10px 30px rgba(201,161,90,.20) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-drawer-brand strong {
+  color: #f4f1e9 !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-drawer-brand span {
+  color: rgba(244,241,233,.42) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-drawer-label {
+  color: rgba(244,241,233,.32) !important;
+}
+
+/* Navigation items */
+html[data-lifeos-theme="dark"] .lifeos-drawer-item {
+  color: rgba(244,241,233,.66) !important;
+  background: transparent !important;
+  border-color: transparent !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-drawer-item:hover {
+  color: #f4f1e9 !important;
+  background: rgba(201,161,90,.07) !important;
+  border-color: rgba(201,161,90,.10) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-drawer-item.active {
+  color: #f4f1e9 !important;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(201,161,90,.16),
+      rgba(201,161,90,.045)
+    ) !important;
+
+  border-color: rgba(201,161,90,.18) !important;
+
+  box-shadow:
+    inset 3px 0 0 #c9a15a !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-drawer-icon {
+  color: #c9a15a !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-drawer-arrow {
+  color: rgba(244,241,233,.25) !important;
+}
+
+/* Close button */
+html[data-lifeos-theme="dark"] .lifeos-drawer-close {
+  background: rgba(255,255,255,.045) !important;
+  border-color: rgba(255,255,255,.08) !important;
+  color: rgba(244,241,233,.78) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-drawer-close:hover {
+  background: rgba(201,161,90,.12) !important;
+  border-color: rgba(201,161,90,.24) !important;
+  color: #e0bd78 !important;
+}
+
+/* Settings / profile */
+html[data-lifeos-theme="dark"] .lifeos-drawer-profile {
+  background: rgba(255,255,255,.025) !important;
+  border-color: rgba(255,255,255,.06) !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-drawer-avatar {
+  background: rgba(201,161,90,.12) !important;
+  color: #e0bd78 !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-drawer-profile-copy strong {
+  color: #f4f1e9 !important;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-drawer-profile-copy span {
+  color: rgba(244,241,233,.40) !important;
+}
+
+/* =========================================================
+   REMOVE DUPLICATE X
+   Drawer already has its own close button.
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-menu-button.open {
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Mobile drawer sizing */
+@media (max-width: 600px) {
+
+  html[data-lifeos-theme="dark"] .lifeos-menu-drawer {
+    top: 8px !important;
+    left: 8px !important;
+    bottom: 8px !important;
+    width: calc(100vw - 16px) !important;
+    border-radius: 24px !important;
+  }
+
+}
