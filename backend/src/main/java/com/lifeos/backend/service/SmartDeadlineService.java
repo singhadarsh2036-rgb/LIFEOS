@@ -260,7 +260,7 @@ public class SmartDeadlineService {
                         .uri(url)
                         .header(
                                 "x-goog-api-key",
-                                apiKey
+                                apiKey.trim()
                         )
                         .contentType(
                                 MediaType.APPLICATION_JSON
