@@ -321,3 +321,463 @@ html[data-lifeos-theme] .task-page {
     color .25s ease;
 }
 
+/* =========================================================
+   LIFEOS — GLOBAL DARK PREMIUM SYSTEM
+   Dashboard / Tasks / Reminders / Travel
+   BLACK + CHAMPAGNE GOLD + SAGE
+   KEEP THIS BLOCK LAST
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] {
+  --lifeos-bg: #08090c;
+  --lifeos-bg-2: #0d0f13;
+
+  --lifeos-card: rgba(19,21,25,.82);
+  --lifeos-card-2: rgba(24,26,30,.92);
+
+  --lifeos-text: #f4f1e9;
+  --lifeos-muted: #98958d;
+
+  --lifeos-gold: #c9a15a;
+  --lifeos-gold-light: #e0bd78;
+  --lifeos-sage: #718879;
+
+  --lifeos-border: rgba(255,255,255,.075);
+  --lifeos-gold-border: rgba(201,161,90,.22);
+}
+
+
+/* =========================================================
+   TASKS
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .tasks-page,
+html[data-lifeos-theme="dark"] .task-page,
+html[data-lifeos-theme="dark"] .tasks-container,
+html[data-lifeos-theme="dark"] .tasks-main {
+
+  background:
+    radial-gradient(
+      circle at 85% 0%,
+      rgba(201,161,90,.10),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 10% 85%,
+      rgba(113,136,121,.06),
+      transparent 25%
+    ),
+    linear-gradient(
+      145deg,
+      #08090c 0%,
+      #0b0d11 55%,
+      #0e1014 100%
+    ) !important;
+
+  color: var(--lifeos-text) !important;
+}
+
+
+/* Cards */
+
+html[data-lifeos-theme="dark"] .tasks-page .glass-card,
+html[data-lifeos-theme="dark"] .task-page .glass-card,
+html[data-lifeos-theme="dark"] .tasks-page .task-card,
+html[data-lifeos-theme="dark"] .task-page .task-card,
+html[data-lifeos-theme="dark"] .tasks-page .tasks-section {
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22,24,29,.90),
+      rgba(14,16,20,.86)
+    ) !important;
+
+  border-color: var(--lifeos-border) !important;
+
+  color: var(--lifeos-text) !important;
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.28) !important;
+}
+
+
+/* Text */
+
+html[data-lifeos-theme="dark"] .tasks-page h1,
+html[data-lifeos-theme="dark"] .tasks-page h2,
+html[data-lifeos-theme="dark"] .tasks-page h3,
+html[data-lifeos-theme="dark"] .tasks-page strong,
+html[data-lifeos-theme="dark"] .task-page h1,
+html[data-lifeos-theme="dark"] .task-page h2,
+html[data-lifeos-theme="dark"] .task-page h3,
+html[data-lifeos-theme="dark"] .task-page strong {
+
+  color: var(--lifeos-text) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-page p,
+html[data-lifeos-theme="dark"] .tasks-page small,
+html[data-lifeos-theme="dark"] .task-page p,
+html[data-lifeos-theme="dark"] .task-page small {
+
+  color: var(--lifeos-muted) !important;
+}
+
+
+/* Task rows */
+
+html[data-lifeos-theme="dark"] .tasks-page .task-row,
+html[data-lifeos-theme="dark"] .task-page .task-row {
+
+  background: rgba(255,255,255,.028) !important;
+
+  border-color: var(--lifeos-border) !important;
+
+  color: #ddd8cf !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-page .task-row:hover,
+html[data-lifeos-theme="dark"] .task-page .task-row:hover {
+
+  background: rgba(201,161,90,.055) !important;
+
+  border-color: var(--lifeos-gold-border) !important;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.22);
+}
+
+
+/* Task inputs */
+
+html[data-lifeos-theme="dark"] .tasks-page input,
+html[data-lifeos-theme="dark"] .tasks-page textarea,
+html[data-lifeos-theme="dark"] .task-page input,
+html[data-lifeos-theme="dark"] .task-page textarea {
+
+  background: rgba(255,255,255,.035) !important;
+
+  border-color: var(--lifeos-border) !important;
+
+  color: var(--lifeos-text) !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-page input:focus,
+html[data-lifeos-theme="dark"] .tasks-page textarea:focus,
+html[data-lifeos-theme="dark"] .task-page input:focus,
+html[data-lifeos-theme="dark"] .task-page textarea:focus {
+
+  border-color: rgba(201,161,90,.42) !important;
+
+  box-shadow:
+    0 0 0 4px rgba(201,161,90,.08) !important;
+}
+
+
+/* =========================================================
+   REMINDERS
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .reminders-page {
+
+  background:
+    radial-gradient(
+      circle at 85% 0%,
+      rgba(201,161,90,.10),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 10% 85%,
+      rgba(113,136,121,.06),
+      transparent 25%
+    ),
+    linear-gradient(
+      145deg,
+      #08090c 0%,
+      #0b0d11 55%,
+      #0e1014 100%
+    ) !important;
+
+  color: var(--lifeos-text) !important;
+}
+
+
+/* Reminder cards */
+
+html[data-lifeos-theme="dark"] .reminders-page .reminders-card,
+html[data-lifeos-theme="dark"] .reminders-page .reminder-row,
+html[data-lifeos-theme="dark"] .reminders-page .reminders-empty,
+html[data-lifeos-theme="dark"] .reminders-page .reminder-modal,
+html[data-lifeos-theme="dark"] .reminders-page .modal-content {
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22,24,29,.90),
+      rgba(14,16,20,.86)
+    ) !important;
+
+  border-color: var(--lifeos-border) !important;
+
+  color: var(--lifeos-text) !important;
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.28) !important;
+}
+
+
+/* Reminder text */
+
+html[data-lifeos-theme="dark"] .reminders-page h1,
+html[data-lifeos-theme="dark"] .reminders-page h2,
+html[data-lifeos-theme="dark"] .reminders-page h3,
+html[data-lifeos-theme="dark"] .reminders-page strong {
+
+  color: var(--lifeos-text) !important;
+}
+
+html[data-lifeos-theme="dark"] .reminders-page p,
+html[data-lifeos-theme="dark"] .reminders-page span,
+html[data-lifeos-theme="dark"] .reminders-page label,
+html[data-lifeos-theme="dark"] .reminders-page small {
+
+  color: var(--lifeos-muted) !important;
+}
+
+
+/* Reminder inputs */
+
+html[data-lifeos-theme="dark"] .reminders-page input,
+html[data-lifeos-theme="dark"] .reminders-page select,
+html[data-lifeos-theme="dark"] .reminders-page textarea {
+
+  background: rgba(255,255,255,.035) !important;
+
+  color: var(--lifeos-text) !important;
+
+  border-color: var(--lifeos-border) !important;
+}
+
+html[data-lifeos-theme="dark"] .reminders-page input:focus,
+html[data-lifeos-theme="dark"] .reminders-page select:focus,
+html[data-lifeos-theme="dark"] .reminders-page textarea:focus {
+
+  border-color: rgba(201,161,90,.42) !important;
+
+  box-shadow:
+    0 0 0 4px rgba(201,161,90,.08) !important;
+}
+
+
+/* Reminder status */
+
+html[data-lifeos-theme="dark"] .reminders-page .reminder-status {
+
+  color: var(--lifeos-gold-light) !important;
+
+  background: rgba(201,161,90,.10) !important;
+
+  border-color: rgba(201,161,90,.18) !important;
+}
+
+
+/* =========================================================
+   TRAVEL
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .trips-page {
+
+  background:
+    radial-gradient(
+      circle at 85% 0%,
+      rgba(201,161,90,.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 8% 85%,
+      rgba(113,136,121,.07),
+      transparent 25%
+    ),
+    linear-gradient(
+      145deg,
+      #08090c 0%,
+      #0b0d11 55%,
+      #0e1014 100%
+    ) !important;
+
+  color: var(--lifeos-text) !important;
+}
+
+
+/* Travel cards */
+
+html[data-lifeos-theme="dark"] .trips-page .trip-planner-card,
+html[data-lifeos-theme="dark"] .trips-page .flight-search-card,
+html[data-lifeos-theme="dark"] .trips-page .flight-results-card,
+html[data-lifeos-theme="dark"] .trips-page .hotel-page > section,
+html[data-lifeos-theme="dark"] .trips-page .trip-summary-card {
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(22,24,29,.90),
+      rgba(14,16,20,.86)
+    ) !important;
+
+  border-color: var(--lifeos-border) !important;
+
+  color: var(--lifeos-text) !important;
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.28) !important;
+}
+
+
+/* Travel headings */
+
+html[data-lifeos-theme="dark"] .trips-page h1,
+html[data-lifeos-theme="dark"] .trips-page h2,
+html[data-lifeos-theme="dark"] .trips-page h3,
+html[data-lifeos-theme="dark"] .trips-page strong {
+
+  color: var(--lifeos-text) !important;
+}
+
+html[data-lifeos-theme="dark"] .trips-page p,
+html[data-lifeos-theme="dark"] .trips-page label,
+html[data-lifeos-theme="dark"] .trips-page small,
+html[data-lifeos-theme="dark"] .trips-page .planner-step {
+
+  color: var(--lifeos-muted) !important;
+}
+
+
+/* Travel inputs */
+
+html[data-lifeos-theme="dark"] .trips-page input,
+html[data-lifeos-theme="dark"] .trips-page select,
+html[data-lifeos-theme="dark"] .trips-page textarea {
+
+  background: rgba(255,255,255,.035) !important;
+
+  color: var(--lifeos-text) !important;
+
+  border-color: var(--lifeos-border) !important;
+}
+
+
+/* Flight / hotel cards */
+
+html[data-lifeos-theme="dark"] .trips-page .flight-card,
+html[data-lifeos-theme="dark"] .trips-page .airport-suggestions,
+html[data-lifeos-theme="dark"] .trips-page .trip-type,
+html[data-lifeos-theme="dark"] .trips-page .flight-summary,
+html[data-lifeos-theme="dark"] .trips-page .hotel-card {
+
+  background:
+    rgba(255,255,255,.028) !important;
+
+  border-color: var(--lifeos-border) !important;
+
+  color: var(--lifeos-text) !important;
+}
+
+html[data-lifeos-theme="dark"] .trips-page .flight-card:hover,
+html[data-lifeos-theme="dark"] .trips-page .hotel-card:hover {
+
+  background:
+    rgba(201,161,90,.055) !important;
+
+  border-color:
+    rgba(201,161,90,.20) !important;
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 16px 35px rgba(0,0,0,.24) !important;
+}
+
+
+/* =========================================================
+   GOLD BUTTON SYSTEM
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .tasks-page button,
+html[data-lifeos-theme="dark"] .task-page button,
+html[data-lifeos-theme="dark"] .reminders-page button,
+html[data-lifeos-theme="dark"] .trips-page button {
+
+  transition:
+    transform .22s ease,
+    box-shadow .22s ease,
+    border-color .22s ease,
+    background .22s ease;
+}
+
+
+/* Common primary buttons */
+
+html[data-lifeos-theme="dark"] .tasks-page button[class*="primary"],
+html[data-lifeos-theme="dark"] .reminders-page button[class*="primary"],
+html[data-lifeos-theme="dark"] .trips-page button[class*="primary"],
+html[data-lifeos-theme="dark"] .reminder-add-button {
+
+  background:
+    linear-gradient(
+      135deg,
+      #d0a65e,
+      #9d763c
+    ) !important;
+
+  color: #17130c !important;
+
+  border-color: transparent !important;
+}
+
+html[data-lifeos-theme="dark"] .tasks-page button[class*="primary"]:hover,
+html[data-lifeos-theme="dark"] .reminders-page button[class*="primary"]:hover,
+html[data-lifeos-theme="dark"] .trips-page button[class*="primary"]:hover,
+html[data-lifeos-theme="dark"] .reminder-add-button:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 35px rgba(201,161,90,.22) !important;
+}
+
+
+/* =========================================================
+   REMOVE OLD PURPLE / PINK ACCENTS
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .tasks-page *,
+html[data-lifeos-theme="dark"] .task-page *,
+html[data-lifeos-theme="dark"] .reminders-page *,
+html[data-lifeos-theme="dark"] .trips-page * {
+
+  --purple: #c9a15a;
+  --purple-light: #e0bd78;
+}
+
+
+/* Common links / accents */
+
+html[data-lifeos-theme="dark"] .tasks-page a,
+html[data-lifeos-theme="dark"] .task-page a,
+html[data-lifeos-theme="dark"] .reminders-page a,
+html[data-lifeos-theme="dark"] .trips-page a {
+
+  color: #d0a65e;
+}
+
+html[data-lifeos-theme="dark"] .tasks-page a:hover,
+html[data-lifeos-theme="dark"] .task-page a:hover,
+html[data-lifeos-theme="dark"] .reminders-page a:hover,
+html[data-lifeos-theme="dark"] .trips-page a:hover {
+
+  color: #e0bd78;
+}
+
