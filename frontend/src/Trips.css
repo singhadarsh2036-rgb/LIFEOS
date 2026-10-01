@@ -2161,3 +2161,379 @@ html[data-lifeos-theme="dark"] .native-date-input::-webkit-calendar-picker-indic
   }
 
 }
+
+
+/* =========================================================
+   LIFEOS TRAVEL — CUSTOM CALENDAR UI
+   Native browser calendar removed
+   Dark mode only
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .lifeos-date-picker {
+  position: relative;
+  width: 100%;
+  z-index: 80;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-date-trigger {
+  width: 100%;
+  min-height: 52px;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 0 15px;
+
+  border: 1px solid rgba(255,255,255,.085);
+  border-radius: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,255,255,.045),
+      rgba(255,255,255,.025)
+    );
+
+  color: #f4f1e9;
+  font: inherit;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    border-color .2s ease,
+    background .2s ease,
+    box-shadow .2s ease;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-date-trigger:hover,
+html[data-lifeos-theme="dark"] .lifeos-date-trigger.open {
+  border-color: rgba(201,161,90,.45);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(201,161,90,.065),
+      rgba(255,255,255,.025)
+    );
+
+  box-shadow:
+    0 0 0 3px rgba(201,161,90,.07);
+}
+
+html[data-lifeos-theme="dark"] .lifeos-date-trigger .date-icon {
+  flex: 0 0 auto;
+  font-size: 17px;
+  color: #c9a15a;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-date-trigger .date-display {
+  flex: 1;
+  min-width: 0;
+
+  color: rgba(244,241,233,.40);
+
+  font-size: 14px;
+  font-weight: 600;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-date-trigger .date-display.has-value {
+  color: #f4f1e9;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-date-trigger .date-arrow {
+  flex: 0 0 auto;
+
+  color: #e0bd78;
+  font-size: 19px;
+  line-height: 1;
+
+  transition: transform .2s ease;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-date-trigger.open .date-arrow {
+  transform: rotate(180deg);
+}
+
+/* Calendar popup */
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-popover {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+
+  width: min(330px, calc(100vw - 32px));
+
+  padding: 15px;
+
+  box-sizing: border-box;
+
+  border: 1px solid rgba(201,161,90,.22);
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(24,26,30,.99),
+      rgba(12,14,17,.99)
+    );
+
+  box-shadow:
+    0 25px 70px rgba(0,0,0,.60),
+    inset 0 1px 0 rgba(255,255,255,.045);
+
+  z-index: 9999;
+
+  animation: lifeosCalendarIn .16s ease-out;
+}
+
+@keyframes lifeosCalendarIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px) scale(.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-header {
+  display: grid;
+  grid-template-columns: 36px 1fr 36px;
+  align-items: center;
+  gap: 8px;
+
+  margin-bottom: 15px;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-month {
+  color: #f4f1e9;
+
+  font-size: 15px;
+  font-weight: 750;
+  text-align: center;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-month-nav {
+  width: 34px;
+  height: 34px;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 10px;
+
+  background: rgba(255,255,255,.035);
+
+  color: #e0bd78;
+  font-size: 22px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-month-nav:hover:not(:disabled) {
+  background: rgba(201,161,90,.10);
+  border-color: rgba(201,161,90,.24);
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-month-nav:disabled {
+  opacity: .25;
+  cursor: not-allowed;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-weekdays,
+html[data-lifeos-theme="dark"] .lifeos-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-weekdays {
+  margin-bottom: 6px;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-weekdays span {
+  color: rgba(244,241,233,.38);
+
+  font-size: 10px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-day {
+  width: 100%;
+  aspect-ratio: 1;
+
+  display: grid;
+  place-items: center;
+
+  border: 1px solid transparent;
+  border-radius: 9px;
+
+  background: transparent;
+
+  color: rgba(244,241,233,.78);
+
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background .16s ease,
+    border-color .16s ease,
+    color .16s ease;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-day:hover:not(:disabled) {
+  background: rgba(201,161,90,.10);
+  border-color: rgba(201,161,90,.18);
+  color: #f4f1e9;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-day.muted {
+  color: rgba(244,241,233,.18);
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-day.today:not(.selected) {
+  border-color: rgba(201,161,90,.30);
+  color: #e0bd78;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-day.selected {
+  background: linear-gradient(135deg,#c9a15a,#e0bd78);
+  border-color: transparent;
+
+  color: #15130f;
+
+  box-shadow:
+    0 7px 18px rgba(201,161,90,.18);
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-day.disabled {
+  opacity: .18;
+  cursor: not-allowed;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-footer {
+  display: flex;
+  justify-content: space-between;
+
+  margin-top: 12px;
+  padding-top: 11px;
+
+  border-top: 1px solid rgba(255,255,255,.06);
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-footer button {
+  padding: 7px 9px;
+
+  border: 0;
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #d2ad68;
+
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-footer button:hover:not(:disabled) {
+  background: rgba(201,161,90,.08);
+  color: #e0bd78;
+}
+
+html[data-lifeos-theme="dark"] .lifeos-calendar-footer button:disabled {
+  opacity: .25;
+  cursor: not-allowed;
+}
+
+@media (max-width: 720px) {
+  html[data-lifeos-theme="dark"] .lifeos-calendar-popover {
+    width: min(320px, calc(100vw - 28px));
+  }
+}
+
+@media (max-width: 380px) {
+  html[data-lifeos-theme="dark"] .lifeos-calendar-popover {
+    width: calc(100vw - 24px);
+    padding: 12px;
+  }
+}
+
+
+/* =========================================================
+   LIFEOS TRAVEL — TRIP TYPE FINAL STATE
+   When One Way is selected, do not show the Round Trip card.
+   Keep an explicit compact switch so the user can change back.
+   ========================================================= */
+
+html[data-lifeos-theme="dark"] .trip-type-oneway-state {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+html[data-lifeos-theme="dark"] .trip-type-oneway-state .trip-type {
+  width: 100%;
+}
+
+html[data-lifeos-theme="dark"] .trip-type-change {
+  align-self: flex-start;
+
+  padding: 7px 10px;
+
+  border: 1px solid rgba(201,161,90,.16);
+  border-radius: 9px;
+
+  background: rgba(201,161,90,.045);
+
+  color: rgba(224,189,120,.82);
+
+  font: inherit;
+  font-size: 11px;
+  font-weight: 650;
+
+  cursor: pointer;
+
+  transition:
+    background .18s ease,
+    border-color .18s ease,
+    color .18s ease,
+    transform .18s ease;
+}
+
+html[data-lifeos-theme="dark"] .trip-type-change:hover {
+  background: rgba(201,161,90,.09);
+  border-color: rgba(201,161,90,.28);
+  color: #e0bd78;
+  transform: translateY(-1px);
+}
+
+html[data-lifeos-theme="dark"] .trip-type-selector.oneway-selected {
+  width: 100%;
+}
+
+html[data-lifeos-theme="dark"] .trip-type-selector.oneway-selected .trip-type.active {
+  min-height: 68px;
+}
+
+@media (max-width: 720px) {
+  html[data-lifeos-theme="dark"] .trip-type-change {
+    width: 100%;
+    text-align: center;
+  }
+}

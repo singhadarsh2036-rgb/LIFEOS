@@ -1,7 +1,269 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Trips.css'
 import MobileGlobalNav from './MobileGlobalNav'
+
+function LifeosDatePicker({ value, min, onChange, label }) {
+  const [open, setOpen] = useState(false)
+  const [viewDate, setViewDate] = useState(() => {
+    const base = value || min || new Date().toISOString().split('T')[0]
+    const [year, month] = base.split('-').map(Number)
+    return new Date(year, month - 1, 1)
+  })
+
+  const pickerRef = useRef(null)
+
+  useEffect(() => {
+    if (!open) return
+
+    const handleOutsideClick = (event) => {
+      if (!pickerRef.current?.contains(event.target)) {
+        setOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleOutsideClick)
+    return () => document.removeEventListener('mousedown', handleOutsideClick)
+  }, [open])
+
+  useEffect(() => {
+    if (!open) return
+
+    const base = value || min
+    if (!base) return
+
+    const [year, month] = base.split('-').map(Number)
+    setViewDate(new Date(year, month - 1, 1))
+  }, [value, min, open])
+
+  const pad = (number) => String(number).padStart(2, '0')
+
+  const toDateKey = (date) =>
+    `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`
+
+  const minDate = min
+    ? new Date(`${min}T00:00:00`)
+    : null
+
+  const selectedDate = value
+    ? new Date(`${value}T00:00:00`)
+    : null
+
+  const todayKey = new Date().toISOString().split('T')[0]
+
+  const monthStart = new Date(
+    viewDate.getFullYear(),
+    viewDate.getMonth(),
+    1
+  )
+
+  const firstDay = monthStart.getDay()
+
+  const daysInMonth = new Date(
+    viewDate.getFullYear(),
+    viewDate.getMonth() + 1,
+    0
+  ).getDate()
+
+  const previousMonthDays = new Date(
+    viewDate.getFullYear(),
+    viewDate.getMonth(),
+    0
+  ).getDate()
+
+  const cells = []
+
+  for (let index = firstDay - 1; index >= 0; index -= 1) {
+    const date = new Date(
+      viewDate.getFullYear(),
+      viewDate.getMonth() - 1,
+      previousMonthDays - index
+    )
+    cells.push({ date, muted: true })
+  }
+
+  for (let day = 1; day <= daysInMonth; day += 1) {
+    cells.push({
+      date: new Date(viewDate.getFullYear(), viewDate.getMonth(), day),
+      muted: false,
+    })
+  }
+
+  const remaining = 42 - cells.length
+
+  for (let day = 1; day <= remaining; day += 1) {
+    cells.push({
+      date: new Date(viewDate.getFullYear(), viewDate.getMonth() + 1, day),
+      muted: true,
+    })
+  }
+
+  const monthLabel = viewDate.toLocaleDateString('en-IN', {
+    month: 'long',
+    year: 'numeric',
+  })
+
+  const displayValue = value
+    ? new Date(`${value}T00:00:00`).toLocaleDateString('en-IN', {
+        day: '2-digit',
+        month: 'short',
+        year: 'numeric',
+      })
+    : 'Select date'
+
+  const minMonth = minDate
+    ? new Date(minDate.getFullYear(), minDate.getMonth(), 1)
+    : null
+
+  const canGoPrevious = !minMonth || monthStart > minMonth
+
+  const moveMonth = (amount) => {
+    const nextMonth = new Date(
+      viewDate.getFullYear(),
+      viewDate.getMonth() + amount,
+      1
+    )
+
+    if (
+      amount < 0 &&
+      minMonth &&
+      nextMonth < minMonth
+    ) {
+      return
+    }
+
+    setViewDate(nextMonth)
+  }
+
+  const selectDate = (date) => {
+    const key = toDateKey(date)
+
+    if (min && key < min) return
+
+    onChange(key)
+    setOpen(false)
+  }
+
+  const clearDate = () => {
+    onChange('')
+    setOpen(false)
+  }
+
+  const goToday = () => {
+    const today = new Date()
+    const todayKeyValue = toDateKey(today)
+
+    if (min && todayKeyValue < min) return
+
+    onChange(todayKeyValue)
+    setViewDate(new Date(today.getFullYear(), today.getMonth(), 1))
+    setOpen(false)
+  }
+
+  return (
+    <div className="lifeos-date-picker" ref={pickerRef}>
+      <button
+        type="button"
+        className={`lifeos-date-trigger ${open ? 'open' : ''}`}
+        onClick={() => setOpen((current) => !current)}
+        aria-label={label}
+        aria-expanded={open}
+      >
+        <span className="date-icon">📅</span>
+
+        <span className={`date-display ${value ? 'has-value' : ''}`}>
+          {displayValue}
+        </span>
+
+        <span className="date-arrow">⌄</span>
+      </button>
+
+      {open && (
+        <div className="lifeos-calendar-popover">
+          <div className="lifeos-calendar-header">
+            <button
+              type="button"
+              className="lifeos-calendar-month-nav"
+              onClick={() => moveMonth(-1)}
+              disabled={!canGoPrevious}
+              aria-label="Previous month"
+            >
+              ‹
+            </button>
+
+            <div className="lifeos-calendar-month">
+              {monthLabel}
+            </div>
+
+            <button
+              type="button"
+              className="lifeos-calendar-month-nav"
+              onClick={() => moveMonth(1)}
+              aria-label="Next month"
+            >
+              ›
+            </button>
+          </div>
+
+          <div className="lifeos-calendar-weekdays">
+            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(
+              (day) => (
+                <span key={day}>{day}</span>
+              )
+            )}
+          </div>
+
+          <div className="lifeos-calendar-grid">
+            {cells.map(({ date, muted }, index) => {
+              const key = toDateKey(date)
+              const disabled = Boolean(min && key < min)
+              const selected = Boolean(value && key === value)
+              const isToday = key === todayKey
+
+              return (
+                <button
+                  type="button"
+                  key={`${key}-${index}`}
+                  className={[
+                    'lifeos-calendar-day',
+                    muted ? 'muted' : '',
+                    disabled ? 'disabled' : '',
+                    selected ? 'selected' : '',
+                    isToday ? 'today' : '',
+                  ]
+                    .filter(Boolean)
+                    .join(' ')}
+                  disabled={disabled}
+                  onClick={() => selectDate(date)}
+                >
+                  {date.getDate()}
+                </button>
+              )
+            })}
+          </div>
+
+          <div className="lifeos-calendar-footer">
+            <button
+              type="button"
+              onClick={clearDate}
+              disabled={!value}
+            >
+              Clear
+            </button>
+
+            <button
+              type="button"
+              onClick={goToday}
+              disabled={Boolean(min && todayKey < min)}
+            >
+              Today
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
 
 function Trips() {
   const navigate = useNavigate()
@@ -40,19 +302,6 @@ function Trips() {
 
   const formatDate = (date) => {
     if (!date) return ''
-
-    return new Date(`${date}T00:00:00`).toLocaleDateString(
-      'en-IN',
-      {
-        day: '2-digit',
-        month: 'short',
-        year: 'numeric',
-      }
-    )
-  }
-
-  const formatPlannerDate = (date) => {
-    if (!date) return 'Select date'
 
     return new Date(`${date}T00:00:00`).toLocaleDateString(
       'en-IN',
@@ -940,56 +1189,85 @@ function Trips() {
 
                   <label>Trip type</label>
 
-                  <div className="trip-type-selector">
+                  <div className={`trip-type-selector ${tripType === 'oneway' ? 'oneway-selected' : 'round-selected'}`}>
 
-                    <button
-                      type="button"
-                      className={
-                        tripType === 'round'
-                          ? 'trip-type active'
-                          : 'trip-type'
-                      }
-                      onClick={() =>
-                        handleTripTypeChange('round')
-                      }
-                    >
+                    {tripType === 'round' ? (
+                      <>
+                        <button
+                          type="button"
+                          className="trip-type active"
+                          onClick={() =>
+                            handleTripTypeChange('round')
+                          }
+                        >
 
-                      <span>⇄</span>
+                          <span>⇄</span>
 
-                      <div>
-                        <strong>Round Trip</strong>
+                          <div>
+                            <strong>Round Trip</strong>
 
-                        <small>
-                          Return to your starting point
-                        </small>
+                            <small>
+                              Return to your starting point
+                            </small>
+                          </div>
+
+                        </button>
+
+                        <button
+                          type="button"
+                          className="trip-type"
+                          onClick={() =>
+                            handleTripTypeChange('oneway')
+                          }
+                        >
+
+                          <span>→</span>
+
+                          <div>
+                            <strong>One Way</strong>
+
+                            <small>
+                              Travel to your destination
+                            </small>
+                          </div>
+
+                        </button>
+                      </>
+                    ) : (
+                      <div className="trip-type-oneway-state">
+
+                        <button
+                          type="button"
+                          className="trip-type active"
+                          onClick={() =>
+                            handleTripTypeChange('oneway')
+                          }
+                        >
+
+                          <span>→</span>
+
+                          <div>
+                            <strong>One Way</strong>
+
+                            <small>
+                              Travel to your destination
+                            </small>
+                          </div>
+
+                        </button>
+
+                        <button
+                          type="button"
+                          className="trip-type-change"
+                          onClick={() =>
+                            handleTripTypeChange('round')
+                          }
+                        >
+                          Change to Round Trip
+                        </button>
+
                       </div>
-
-                    </button>
-
-
-                    <button
-                      type="button"
-                      className={
-                        tripType === 'oneway'
-                          ? 'trip-type active'
-                          : 'trip-type'
-                      }
-                      onClick={() =>
-                        handleTripTypeChange('oneway')
-                      }
-                    >
-
-                      <span>→</span>
-
-                      <div>
-                        <strong>One Way</strong>
-
-                        <small>
-                          Travel to your destination
-                        </small>
-                      </div>
-
-                    </button>
+                    )}
 
                   </div>
 
@@ -1006,26 +1284,16 @@ function Trips() {
 
                     <label>Departure</label>
 
-                    <div className="input-with-icon date-input-shell">
-
-                      <span className="date-icon">📅</span>
-
-                      <div className="date-display">
-                        {formatPlannerDate(departureDate)}
-                      </div>
-
-                      <input
-                        className="native-date-input"
-                        type="date"
-                        min={today}
-                        value={departureDate}
-                        onChange={handleDepartureChange}
-                        aria-label="Departure date"
-                      />
-
-                      <span className="date-arrow">⌄</span>
-
-                    </div>
+                    <LifeosDatePicker
+                      value={departureDate}
+                      min={today}
+                      onChange={(date) =>
+                        handleDepartureChange({
+                          target: { value: date },
+                        })
+                      }
+                      label="Departure date"
+                    />
 
                   </div>
 
@@ -1036,28 +1304,12 @@ function Trips() {
 
                       <label>Return</label>
 
-                      <div className="input-with-icon date-input-shell">
-
-                        <span className="date-icon">📅</span>
-
-                        <div className="date-display">
-                          {formatPlannerDate(returnDate)}
-                        </div>
-
-                        <input
-                          className="native-date-input"
-                          type="date"
-                          min={departureDate || today}
-                          value={returnDate}
-                          onChange={(e) =>
-                            setReturnDate(e.target.value)
-                          }
-                          aria-label="Return date"
-                        />
-
-                        <span className="date-arrow">⌄</span>
-
-                      </div>
+                      <LifeosDatePicker
+                        value={returnDate}
+                        min={departureDate || today}
+                        onChange={(date) => setReturnDate(date)}
+                        label="Return date"
+                      />
 
                     </div>
 
