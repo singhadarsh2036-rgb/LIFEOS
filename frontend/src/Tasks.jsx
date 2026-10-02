@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Tasks.css'
 import MobileGlobalNav from './MobileGlobalNav'
+import { apiFetch } from './api'
 
 function Tasks() {
   const navigate = useNavigate()
@@ -27,8 +28,8 @@ function Tasks() {
     try {
       const token = getToken()
 
-      const response = await fetch(
-        'http://127.0.0.1:8081/tasks',
+      const response = await apiFetch(
+        '/tasks',
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -68,8 +69,8 @@ function Tasks() {
     try {
       setSaving(true)
 
-      const response = await fetch(
-        'http://127.0.0.1:8081/tasks',
+      const response = await apiFetch(
+        '/tasks',
         {
           method: 'POST',
           headers: {
@@ -113,8 +114,8 @@ function Tasks() {
     )
 
     try {
-      const response = await fetch(
-        `http://127.0.0.1:8081/tasks/${task.id}`,
+      const response = await apiFetch(
+        `/tasks/${task.id}`,
         {
           method: 'PUT',
           headers: {
@@ -156,8 +157,8 @@ function Tasks() {
 
   const deleteTask = async (id) => {
     try {
-      const response = await fetch(
-        `http://127.0.0.1:8081/tasks/${id}`,
+      const response = await apiFetch(
+        `/tasks/${id}`,
         {
           method: 'DELETE',
           headers: {
