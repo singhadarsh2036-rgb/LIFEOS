@@ -6,6 +6,7 @@ import com.lifeos.backend.repository.ReminderRepository;
 import com.lifeos.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -76,6 +77,15 @@ public class ReminderService {
                     "Reminder time is required");
         }
 
+        // Never create a reminder for a date/time
+        // that has already passed.
+        if (reminder.getReminderTime()
+                .isBefore(LocalDateTime.now())) {
+
+            throw new IllegalArgumentException(
+                    "Cannot create a reminder for a past date/time");
+        }
+
         User user = findUser(loginIdentifier);
 
         reminder.setUser(user);
@@ -122,6 +132,14 @@ public class ReminderService {
 
             throw new IllegalArgumentException(
                     "Reminder time is required");
+        }
+
+        // Do not allow updating a reminder to a past date/time.
+        if (reminder.getReminderTime()
+                .isBefore(LocalDateTime.now())) {
+
+            throw new IllegalArgumentException(
+                    "Cannot set a reminder for a past date/time");
         }
 
         existingReminder.setTitle(

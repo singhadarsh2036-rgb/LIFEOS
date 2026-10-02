@@ -28,6 +28,17 @@ function Reminders() {
   const [notificationLoading, setNotificationLoading] =
     useState(false)
 
+  // =====================================================
+  // EDIT / UPDATE REMINDER STATE
+  // =====================================================
+
+  const [editingReminder, setEditingReminder] = useState(null)
+  const [editTitle, setEditTitle] = useState('')
+  const [editDate, setEditDate] = useState('')
+  const [editTime, setEditTime] = useState('')
+  const [editTimePeriod, setEditTimePeriod] = useState('AM')
+  const [updating, setUpdating] = useState(false)
+
   const notifiedReminders = useRef(new Set())
 
   // =====================================================
@@ -593,6 +604,336 @@ function Reminders() {
     }
 
   // =====================================================
+  // COMPLETE / UNCOMPLETE REMINDER
+  // =====================================================
+
+  const toggleComplete = async (reminder) => {
+    try {
+      const response = await apiFetch(
+        `/reminders/${reminder.id}`,
+        {
+          method: 'PUT',
+          body: JSON.stringify({
+            title: reminder.title,
+            reminderTime: reminder.reminderTime,
+            completed: !reminder.completed,
+            notificationSent: reminder.notificationSent,
+          }),
+        }
+      )
+
+      if (!response.ok) {
+        const errorText = await response.text()
+        throw new Error(
+          errorText || 'Could not update reminder'
+        )
+      }
+
+      const updated = await response.json()
+
+      setReminders((current) =>
+        current.map((item) =>
+          item.id === reminder.id ? updated : item
+        )
+      )
+
+      showMessage(
+        updated.completed
+          ? 'Reminder completed ✓'
+          : 'Reminder marked as upcoming'
+      )
+    } catch (error) {
+      console.error(
+        '❌ TOGGLE REMINDER ERROR:',
+        error
+      )
+
+      showMessage('Could not update reminder')
+    }
+  }
+
+
+  // =====================================================
+  // OPEN EDIT MODAL
+  // =====================================================
+
+  const openEditReminder = (reminder) => {
+    const dateObject = new Date(reminder.reminderTime)
+
+    if (Number.isNaN(dateObject.getTime())) {
+      showMessage('Invalid reminder date')
+      return
+    }
+
+    const year = dateObject.getFullYear()
+    const month = String(
+      dateObject.getMonth() + 1
+    ).padStart(2, '0')
+    const day = String(
+      dateObject.getDate()
+    ).padStart(2, '0')
+
+    let hour = dateObject.getHours()
+
+    const minute = String(
+      dateObject.getMinutes()
+    ).padStart(2, '0')
+
+    const period =
+      hour >= 12
+        ? 'PM'
+        : 'AM'
+
+    hour = hour % 12
+
+    if (hour === 0) {
+      hour = 12
+    }
+
+    setEditTitle(reminder.title || '')
+    setEditDate(
+      `${year}-${month}-${day}`
+    )
+    setEditTime(
+      `${String(hour).padStart(2, '0')}:${minute}`
+    )
+    setEditTimePeriod(period)
+    setEditingReminder(reminder)
+  }
+
+
+  // =====================================================
+  // UPDATE REMINDER
+  // =====================================================
+
+  const updateReminder = async (event) => {
+    event.preventDefault()
+
+    if (!editingReminder || updating) {
+      return
+    }
+
+    if (!editTitle.trim()) {
+      showMessage('Enter a reminder title')
+      return
+    }
+
+    if (!editDate || !editTime) {
+      showMessage('Select date and time')
+      return
+    }
+
+    const timeParts = editTime.split(':')
+
+    if (
+      timeParts.length !== 2 ||
+      parseInt(timeParts[0], 10) < 1 ||
+      parseInt(timeParts[0], 10) > 12 ||
+      parseInt(timeParts[1], 10) < 0 ||
+      parseInt(timeParts[1], 10) > 59
+    ) {
+      showMessage('Enter a valid time')
+      return
+    }
+
+    try {
+      setUpdating(true)
+
+      let hour = parseInt(
+        timeParts[0],
+        10
+      )
+
+      if (editTimePeriod === 'AM') {
+        if (hour === 12) {
+          hour = 0
+        }
+      } else {
+        if (hour !== 12) {
+          hour += 12
+        }
+      }
+
+      const formattedHour =
+        String(hour).padStart(2, '0')
+
+      const reminderTime =
+        `${editDate}T${formattedHour}:${timeParts[1]}:00`
+
+      const selectedDateTime =
+        new Date(reminderTime)
+
+      if (
+        Number.isNaN(
+          selectedDateTime.getTime()
+        ) ||
+        selectedDateTime <= new Date()
+      ) {
+        showMessage(
+          'Please select a future date and time'
+        )
+        return
+      }
+
+      const response =
+        await apiFetch(
+          `/reminders/${editingReminder.id}`,
+          {
+            method: 'PUT',
+            body: JSON.stringify({
+              title: editTitle.trim(),
+              reminderTime,
+              completed: false,
+              notificationSent: false,
+            }),
+          }
+        )
+
+      if (!response.ok) {
+        const errorText =
+          await response.text()
+
+        throw new Error(
+          errorText ||
+          'Could not update reminder'
+        )
+      }
+
+      const updated =
+        await response.json()
+
+      setReminders((current) =>
+        current.map((item) =>
+          item.id === editingReminder.id
+            ? updated
+            : item
+        )
+      )
+
+      setEditingReminder(null)
+      setEditTitle('')
+      setEditDate('')
+      setEditTime('')
+      setEditTimePeriod('AM')
+
+      showMessage('Reminder updated ✓')
+    } catch (error) {
+      console.error(
+        '❌ UPDATE REMINDER ERROR:',
+        error
+      )
+
+      showMessage(
+        error?.message?.trim()
+          ? `Couldn't update reminder: ${error.message}`
+          : 'Could not update reminder'
+      )
+    } finally {
+      setUpdating(false)
+    }
+  }
+
+
+  // =====================================================
+  // SNOOZE REMINDER
+  // =====================================================
+
+  const snoozeReminder = async (
+    reminder,
+    minutes
+  ) => {
+    try {
+      const currentTime =
+        new Date(reminder.reminderTime)
+
+      if (
+        Number.isNaN(
+          currentTime.getTime()
+        )
+      ) {
+        showMessage('Invalid reminder time')
+        return
+      }
+
+      const newTime =
+        new Date(
+          Math.max(
+            currentTime.getTime(),
+            Date.now()
+          ) +
+          minutes * 60 * 1000
+        )
+
+      const pad = (value) =>
+        String(value).padStart(2, '0')
+
+      const reminderTime =
+        `${newTime.getFullYear()}-${pad(
+          newTime.getMonth() + 1
+        )}-${pad(
+          newTime.getDate()
+        )}T${pad(
+          newTime.getHours()
+        )}:${pad(
+          newTime.getMinutes()
+        )}:00`
+
+      const response =
+        await apiFetch(
+          `/reminders/${reminder.id}`,
+          {
+            method: 'PUT',
+            body: JSON.stringify({
+              title: reminder.title,
+              reminderTime,
+              completed: false,
+              notificationSent: false,
+            }),
+          }
+        )
+
+      if (!response.ok) {
+        const errorText =
+          await response.text()
+
+        throw new Error(
+          errorText ||
+          'Could not snooze reminder'
+        )
+      }
+
+      const updated =
+        await response.json()
+
+      setReminders((current) =>
+        current.map((item) =>
+          item.id === reminder.id
+            ? updated
+            : item
+        )
+      )
+
+      showMessage(
+        minutes === 1440
+          ? 'Reminder snoozed until tomorrow ⏰'
+          : `Reminder snoozed for ${minutes} minutes ⏰`
+      )
+    } catch (error) {
+      console.error(
+        '❌ SNOOZE ERROR:',
+        error
+      )
+
+      showMessage(
+        error?.message?.trim()
+          ? `Couldn't snooze reminder: ${error.message}`
+          : 'Could not snooze reminder'
+      )
+    }
+  }
+
+
+  // =====================================================
   // FORMAT DATE
   // =====================================================
 
@@ -836,17 +1177,80 @@ function Reminders() {
                       : 'UPCOMING'}
                   </span>
 
-                  <button
-                    className="reminder-delete"
-                    onClick={() =>
-                      deleteReminder(
-                        reminder.id
-                      )
-                    }
-                    aria-label={`Delete ${reminder.title}`}
-                  >
-                    ×
-                  </button>
+                  <div className="reminder-actions">
+
+                    <button
+                      type="button"
+                      className={`reminder-complete ${
+                        reminder.completed
+                          ? 'completed'
+                          : ''
+                      }`}
+                      onClick={() =>
+                        toggleComplete(reminder)
+                      }
+                      title={
+                        reminder.completed
+                          ? 'Mark as upcoming'
+                          : 'Mark as completed'
+                      }
+                      aria-label={
+                        reminder.completed
+                          ? 'Mark as upcoming'
+                          : 'Mark as completed'
+                      }
+                    >
+                      {reminder.completed
+                        ? '✓'
+                        : '○'}
+                    </button>
+
+                    {!reminder.completed && (
+                      <button
+                        type="button"
+                        className="reminder-snooze"
+                        onClick={() =>
+                          snoozeReminder(
+                            reminder,
+                            10
+                          )
+                        }
+                        title="Snooze for 10 minutes"
+                        aria-label="Snooze for 10 minutes"
+                      >
+                        ⏰
+                      </button>
+                    )}
+
+                    <button
+                      type="button"
+                      className="reminder-edit"
+                      onClick={() =>
+                        openEditReminder(
+                          reminder
+                        )
+                      }
+                      title="Edit reminder"
+                      aria-label={`Edit ${reminder.title}`}
+                    >
+                      ✎
+                    </button>
+
+                    <button
+                      type="button"
+                      className="reminder-delete"
+                      onClick={() =>
+                        deleteReminder(
+                          reminder.id
+                        )
+                      }
+                      title="Delete reminder"
+                      aria-label={`Delete ${reminder.title}`}
+                    >
+                      ×
+                    </button>
+
+                  </div>
 
                 </div>
 
@@ -1055,6 +1459,207 @@ function Reminders() {
                   {saving
                     ? 'Saving...'
                     : 'Set reminder'}
+                </button>
+
+              </div>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      )}
+
+
+      {/* EDIT REMINDER MODAL */}
+
+      {editingReminder && (
+
+        <div
+          className="reminder-modal-overlay"
+          onClick={() =>
+            setEditingReminder(null)
+          }
+        >
+
+          <div
+            className="reminder-modal"
+            onClick={(event) =>
+              event.stopPropagation()
+            }
+          >
+
+            <div className="reminder-modal-header">
+
+              <div>
+
+                <span className="reminders-label">
+                  EDIT REMINDER
+                </span>
+
+                <h2>
+                  Update your reminder
+                </h2>
+
+              </div>
+
+              <button
+                type="button"
+                className="reminder-close"
+                onClick={() =>
+                  setEditingReminder(null)
+                }
+              >
+                ×
+              </button>
+
+            </div>
+
+            <form
+              onSubmit={updateReminder}
+            >
+
+              <label>
+                Reminder
+              </label>
+
+              <input
+                className="reminder-input"
+                type="text"
+                value={editTitle}
+                onChange={(event) =>
+                  setEditTitle(
+                    event.target.value
+                  )
+                }
+                maxLength={100}
+                autoFocus
+              />
+
+              <div className="reminder-fields">
+
+                <div>
+
+                  <label>
+                    Date
+                  </label>
+
+                  <input
+                    className="reminder-input"
+                    type="date"
+                    value={editDate}
+                    min={
+                      new Date()
+                        .toISOString()
+                        .split('T')[0]
+                    }
+                    onChange={(event) =>
+                      setEditDate(
+                        event.target.value
+                      )
+                    }
+                  />
+
+                </div>
+
+                <div>
+
+                  <label>
+                    Time
+                  </label>
+
+                  <div className="time-picker">
+
+                    <input
+                      className="reminder-input"
+                      type="text"
+                      placeholder="09:30"
+                      value={editTime}
+                      onChange={(event) => {
+
+                        let value =
+                          event.target.value
+                            .replace(
+                              /\D/g,
+                              ''
+                            )
+
+                        if (
+                          value.length >
+                          4
+                        ) {
+                          value =
+                            value.slice(
+                              0,
+                              4
+                            )
+                        }
+
+                        if (
+                          value.length >
+                          2
+                        ) {
+                          value =
+                            value.slice(
+                              0,
+                              2
+                            ) +
+                            ':' +
+                            value.slice(2)
+                        }
+
+                        setEditTime(value)
+                      }}
+                      maxLength={5}
+                    />
+
+                    <select
+                      className="reminder-input time-period"
+                      value={editTimePeriod}
+                      onChange={(event) =>
+                        setEditTimePeriod(
+                          event.target.value
+                        )
+                      }
+                    >
+
+                      <option value="AM">
+                        AM
+                      </option>
+
+                      <option value="PM">
+                        PM
+                      </option>
+
+                    </select>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div className="reminder-modal-actions">
+
+                <button
+                  type="button"
+                  className="reminder-cancel"
+                  onClick={() =>
+                    setEditingReminder(null)
+                  }
+                >
+                  Cancel
+                </button>
+
+                <button
+                  type="submit"
+                  className="reminder-save"
+                  disabled={updating}
+                >
+                  {updating
+                    ? 'Updating...'
+                    : 'Save changes'}
                 </button>
 
               </div>
