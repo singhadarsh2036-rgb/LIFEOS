@@ -7292,9 +7292,10 @@ html[data-lifeos-theme="light"] .lifeos-add-button {
   background: rgba(139,92,246,.13);
 }
 
-.lifeos-intel-icon.amber {
-  color: #fbbf24;
-  background: rgba(245,158,11,.11);
+.lifeos-intel-icon.gold {
+  color: #d8b36a !important;
+  background: rgba(190,142,62,.14) !important;
+  border: 1px solid rgba(216,179,106,.14);
 }
 
 .lifeos-intel-icon.red {
@@ -7303,8 +7304,8 @@ html[data-lifeos-theme="light"] .lifeos-add-button {
 }
 
 .lifeos-intel-icon.blue {
-  color: #d2aa6b;
-  background: rgba(190,142,62,.12);
+  color: #d8b36a !important;
+  background: rgba(190,142,62,.14) !important;
 }
 
 .lifeos-intel-stat div {
