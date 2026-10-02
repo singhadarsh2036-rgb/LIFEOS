@@ -6951,3 +6951,163 @@ html[data-lifeos-theme="light"] main.dashboard-main.lifeos-premium-dashboard {
 
   color: #2d2b27 !important;
 }
+/* =========================================================
+   LIFEOS — WARM IVORY / STONE / ANTIQUE GOLD
+   FINAL LIGHT PALETTE
+========================================================= */
+
+html[data-lifeos-theme="light"] .dashboard-page,
+html[data-lifeos-theme="light"] main.dashboard-main.lifeos-premium-dashboard {
+  background:
+    radial-gradient(
+      circle at 82% 0%,
+      rgba(176, 138, 74, 0.08),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 12% 88%,
+      rgba(113, 128, 106, 0.055),
+      transparent 27%
+    ),
+    linear-gradient(
+      145deg,
+      #f4f0e7 0%,
+      #eee8dc 52%,
+      #e8e1d5 100%
+    ) !important;
+
+  color: #292722 !important;
+}
+
+/* TOP BAR */
+html[data-lifeos-theme="light"] .dashboard-page .topbar,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-topbar {
+  background: rgba(248, 245, 238, 0.88) !important;
+  border-color: rgba(110, 95, 72, 0.10) !important;
+  box-shadow: 0 10px 30px rgba(70, 58, 40, 0.055) !important;
+}
+
+/* SIDEBAR */
+html[data-lifeos-theme="light"] .dashboard-page .sidebar,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .sidebar {
+  background: rgba(241, 236, 226, 0.94) !important;
+  border-color: rgba(110, 95, 72, 0.13) !important;
+}
+
+/* GOLD BRAND */
+html[data-lifeos-theme="light"] .dashboard-page .brand-mark,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .brand-mark {
+  background: linear-gradient(
+    135deg,
+    #c1a064,
+    #a98245
+  ) !important;
+
+  box-shadow: 0 8px 25px rgba(145, 111, 54, 0.20) !important;
+}
+
+/* ACTIVE NAV */
+html[data-lifeos-theme="light"] .dashboard-page .nav-item.active,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .nav-item.active {
+  background: rgba(176, 138, 74, 0.105) !important;
+  color: #8e6d38 !important;
+  border-color: rgba(176, 138, 74, 0.18) !important;
+}
+
+/* NAV HOVER */
+html[data-lifeos-theme="light"] .dashboard-page .nav-item:hover,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .nav-item:hover {
+  background: rgba(176, 138, 74, 0.065) !important;
+  color: #5e523f !important;
+}
+
+/* SEARCH */
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-search-shell,
+html[data-lifeos-theme="light"] .dashboard-page .search-box {
+  background: rgba(251, 248, 241, 0.90) !important;
+  border-color: rgba(110, 95, 72, 0.13) !important;
+  box-shadow: 0 8px 25px rgba(70, 58, 40, 0.045) !important;
+}
+
+/* CARDS */
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-focus-card,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-deadline-card,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .glass-card,
+html[data-lifeos-theme="light"] .dashboard-page .metric-card,
+html[data-lifeos-theme="light"] .dashboard-page .hero-panel {
+  background: rgba(251, 248, 241, 0.86) !important;
+  border-color: rgba(110, 95, 72, 0.12) !important;
+  color: #292722 !important;
+  box-shadow: 0 18px 50px rgba(70, 58, 40, 0.065) !important;
+}
+
+/* HEADINGS */
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard h1,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard h2,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard h3,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard strong,
+html[data-lifeos-theme="light"] .dashboard-page h1,
+html[data-lifeos-theme="light"] .dashboard-page h2,
+html[data-lifeos-theme="light"] .dashboard-page h3,
+html[data-lifeos-theme="light"] .dashboard-page strong {
+  color: #292722 !important;
+}
+
+/* MUTED TEXT */
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard p,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard small,
+html[data-lifeos-theme="light"] .dashboard-page p,
+html[data-lifeos-theme="light"] .dashboard-page small,
+html[data-lifeos-theme="light"] .dashboard-page .section-label {
+  color: #756d60 !important;
+}
+
+/* REMOVE LAVENDER ACCENTS */
+html[data-lifeos-theme="light"] .dashboard-page a,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard a {
+  color: #9a773d !important;
+}
+
+/* GOLD PRIMARY BUTTONS */
+html[data-lifeos-theme="light"] .dashboard-page button.primary,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-add-button,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-primary-button {
+  background: linear-gradient(
+    135deg,
+    #c1a064,
+    #a98245
+  ) !important;
+
+  color: #fffaf1 !important;
+  border-color: rgba(145, 111, 54, 0.30) !important;
+  box-shadow: 0 9px 24px rgba(145, 111, 54, 0.17) !important;
+}
+
+/* DAY CHIPS */
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-day-chip {
+  background: rgba(251, 248, 241, 0.78) !important;
+  border-color: rgba(110, 95, 72, 0.11) !important;
+  color: #665d50 !important;
+}
+
+/* BOTTOM NAV */
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-bottom-nav {
+  background: rgba(250, 247, 240, 0.94) !important;
+  border-color: rgba(110, 95, 72, 0.12) !important;
+  box-shadow: 0 18px 50px rgba(70, 58, 40, 0.11) !important;
+}
+
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-bottom-nav button.active {
+  color: #a27b3d !important;
+}
+
+/* FOCUS ICON / SAGE */
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-focus-card svg {
+  color: #71806a !important;
+}
+
+/* REMOVE PURPLE FROM COUNTERS / BADGES */
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard [class*="badge"],
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard [class*="count"] {
+  color: #8e6d38 !important;
+}
