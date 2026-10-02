@@ -7111,3 +7111,64 @@ html[data-lifeos-theme="light"] .lifeos-premium-dashboard [class*="badge"],
 html[data-lifeos-theme="light"] .lifeos-premium-dashboard [class*="count"] {
   color: #8e6d38 !important;
 }
+/* =========================================================
+   LIFEOS LIGHT — PREMIUM WARM STONE
+========================================================= */
+
+html[data-lifeos-theme="light"] .dashboard-page {
+  background: #EEEDE8 !important;
+}
+
+html[data-lifeos-theme="light"] main.dashboard-main.lifeos-premium-dashboard {
+  background:
+    radial-gradient(
+      circle at 85% 8%,
+      rgba(181, 164, 132, 0.10),
+      transparent 32%
+    ),
+    linear-gradient(
+      135deg,
+      #F1F0EB 0%,
+      #EBE9E3 48%,
+      #E5E3DC 100%
+    ) !important;
+
+  color: #252521 !important;
+}
+
+/* Top bar */
+html[data-lifeos-theme="light"] .lifeos-topbar {
+  background: rgba(248, 247, 243, 0.92) !important;
+}
+
+/* Main cards */
+html[data-lifeos-theme="light"] .lifeos-focus-card,
+html[data-lifeos-theme="light"] .lifeos-deadline-card {
+  background: rgba(250, 249, 246, 0.88) !important;
+  border-color: rgba(72, 68, 58, 0.10) !important;
+  box-shadow: 0 20px 55px rgba(45, 42, 35, 0.07) !important;
+}
+
+/* Day cards */
+html[data-lifeos-theme="light"] .lifeos-day-chip {
+  background: rgba(250, 249, 246, 0.82) !important;
+  border-color: rgba(72, 68, 58, 0.08) !important;
+}
+
+/* Bottom navigation */
+html[data-lifeos-theme="light"] .lifeos-bottom-nav {
+  background: rgba(249, 248, 244, 0.94) !important;
+  border-color: rgba(72, 68, 58, 0.10) !important;
+}
+
+/* Main text */
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard {
+  --lo-text: #252521 !important;
+  --lo-muted: #74716A !important;
+}
+
+/* Main accent — muted bronze */
+html[data-lifeos-theme="light"] .lifeos-add-button {
+  background: #A88750 !important;
+  color: #fff !important;
+}
