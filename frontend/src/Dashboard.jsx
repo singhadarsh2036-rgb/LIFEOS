@@ -1575,10 +1575,10 @@ function Dashboard() {
             </div>
 
             <div className="lifeos-intel-stat">
-              <span className="lifeos-intel-icon gold lifeos-this-week-icon" style={{ color: "#d8b36a", background: "rgba(190,142,62,.14)", border: "1px solid rgba(216,179,106,.22)" }}>↗</span>
+              <span className="lifeos-this-week-gold">↗</span>
               <div>
                 <strong>{weekReminders.length}</strong>
-                <small>This week</small>
+                <small className="lifeos-this-week-label">This week</small>
               </div>
             </div>
           </div>
