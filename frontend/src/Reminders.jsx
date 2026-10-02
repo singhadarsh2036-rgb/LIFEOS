@@ -630,8 +630,12 @@ function Reminders() {
         <button
           type="button"
           className="reminders-back-button"
-          onClick={() => navigate(-1)}
-          aria-label="Go back"
+          onClick={(event) => {
+            event.preventDefault()
+            event.stopPropagation()
+            navigate('/dashboard', { replace: false })
+          }}
+          aria-label="Go back to dashboard"
         >
           ←
         </button>
