@@ -1575,7 +1575,7 @@ function Dashboard() {
             </div>
 
             <div className="lifeos-intel-stat">
-              <span className="lifeos-intel-icon blue">↗</span>
+              <span className="lifeos-intel-icon amber">↗</span>
               <div>
                 <strong>{weekReminders.length}</strong>
                 <small>This week</small>
