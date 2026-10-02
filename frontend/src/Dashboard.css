@@ -7936,3 +7936,133 @@ html[data-lifeos-theme="light"] .lifeos-add-button {
     padding: 7px 8px !important;
   }
 }
+/* =========================================================
+   MOBILE SEARCH DROPDOWN FIX
+   ========================================================= */
+
+@media (max-width: 720px) {
+
+  .lifeos-search-shell {
+    position: absolute !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    z-index: 1000 !important;
+  }
+
+  .lifeos-global-search-dropdown {
+    position: absolute !important;
+
+    top: calc(100% + 8px) !important;
+    left: 0 !important;
+    right: 0 !important;
+
+    width: 100% !important;
+    max-width: none !important;
+    min-width: 0 !important;
+
+    box-sizing: border-box !important;
+
+    padding: 14px !important;
+
+    border-radius: 18px !important;
+
+    overflow: hidden !important;
+
+    z-index: 9999 !important;
+  }
+
+  .lifeos-search-heading {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+
+    width: 100% !important;
+    box-sizing: border-box !important;
+
+    margin-bottom: 10px !important;
+  }
+
+  .lifeos-search-heading span {
+    font-size: 12px !important;
+    white-space: nowrap !important;
+  }
+
+  .lifeos-search-empty.compact {
+    width: 100% !important;
+    box-sizing: border-box !important;
+
+    display: grid !important;
+    grid-template-columns: 32px minmax(0, 1fr) !important;
+
+    column-gap: 10px !important;
+    row-gap: 3px !important;
+
+    align-items: center !important;
+
+    padding: 14px !important;
+  }
+
+  .lifeos-search-empty.compact > span {
+    grid-row: 1 / span 2 !important;
+    align-self: center !important;
+  }
+
+  .lifeos-search-empty.compact strong {
+    min-width: 0 !important;
+
+    font-size: 15px !important;
+    line-height: 1.2 !important;
+
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+
+  .lifeos-search-empty.compact small {
+    min-width: 0 !important;
+
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+
+    white-space: normal !important;
+  }
+
+  .lifeos-search-recent-item,
+  .lifeos-search-result-item {
+    width: 100% !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+
+  .lifeos-search-result-copy {
+    min-width: 0 !important;
+  }
+
+  .lifeos-search-result-copy strong,
+  .lifeos-search-result-copy small {
+    white-space: normal !important;
+    overflow-wrap: anywhere !important;
+  }
+}
+
+/* Small phones */
+@media (max-width: 390px) {
+
+  .lifeos-global-search-dropdown {
+    padding: 11px !important;
+    border-radius: 16px !important;
+  }
+
+  .lifeos-search-empty.compact {
+    padding: 12px !important;
+  }
+
+  .lifeos-search-empty.compact strong {
+    font-size: 14px !important;
+  }
+
+  .lifeos-search-empty.compact small {
+    font-size: 10px !important;
+  }
+}
