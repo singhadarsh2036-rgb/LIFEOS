@@ -1559,7 +1559,7 @@ function Dashboard() {
             </div>
 
             <div className="lifeos-intel-stat">
-              <span className="lifeos-intel-icon amber">◷</span>
+              <span className="lifeos-intel-icon gold">◷</span>
               <div>
                 <strong>{todayReminders.length}</strong>
                 <small>Due today</small>
@@ -1575,7 +1575,7 @@ function Dashboard() {
             </div>
 
             <div className="lifeos-intel-stat">
-              <span className="lifeos-intel-icon amber">↗</span>
+              <span className="lifeos-intel-icon gold lifeos-this-week-icon" style={{ color: "#d8b36a", background: "rgba(190,142,62,.14)", border: "1px solid rgba(216,179,106,.22)" }}>↗</span>
               <div>
                 <strong>{weekReminders.length}</strong>
                 <small>This week</small>

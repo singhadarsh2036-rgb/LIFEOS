@@ -7579,3 +7579,12 @@ html[data-lifeos-theme="light"] .lifeos-add-button {
     font-size: 17px;
   }
 }
+
+
+/* FINAL: This Week icon — unmistakable LIFEOS gold */
+.lifeos-premium-dashboard .lifeos-intelligence-grid .lifeos-this-week-icon {
+  color: #d8b36a !important;
+  background: rgba(190, 142, 62, 0.14) !important;
+  border-color: rgba(216, 179, 106, 0.30) !important;
+  box-shadow: 0 0 18px rgba(190, 142, 62, 0.10) !important;
+}
