@@ -2471,3 +2471,402 @@ body {
     0 8px 26px rgba(112, 106, 255, 0.18)
   ) !important;
 }
+
+/* =========================================================
+   LIFEOS — SMART DEADLINE THEME OVERRIDE
+   Premium Gold + Sage / Warm Champagne
+   ========================================================= */
+
+/* =========================
+   DARK MODE
+   ========================= */
+
+html[data-lifeos-theme="dark"] .smart-deadline-overlay {
+  background: rgba(5, 7, 7, 0.78) !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-modal {
+  background:
+    radial-gradient(
+      circle at 88% 0%,
+      rgba(201, 161, 90, 0.12),
+      transparent 34%
+    ),
+    radial-gradient(
+      circle at 8% 100%,
+      rgba(156, 175, 136, 0.07),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      #17191d 0%,
+      #101214 55%,
+      #0d0f10 100%
+    ) !important;
+
+  border-color: rgba(201, 161, 90, 0.28) !important;
+  color: #f4f1e9 !important;
+
+  box-shadow:
+    0 35px 100px rgba(0, 0, 0, 0.65),
+    0 0 70px rgba(201, 161, 90, 0.07) !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-modal::-webkit-scrollbar-thumb {
+  background: rgba(201, 161, 90, 0.38) !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-header h2 {
+  color: #f4f1e9 !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-header p {
+  color: #aaa99f !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-eyebrow {
+  color: #c9a15a !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-close {
+  background: rgba(255, 255, 255, 0.045) !important;
+  border-color: rgba(201, 161, 90, 0.22) !important;
+  color: #d9d5ca !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-close:hover {
+  background: rgba(201, 161, 90, 0.12) !important;
+  border-color: rgba(201, 161, 90, 0.48) !important;
+  color: #f4f1e9 !important;
+}
+
+/* Drop zone */
+
+html[data-lifeos-theme="dark"] .smart-deadline-dropzone {
+  background: rgba(255, 255, 255, 0.025) !important;
+  border-color: rgba(201, 161, 90, 0.30) !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-dropzone:hover,
+html[data-lifeos-theme="dark"] .smart-deadline-dropzone.dragging {
+  background: rgba(201, 161, 90, 0.065) !important;
+  border-color: #c9a15a !important;
+  box-shadow: 0 0 35px rgba(201, 161, 90, 0.08) !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-upload-icon {
+  background: rgba(201, 161, 90, 0.09) !important;
+  border-color: rgba(201, 161, 90, 0.30) !important;
+  color: #c9a15a !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-dropzone h3 {
+  color: #f4f1e9 !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-dropzone p {
+  color: #96968d !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-upload-button {
+  background: linear-gradient(135deg, #c9a15a, #a98243) !important;
+  color: #11120f !important;
+  box-shadow: 0 9px 25px rgba(201, 161, 90, 0.18) !important;
+}
+
+/* Text input */
+
+html[data-lifeos-theme="dark"] .smart-deadline-text-section label {
+  color: #d9d5ca !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-text-section textarea {
+  background: rgba(255, 255, 255, 0.035) !important;
+  border-color: rgba(201, 161, 90, 0.18) !important;
+  color: #f4f1e9 !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-text-section textarea:focus {
+  border-color: rgba(201, 161, 90, 0.58) !important;
+  box-shadow: 0 0 0 3px rgba(201, 161, 90, 0.08) !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-text-section textarea::placeholder {
+  color: #77776f !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-divider {
+  color: #77776f !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-divider::before,
+html[data-lifeos-theme="dark"] .smart-deadline-divider::after {
+  background: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* Buttons */
+
+html[data-lifeos-theme="dark"] .smart-deadline-primary-button,
+html[data-lifeos-theme="dark"] .smart-deadline-scan {
+  background: linear-gradient(135deg, #c9a15a, #a98243) !important;
+  border-color: rgba(201, 161, 90, 0.45) !important;
+  color: #11120f !important;
+  box-shadow: 0 10px 28px rgba(201, 161, 90, 0.18) !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-primary-button:hover:not(:disabled),
+html[data-lifeos-theme="dark"] .smart-deadline-scan:hover:not(:disabled) {
+  box-shadow: 0 14px 34px rgba(201, 161, 90, 0.27) !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-secondary-button,
+html[data-lifeos-theme="dark"] .smart-deadline-cancel {
+  background: rgba(255, 255, 255, 0.035) !important;
+  border-color: rgba(201, 161, 90, 0.20) !important;
+  color: #d9d5ca !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-secondary-button:hover:not(:disabled),
+html[data-lifeos-theme="dark"] .smart-deadline-cancel:hover {
+  background: rgba(201, 161, 90, 0.09) !important;
+  color: #f4f1e9 !important;
+}
+
+/* Results */
+
+html[data-lifeos-theme="dark"] .smart-deadline-result-card {
+  background: rgba(255, 255, 255, 0.025) !important;
+  border-color: rgba(201, 161, 90, 0.14) !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-result-card:hover,
+html[data-lifeos-theme="dark"] .smart-deadline-result-card.selected {
+  background: rgba(201, 161, 90, 0.045) !important;
+  border-color: rgba(201, 161, 90, 0.38) !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-result-card h4 {
+  color: #f4f1e9 !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-result-date {
+  color: #a7a69d !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-confidence {
+  background: rgba(156, 175, 136, 0.12) !important;
+  color: #b8c8a7 !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-result-card.selected
+.smart-custom-checkbox {
+  background: #c9a15a !important;
+  border-color: #c9a15a !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-evidence {
+  color: #77776f !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+
+/* =========================
+   LIGHT MODE — WARM CHAMPAGNE
+   ========================= */
+
+html[data-lifeos-theme="light"] .smart-deadline-overlay {
+  background: rgba(55, 47, 36, 0.28) !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-modal {
+  background:
+    radial-gradient(
+      circle at 88% 0%,
+      rgba(201, 161, 90, 0.12),
+      transparent 34%
+    ),
+    linear-gradient(
+      145deg,
+      #fffaf0 0%,
+      #f7f0e3 58%,
+      #f1eadc 100%
+    ) !important;
+
+  border-color: rgba(171, 132, 69, 0.24) !important;
+  color: #292823 !important;
+
+  box-shadow:
+    0 30px 90px rgba(76, 61, 40, 0.18),
+    0 0 55px rgba(201, 161, 90, 0.08) !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-modal::-webkit-scrollbar-thumb {
+  background: rgba(171, 132, 69, 0.32) !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-header h2 {
+  color: #292823 !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-header p {
+  color: #756f64 !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-eyebrow {
+  color: #a47d3c !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-close {
+  background: rgba(41, 40, 35, 0.045) !important;
+  border-color: rgba(171, 132, 69, 0.20) !important;
+  color: #625d53 !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-close:hover {
+  background: rgba(201, 161, 90, 0.10) !important;
+  border-color: rgba(171, 132, 69, 0.40) !important;
+  color: #292823 !important;
+}
+
+/* Drop zone */
+
+html[data-lifeos-theme="light"] .smart-deadline-dropzone {
+  background: rgba(255, 255, 255, 0.48) !important;
+  border-color: rgba(171, 132, 69, 0.30) !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-dropzone:hover,
+html[data-lifeos-theme="light"] .smart-deadline-dropzone.dragging {
+  background: rgba(201, 161, 90, 0.075) !important;
+  border-color: #b58b4a !important;
+  box-shadow: 0 0 35px rgba(201, 161, 90, 0.10) !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-upload-icon {
+  background: rgba(201, 161, 90, 0.10) !important;
+  border-color: rgba(171, 132, 69, 0.28) !important;
+  color: #a47d3c !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-dropzone h3 {
+  color: #302e28 !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-dropzone p {
+  color: #827b70 !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-upload-button {
+  background: linear-gradient(135deg, #c9a15a, #aa8145) !important;
+  color: #fffaf0 !important;
+}
+
+/* Text */
+
+html[data-lifeos-theme="light"] .smart-deadline-text-section label {
+  color: #575249 !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-text-section textarea {
+  background: rgba(255, 255, 255, 0.62) !important;
+  border-color: rgba(171, 132, 69, 0.20) !important;
+  color: #302e28 !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-text-section textarea:focus {
+  border-color: rgba(171, 132, 69, 0.55) !important;
+  box-shadow: 0 0 0 3px rgba(201, 161, 90, 0.10) !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-text-section textarea::placeholder {
+  color: #a09a90 !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-divider {
+  color: #968f83 !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-divider::before,
+html[data-lifeos-theme="light"] .smart-deadline-divider::after {
+  background: rgba(72, 66, 56, 0.10) !important;
+}
+
+/* Buttons */
+
+html[data-lifeos-theme="light"] .smart-deadline-primary-button,
+html[data-lifeos-theme="light"] .smart-deadline-scan {
+  background: linear-gradient(135deg, #c9a15a, #aa8145) !important;
+  border-color: rgba(171, 132, 69, 0.40) !important;
+  color: #fffaf0 !important;
+  box-shadow: 0 10px 25px rgba(171, 132, 69, 0.18) !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-primary-button:hover:not(:disabled),
+html[data-lifeos-theme="light"] .smart-deadline-scan:hover:not(:disabled) {
+  box-shadow: 0 14px 32px rgba(171, 132, 69, 0.25) !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-secondary-button,
+html[data-lifeos-theme="light"] .smart-deadline-cancel {
+  background: rgba(255, 255, 255, 0.48) !important;
+  border-color: rgba(171, 132, 69, 0.20) !important;
+  color: #625d53 !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-secondary-button:hover:not(:disabled),
+html[data-lifeos-theme="light"] .smart-deadline-cancel:hover {
+  background: rgba(201, 161, 90, 0.10) !important;
+  color: #302e28 !important;
+}
+
+/* Results */
+
+html[data-lifeos-theme="light"] .smart-deadline-result-card {
+  background: rgba(255, 255, 255, 0.46) !important;
+  border-color: rgba(171, 132, 69, 0.15) !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-result-card:hover,
+html[data-lifeos-theme="light"] .smart-deadline-result-card.selected {
+  background: rgba(201, 161, 90, 0.065) !important;
+  border-color: rgba(171, 132, 69, 0.38) !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-result-card h4 {
+  color: #302e28 !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-result-date {
+  color: #827b70 !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-confidence {
+  background: rgba(116, 139, 94, 0.12) !important;
+  color: #617650 !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-result-card.selected
+.smart-custom-checkbox {
+  background: #b58b4a !important;
+  border-color: #b58b4a !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-evidence {
+  color: #918a7f !important;
+  border-color: rgba(72, 66, 56, 0.08) !important;
+}
+
+
+/* Error stays readable in both themes */
+
+html[data-lifeos-theme="light"] .smart-deadline-error {
+  background: rgba(185, 80, 65, 0.07) !important;
+  border-color: rgba(185, 80, 65, 0.20) !important;
+  color: #9a4e42 !important;
+}
+
+html[data-lifeos-theme="dark"] .smart-deadline-error {
+  background: rgba(185, 80, 65, 0.08) !important;
+  border-color: rgba(185, 80, 65, 0.24) !important;
+  color: #e3a39a !important;
+}

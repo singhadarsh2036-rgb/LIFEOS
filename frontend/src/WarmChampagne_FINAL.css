@@ -1,0 +1,292 @@
+
+/* =========================================================
+   LIFEOS — FINAL WARM CHAMPAGNE LIGHT OVERRIDE
+   IMPORTANT: import this AFTER all page CSS.
+   Dark mode is untouched.
+   ========================================================= */
+
+html[data-lifeos-theme="light"] {
+  --lifeos-champagne: #c7a15a !important;
+  --lifeos-gold: #b58b48 !important;
+  --lifeos-ivory: #f6f0e4 !important;
+  --lifeos-surface: rgba(255,252,246,.82) !important;
+  --lifeos-surface-strong: #fffaf0 !important;
+  --lifeos-charcoal: #2d2b27 !important;
+  --lifeos-muted: #756f64 !important;
+  --lifeos-sage: #7c916b !important;
+  --lifeos-border: rgba(142,112,58,.18) !important;
+}
+
+/* BODY */
+html[data-lifeos-theme="light"] body {
+  background: #f6f0e4 !important;
+  color: #2d2b27 !important;
+}
+
+/* =========================
+   DASHBOARD
+   ========================= */
+html[data-lifeos-theme="light"] .dashboard-page,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard {
+  background:
+    radial-gradient(circle at 82% 0%, rgba(201,161,90,.13), transparent 30%),
+    radial-gradient(circle at 12% 88%, rgba(124,145,107,.08), transparent 27%),
+    linear-gradient(145deg,#f8f2e7 0%,#f3ecdf 54%,#eee6d7 100%) !important;
+  color: #2d2b27 !important;
+}
+html[data-lifeos-theme="light"] .dashboard-page .sidebar,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .sidebar {
+  background: rgba(246,240,228,.94) !important;
+  border-color: rgba(142,112,58,.16) !important;
+}
+html[data-lifeos-theme="light"] .dashboard-page .brand-mark,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .brand-mark {
+  background: linear-gradient(135deg,#c9a15a,#a98243) !important;
+}
+html[data-lifeos-theme="light"] .dashboard-page .nav-item.active,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .nav-item.active {
+  background: rgba(201,161,90,.12) !important;
+  color: #9b7436 !important;
+  border-color: rgba(201,161,90,.20) !important;
+}
+html[data-lifeos-theme="light"] .dashboard-page .card,
+html[data-lifeos-theme="light"] .dashboard-page .glass-card,
+html[data-lifeos-theme="light"] .dashboard-page [class*="card"],
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .glass-card {
+  background: rgba(255,252,246,.76) !important;
+  border-color: rgba(142,112,58,.15) !important;
+  color: #2d2b27 !important;
+  box-shadow: 0 20px 55px rgba(88,69,40,.08) !important;
+}
+html[data-lifeos-theme="light"] .dashboard-page h1,
+html[data-lifeos-theme="light"] .dashboard-page h2,
+html[data-lifeos-theme="light"] .dashboard-page h3,
+html[data-lifeos-theme="light"] .dashboard-page strong,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard h1,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard h2,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard h3,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard strong {
+  color: #2d2b27 !important;
+}
+html[data-lifeos-theme="light"] .dashboard-page p,
+html[data-lifeos-theme="light"] .dashboard-page small,
+html[data-lifeos-theme="light"] .dashboard-page label,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard p,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard small {
+  color: #756f64 !important;
+}
+
+/* =========================
+   REMINDERS
+   ========================= */
+html[data-lifeos-theme="light"] .reminders-page {
+  background:
+    radial-gradient(circle at 84% 0%, rgba(201,161,90,.13), transparent 30%),
+    radial-gradient(circle at 12% 88%, rgba(124,145,107,.08), transparent 26%),
+    linear-gradient(145deg,#f8f2e7 0%,#f2ebdf 55%,#eee6d8 100%) !important;
+  color: #2d2b27 !important;
+}
+html[data-lifeos-theme="light"] .reminders-page .reminders-card,
+html[data-lifeos-theme="light"] .reminders-page .reminder-row,
+html[data-lifeos-theme="light"] .reminders-page .reminders-empty,
+html[data-lifeos-theme="light"] .reminders-page .reminder-modal,
+html[data-lifeos-theme="light"] .reminders-page .modal-content {
+  background: rgba(255,252,246,.82) !important;
+  border-color: rgba(142,112,58,.15) !important;
+  color: #2d2b27 !important;
+  box-shadow: 0 20px 55px rgba(88,69,40,.08) !important;
+}
+html[data-lifeos-theme="light"] .reminders-page h1,
+html[data-lifeos-theme="light"] .reminders-page h2,
+html[data-lifeos-theme="light"] .reminders-page h3,
+html[data-lifeos-theme="light"] .reminders-page strong {
+  color: #2d2b27 !important;
+}
+html[data-lifeos-theme="light"] .reminders-page p,
+html[data-lifeos-theme="light"] .reminders-page span,
+html[data-lifeos-theme="light"] .reminders-page label,
+html[data-lifeos-theme="light"] .reminders-page small {
+  color: #756f64 !important;
+}
+html[data-lifeos-theme="light"] .reminders-page input,
+html[data-lifeos-theme="light"] .reminders-page select,
+html[data-lifeos-theme="light"] .reminders-page textarea,
+html[data-lifeos-theme="light"] .reminder-input {
+  background: rgba(255,252,246,.9) !important;
+  color: #302e28 !important;
+  border-color: rgba(142,112,58,.18) !important;
+}
+
+/* =========================
+   TASKS
+   ========================= */
+html[data-lifeos-theme="light"] .tasks-page,
+html[data-lifeos-theme="light"] .task-page,
+html[data-lifeos-theme="light"] .tasks-container,
+html[data-lifeos-theme="light"] .tasks-main {
+  background:
+    radial-gradient(circle at 84% 0%, rgba(201,161,90,.13), transparent 30%),
+    radial-gradient(circle at 12% 88%, rgba(124,145,107,.08), transparent 26%),
+    linear-gradient(145deg,#f8f2e7 0%,#f2ebdf 55%,#eee6d8 100%) !important;
+  color: #2d2b27 !important;
+}
+html[data-lifeos-theme="light"] .tasks-page .glass-card,
+html[data-lifeos-theme="light"] .tasks-page .task-card,
+html[data-lifeos-theme="light"] .tasks-page .tasks-section,
+html[data-lifeos-theme="light"] .tasks-page .task-row,
+html[data-lifeos-theme="light"] .task-page .task-card,
+html[data-lifeos-theme="light"] .task-page .task-row {
+  background: rgba(255,252,246,.82) !important;
+  border-color: rgba(142,112,58,.15) !important;
+  color: #2d2b27 !important;
+  box-shadow: 0 20px 55px rgba(88,69,40,.08) !important;
+}
+html[data-lifeos-theme="light"] .tasks-page h1,
+html[data-lifeos-theme="light"] .tasks-page h2,
+html[data-lifeos-theme="light"] .tasks-page h3,
+html[data-lifeos-theme="light"] .tasks-page strong,
+html[data-lifeos-theme="light"] .task-page h1,
+html[data-lifeos-theme="light"] .task-page h2,
+html[data-lifeos-theme="light"] .task-page h3,
+html[data-lifeos-theme="light"] .task-page strong {
+  color: #2d2b27 !important;
+}
+html[data-lifeos-theme="light"] .tasks-page p,
+html[data-lifeos-theme="light"] .tasks-page small,
+html[data-lifeos-theme="light"] .task-page p,
+html[data-lifeos-theme="light"] .task-page small {
+  color: #756f64 !important;
+}
+html[data-lifeos-theme="light"] .tasks-page input,
+html[data-lifeos-theme="light"] .tasks-page textarea,
+html[data-lifeos-theme="light"] .task-page input,
+html[data-lifeos-theme="light"] .task-page textarea {
+  background: rgba(255,252,246,.9) !important;
+  color: #302e28 !important;
+  border-color: rgba(142,112,58,.18) !important;
+}
+
+/* =========================
+   TRIPS
+   ========================= */
+html[data-lifeos-theme="light"] .trips-page {
+  background:
+    radial-gradient(circle at 84% 0%, rgba(201,161,90,.13), transparent 30%),
+    radial-gradient(circle at 12% 85%, rgba(124,145,107,.08), transparent 26%),
+    linear-gradient(145deg,#f8f2e7 0%,#f2ebdf 55%,#eee6d8 100%) !important;
+  color: #2d2b27 !important;
+}
+html[data-lifeos-theme="light"] .trips-page .trip-planner-card,
+html[data-lifeos-theme="light"] .trips-page .flight-search-card,
+html[data-lifeos-theme="light"] .trips-page .hotel-search-card,
+html[data-lifeos-theme="light"] .trips-page .flight-route-card,
+html[data-lifeos-theme="light"] .trips-page .hotel-route-card,
+html[data-lifeos-theme="light"] .trips-page .flight-card,
+html[data-lifeos-theme="light"] .trips-page .hotel-card,
+html[data-lifeos-theme="light"] .trips-page .feature-card,
+html[data-lifeos-theme="light"] .trips-page .booking-link-card,
+html[data-lifeos-theme="light"] .trips-page .trip-type {
+  background: rgba(255,252,246,.82) !important;
+  border-color: rgba(142,112,58,.15) !important;
+  color: #2d2b27 !important;
+  box-shadow: 0 20px 55px rgba(88,69,40,.08) !important;
+}
+html[data-lifeos-theme="light"] .trips-page h1,
+html[data-lifeos-theme="light"] .trips-page h2,
+html[data-lifeos-theme="light"] .trips-page h3,
+html[data-lifeos-theme="light"] .trips-page strong {
+  color: #2d2b27 !important;
+}
+html[data-lifeos-theme="light"] .trips-page p,
+html[data-lifeos-theme="light"] .trips-page label,
+html[data-lifeos-theme="light"] .trips-page small,
+html[data-lifeos-theme="light"] .trips-page .planner-step {
+  color: #756f64 !important;
+}
+html[data-lifeos-theme="light"] .trips-page input,
+html[data-lifeos-theme="light"] .trips-page select,
+html[data-lifeos-theme="light"] .trips-page textarea,
+html[data-lifeos-theme="light"] .trips-page .input-with-icon {
+  background: rgba(255,252,246,.9) !important;
+  color: #302e28 !important;
+  border-color: rgba(142,112,58,.18) !important;
+}
+html[data-lifeos-theme="light"] .trips-page .planner-step,
+html[data-lifeos-theme="light"] .trips-page .trips-badge,
+html[data-lifeos-theme="light"] .trips-page .trips-hero h1 span,
+html[data-lifeos-theme="light"] .trips-page .flight-hero h1 span {
+  color: #a47d3c !important;
+}
+html[data-lifeos-theme="light"] .trips-page .trip-type.active,
+html[data-lifeos-theme="light"] .trips-page .trip-type:hover,
+html[data-lifeos-theme="light"] .trips-page .flight-card.selected {
+  border-color: rgba(181,139,72,.38) !important;
+  background: rgba(201,161,90,.08) !important;
+}
+
+/* =========================
+   CALENDAR
+   ========================= */
+html[data-lifeos-theme="light"] .calendar-page {
+  background:
+    radial-gradient(circle at 84% 0%, rgba(201,161,90,.13), transparent 30%),
+    radial-gradient(circle at 12% 88%, rgba(124,145,107,.08), transparent 26%),
+    linear-gradient(145deg,#f8f2e7 0%,#f2ebdf 55%,#eee6d8 100%) !important;
+  color: #2d2b27 !important;
+}
+html[data-lifeos-theme="light"] .calendar-page .calendar-topbar,
+html[data-lifeos-theme="light"] .calendar-page .calendar-card,
+html[data-lifeos-theme="light"] .calendar-page .calendar-panel,
+html[data-lifeos-theme="light"] .calendar-page .calendar-grid,
+html[data-lifeos-theme="light"] .calendar-page .calendar-week {
+  background: rgba(255,252,246,.78) !important;
+  border-color: rgba(142,112,58,.15) !important;
+  box-shadow: 0 20px 55px rgba(88,69,40,.07) !important;
+}
+html[data-lifeos-theme="light"] .calendar-page h1,
+html[data-lifeos-theme="light"] .calendar-page h2,
+html[data-lifeos-theme="light"] .calendar-page h3,
+html[data-lifeos-theme="light"] .calendar-page strong {
+  color: #2d2b27 !important;
+}
+html[data-lifeos-theme="light"] .calendar-page p,
+html[data-lifeos-theme="light"] .calendar-page span,
+html[data-lifeos-theme="light"] .calendar-page label,
+html[data-lifeos-theme="light"] .calendar-page small {
+  color: #756f64 !important;
+}
+
+/* =========================
+   SMART DEADLINE
+   ========================= */
+html[data-lifeos-theme="light"] .smart-deadline-overlay {
+  background: rgba(55,47,36,.28) !important;
+}
+html[data-lifeos-theme="light"] .smart-deadline-modal {
+  background:
+    radial-gradient(circle at 88% 0%, rgba(201,161,90,.12), transparent 34%),
+    linear-gradient(145deg,#fffaf0 0%,#f7f0e3 58%,#f1eadc 100%) !important;
+  border-color: rgba(171,132,69,.24) !important;
+  color: #292823 !important;
+}
+
+/* =========================
+   UNIVERSAL LIGHT ACTIONS
+   ========================= */
+html[data-lifeos-theme="light"] .lifeos-primary-button,
+html[data-lifeos-theme="light"] .lifeos-add-button,
+html[data-lifeos-theme="light"] .reminder-add-button,
+html[data-lifeos-theme="light"] .empty-add-button,
+html[data-lifeos-theme="light"] .plan-trip-button {
+  background: linear-gradient(135deg,#c9a15a,#aa8145) !important;
+  border-color: rgba(171,132,69,.40) !important;
+  color: #fffaf0 !important;
+  box-shadow: 0 10px 26px rgba(171,132,69,.18) !important;
+}
+html[data-lifeos-theme="light"] button:focus-visible,
+html[data-lifeos-theme="light"] input:focus-visible,
+html[data-lifeos-theme="light"] textarea:focus-visible,
+html[data-lifeos-theme="light"] select:focus-visible {
+  outline: 2px solid rgba(171,132,69,.48) !important;
+  outline-offset: 2px;
+}

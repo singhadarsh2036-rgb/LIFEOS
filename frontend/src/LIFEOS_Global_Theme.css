@@ -322,462 +322,358 @@ html[data-lifeos-theme] .task-page {
 }
 
 /* =========================================================
-   LIFEOS — GLOBAL DARK PREMIUM SYSTEM
-   Dashboard / Tasks / Reminders / Travel
-   BLACK + CHAMPAGNE GOLD + SAGE
-   KEEP THIS BLOCK LAST
+   LIFEOS — WARM CHAMPAGNE LIGHT THEME
+   Final light-mode override. Dark mode is intentionally untouched.
    ========================================================= */
 
-html[data-lifeos-theme="dark"] {
-  --lifeos-bg: #08090c;
-  --lifeos-bg-2: #0d0f13;
-
-  --lifeos-card: rgba(19,21,25,.82);
-  --lifeos-card-2: rgba(24,26,30,.92);
-
-  --lifeos-text: #f4f1e9;
-  --lifeos-muted: #98958d;
-
-  --lifeos-gold: #c9a15a;
-  --lifeos-gold-light: #e0bd78;
-  --lifeos-sage: #718879;
-
-  --lifeos-border: rgba(255,255,255,.075);
-  --lifeos-gold-border: rgba(201,161,90,.22);
+html[data-lifeos-theme="light"] {
+  --lifeos-champagne: #c7a15a;
+  --lifeos-champagne-deep: #a98243;
+  --lifeos-ivory: #f6f0e4;
+  --lifeos-surface: rgba(255, 250, 240, .72);
+  --lifeos-surface-strong: rgba(255, 252, 246, .86);
+  --lifeos-charcoal: #2d2b27;
+  --lifeos-muted: #756f64;
+  --lifeos-sage: #7c916b;
+  --lifeos-border: rgba(142, 112, 58, .18);
 }
 
+/* Shared page canvas */
+html[data-lifeos-theme="light"] body {
+  background: #f6f0e4 !important;
+  color: #2d2b27 !important;
+}
 
-/* =========================================================
-   TASKS
-   ========================================================= */
+/* =========================
+   DASHBOARD
+   ========================= */
 
-html[data-lifeos-theme="dark"] .tasks-page,
-html[data-lifeos-theme="dark"] .task-page,
-html[data-lifeos-theme="dark"] .tasks-container,
-html[data-lifeos-theme="dark"] .tasks-main {
-
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard,
+html[data-lifeos-theme="light"] .dashboard-page {
   background:
-    radial-gradient(
-      circle at 85% 0%,
-      rgba(201,161,90,.10),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 10% 85%,
-      rgba(113,136,121,.06),
-      transparent 25%
-    ),
-    linear-gradient(
-      145deg,
-      #08090c 0%,
-      #0b0d11 55%,
-      #0e1014 100%
-    ) !important;
-
-  color: var(--lifeos-text) !important;
+    radial-gradient(circle at 82% 0%, rgba(201,161,90,.12), transparent 30%),
+    radial-gradient(circle at 12% 88%, rgba(124,145,107,.07), transparent 27%),
+    linear-gradient(145deg, #f8f2e7 0%, #f3ecdf 54%, #eee6d7 100%) !important;
+  color: #2d2b27 !important;
 }
 
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-topbar,
+html[data-lifeos-theme="light"] .dashboard-page .topbar {
+  background: rgba(248,242,231,.78) !important;
+  border-color: rgba(92,82,65,.10) !important;
+  box-shadow: 0 12px 35px rgba(88,69,40,.06) !important;
+}
 
-/* Cards */
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-menu-button,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-icon-button,
+html[data-lifeos-theme="light"] .dashboard-page .top-icon,
+html[data-lifeos-theme="light"] .dashboard-page .theme-toggle,
+html[data-lifeos-theme="light"] .dashboard-page .consistency {
+  background: rgba(255,252,246,.72) !important;
+  color: #5f5a51 !important;
+  border-color: rgba(142,112,58,.16) !important;
+}
 
-html[data-lifeos-theme="dark"] .tasks-page .glass-card,
-html[data-lifeos-theme="dark"] .task-page .glass-card,
-html[data-lifeos-theme="dark"] .tasks-page .task-card,
-html[data-lifeos-theme="dark"] .task-page .task-card,
-html[data-lifeos-theme="dark"] .tasks-page .tasks-section {
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-search-shell,
+html[data-lifeos-theme="light"] .dashboard-page .search-box {
+  background: rgba(255,252,246,.76) !important;
+  border-color: rgba(142,112,58,.15) !important;
+  box-shadow: 0 10px 28px rgba(88,69,40,.06) !important;
+}
 
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard input,
+html[data-lifeos-theme="light"] .dashboard-page input {
+  color: #302e28 !important;
+}
+
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-focus-card,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-deadline-card,
+html[data-lifeos-theme="light"] .dashboard-page .metric-card,
+html[data-lifeos-theme="light"] .dashboard-page .hero-panel,
+html[data-lifeos-theme="light"] .dashboard-page .glass-card {
+  background: rgba(255,252,246,.70) !important;
+  border-color: rgba(142,112,58,.15) !important;
+  box-shadow: 0 20px 55px rgba(88,69,40,.09) !important;
+  color: #2d2b27 !important;
+}
+
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-day-chip,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-task-item,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-deadline-list,
+html[data-lifeos-theme="light"] .dashboard-page .task-row,
+html[data-lifeos-theme="light"] .dashboard-page .event-row {
+  background: rgba(255,250,240,.54) !important;
+  border-color: rgba(142,112,58,.12) !important;
+}
+
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard h1,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard h2,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard h3,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard strong,
+html[data-lifeos-theme="light"] .dashboard-page h1,
+html[data-lifeos-theme="light"] .dashboard-page h2,
+html[data-lifeos-theme="light"] .dashboard-page h3,
+html[data-lifeos-theme="light"] .dashboard-page strong {
+  color: #2d2b27 !important;
+}
+
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard p,
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard small,
+html[data-lifeos-theme="light"] .dashboard-page p,
+html[data-lifeos-theme="light"] .dashboard-page small,
+html[data-lifeos-theme="light"] .dashboard-page .section-label,
+html[data-lifeos-theme="light"] .dashboard-page .card-label {
+  color: #756f64 !important;
+}
+
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-bottom-nav {
+  background: rgba(255,252,246,.84) !important;
+  border-color: rgba(142,112,58,.16) !important;
+  box-shadow: 0 20px 55px rgba(88,69,40,.14) !important;
+}
+
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard .lifeos-bottom-nav button.active {
+  color: #a47d3c !important;
+}
+
+/* =========================
+   TRIPS
+   ========================= */
+
+html[data-lifeos-theme="light"] .trips-page {
   background:
-    linear-gradient(
-      145deg,
-      rgba(22,24,29,.90),
-      rgba(14,16,20,.86)
-    ) !important;
-
-  border-color: var(--lifeos-border) !important;
-
-  color: var(--lifeos-text) !important;
-
-  box-shadow:
-    0 25px 70px rgba(0,0,0,.28) !important;
+    radial-gradient(circle at 84% 0%, rgba(201,161,90,.13), transparent 30%),
+    radial-gradient(circle at 12% 85%, rgba(124,145,107,.07), transparent 26%),
+    linear-gradient(145deg,#f8f2e7 0%,#f2ebdf 55%,#eee6d8 100%) !important;
+  color: #2d2b27 !important;
 }
 
-
-/* Text */
-
-html[data-lifeos-theme="dark"] .tasks-page h1,
-html[data-lifeos-theme="dark"] .tasks-page h2,
-html[data-lifeos-theme="dark"] .tasks-page h3,
-html[data-lifeos-theme="dark"] .tasks-page strong,
-html[data-lifeos-theme="dark"] .task-page h1,
-html[data-lifeos-theme="dark"] .task-page h2,
-html[data-lifeos-theme="dark"] .task-page h3,
-html[data-lifeos-theme="dark"] .task-page strong {
-
-  color: var(--lifeos-text) !important;
+html[data-lifeos-theme="light"] .trips-page .trip-planner-card,
+html[data-lifeos-theme="light"] .trips-page .flight-search-card,
+html[data-lifeos-theme="light"] .trips-page .flight-results-card,
+html[data-lifeos-theme="light"] .trips-page .hotel-page > section,
+html[data-lifeos-theme="light"] .trips-page .trip-summary-card,
+html[data-lifeos-theme="light"] .trips-page .flight-card,
+html[data-lifeos-theme="light"] .trips-page .hotel-card,
+html[data-lifeos-theme="light"] .trips-page .flight-summary,
+html[data-lifeos-theme="light"] .trips-page .trip-type {
+  background: rgba(255,252,246,.72) !important;
+  border-color: rgba(142,112,58,.15) !important;
+  color: #2d2b27 !important;
+  box-shadow: 0 20px 55px rgba(88,69,40,.08) !important;
 }
 
-html[data-lifeos-theme="dark"] .tasks-page p,
-html[data-lifeos-theme="dark"] .tasks-page small,
-html[data-lifeos-theme="dark"] .task-page p,
-html[data-lifeos-theme="dark"] .task-page small {
-
-  color: var(--lifeos-muted) !important;
+html[data-lifeos-theme="light"] .trips-page input,
+html[data-lifeos-theme="light"] .trips-page select,
+html[data-lifeos-theme="light"] .trips-page textarea {
+  background: rgba(255,252,246,.82) !important;
+  color: #302e28 !important;
+  border-color: rgba(142,112,58,.18) !important;
 }
 
-
-/* Task rows */
-
-html[data-lifeos-theme="dark"] .tasks-page .task-row,
-html[data-lifeos-theme="dark"] .task-page .task-row {
-
-  background: rgba(255,255,255,.028) !important;
-
-  border-color: var(--lifeos-border) !important;
-
-  color: #ddd8cf !important;
+html[data-lifeos-theme="light"] .trips-page input:focus,
+html[data-lifeos-theme="light"] .trips-page select:focus,
+html[data-lifeos-theme="light"] .trips-page textarea:focus {
+  border-color: rgba(171,132,69,.52) !important;
+  box-shadow: 0 0 0 3px rgba(201,161,90,.10) !important;
 }
 
-html[data-lifeos-theme="dark"] .tasks-page .task-row:hover,
-html[data-lifeos-theme="dark"] .task-page .task-row:hover {
-
-  background: rgba(201,161,90,.055) !important;
-
-  border-color: var(--lifeos-gold-border) !important;
-
-  transform: translateY(-2px);
-
-  box-shadow:
-    0 12px 30px rgba(0,0,0,.22);
+html[data-lifeos-theme="light"] .trips-page h1,
+html[data-lifeos-theme="light"] .trips-page h2,
+html[data-lifeos-theme="light"] .trips-page h3,
+html[data-lifeos-theme="light"] .trips-page strong {
+  color: #2d2b27 !important;
 }
 
-
-/* Task inputs */
-
-html[data-lifeos-theme="dark"] .tasks-page input,
-html[data-lifeos-theme="dark"] .tasks-page textarea,
-html[data-lifeos-theme="dark"] .task-page input,
-html[data-lifeos-theme="dark"] .task-page textarea {
-
-  background: rgba(255,255,255,.035) !important;
-
-  border-color: var(--lifeos-border) !important;
-
-  color: var(--lifeos-text) !important;
+html[data-lifeos-theme="light"] .trips-page p,
+html[data-lifeos-theme="light"] .trips-page label,
+html[data-lifeos-theme="light"] .trips-page small,
+html[data-lifeos-theme="light"] .trips-page .planner-step {
+  color: #756f64 !important;
 }
 
-html[data-lifeos-theme="dark"] .tasks-page input:focus,
-html[data-lifeos-theme="dark"] .tasks-page textarea:focus,
-html[data-lifeos-theme="dark"] .task-page input:focus,
-html[data-lifeos-theme="dark"] .task-page textarea:focus {
-
-  border-color: rgba(201,161,90,.42) !important;
-
-  box-shadow:
-    0 0 0 4px rgba(201,161,90,.08) !important;
-}
-
-
-/* =========================================================
+/* =========================
    REMINDERS
-   ========================================================= */
+   ========================= */
 
-html[data-lifeos-theme="dark"] .reminders-page {
-
+html[data-lifeos-theme="light"] .reminders-page {
   background:
-    radial-gradient(
-      circle at 85% 0%,
-      rgba(201,161,90,.10),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 10% 85%,
-      rgba(113,136,121,.06),
-      transparent 25%
-    ),
-    linear-gradient(
-      145deg,
-      #08090c 0%,
-      #0b0d11 55%,
-      #0e1014 100%
-    ) !important;
-
-  color: var(--lifeos-text) !important;
+    radial-gradient(circle at 84% 0%, rgba(201,161,90,.13), transparent 30%),
+    radial-gradient(circle at 12% 88%, rgba(124,145,107,.07), transparent 26%),
+    linear-gradient(145deg,#f8f2e7 0%,#f2ebdf 55%,#eee6d8 100%) !important;
+  color: #2d2b27 !important;
 }
 
+html[data-lifeos-theme="light"] .reminders-page .reminders-card,
+html[data-lifeos-theme="light"] .reminders-page .reminder-row,
+html[data-lifeos-theme="light"] .reminders-page .reminders-empty,
+html[data-lifeos-theme="light"] .reminders-page .reminder-modal,
+html[data-lifeos-theme="light"] .reminders-page .modal-content {
+  background: rgba(255,252,246,.72) !important;
+  border-color: rgba(142,112,58,.15) !important;
+  color: #2d2b27 !important;
+  box-shadow: 0 20px 55px rgba(88,69,40,.08) !important;
+}
 
-/* Reminder cards */
+html[data-lifeos-theme="light"] .reminders-page .reminder-row:hover {
+  background: rgba(201,161,90,.065) !important;
+  border-color: rgba(171,132,69,.30) !important;
+}
 
-html[data-lifeos-theme="dark"] .reminders-page .reminders-card,
-html[data-lifeos-theme="dark"] .reminders-page .reminder-row,
-html[data-lifeos-theme="dark"] .reminders-page .reminders-empty,
-html[data-lifeos-theme="dark"] .reminders-page .reminder-modal,
-html[data-lifeos-theme="dark"] .reminders-page .modal-content {
+html[data-lifeos-theme="light"] .reminders-page h1,
+html[data-lifeos-theme="light"] .reminders-page h2,
+html[data-lifeos-theme="light"] .reminders-page h3,
+html[data-lifeos-theme="light"] .reminders-page strong {
+  color: #2d2b27 !important;
+}
 
+html[data-lifeos-theme="light"] .reminders-page p,
+html[data-lifeos-theme="light"] .reminders-page span,
+html[data-lifeos-theme="light"] .reminders-page label,
+html[data-lifeos-theme="light"] .reminders-page small {
+  color: #756f64 !important;
+}
+
+html[data-lifeos-theme="light"] .reminders-page input,
+html[data-lifeos-theme="light"] .reminders-page select,
+html[data-lifeos-theme="light"] .reminders-page textarea,
+html[data-lifeos-theme="light"] .reminder-input {
+  background: rgba(255,252,246,.82) !important;
+  color: #302e28 !important;
+  border-color: rgba(142,112,58,.18) !important;
+}
+
+html[data-lifeos-theme="light"] .reminder-input:focus {
+  border-color: rgba(171,132,69,.52) !important;
+  box-shadow: 0 0 0 3px rgba(201,161,90,.10) !important;
+}
+
+/* =========================
+   TASKS
+   ========================= */
+
+html[data-lifeos-theme="light"] .tasks-page,
+html[data-lifeos-theme="light"] .task-page,
+html[data-lifeos-theme="light"] .tasks-container,
+html[data-lifeos-theme="light"] .tasks-main {
   background:
-    linear-gradient(
-      145deg,
-      rgba(22,24,29,.90),
-      rgba(14,16,20,.86)
-    ) !important;
-
-  border-color: var(--lifeos-border) !important;
-
-  color: var(--lifeos-text) !important;
-
-  box-shadow:
-    0 25px 70px rgba(0,0,0,.28) !important;
+    radial-gradient(circle at 84% 0%, rgba(201,161,90,.13), transparent 30%),
+    radial-gradient(circle at 12% 88%, rgba(124,145,107,.07), transparent 26%),
+    linear-gradient(145deg,#f8f2e7 0%,#f2ebdf 55%,#eee6d8 100%) !important;
+  color: #2d2b27 !important;
 }
 
-
-/* Reminder text */
-
-html[data-lifeos-theme="dark"] .reminders-page h1,
-html[data-lifeos-theme="dark"] .reminders-page h2,
-html[data-lifeos-theme="dark"] .reminders-page h3,
-html[data-lifeos-theme="dark"] .reminders-page strong {
-
-  color: var(--lifeos-text) !important;
+html[data-lifeos-theme="light"] .tasks-page .glass-card,
+html[data-lifeos-theme="light"] .task-page .glass-card,
+html[data-lifeos-theme="light"] .tasks-page .task-card,
+html[data-lifeos-theme="light"] .task-page .task-card,
+html[data-lifeos-theme="light"] .tasks-page .tasks-section,
+html[data-lifeos-theme="light"] .tasks-page .task-row,
+html[data-lifeos-theme="light"] .task-page .task-row {
+  background: rgba(255,252,246,.72) !important;
+  border-color: rgba(142,112,58,.15) !important;
+  color: #2d2b27 !important;
+  box-shadow: 0 20px 55px rgba(88,69,40,.07) !important;
 }
 
-html[data-lifeos-theme="dark"] .reminders-page p,
-html[data-lifeos-theme="dark"] .reminders-page span,
-html[data-lifeos-theme="dark"] .reminders-page label,
-html[data-lifeos-theme="dark"] .reminders-page small {
-
-  color: var(--lifeos-muted) !important;
+html[data-lifeos-theme="light"] .tasks-page h1,
+html[data-lifeos-theme="light"] .tasks-page h2,
+html[data-lifeos-theme="light"] .tasks-page h3,
+html[data-lifeos-theme="light"] .tasks-page strong,
+html[data-lifeos-theme="light"] .task-page h1,
+html[data-lifeos-theme="light"] .task-page h2,
+html[data-lifeos-theme="light"] .task-page h3,
+html[data-lifeos-theme="light"] .task-page strong {
+  color: #2d2b27 !important;
 }
 
-
-/* Reminder inputs */
-
-html[data-lifeos-theme="dark"] .reminders-page input,
-html[data-lifeos-theme="dark"] .reminders-page select,
-html[data-lifeos-theme="dark"] .reminders-page textarea {
-
-  background: rgba(255,255,255,.035) !important;
-
-  color: var(--lifeos-text) !important;
-
-  border-color: var(--lifeos-border) !important;
+html[data-lifeos-theme="light"] .tasks-page p,
+html[data-lifeos-theme="light"] .tasks-page small,
+html[data-lifeos-theme="light"] .task-page p,
+html[data-lifeos-theme="light"] .task-page small {
+  color: #756f64 !important;
 }
 
-html[data-lifeos-theme="dark"] .reminders-page input:focus,
-html[data-lifeos-theme="dark"] .reminders-page select:focus,
-html[data-lifeos-theme="dark"] .reminders-page textarea:focus {
-
-  border-color: rgba(201,161,90,.42) !important;
-
-  box-shadow:
-    0 0 0 4px rgba(201,161,90,.08) !important;
+html[data-lifeos-theme="light"] .tasks-page input,
+html[data-lifeos-theme="light"] .tasks-page textarea,
+html[data-lifeos-theme="light"] .task-page input,
+html[data-lifeos-theme="light"] .task-page textarea {
+  background: rgba(255,252,246,.82) !important;
+  color: #302e28 !important;
+  border-color: rgba(142,112,58,.18) !important;
 }
 
+/* =========================
+   CALENDAR
+   ========================= */
 
-/* Reminder status */
-
-html[data-lifeos-theme="dark"] .reminders-page .reminder-status {
-
-  color: var(--lifeos-gold-light) !important;
-
-  background: rgba(201,161,90,.10) !important;
-
-  border-color: rgba(201,161,90,.18) !important;
-}
-
-
-/* =========================================================
-   TRAVEL
-   ========================================================= */
-
-html[data-lifeos-theme="dark"] .trips-page {
-
+html[data-lifeos-theme="light"] .calendar-page {
   background:
-    radial-gradient(
-      circle at 85% 0%,
-      rgba(201,161,90,.12),
-      transparent 30%
-    ),
-    radial-gradient(
-      circle at 8% 85%,
-      rgba(113,136,121,.07),
-      transparent 25%
-    ),
-    linear-gradient(
-      145deg,
-      #08090c 0%,
-      #0b0d11 55%,
-      #0e1014 100%
-    ) !important;
-
-  color: var(--lifeos-text) !important;
+    radial-gradient(circle at 84% 0%, rgba(201,161,90,.13), transparent 30%),
+    radial-gradient(circle at 12% 88%, rgba(124,145,107,.07), transparent 26%),
+    linear-gradient(145deg,#f8f2e7 0%,#f2ebdf 55%,#eee6d8 100%) !important;
+  color: #2d2b27 !important;
 }
 
+html[data-lifeos-theme="light"] .calendar-page h1,
+html[data-lifeos-theme="light"] .calendar-page h2,
+html[data-lifeos-theme="light"] .calendar-page h3,
+html[data-lifeos-theme="light"] .calendar-page strong {
+  color: #2d2b27 !important;
+}
 
-/* Travel cards */
+html[data-lifeos-theme="light"] .calendar-page p,
+html[data-lifeos-theme="light"] .calendar-page span,
+html[data-lifeos-theme="light"] .calendar-page label,
+html[data-lifeos-theme="light"] .calendar-page small {
+  color: #756f64 !important;
+}
 
-html[data-lifeos-theme="dark"] .trips-page .trip-planner-card,
-html[data-lifeos-theme="dark"] .trips-page .flight-search-card,
-html[data-lifeos-theme="dark"] .trips-page .flight-results-card,
-html[data-lifeos-theme="dark"] .trips-page .hotel-page > section,
-html[data-lifeos-theme="dark"] .trips-page .trip-summary-card {
+html[data-lifeos-theme="light"] .calendar-page .calendar-topbar,
+html[data-lifeos-theme="light"] .calendar-page .calendar-card,
+html[data-lifeos-theme="light"] .calendar-page .calendar-panel,
+html[data-lifeos-theme="light"] .calendar-page .calendar-grid,
+html[data-lifeos-theme="light"] .calendar-page .calendar-week {
+  background: rgba(255,252,246,.70) !important;
+  border-color: rgba(142,112,58,.15) !important;
+  box-shadow: 0 20px 55px rgba(88,69,40,.07) !important;
+}
 
+/* =========================
+   SMART DEADLINE
+   ========================= */
+
+html[data-lifeos-theme="light"] .smart-deadline-overlay {
+  background: rgba(55,47,36,.28) !important;
+}
+
+html[data-lifeos-theme="light"] .smart-deadline-modal {
   background:
-    linear-gradient(
-      145deg,
-      rgba(22,24,29,.90),
-      rgba(14,16,20,.86)
-    ) !important;
-
-  border-color: var(--lifeos-border) !important;
-
-  color: var(--lifeos-text) !important;
-
-  box-shadow:
-    0 25px 70px rgba(0,0,0,.28) !important;
+    radial-gradient(circle at 88% 0%, rgba(201,161,90,.12), transparent 34%),
+    linear-gradient(145deg,#fffaf0 0%,#f7f0e3 58%,#f1eadc 100%) !important;
+  border-color: rgba(171,132,69,.24) !important;
+  color: #292823 !important;
+  box-shadow: 0 30px 90px rgba(76,61,40,.18), 0 0 55px rgba(201,161,90,.08) !important;
 }
 
+/* =========================
+   COMMON GOLD ACTIONS
+   ========================= */
 
-/* Travel headings */
-
-html[data-lifeos-theme="dark"] .trips-page h1,
-html[data-lifeos-theme="dark"] .trips-page h2,
-html[data-lifeos-theme="dark"] .trips-page h3,
-html[data-lifeos-theme="dark"] .trips-page strong {
-
-  color: var(--lifeos-text) !important;
+html[data-lifeos-theme="light"] .lifeos-primary-button,
+html[data-lifeos-theme="light"] .lifeos-add-button,
+html[data-lifeos-theme="light"] .reminder-add-button,
+html[data-lifeos-theme="light"] .empty-add-button {
+  background: linear-gradient(135deg,#c9a15a,#aa8145) !important;
+  border-color: rgba(171,132,69,.40) !important;
+  color: #fffaf0 !important;
+  box-shadow: 0 10px 26px rgba(171,132,69,.18) !important;
 }
 
-html[data-lifeos-theme="dark"] .trips-page p,
-html[data-lifeos-theme="dark"] .trips-page label,
-html[data-lifeos-theme="dark"] .trips-page small,
-html[data-lifeos-theme="dark"] .trips-page .planner-step {
-
-  color: var(--lifeos-muted) !important;
+html[data-lifeos-theme="light"] button:focus-visible,
+html[data-lifeos-theme="light"] input:focus-visible,
+html[data-lifeos-theme="light"] textarea:focus-visible,
+html[data-lifeos-theme="light"] select:focus-visible {
+  outline: 2px solid rgba(171,132,69,.48) !important;
+  outline-offset: 2px;
 }
-
-
-/* Travel inputs */
-
-html[data-lifeos-theme="dark"] .trips-page input,
-html[data-lifeos-theme="dark"] .trips-page select,
-html[data-lifeos-theme="dark"] .trips-page textarea {
-
-  background: rgba(255,255,255,.035) !important;
-
-  color: var(--lifeos-text) !important;
-
-  border-color: var(--lifeos-border) !important;
-}
-
-
-/* Flight / hotel cards */
-
-html[data-lifeos-theme="dark"] .trips-page .flight-card,
-html[data-lifeos-theme="dark"] .trips-page .airport-suggestions,
-html[data-lifeos-theme="dark"] .trips-page .trip-type,
-html[data-lifeos-theme="dark"] .trips-page .flight-summary,
-html[data-lifeos-theme="dark"] .trips-page .hotel-card {
-
-  background:
-    rgba(255,255,255,.028) !important;
-
-  border-color: var(--lifeos-border) !important;
-
-  color: var(--lifeos-text) !important;
-}
-
-html[data-lifeos-theme="dark"] .trips-page .flight-card:hover,
-html[data-lifeos-theme="dark"] .trips-page .hotel-card:hover {
-
-  background:
-    rgba(201,161,90,.055) !important;
-
-  border-color:
-    rgba(201,161,90,.20) !important;
-
-  transform: translateY(-3px);
-
-  box-shadow:
-    0 16px 35px rgba(0,0,0,.24) !important;
-}
-
-
-/* =========================================================
-   GOLD BUTTON SYSTEM
-   ========================================================= */
-
-html[data-lifeos-theme="dark"] .tasks-page button,
-html[data-lifeos-theme="dark"] .task-page button,
-html[data-lifeos-theme="dark"] .reminders-page button,
-html[data-lifeos-theme="dark"] .trips-page button {
-
-  transition:
-    transform .22s ease,
-    box-shadow .22s ease,
-    border-color .22s ease,
-    background .22s ease;
-}
-
-
-/* Common primary buttons */
-
-html[data-lifeos-theme="dark"] .tasks-page button[class*="primary"],
-html[data-lifeos-theme="dark"] .reminders-page button[class*="primary"],
-html[data-lifeos-theme="dark"] .trips-page button[class*="primary"],
-html[data-lifeos-theme="dark"] .reminder-add-button {
-
-  background:
-    linear-gradient(
-      135deg,
-      #d0a65e,
-      #9d763c
-    ) !important;
-
-  color: #17130c !important;
-
-  border-color: transparent !important;
-}
-
-html[data-lifeos-theme="dark"] .tasks-page button[class*="primary"]:hover,
-html[data-lifeos-theme="dark"] .reminders-page button[class*="primary"]:hover,
-html[data-lifeos-theme="dark"] .trips-page button[class*="primary"]:hover,
-html[data-lifeos-theme="dark"] .reminder-add-button:hover {
-
-  transform: translateY(-3px);
-
-  box-shadow:
-    0 15px 35px rgba(201,161,90,.22) !important;
-}
-
-
-/* =========================================================
-   REMOVE OLD PURPLE / PINK ACCENTS
-   ========================================================= */
-
-html[data-lifeos-theme="dark"] .tasks-page *,
-html[data-lifeos-theme="dark"] .task-page *,
-html[data-lifeos-theme="dark"] .reminders-page *,
-html[data-lifeos-theme="dark"] .trips-page * {
-
-  --purple: #c9a15a;
-  --purple-light: #e0bd78;
-}
-
-
-/* Common links / accents */
-
-html[data-lifeos-theme="dark"] .tasks-page a,
-html[data-lifeos-theme="dark"] .task-page a,
-html[data-lifeos-theme="dark"] .reminders-page a,
-html[data-lifeos-theme="dark"] .trips-page a {
-
-  color: #d0a65e;
-}
-
-html[data-lifeos-theme="dark"] .tasks-page a:hover,
-html[data-lifeos-theme="dark"] .task-page a:hover,
-html[data-lifeos-theme="dark"] .reminders-page a:hover,
-html[data-lifeos-theme="dark"] .trips-page a:hover {
-
-  color: #e0bd78;
-}
-

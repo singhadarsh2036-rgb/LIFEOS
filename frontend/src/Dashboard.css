@@ -6878,3 +6878,76 @@ html[data-lifeos-theme="dark"] .lifeos-menu-button.open {
   }
 
 }
+/* =========================================================
+   LIFEOS — WARM CHAMPAGNE LIGHT DASHBOARD FINAL FIX
+   MUST BE AT THE VERY END OF Dashboard.css
+========================================================= */
+
+html[data-lifeos-theme="light"] .dashboard-page {
+  background:
+    radial-gradient(
+      circle at 82% 0%,
+      rgba(201, 161, 90, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 12% 88%,
+      rgba(124, 145, 107, 0.07),
+      transparent 27%
+    ),
+    linear-gradient(
+      145deg,
+      #f8f2e7 0%,
+      #f3ecdf 54%,
+      #eee6d7 100%
+    ) !important;
+
+  color: #2d2b27 !important;
+}
+
+html[data-lifeos-theme="light"] .lifeos-premium-dashboard {
+  background:
+    radial-gradient(
+      circle at 82% 0%,
+      rgba(201, 161, 90, 0.10),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 12% 88%,
+      rgba(124, 145, 107, 0.06),
+      transparent 27%
+    ),
+    linear-gradient(
+      145deg,
+      #f8f2e7 0%,
+      #f3ecdf 54%,
+      #eee6d7 100%
+    ) !important;
+
+  color: #2d2b27 !important;
+}
+/* =========================================================
+   FINAL WARM CHAMPAGNE — DASHBOARD
+   ========================================================= */
+
+html[data-lifeos-theme="light"] main.dashboard-main.lifeos-premium-dashboard {
+  background:
+    radial-gradient(
+      circle at 82% 0%,
+      rgba(201, 161, 90, 0.12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 12% 88%,
+      rgba(124, 145, 107, 0.07),
+      transparent 27%
+    ),
+    linear-gradient(
+      145deg,
+      #f8f2e7 0%,
+      #f3ecdf 54%,
+      #eee6d7 100%
+    ) !important;
+
+  color: #2d2b27 !important;
+}
