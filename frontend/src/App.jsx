@@ -13,8 +13,8 @@ import Tasks from './Tasks.jsx'
 import Reminders from './Reminders.jsx'
 import Trips from './Trips.jsx'
 import Calendar from './Calendar.jsx'
-import './WarmChampagne_FINAL.css'
 
+import './WarmChampagne_FINAL.css'
 import './App.css'
 
 function ProtectedRoute({ children }) {
@@ -61,7 +61,6 @@ function App() {
 
   return (
     <BrowserRouter>
-
       <Routes>
 
         <Route
@@ -144,7 +143,6 @@ function App() {
         />
 
       </Routes>
-
     </BrowserRouter>
   )
 }
