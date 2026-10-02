@@ -879,6 +879,115 @@ function Dashboard() {
       : 0
 
 
+
+  /* ================================
+     DASHBOARD INTELLIGENCE
+  ================================= */
+
+  const now = new Date()
+
+  const futureReminders = reminders
+    .filter((reminder) => reminder.reminderTime && new Date(reminder.reminderTime) >= now)
+    .sort((a, b) => new Date(a.reminderTime) - new Date(b.reminderTime))
+
+  const activeTasks = tasks.filter((task) => !task.completed)
+  const completedTaskCount = tasks.filter((task) => task.completed).length
+
+  const startOfToday = new Date(now)
+  startOfToday.setHours(0, 0, 0, 0)
+
+  const endOfToday = new Date(startOfToday)
+  endOfToday.setHours(23, 59, 59, 999)
+
+  const endOfWeek = new Date(startOfToday)
+  endOfWeek.setDate(endOfWeek.getDate() + 6)
+  endOfWeek.setHours(23, 59, 59, 999)
+
+  const todayReminders = futureReminders.filter((reminder) => {
+    const date = new Date(reminder.reminderTime)
+    return date >= startOfToday && date <= endOfToday
+  })
+
+  const weekReminders = futureReminders.filter((reminder) => {
+    const date = new Date(reminder.reminderTime)
+    return date >= startOfToday && date <= endOfWeek
+  })
+
+  const overdueReminders = reminders.filter((reminder) => {
+    if (!reminder.reminderTime || reminder.completed) return false
+    return new Date(reminder.reminderTime) < now
+  })
+
+  const urgentReminders = futureReminders.filter((reminder) => {
+    const diffHours = (new Date(reminder.reminderTime) - now) / 3600000
+    return diffHours <= 24
+  })
+
+  const attentionItems = [
+    ...overdueReminders.map((reminder) => ({
+      id: `overdue-${reminder.id}`,
+      type: 'Overdue',
+      title: reminder.title,
+      subtitle: 'Reminder needs attention',
+      date: new Date(reminder.reminderTime),
+      urgent: true,
+      action: () => window.location.href = '/reminders',
+    })),
+    ...urgentReminders
+      .filter((reminder) => !overdueReminders.some((item) => item.id === reminder.id))
+      .map((reminder) => ({
+        id: `urgent-${reminder.id}`,
+        type: 'Upcoming',
+        title: reminder.title,
+        subtitle: 'Due within 24 hours',
+        date: new Date(reminder.reminderTime),
+        urgent: true,
+        action: () => window.location.href = '/reminders',
+      })),
+    ...activeTasks.slice(0, 3).map((task) => ({
+      id: `task-${task.id}`,
+      type: 'Task',
+      title: task.title,
+      subtitle: 'Active task',
+      date: null,
+      urgent: false,
+      action: () => window.location.href = '/tasks',
+    })),
+  ].slice(0, 5)
+
+  const workloadScore = activeTasks.length + todayReminders.length * 2
+  const workloadLevel =
+    workloadScore === 0 ? 'Clear' :
+    workloadScore <= 3 ? 'Light' :
+    workloadScore <= 6 ? 'Balanced' :
+    workloadScore <= 9 ? 'Busy' : 'Heavy'
+
+  const workloadMessage =
+    workloadLevel === 'Clear'
+      ? 'You have a clear day. Good time to get ahead.'
+      : workloadLevel === 'Light'
+        ? 'A light day. You have room to make progress.'
+        : workloadLevel === 'Balanced'
+          ? 'A balanced day. Stay focused on the important items.'
+          : workloadLevel === 'Busy'
+            ? 'A busy day. Prioritize the nearest deadlines first.'
+            : 'A heavy day. Break the workload into smaller focused sessions.'
+
+  const nextDeadline = futureReminders[0] || null
+
+  const formatRelativeDeadline = (date) => {
+    if (!date) return 'No upcoming deadline'
+
+    const diffMs = date - now
+    const diffMinutes = Math.max(0, Math.round(diffMs / 60000))
+
+    if (diffMinutes < 60) return `In ${diffMinutes || 1} min`
+    if (diffMinutes < 1440) return `In ${Math.ceil(diffMinutes / 60)}h`
+
+    const days = Math.ceil(diffMinutes / 1440)
+    return `In ${days} day${days === 1 ? '' : 's'}`
+  }
+
   return (
     <>
       <style>{`
@@ -1427,6 +1536,149 @@ function Dashboard() {
               <button type="button" className="lifeos-add-inline" onClick={() => setShowTaskModal(true)}>＋ Add another task</button>
             </div>
           )}
+        </section>
+
+        <section className="lifeos-intelligence-card">
+          <div className="lifeos-intelligence-header">
+            <div>
+              <span className="lifeos-eyebrow">LIFEOS INTELLIGENCE</span>
+              <h2>Your day at a glance</h2>
+            </div>
+            <span className={`lifeos-workload-pill ${workloadLevel.toLowerCase()}`}>
+              {workloadLevel} workload
+            </span>
+          </div>
+
+          <div className="lifeos-intelligence-grid">
+            <div className="lifeos-intel-stat">
+              <span className="lifeos-intel-icon purple">◉</span>
+              <div>
+                <strong>{activeTasks.length}</strong>
+                <small>Active tasks</small>
+              </div>
+            </div>
+
+            <div className="lifeos-intel-stat">
+              <span className="lifeos-intel-icon amber">◷</span>
+              <div>
+                <strong>{todayReminders.length}</strong>
+                <small>Due today</small>
+              </div>
+            </div>
+
+            <div className="lifeos-intel-stat">
+              <span className="lifeos-intel-icon red">!</span>
+              <div>
+                <strong>{overdueReminders.length}</strong>
+                <small>Overdue</small>
+              </div>
+            </div>
+
+            <div className="lifeos-intel-stat">
+              <span className="lifeos-intel-icon blue">↗</span>
+              <div>
+                <strong>{weekReminders.length}</strong>
+                <small>This week</small>
+              </div>
+            </div>
+          </div>
+
+          <div className="lifeos-intelligence-body">
+            <div className="lifeos-workload-copy">
+              <div className="lifeos-workload-title">
+                <span>Today</span>
+                <strong>{workloadMessage}</strong>
+              </div>
+              <div className="lifeos-workload-bar">
+                <span style={{ width: `${Math.min(100, workloadScore * 10 + (workloadScore ? 8 : 0))}%` }} />
+              </div>
+            </div>
+
+            <div className="lifeos-next-deadline">
+              <span className="lifeos-next-label">NEXT UP</span>
+              {nextDeadline ? (
+                <>
+                  <strong>{nextDeadline.title}</strong>
+                  <small>
+                    {formatRelativeDeadline(new Date(nextDeadline.reminderTime))}
+                    {' · '}
+                    {new Date(nextDeadline.reminderTime).toLocaleDateString('en-IN', {
+                      day: 'numeric',
+                      month: 'short',
+                    })}
+                  </small>
+                </>
+              ) : (
+                <>
+                  <strong>Nothing scheduled</strong>
+                  <small>Your upcoming reminders will appear here.</small>
+                </>
+              )}
+            </div>
+          </div>
+        </section>
+
+        <section className="lifeos-attention-section">
+          <div className="lifeos-section-heading">
+            <div>
+              <span className="lifeos-eyebrow">PRIORITY</span>
+              <h2>Needs Attention</h2>
+            </div>
+            <button
+              type="button"
+              className="lifeos-link-button"
+              onClick={() => {
+                if (overdueReminders.length > 0 || futureReminders.length > 0) {
+                  window.location.href = '/reminders'
+                } else {
+                  window.location.href = '/tasks'
+                }
+              }}
+            >
+              Open <span>→</span>
+            </button>
+          </div>
+
+          <div className="lifeos-attention-list">
+            {attentionItems.length === 0 ? (
+              <div className="lifeos-attention-empty">
+                <span>✓</span>
+                <div>
+                  <strong>You're all caught up.</strong>
+                  <small>No urgent reminders or active tasks need attention right now.</small>
+                </div>
+              </div>
+            ) : (
+              attentionItems.map((item) => (
+                <button
+                  key={item.id}
+                  type="button"
+                  className={`lifeos-attention-row ${item.urgent ? 'urgent' : ''}`}
+                  onClick={item.action}
+                >
+                  <span className="lifeos-attention-indicator">
+                    {item.type === 'Overdue' ? '!' : item.type === 'Upcoming' ? '◷' : '✓'}
+                  </span>
+
+                  <span className="lifeos-attention-copy">
+                    <strong>{item.title}</strong>
+                    <small>
+                      {item.subtitle}
+                      {item.date
+                        ? ` · ${item.date.toLocaleDateString('en-IN', {
+                            day: 'numeric',
+                            month: 'short',
+                          })}`
+                        : ''}
+                    </small>
+                  </span>
+
+                  <span className="lifeos-attention-type">{item.type}</span>
+                  <span className="lifeos-attention-arrow">›</span>
+                </button>
+              ))
+            )}
+          </div>
         </section>
 
         <section className="lifeos-deadline-card">
