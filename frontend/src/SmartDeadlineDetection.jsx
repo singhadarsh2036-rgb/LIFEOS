@@ -29,6 +29,62 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
   }
 
   // -----------------------------------------
+  // DEADLINE DATE/TIME HELPER
+  // -----------------------------------------
+  const getDeadlineDateTime = (deadline) => {
+    if (!deadline?.date) return null
+
+    let time = deadline.time || '23:59'
+
+    // Convert HH:mm:ss -> HH:mm
+    if (time.length >= 5) {
+      time = time.substring(0, 5)
+    }
+
+    // Convert 12-hour format like 6:30 PM -> 18:30
+    const twelveHourMatch = String(time).match(
+      /^(\d{1,2}):(\d{2})\s*(AM|PM)$/i
+    )
+
+    if (twelveHourMatch) {
+      let hour = Number(twelveHourMatch[1])
+      const minute = twelveHourMatch[2]
+      const period = twelveHourMatch[3].toUpperCase()
+
+      if (period === 'PM' && hour !== 12) {
+        hour += 12
+      }
+
+      if (period === 'AM' && hour === 12) {
+        hour = 0
+      }
+
+      time = `${String(hour).padStart(2, '0')}:${minute}`
+    }
+
+    const dateTime = new Date(
+      `${deadline.date}T${time}:00`
+    )
+
+    if (Number.isNaN(dateTime.getTime())) {
+      return null
+    }
+
+    return dateTime
+  }
+
+  // -----------------------------------------
+  // CHECK IF DEADLINE IS IN FUTURE
+  // -----------------------------------------
+  const isFutureDeadline = (deadline) => {
+    const dateTime = getDeadlineDateTime(deadline)
+
+    if (!dateTime) return false
+
+    return dateTime > new Date()
+  }
+
+  // -----------------------------------------
   // FILE VALIDATION
   // -----------------------------------------
   const handleFile = (selectedFile) => {
@@ -138,10 +194,12 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
         ? data.deadlines
         : []
 
-      const normalizedDeadlines = deadlines.map((deadline, index) => ({
-        ...deadline,
-        _id: `${Date.now()}-${index}`,
-      }))
+      const normalizedDeadlines = deadlines.map(
+        (deadline, index) => ({
+          ...deadline,
+          _id: `${Date.now()}-${index}`,
+        })
+      )
 
       const normalizedResult = {
         ...data,
@@ -150,14 +208,25 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
 
       setResult(normalizedResult)
 
-      // Select all by default
-      setSelected(normalizedDeadlines.map((deadline) => deadline._id))
+      // -----------------------------------------
+      // SELECT ONLY FUTURE DEADLINES BY DEFAULT
+      // -----------------------------------------
+      const futureDeadlineIds = normalizedDeadlines
+        .filter((deadline) =>
+          isFutureDeadline(deadline)
+        )
+        .map((deadline) => deadline._id)
+
+      setSelected(futureDeadlineIds)
 
       if (onDetected) {
         onDetected(normalizedResult)
       }
     } catch (err) {
-      console.error('Smart Deadline Detection error:', err)
+      console.error(
+        'Smart Deadline Detection error:',
+        err
+      )
 
       setError(
         err.message ||
@@ -172,6 +241,15 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
   // SELECT / UNSELECT
   // -----------------------------------------
   const toggleDeadline = (id) => {
+    const deadline = result?.deadlines?.find(
+      (item) => item._id === id
+    )
+
+    // Never allow expired deadlines to be selected
+    if (deadline && !isFutureDeadline(deadline)) {
+      return
+    }
+
     setSelected((current) =>
       current.includes(id)
         ? current.filter((item) => item !== id)
@@ -180,12 +258,18 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
   }
 
   // -----------------------------------------
-  // SELECT ALL
+  // SELECT ALL FUTURE DEADLINES
   // -----------------------------------------
   const selectAll = () => {
     if (!result?.deadlines) return
 
-    setSelected(result.deadlines.map((deadline) => deadline._id))
+    const futureDeadlineIds = result.deadlines
+      .filter((deadline) =>
+        isFutureDeadline(deadline)
+      )
+      .map((deadline) => deadline._id)
+
+    setSelected(futureDeadlineIds)
   }
 
   // -----------------------------------------
@@ -199,7 +283,11 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
   // FORMAT CONFIDENCE
   // -----------------------------------------
   const formatConfidence = (value) => {
-    if (value === null || value === undefined || value === '') {
+    if (
+      value === null ||
+      value === undefined ||
+      value === ''
+    ) {
       return null
     }
 
@@ -242,9 +330,15 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
   // PRIORITY CLASS
   // -----------------------------------------
   const getPriorityClass = (priority) => {
-    const value = String(priority || '').toLowerCase()
+    const value = String(
+      priority || ''
+    ).toLowerCase()
 
-    if (value === 'high' || value === 'urgent' || value === 'critical') {
+    if (
+      value === 'high' ||
+      value === 'urgent' ||
+      value === 'critical'
+    ) {
       return 'smart-priority-high'
     }
 
@@ -263,12 +357,15 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
       return
     }
 
-    const selectedDeadlines = result.deadlines.filter((deadline) =>
-      selected.includes(deadline._id)
-    )
+    const selectedDeadlines =
+      result.deadlines.filter((deadline) =>
+        selected.includes(deadline._id)
+      )
 
     if (selectedDeadlines.length === 0) {
-      setError('Select at least one deadline.')
+      setError(
+        'Select at least one future deadline.'
+      )
       return
     }
 
@@ -287,6 +384,7 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
       }
 
       let createdCount = 0
+      let skippedCount = 0
 
       for (const deadline of selectedDeadlines) {
         if (!deadline.date) {
@@ -294,43 +392,88 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
             'Skipping deadline because date is missing:',
             deadline
           )
+
+          skippedCount++
           continue
         }
 
         let time = deadline.time || '09:00'
 
-        // Convert HH:mm:ss → HH:mm
+        // Convert HH:mm:ss -> HH:mm
         if (time.length >= 5) {
           time = time.substring(0, 5)
         }
 
-        // If AI somehow returns 6 PM etc., try to convert it
-        const twelveHourMatch = String(time).match(
-          /^(\d{1,2}):(\d{2})\s*(AM|PM)$/i
-        )
+        // Convert 12-hour format like 6:30 PM -> 18:30
+        const twelveHourMatch =
+          String(time).match(
+            /^(\d{1,2}):(\d{2})\s*(AM|PM)$/i
+          )
 
         if (twelveHourMatch) {
-          let hour = Number(twelveHourMatch[1])
-          const minute = twelveHourMatch[2]
-          const period = twelveHourMatch[3].toUpperCase()
+          let hour = Number(
+            twelveHourMatch[1]
+          )
 
-          if (period === 'PM' && hour !== 12) {
+          const minute =
+            twelveHourMatch[2]
+
+          const period =
+            twelveHourMatch[3].toUpperCase()
+
+          if (
+            period === 'PM' &&
+            hour !== 12
+          ) {
             hour += 12
           }
 
-          if (period === 'AM' && hour === 12) {
+          if (
+            period === 'AM' &&
+            hour === 12
+          ) {
             hour = 0
           }
 
-          time = `${String(hour).padStart(2, '0')}:${minute}`
+          time = `${String(hour).padStart(
+            2,
+            '0'
+          )}:${minute}`
         }
 
-        const reminderTime = `${deadline.date}T${time}:00`
+        const reminderTime =
+          `${deadline.date}T${time}:00`
+
+        // -----------------------------------------
+        // EXTRA FRONTEND SAFETY CHECK
+        // -----------------------------------------
+        const reminderDate =
+          new Date(reminderTime)
+
+        if (
+          Number.isNaN(
+            reminderDate.getTime()
+          ) ||
+          reminderDate <= new Date()
+        ) {
+          console.warn(
+            'Skipping past deadline:',
+            deadline
+          )
+
+          skippedCount++
+          continue
+        }
 
         const reminderPayload = {
-          title: deadline.title || 'LIFEOS Deadline',
+          title:
+            deadline.title ||
+            'LIFEOS Deadline',
+
           reminderTime,
+
           completed: false,
+
           notificationSent: false,
         }
 
@@ -338,12 +481,17 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
           '/reminders',
           {
             method: 'POST',
-            body: JSON.stringify(reminderPayload),
+            body: JSON.stringify(
+              reminderPayload
+            ),
           }
         )
 
         if (!response.ok) {
-          const errorData = await response.json().catch(() => null)
+          const errorData =
+            await response
+              .json()
+              .catch(() => null)
 
           throw new Error(
             errorData?.message ||
@@ -354,15 +502,31 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
         createdCount++
       }
 
+      // -----------------------------------------
+      // RESULT
+      // -----------------------------------------
+      if (createdCount === 0) {
+        setError(
+          'No future deadlines were available to create reminders.'
+        )
+
+        return
+      }
+
       alert(
         `🎉 ${createdCount} reminder${
-          createdCount !== 1 ? 's' : ''
+          createdCount !== 1
+            ? 's'
+            : ''
         } created successfully!`
       )
 
       onClose()
     } catch (err) {
-      console.error('Create reminders error:', err)
+      console.error(
+        'Create reminders error:',
+        err
+      )
 
       setError(
         err.message ||
@@ -395,7 +559,10 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
     <div
       className="smart-deadline-overlay"
       onMouseDown={(event) => {
-        if (event.target === event.currentTarget) {
+        if (
+          event.target ===
+          event.currentTarget
+        ) {
           onClose()
         }
       }}
@@ -411,11 +578,14 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
               ✦ AI POWERED
             </div>
 
-            <h2>Smart Deadline Detection</h2>
+            <h2>
+              Smart Deadline Detection
+            </h2>
 
             <p>
-              Upload a document or paste text and LIFEOS will
-              find important dates automatically.
+              Upload a document or paste text
+              and LIFEOS will find important
+              dates automatically.
             </p>
           </div>
 
@@ -446,15 +616,21 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
 
             <div
               className={`smart-deadline-dropzone ${
-                dragging ? 'dragging' : ''
+                dragging
+                  ? 'dragging'
+                  : ''
               }`}
               onDragOver={(event) => {
                 event.preventDefault()
                 setDragging(true)
               }}
-              onDragLeave={() => setDragging(false)}
+              onDragLeave={() =>
+                setDragging(false)
+              }
               onDrop={handleDrop}
-              onClick={() => fileInputRef.current?.click()}
+              onClick={() =>
+                fileInputRef.current?.click()
+              }
             >
 
               <input
@@ -462,7 +638,9 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
                 type="file"
                 hidden
                 accept=".pdf,.png,.jpg,.jpeg,.webp"
-                onChange={handleFileChange}
+                onChange={
+                  handleFileChange
+                }
               />
 
               <div className="smart-deadline-upload-icon">
@@ -477,7 +655,11 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
 
               <p>
                 {file
-                  ? `${(file.size / 1024 / 1024).toFixed(2)} MB`
+                  ? `${(
+                      file.size /
+                      1024 /
+                      1024
+                    ).toFixed(2)} MB`
                   : 'PDF, PNG, JPG or WebP · Max 20MB'}
               </p>
 
@@ -487,6 +669,7 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
                   className="smart-deadline-upload-button"
                   onClick={(event) => {
                     event.stopPropagation()
+
                     fileInputRef.current?.click()
                   }}
                 >
@@ -511,7 +694,11 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
               <textarea
                 id="deadline-text"
                 value={text}
-                onChange={(event) => setText(event.target.value)}
+                onChange={(event) =>
+                  setText(
+                    event.target.value
+                  )
+                }
                 placeholder="Paste a syllabus, assignment notice, college circular, project brief..."
                 rows={7}
               />
@@ -535,7 +722,11 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
                 type="button"
                 className="smart-deadline-primary-button"
                 onClick={extractDeadlines}
-                disabled={loading || (!file && !text.trim())}
+                disabled={
+                  loading ||
+                  (!file &&
+                    !text.trim())
+                }
               >
                 {loading ? (
                   <>
@@ -571,15 +762,20 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
 
                 <div>
                   <strong>
-                    {result.deadlines?.length || 0}{' '}
-                    {result.deadlines?.length === 1
+                    {result.deadlines?.length ||
+                      0}{' '}
+
+                    {result.deadlines
+                      ?.length === 1
                       ? 'deadline'
                       : 'deadlines'}{' '}
+
                     detected
                   </strong>
 
                   <p>
-                    Review the extracted information before
+                    Review the extracted
+                    information before
                     creating reminders.
                   </p>
                 </div>
@@ -592,8 +788,19 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
                   type="button"
                   onClick={selectAll}
                   disabled={
+                    !result.deadlines?.some(
+                      (deadline) =>
+                        isFutureDeadline(
+                          deadline
+                        )
+                    ) ||
                     selected.length ===
-                    result.deadlines.length
+                      result.deadlines.filter(
+                        (deadline) =>
+                          isFutureDeadline(
+                            deadline
+                          )
+                      ).length
                   }
                 >
                   Select all
@@ -602,7 +809,9 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
                 <button
                   type="button"
                   onClick={clearAll}
-                  disabled={selected.length === 0}
+                  disabled={
+                    selected.length === 0
+                  }
                 >
                   Clear
                 </button>
@@ -615,108 +824,161 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
 
             <div className="smart-deadline-list">
 
-              {result.deadlines?.map((deadline) => {
+              {result.deadlines?.map(
+                (deadline) => {
 
-                const isSelected = selected.includes(
-                  deadline._id
-                )
+                  const isSelected =
+                    selected.includes(
+                      deadline._id
+                    )
 
-                const confidence = formatConfidence(
-                  deadline.confidence
-                )
+                  const isFuture =
+                    isFutureDeadline(
+                      deadline
+                    )
 
-                return (
-                  <div
-                    key={deadline._id}
-                    className={`smart-deadline-result-card ${
-                      isSelected ? 'selected' : ''
-                    }`}
-                  >
+                  const confidence =
+                    formatConfidence(
+                      deadline.confidence
+                    )
 
-                    {/* CHECKBOX */}
+                  return (
+                    <div
+                      key={
+                        deadline._id
+                      }
+                      className={`smart-deadline-result-card ${
+                        isSelected
+                          ? 'selected'
+                          : ''
+                      }`}
+                    >
 
-                    <label className="smart-deadline-checkbox">
+                      {/* CHECKBOX */}
 
-                      <input
-                        type="checkbox"
-                        checked={isSelected}
-                        onChange={() =>
-                          toggleDeadline(deadline._id)
-                        }
-                      />
+                      <label className="smart-deadline-checkbox">
 
-                      <span className="smart-custom-checkbox">
-                        {isSelected ? '✓' : ''}
-                      </span>
+                        <input
+                          type="checkbox"
+                          checked={
+                            isSelected
+                          }
+                          disabled={
+                            !isFuture
+                          }
+                          onChange={() =>
+                            toggleDeadline(
+                              deadline._id
+                            )
+                          }
+                        />
 
-                    </label>
-
-                    {/* CONTENT */}
-
-                    <div className="smart-deadline-result-content">
-
-                      {/* BADGES */}
-
-                      <div className="smart-deadline-badges">
-
-                        <span className="smart-type-badge">
-                          {formatType(deadline.type)}
+                        <span className="smart-custom-checkbox">
+                          {isSelected
+                            ? '✓'
+                            : ''}
                         </span>
 
-                        <span
-                          className={`smart-priority-badge ${getPriorityClass(
-                            deadline.priority
-                          )}`}
-                        >
-                          {formatPriority(deadline.priority)}
-                        </span>
+                      </label>
 
-                      </div>
+                      {/* CONTENT */}
 
-                      {/* TITLE */}
+                      <div className="smart-deadline-result-content">
 
-                      <h3>
-                        {deadline.title ||
-                          'Untitled Deadline'}
-                      </h3>
+                        {/* BADGES */}
 
-                      {/* DATE / TIME / CONFIDENCE */}
+                        <div className="smart-deadline-badges">
 
-                      <div className="smart-deadline-meta">
-
-                        {deadline.date && (
-                          <span>
-                            📅 {deadline.date}
+                          <span className="smart-type-badge">
+                            {formatType(
+                              deadline.type
+                            )}
                           </span>
-                        )}
 
-                        {deadline.time && (
-                          <span>
-                            🕐 {deadline.time}
+                          <span
+                            className={`smart-priority-badge ${getPriorityClass(
+                              deadline.priority
+                            )}`}
+                          >
+                            {formatPriority(
+                              deadline.priority
+                            )}
                           </span>
-                        )}
 
-                        {confidence && (
-                          <span>
-                            ✦ {confidence} confidence
-                          </span>
-                        )}
+                          {!isFuture && (
+                            <span className="smart-type-badge">
+                              EXPIRED
+                            </span>
+                          )}
 
-                      </div>
-
-                      {/* EVIDENCE */}
-
-                      {deadline.evidence && (
-                        <div className="smart-deadline-evidence">
-                          “{deadline.evidence}”
                         </div>
-                      )}
+
+                        {/* TITLE */}
+
+                        <h3>
+                          {deadline.title ||
+                            'Untitled Deadline'}
+                        </h3>
+
+                        {/* DATE / TIME / CONFIDENCE */}
+
+                        <div className="smart-deadline-meta">
+
+                          {deadline.date && (
+                            <span>
+                              📅{' '}
+                              {
+                                deadline.date
+                              }
+                            </span>
+                          )}
+
+                          {deadline.time && (
+                            <span>
+                              🕐{' '}
+                              {
+                                deadline.time
+                              }
+                            </span>
+                          )}
+
+                          {confidence && (
+                            <span>
+                              ✦{' '}
+                              {confidence}{' '}
+                              confidence
+                            </span>
+                          )}
+
+                        </div>
+
+                        {/* EXPIRED STATUS */}
+
+                        {!isFuture && (
+                          <div className="smart-deadline-evidence">
+                            This deadline has already passed and will not be included in reminders.
+                          </div>
+                        )}
+
+                        {/* EVIDENCE */}
+
+                        {deadline.evidence &&
+                          isFuture && (
+                            <div className="smart-deadline-evidence">
+                              “
+                              {
+                                deadline.evidence
+                              }
+                              ”
+                            </div>
+                          )}
+
+                      </div>
 
                     </div>
-
-                  </div>
-                )
-              })}
+                  )
+                }
+              )}
 
             </div>
 
@@ -725,11 +987,18 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
             <div className="smart-results-footer">
 
               <div className="smart-selection-count">
-                <strong>{selected.length}</strong>
+
+                <strong>
+                  {selected.length}
+                </strong>
+
                 <span>
-                  of {result.deadlines?.length || 0}{' '}
+                  of{' '}
+                  {result.deadlines
+                    ?.length || 0}{' '}
                   selected
                 </span>
+
               </div>
 
               <div className="smart-footer-actions">
@@ -746,10 +1015,13 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
                 <button
                   type="button"
                   className="smart-deadline-primary-button"
-                  onClick={createReminders}
+                  onClick={
+                    createReminders
+                  }
                   disabled={
                     creating ||
-                    selected.length === 0
+                    selected.length ===
+                      0
                   }
                 >
                   {creating ? (
@@ -759,8 +1031,10 @@ function SmartDeadlineDetection({ onClose, onDetected }) {
                     </>
                   ) : (
                     <>
-                      ✓ Create {selected.length}{' '}
-                      {selected.length === 1
+                      ✓ Create{' '}
+                      {selected.length}{' '}
+                      {selected.length ===
+                      1
                         ? 'Reminder'
                         : 'Reminders'}
                     </>
