@@ -7850,3 +7850,89 @@ html[data-lifeos-theme="light"] .lifeos-add-button {
     border-radius: 18px;
   }
 }
+
+/* =========================================================
+   LIFEOS MOBILE — COMPACT HERO
+   ========================================================= */
+
+@media (max-width: 720px) {
+
+  .lifeos-hero {
+    min-height: 270px !important;
+    height: 270px !important;
+    margin-top: 66px !important;
+    margin-bottom: 18px !important;
+    border-radius: 22px !important;
+  }
+
+  .lifeos-hero-content {
+    min-height: 270px !important;
+    height: 270px !important;
+    padding: 22px 20px 20px !important;
+    justify-content: flex-end !important;
+    box-sizing: border-box !important;
+  }
+
+  .lifeos-hero h1 {
+    font-size: 31px !important;
+    line-height: .98 !important;
+    letter-spacing: -.035em !important;
+    margin: 8px 0 7px !important;
+    max-width: 100% !important;
+  }
+
+  .lifeos-hero h1 strong {
+    font-size: 1em !important;
+  }
+
+  .lifeos-hero p {
+    font-size: 13px !important;
+    line-height: 1.3 !important;
+    margin: 0 !important;
+  }
+
+  .lifeos-date-label {
+    font-size: 9px !important;
+    letter-spacing: .16em !important;
+  }
+
+  .lifeos-hero-meta {
+    margin-top: 11px !important;
+    gap: 7px !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .lifeos-hero-meta span {
+    font-size: 9px !important;
+    padding: 8px 10px !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* Smaller phones */
+@media (max-width: 390px) {
+
+  .lifeos-hero {
+    min-height: 250px !important;
+    height: 250px !important;
+  }
+
+  .lifeos-hero-content {
+    min-height: 250px !important;
+    height: 250px !important;
+    padding: 18px 17px 17px !important;
+  }
+
+  .lifeos-hero h1 {
+    font-size: 28px !important;
+  }
+
+  .lifeos-hero p {
+    font-size: 12px !important;
+  }
+
+  .lifeos-hero-meta span {
+    font-size: 8px !important;
+    padding: 7px 8px !important;
+  }
+}
