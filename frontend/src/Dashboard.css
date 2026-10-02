@@ -7680,3 +7680,173 @@ html[data-lifeos-theme="light"] .lifeos-add-button {
   background: rgba(255,255,255,.018) !important;
   border: 1px solid rgba(255,255,255,.055) !important;
 }
+
+
+/* =========================================================
+   LIFEOS AI SUGGESTIONS
+   ========================================================= */
+.lifeos-intelligence-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lifeos-ai-suggest-button {
+  border: 1px solid rgba(216,179,106,.24);
+  background: rgba(216,179,106,.08);
+  color: #d8b36a;
+  border-radius: 999px;
+  padding: 9px 14px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s ease;
+}
+
+.lifeos-ai-suggest-button:hover:not(:disabled) {
+  background: rgba(216,179,106,.14);
+  transform: translateY(-1px);
+}
+
+.lifeos-ai-suggest-button:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+.lifeos-ai-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10000;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: rgba(3, 4, 8, .68);
+  backdrop-filter: blur(12px);
+}
+
+.lifeos-ai-modal {
+  width: min(720px, 100%);
+  max-height: min(760px, 88vh);
+  overflow: auto;
+  padding: 24px;
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 24px;
+  background: linear-gradient(145deg, rgba(23,23,28,.98), rgba(12,13,17,.98));
+  box-shadow: 0 30px 90px rgba(0,0,0,.5);
+}
+
+.lifeos-ai-modal-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.lifeos-ai-modal-header h2 {
+  margin: 5px 0 6px;
+}
+
+.lifeos-ai-modal-header p {
+  margin: 0;
+  color: #8f8aa3;
+  font-size: 13px;
+}
+
+.lifeos-ai-close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.08);
+  background: rgba(255,255,255,.04);
+  color: #fff;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.lifeos-ai-suggestion-list {
+  display: grid;
+  gap: 12px;
+}
+
+.lifeos-ai-suggestion {
+  padding: 16px;
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 16px;
+  background: rgba(255,255,255,.025);
+}
+
+.lifeos-ai-suggestion-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  color: #777285;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.lifeos-ai-priority {
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 9px;
+  letter-spacing: .08em;
+}
+
+.lifeos-ai-priority.high {
+  color: #fb7185;
+  background: rgba(244,63,94,.11);
+}
+
+.lifeos-ai-priority.medium {
+  color: #d8b36a;
+  background: rgba(190,142,62,.12);
+}
+
+.lifeos-ai-priority.low {
+  color: #a78bfa;
+  background: rgba(139,92,246,.11);
+}
+
+.lifeos-ai-suggestion > strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+.lifeos-ai-suggestion > p {
+  margin: 0 0 13px;
+  color: #8f8aa3;
+  line-height: 1.55;
+  font-size: 13px;
+}
+
+.lifeos-ai-use-button {
+  border: 1px solid rgba(216,179,106,.2);
+  background: rgba(216,179,106,.08);
+  color: #d8b36a;
+  border-radius: 10px;
+  padding: 8px 11px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.lifeos-ai-empty {
+  padding: 30px;
+  text-align: center;
+  color: #8f8aa3;
+}
+
+@media (max-width: 700px) {
+  .lifeos-intelligence-header-actions {
+    align-items: flex-end;
+    flex-direction: column;
+  }
+
+  .lifeos-ai-modal {
+    padding: 18px;
+    border-radius: 18px;
+  }
+}

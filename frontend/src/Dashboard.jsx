@@ -35,6 +35,9 @@ function Dashboard() {
   const [showSmartDeadline, setShowSmartDeadline] = useState(false)
   const [newTaskTitle, setNewTaskTitle] = useState('')
   const [savingTask, setSavingTask] = useState(false)
+  const [showAiSuggestions, setShowAiSuggestions] = useState(false)
+  const [aiSuggestions, setAiSuggestions] = useState([])
+  const [aiSuggestionsLoading, setAiSuggestionsLoading] = useState(false)
 
   const [showProfilePanel, setShowProfilePanel] = useState(false)
   const [mobileNavOpen, setMobileNavOpen] = useState(false)
@@ -456,6 +459,64 @@ function Dashboard() {
     }
 
     showMessage(`${name} section coming soon`)
+  }
+
+  /* ================================
+     AI SUGGESTIONS
+  ================================= */
+
+  const getAiSuggestions = async () => {
+    try {
+      const token = getToken()
+
+      if (!token) {
+        showMessage('Please login again')
+        return
+      }
+
+      setAiSuggestionsLoading(true)
+
+      const response = await apiFetch('/ai/suggestions', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          tasks: tasks.map((task) => ({
+            id: task.id,
+            title: task.title,
+            completed: task.completed,
+            dueDate: task.dueDate,
+            dueTime: task.dueTime,
+            priority: task.priority,
+          })),
+          reminders: reminders.map((reminder) => ({
+            id: reminder.id,
+            title: reminder.title,
+            reminderTime: reminder.reminderTime,
+            completed: reminder.completed,
+          })),
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Could not generate AI suggestions')
+      }
+
+      const data = await response.json()
+      setAiSuggestions(Array.isArray(data.suggestions) ? data.suggestions : [])
+      setShowAiSuggestions(true)
+
+      if (!data.suggestions?.length) {
+        showMessage('No suggestions right now')
+      }
+    } catch (error) {
+      console.error('AI SUGGESTIONS ERROR:', error)
+      showMessage('Could not generate AI suggestions')
+    } finally {
+      setAiSuggestionsLoading(false)
+    }
   }
 
   /* ================================
@@ -1521,7 +1582,7 @@ function Dashboard() {
               <span>Add a task or let LIFEOS suggest one for you.</span>
               <div className="lifeos-focus-actions">
                 <button type="button" className="lifeos-primary-button" onClick={() => setShowTaskModal(true)}>＋ Add Task</button>
-                <button type="button" className="lifeos-secondary-button" onClick={() => showMessage('AI suggestions are coming next')}>✦ Suggest with AI</button>
+                <button type="button" className="lifeos-secondary-button" onClick={getAiSuggestions}>✦ Suggest with AI</button>
               </div>
             </div>
           ) : (
@@ -1544,9 +1605,19 @@ function Dashboard() {
               <span className="lifeos-eyebrow">LIFEOS INTELLIGENCE</span>
               <h2>Your day at a glance</h2>
             </div>
-            <span className={`lifeos-workload-pill ${workloadLevel.toLowerCase()}`}>
-              {workloadLevel} workload
-            </span>
+            <div className="lifeos-intelligence-header-actions">
+              <button
+                type="button"
+                className="lifeos-ai-suggest-button"
+                onClick={getAiSuggestions}
+                disabled={aiSuggestionsLoading}
+              >
+                {aiSuggestionsLoading ? 'Thinking…' : '✦ AI Suggest'}
+              </button>
+              <span className={`lifeos-workload-pill ${workloadLevel.toLowerCase()}`}>
+                {workloadLevel} workload
+              </span>
+            </div>
           </div>
 
           <div className="lifeos-intelligence-grid">
@@ -1836,6 +1907,51 @@ function Dashboard() {
             <div className="lifeos-panel-actions">
               <button className="lifeos-secondary-action" onClick={() => setShowSettingsPanel(false)}>Done</button>
               <button className="lifeos-danger-action" onClick={handleLogout}>↪ Logout</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showAiSuggestions && (
+        <div className="lifeos-ai-overlay" onClick={() => setShowAiSuggestions(false)}>
+          <div className="lifeos-ai-modal" onClick={(event) => event.stopPropagation()}>
+            <div className="lifeos-ai-modal-header">
+              <div>
+                <span className="lifeos-eyebrow">LIFEOS AI</span>
+                <h2>What should you do next?</h2>
+                <p>Suggestions are based on your current tasks and reminders.</p>
+              </div>
+              <button type="button" className="lifeos-ai-close" onClick={() => setShowAiSuggestions(false)}>×</button>
+            </div>
+
+            <div className="lifeos-ai-suggestion-list">
+              {aiSuggestions.length === 0 ? (
+                <div className="lifeos-ai-empty">No useful action found right now.</div>
+              ) : (
+                aiSuggestions.map((suggestion, index) => (
+                  <div className="lifeos-ai-suggestion" key={`${suggestion.title}-${index}`}>
+                    <div className="lifeos-ai-suggestion-top">
+                      <span className={`lifeos-ai-priority ${String(suggestion.priority || 'MEDIUM').toLowerCase()}`}>
+                        {suggestion.priority || 'MEDIUM'}
+                      </span>
+                      <span>#{index + 1}</span>
+                    </div>
+                    <strong>{suggestion.title}</strong>
+                    <p>{suggestion.reason}</p>
+                    <button
+                      type="button"
+                      className="lifeos-ai-use-button"
+                      onClick={() => {
+                        setNewTaskTitle(suggestion.action || suggestion.title)
+                        setShowAiSuggestions(false)
+                        setShowTaskModal(true)
+                      }}
+                    >
+                      + Add to tasks
+                    </button>
+                  </div>
+                ))
+              )}
             </div>
           </div>
         </div>
