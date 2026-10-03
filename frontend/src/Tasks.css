@@ -1266,3 +1266,13 @@ html[data-lifeos-theme="dark"] .tasks-progress-card:hover {
     transition: none !important;
   }
 }
+/* =========================================================
+   TASKS — MOBILE HEADER CLEANUP
+   Hide duplicate hamburger on Tasks page
+   ========================================================= */
+
+@media (max-width: 720px) {
+  .dashboard-page .mobile-nav-trigger {
+    display: none !important;
+  }
+}
