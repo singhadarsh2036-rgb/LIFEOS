@@ -21,6 +21,12 @@ function MobileGlobalNav() {
 
   const currentPath = location.pathname
 
+  // Tasks page already has its own back/header.
+  // Don't render the duplicate mobile hamburger there.
+  if (currentPath === '/tasks') {
+    return null
+  }
+
   const go = (path) => {
     setOpen(false)
 
@@ -49,16 +55,22 @@ function MobileGlobalNav() {
       </button>
 
       {open && (
-        <aside className="lifeos-mobile-drawer" aria-label="LIFEOS navigation">
+        <aside
+          className="lifeos-mobile-drawer"
+          aria-label="LIFEOS navigation"
+        >
           <div className="lifeos-mobile-drawer-brand">
             <div className="lifeos-mobile-brand-mark">L</div>
+
             <div>
               <strong>LIFEOS</strong>
               <span>Your personal OS</span>
             </div>
           </div>
 
-          <div className="lifeos-mobile-drawer-title">NAVIGATION</div>
+          <div className="lifeos-mobile-drawer-title">
+            NAVIGATION
+          </div>
 
           <nav className="lifeos-mobile-drawer-nav">
             {items.map(([name, icon, path]) => {
@@ -77,20 +89,31 @@ function MobileGlobalNav() {
                 <button
                   key={name}
                   type="button"
-                  className={`lifeos-mobile-nav-item ${active ? 'active' : ''}`}
+                  className={`lifeos-mobile-nav-item ${
+                    active ? 'active' : ''
+                  }`}
                   onClick={() => go(path)}
                   title={name}
                 >
-                  <span className="lifeos-mobile-nav-icon">{icon}</span>
+                  <span className="lifeos-mobile-nav-icon">
+                    {icon}
+                  </span>
+
                   <span>{name}</span>
-                  <span className="lifeos-mobile-nav-arrow">›</span>
+
+                  <span className="lifeos-mobile-nav-arrow">
+                    ›
+                  </span>
                 </button>
               )
             })}
           </nav>
 
           <div className="lifeos-mobile-drawer-footer">
-            <button type="button" onClick={() => go('/dashboard#settings')}>
+            <button
+              type="button"
+              onClick={() => go('/dashboard#settings')}
+            >
               <span>⚙</span>
               <span>Settings</span>
             </button>
