@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { apiFetch } from './api'
 import './Dashboard.css'
@@ -23,6 +23,7 @@ function Dashboard() {
   const [message, setMessage] = useState('')
   const [searchQuery, setSearchQuery] = useState('')
   const [showSearchResults, setShowSearchResults] = useState(false)
+  const searchShellRef = useRef(null)
   const [recentSearches, setRecentSearches] = useState(() => {
     try {
       return JSON.parse(localStorage.getItem('lifeosRecentSearches') || '[]')
@@ -75,6 +76,25 @@ function Dashboard() {
     document.documentElement.setAttribute('data-lifeos-theme', theme)
     localStorage.setItem('lifeosTheme', theme)
   }, [theme])
+
+  // Close the search dropdown when the user taps/clicks anywhere outside it.
+  // This is especially important on mobile where mouseleave does not fire.
+  useEffect(() => {
+    const handleOutsideSearchClick = (event) => {
+      if (
+        searchShellRef.current &&
+        !searchShellRef.current.contains(event.target)
+      ) {
+        setShowSearchResults(false)
+      }
+    }
+
+    document.addEventListener('pointerdown', handleOutsideSearchClick)
+
+    return () => {
+      document.removeEventListener('pointerdown', handleOutsideSearchClick)
+    }
+  }, [])
 
   useEffect(() => {
     if (!focusRunning) return
@@ -1409,7 +1429,7 @@ function Dashboard() {
             <span>LIFEOS</span>
           </button>
 
-          <div className="lifeos-search-shell" onMouseLeave={() => setShowSearchResults(false)}>
+          <div ref={searchShellRef} className="lifeos-search-shell">
             <span className="lifeos-search-icon">⌕</span>
             <input
               placeholder="Search anything..."
