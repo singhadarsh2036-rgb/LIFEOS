@@ -8066,3 +8066,231 @@ html[data-lifeos-theme="light"] .lifeos-add-button {
     font-size: 10px !important;
   }
 }
+/* =========================================================
+   LIFEOS SEARCH RESULTS — MOBILE PREMIUM FIX
+   ========================================================= */
+
+.lifeos-global-search-dropdown {
+  position: absolute !important;
+  top: calc(100% + 10px) !important;
+  left: 0 !important;
+  right: 0 !important;
+
+  width: 100% !important;
+  box-sizing: border-box !important;
+
+  padding: 14px !important;
+
+  background: rgba(15, 16, 20, 0.97) !important;
+  border: 1px solid rgba(255, 255, 255, 0.10) !important;
+  border-radius: 20px !important;
+
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04) !important;
+
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+
+  z-index: 99999 !important;
+
+  color: #f4f1e9 !important;
+}
+
+
+/* RESULTS HEADER */
+
+.lifeos-search-heading {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  padding: 2px 4px 10px !important;
+
+  color: #d8b36a !important;
+
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+.lifeos-search-heading small {
+  color: #8f8b83 !important;
+  font-size: 11px !important;
+}
+
+
+/* RESULT BUTTON */
+
+.lifeos-search-result-item {
+  width: 100% !important;
+  min-height: 54px !important;
+
+  display: grid !important;
+  grid-template-columns: 36px minmax(0, 1fr) 20px !important;
+  align-items: center !important;
+
+  gap: 10px !important;
+
+  margin: 6px 0 !important;
+  padding: 9px 11px !important;
+
+  box-sizing: border-box !important;
+
+  background: rgba(255, 255, 255, 0.045) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.065) !important;
+  border-radius: 14px !important;
+
+  color: #f4f1e9 !important;
+
+  text-align: left !important;
+
+  cursor: pointer !important;
+
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease !important;
+}
+
+.lifeos-search-result-item:hover,
+.lifeos-search-result-item:active {
+  background: rgba(201, 161, 90, 0.10) !important;
+  border-color: rgba(201, 161, 90, 0.28) !important;
+  transform: translateX(2px) !important;
+}
+
+
+/* ICON */
+
+.lifeos-search-result-icon {
+  width: 34px !important;
+  height: 34px !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  border-radius: 11px !important;
+
+  background: rgba(201, 161, 90, 0.11) !important;
+  border: 1px solid rgba(201, 161, 90, 0.16) !important;
+
+  color: #d8b36a !important;
+
+  font-size: 15px !important;
+}
+
+
+/* TEXT */
+
+.lifeos-search-result-copy {
+  min-width: 0 !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  gap: 3px !important;
+}
+
+.lifeos-search-result-copy strong {
+  display: block !important;
+
+  color: #f4f1e9 !important;
+
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+.lifeos-search-result-copy small {
+  display: block !important;
+
+  color: #8f8b83 !important;
+
+  font-size: 11px !important;
+  line-height: 1.25 !important;
+
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+}
+
+
+/* ARROW */
+
+.lifeos-search-arrow {
+  color: #d8b36a !important;
+  font-size: 20px !important;
+  text-align: center !important;
+}
+
+
+/* EMPTY SEARCH */
+
+.lifeos-search-empty.compact {
+  display: grid !important;
+  grid-template-columns: 38px minmax(0, 1fr) !important;
+
+  column-gap: 10px !important;
+  row-gap: 3px !important;
+
+  padding: 16px !important;
+
+  border-radius: 14px !important;
+
+  background: rgba(255, 255, 255, 0.035) !important;
+}
+
+.lifeos-search-empty.compact > span {
+  grid-row: 1 / span 2 !important;
+
+  width: 34px !important;
+  height: 34px !important;
+
+  display: grid !important;
+  place-items: center !important;
+
+  border-radius: 10px !important;
+
+  color: #d8b36a !important;
+  background: rgba(201, 161, 90, 0.10) !important;
+}
+
+.lifeos-search-empty.compact strong {
+  color: #f4f1e9 !important;
+  font-size: 14px !important;
+}
+
+.lifeos-search-empty.compact small {
+  color: #8f8b83 !important;
+  font-size: 11px !important;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 720px) {
+
+  .lifeos-global-search-dropdown {
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+
+    max-height: 430px !important;
+    overflow-y: auto !important;
+
+    scrollbar-width: none !important;
+  }
+
+  .lifeos-global-search-dropdown::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .lifeos-search-result-item {
+    min-height: 52px !important;
+  }
+}
